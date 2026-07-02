@@ -1,0 +1,25 @@
+defaults:
+  - model: fidelityno
+  - _self_
+seed: 0
+device: cuda
+wandb:
+  mode: offline
+data:
+  train: data/train_split.npz
+  val: data/val_split.npz
+train:
+  epochs: 80
+  batch_size: 512
+  lr: 3.0e-4
+  lr_min: 1.0e-6
+  warmup_epochs: 10
+  restart_epochs: 20
+  weight_decay: 1.0e-4
+  aux_weight: 0.1
+  grad_clip: 1.0
+  ckpt_dir: checkpoints
+  ckpt_name: null
+  curriculum: false
+  curriculum_schedule: [4, 8, 16, 48]
+  patience: 25

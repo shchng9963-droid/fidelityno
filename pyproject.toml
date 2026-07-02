@@ -1,0 +1,10 @@
+[project]
+name = "fidelityno"
+version = "0.1.0"
+description = "Operator-aware neural surrogate for end-to-end fidelity of composed quantum channels"
+requires-python = ">=3.11"
+dependencies = ["numpy", "scipy", "torch", "hydra-core", "omegaconf", "wandb", "pandas", "matplotlib", "pytest", "qutip", "qiskit", "qiskit-dynamics", "dynamiqs", "neuraloperator", "networkx", "scikit-learn", "tqdm"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

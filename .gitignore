@@ -1,0 +1,33 @@
+__pycache__/
+*.pyc
+.venv/
+outputs/
+wandb/
+data/**/*.npz
+data/**/manifest.json
+results/*.csv
+results/benchmarks/**/*.csv
+results/ablations/**/*.csv
+results/figs/*.png
+checkpoints/
+logs/
+
+# v1 freeze housekeeping
+*.zip
+paper_nn/*.aux
+paper_nn/*.log
+paper_nn/*.spl
+paper_nn/*.blg
+paper_nn/*.bbl
+paper_nn/*.out
+paper_nn/*.bak
+paper/*.aux
+paper/*.log
+paper/*.spl
+paper/*.blg
+paper/*.bbl
+paper/*.out
+paper/*.bak
+*.bib.bak
+references (1).bib
+submission_NN/
