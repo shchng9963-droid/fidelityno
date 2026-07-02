@@ -1,0 +1,4 @@
+family: lindblad
+train_lengths: [2,4,8,16]
+test_lengths: [2,4,8,16,24,32,48]
+max_len: 48

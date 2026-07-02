@@ -1,0 +1,11 @@
+name: fidelityno
+d_model: 128
+depth: 4
+heads: 4
+layers: 4
+head_type: quantile
+causal: true
+aux: true
+quantiles: [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]
+choi_representation: hermitian_real_vector
+ptm_ablation: false
