@@ -1,0 +1,79 @@
+[
+  {
+    "split": "id_test",
+    "path": "data/benchmarks/single_qubit_mixed/id_test.npz",
+    "n": 1024,
+    "dim": 2,
+    "mae_F_e": 1.7032151741443787e-08,
+    "max_abs_err_F_e": 6.624473725125313e-08,
+    "latency_ms_per_seq_median": 0.14999741324572824,
+    "latency_ms_per_seq_min": 0.149547550790885,
+    "repeats": 5
+  },
+  {
+    "split": "length_ood",
+    "path": "data/benchmarks/single_qubit_mixed/length_ood.npz",
+    "n": 1024,
+    "dim": 2,
+    "mae_F_e": 1.5927808841764615e-08,
+    "max_abs_err_F_e": 6.679813602250562e-08,
+    "latency_ms_per_seq_median": 0.39528012166556437,
+    "latency_ms_per_seq_min": 0.3929607000827673,
+    "repeats": 5
+  },
+  {
+    "split": "id_test",
+    "path": "data/benchmarks/two_qubit_mixed/id_test.npz",
+    "n": 1024,
+    "dim": 4,
+    "mae_F_e": 8.492763032008643e-09,
+    "max_abs_err_F_e": 1.1298748214816356e-07,
+    "latency_ms_per_seq_median": 0.6554047995450674,
+    "latency_ms_per_seq_min": 0.6545159203596995,
+    "repeats": 5
+  },
+  {
+    "split": "length_ood",
+    "path": "data/benchmarks/two_qubit_mixed/length_ood.npz",
+    "n": 1024,
+    "dim": 4,
+    "mae_F_e": 7.854979463469975e-09,
+    "max_abs_err_F_e": 5.492072352453192e-08,
+    "latency_ms_per_seq_median": 0.8563111014154856,
+    "latency_ms_per_seq_min": 0.8562008169974433,
+    "repeats": 5
+  },
+  {
+    "split": "id_test",
+    "path": "data_prxq/collision/id_test.npz",
+    "n": 1024,
+    "dim": 2,
+    "mae_F_e": 0.03969854382079484,
+    "max_abs_err_F_e": 0.27342168276273937,
+    "latency_ms_per_seq_median": 0.4295404323784169,
+    "latency_ms_per_seq_min": 0.4285011655156268,
+    "repeats": 5
+  },
+  {
+    "split": "length_ood",
+    "path": "data_prxq/collision/length_ood.npz",
+    "n": 1024,
+    "dim": 2,
+    "mae_F_e": 0.11173455848994954,
+    "max_abs_err_F_e": 0.28929765126461704,
+    "latency_ms_per_seq_median": 0.6300248323896085,
+    "latency_ms_per_seq_min": 0.628903655524482,
+    "repeats": 5
+  },
+  {
+    "split": "family_ood",
+    "path": "data_prxq/collision/family_ood.npz",
+    "n": 1024,
+    "dim": 2,
+    "mae_F_e": 0.44195361573890485,
+    "max_abs_err_F_e": 0.8113309552503494,
+    "latency_ms_per_seq_median": 0.49690495325194206,
+    "latency_ms_per_seq_min": 0.49564150685910136,
+    "repeats": 5
+  }
+]

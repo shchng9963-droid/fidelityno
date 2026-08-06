@@ -100,6 +100,48 @@ class DFEResult:
     sigma_protocol: float  # sample stddev across S Paulis (importance-sampled estimator)
     n_paulis: int          # S
     M_per_pauli: int       # measurement repetitions per Pauli (>=1)
+    quantum_shots: int     # total simulated projective measurements
+    n_unique_paulis: int   # number of distinct Pauli settings measured
+    strategy: str          # "iid" or "stratified"
+
+
+def _sample_pauli_mean(
+    expectation: np.ndarray,
+    shots: np.ndarray,
+    rng: np.random.Generator,
+) -> np.ndarray:
+    """Sample means of +/-1 outcomes using their exact binomial law."""
+    expectation = np.clip(np.asarray(expectation, dtype=np.float64), -1.0, 1.0)
+    shots = np.asarray(shots, dtype=np.int64)
+    if np.any(shots < 1):
+        raise ValueError("each measured Pauli setting requires at least one shot")
+    plus = rng.binomial(shots, 0.5 * (1.0 + expectation))
+    return 2.0 * plus / shots - 1.0
+
+
+def _allocate_stratified_shots(
+    weights: np.ndarray,
+    total_shots: int,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Allocate a fixed shot budget across every nonzero-relevance Pauli."""
+    support = np.flatnonzero(weights > 0)
+    if total_shots < len(support):
+        raise ValueError(
+            f"stratified DFE needs at least {len(support)} shots, got {total_shots}"
+        )
+    shots = np.ones(len(support), dtype=np.int64)
+    remaining = total_shots - len(support)
+    if remaining:
+        probs = np.sqrt(weights[support])
+        probs /= probs.sum()
+        expected = remaining * probs
+        extra = np.floor(expected).astype(np.int64)
+        shots += extra
+        leftover = remaining - int(extra.sum())
+        if leftover:
+            order = np.argsort(-(expected - extra), kind="stable")
+            shots[order[:leftover]] += 1
+    return support, shots
 
 
 def direct_fidelity_estimate(
@@ -109,6 +151,8 @@ def direct_fidelity_estimate(
     num_paulis: int = 50,
     M_per_pauli: int = 200,
     noise: str = "finite",
+    strategy: str = "iid",
+    total_shots: Optional[int] = None,
     rng: Optional[np.random.Generator] = None,
 ) -> DFEResult:
     """Run DFE on the *composed* channel.
@@ -122,6 +166,10 @@ def direct_fidelity_estimate(
     M_per_pauli:     M, projective-measurement repetitions per Pauli, used
                      to inject finite-shot variance when noise="finite".
     noise:           "exact" or "finite".
+    strategy:        "iid" samples Paulis with replacement; "stratified"
+                     enumerates every nonzero-relevance Pauli.
+    total_shots:     fixed budget for stratified DFE. Defaults to
+                     ``num_paulis * M_per_pauli``.
     rng:             numpy Generator (defaults to default_rng()).
 
     Returns
@@ -145,26 +193,36 @@ def direct_fidelity_estimate(
     # Importance sampling: Pr(P) = chi_V(P)^2 / d^2
     weights = chi_V ** 2 / d ** 2
     weights = weights / weights.sum()  # numerical safety
-    S = num_paulis
-    idx = rng.choice(len(chi_V), size=S, replace=True, p=weights)
-
-    # X_i = chi_Lambda(P_i) / chi_V(P_i)
-    chi_L_sample = chi_L[idx]
-    chi_V_sample = chi_V[idx]
-    X = chi_L_sample / chi_V_sample
-
-    if noise == "finite":
-        # The eigenvalues of P are +-1, so chi_Lambda(P) is the expectation
-        # of a +-1 valued random variable.  After M measurements its
-        # variance is at most (1 - chi_L^2)/M, which we bound by 1/M.
-        sigma = np.sqrt(np.maximum(1.0 - chi_L_sample ** 2, 0.0) / M_per_pauli)
-        chi_L_noisy = chi_L_sample + rng.normal(0.0, sigma)
-        X = chi_L_noisy / chi_V_sample
-    elif noise != "exact":
+    if noise not in {"exact", "finite"}:
         raise ValueError(noise)
+    S = int(num_paulis)
+    if S < 1 or M_per_pauli < 1:
+        raise ValueError("num_paulis and M_per_pauli must be positive")
 
-    F_hat = float(X.mean())
-    sigma_proto = float(X.std(ddof=1) / np.sqrt(S)) if S > 1 else float("nan")
+    if strategy == "iid":
+        idx = rng.choice(len(chi_V), size=S, replace=True, p=weights)
+        observed = chi_L[idx]
+        if noise == "finite":
+            observed = _sample_pauli_mean(observed, np.full(S, M_per_pauli), rng)
+        X = observed / chi_V[idx]
+        F_hat = float(X.mean())
+        sigma_proto = float(X.std(ddof=1) / np.sqrt(S)) if S > 1 else float("nan")
+        quantum_shots = S * M_per_pauli if noise == "finite" else 0
+        n_unique = int(np.unique(idx).size)
+    elif strategy == "stratified":
+        budget = S * M_per_pauli if total_shots is None else int(total_shots)
+        idx, shots = _allocate_stratified_shots(weights, budget)
+        observed = chi_L[idx]
+        if noise == "finite":
+            observed = _sample_pauli_mean(observed, shots, rng)
+        F_hat = float(np.sum(observed * chi_V[idx]) / d ** 2)
+        variances = np.maximum(1.0 - np.square(chi_L[idx]), 0.0) / shots
+        sigma_proto = float(np.sqrt(np.sum(np.square(chi_V[idx]) * variances)) / d ** 2)
+        quantum_shots = budget if noise == "finite" else 0
+        n_unique = len(idx)
+    else:
+        raise ValueError(f"unknown DFE strategy: {strategy}")
+
     return DFEResult(
         F_hat=F_hat,
         F_exact=F_exact,
@@ -172,6 +230,9 @@ def direct_fidelity_estimate(
         sigma_protocol=sigma_proto,
         n_paulis=S,
         M_per_pauli=M_per_pauli,
+        quantum_shots=quantum_shots,
+        n_unique_paulis=n_unique,
+        strategy=strategy,
     )
 
 
@@ -181,4 +242,5 @@ __all__ = [
     "chi_channel",
     "chi_unitary",
     "direct_fidelity_estimate",
+    "_allocate_stratified_shots",
 ]

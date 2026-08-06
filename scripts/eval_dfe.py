@@ -84,6 +84,7 @@ def run_dfe_split(
     seed: int,
     dim: int,
     backend: str,
+    strategy: str,
 ) -> pd.DataFrame:
     raw = np.load(npz_path, allow_pickle=True)
     n_total = raw["x"].shape[0]
@@ -113,6 +114,7 @@ def run_dfe_split(
                 num_paulis=S,
                 M_per_pauli=M_per_pauli,
                 noise="finite",
+                strategy=strategy,
                 rng=rng_s,
             )
             F_hat = float(np.clip(res.F_hat, 0.0, 1.0))
@@ -126,6 +128,7 @@ def run_dfe_split(
             "n_seq": n_eval,
             "S": int(S),
             "M": int(M_per_pauli),
+            "strategy": strategy,
             "quantum_shots_per_seq": int(S * M_per_pauli),
             "mae_F_e": float(np.mean(errs_F_e)),
             "std_F_e": float(np.std(errs_F_e)),
@@ -151,6 +154,8 @@ def main() -> None:
     ap.add_argument("--n-eval", type=int, default=512,
                     help="number of test sequences to evaluate per split")
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--strategy", choices=["iid", "stratified"], default="stratified",
+                    help="Pauli allocation strategy")
     ap.add_argument("--dim", type=int, default=2)
     ap.add_argument("--out", default="results_prxq/dfe/dfe_summary.csv")
     args = ap.parse_args()
@@ -164,7 +169,7 @@ def main() -> None:
         backend = Path(args.data).stem
         df = run_dfe_split(args.data, pauli_budgets=pauli_budgets, M_per_pauli=args.M,
                            n_eval=args.n_eval, seed=args.seed, dim=args.dim,
-                           backend=backend)
+                           backend=backend, strategy=args.strategy)
         all_dfs.append(df)
     else:
         root = Path(args.data_root)
@@ -179,7 +184,7 @@ def main() -> None:
                 continue
             df = run_dfe_split(str(npz), pauli_budgets=pauli_budgets, M_per_pauli=args.M,
                                n_eval=args.n_eval, seed=args.seed, dim=args.dim,
-                               backend=be)
+                               backend=be, strategy=args.strategy)
             all_dfs.append(df)
 
     if not all_dfs:

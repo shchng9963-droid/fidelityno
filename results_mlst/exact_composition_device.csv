@@ -1,0 +1,4 @@
+split,path,n,dim,mae_F_e,max_abs_err_F_e,latency_ms_per_seq_median,latency_ms_per_seq_min,repeats
+id_test,data_prxq/device_regime/id_test.npz,1024,2,2.4417203789255104e-08,1.0939999084413898e-07,0.33117839666374493,0.33104165049735457,5
+length_ood,data_prxq/device_regime/length_ood.npz,1024,2,4.2489314044480246e-08,3.003444821736423e-07,0.6812098035879899,0.6792429867346073,5
+family_ood,data_prxq/device_regime/family_ood.npz,1024,2,3.8489154713427023e-08,1.870980810281253e-07,0.4440088569026557,0.4434786533238366,5

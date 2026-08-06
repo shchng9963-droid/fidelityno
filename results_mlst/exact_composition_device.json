@@ -1,0 +1,35 @@
+[
+  {
+    "split": "id_test",
+    "path": "data_prxq/device_regime/id_test.npz",
+    "n": 1024,
+    "dim": 2,
+    "mae_F_e": 2.4417203789255104e-08,
+    "max_abs_err_F_e": 1.0939999084413898e-07,
+    "latency_ms_per_seq_median": 0.33117839666374493,
+    "latency_ms_per_seq_min": 0.33104165049735457,
+    "repeats": 5
+  },
+  {
+    "split": "length_ood",
+    "path": "data_prxq/device_regime/length_ood.npz",
+    "n": 1024,
+    "dim": 2,
+    "mae_F_e": 4.2489314044480246e-08,
+    "max_abs_err_F_e": 3.003444821736423e-07,
+    "latency_ms_per_seq_median": 0.6812098035879899,
+    "latency_ms_per_seq_min": 0.6792429867346073,
+    "repeats": 5
+  },
+  {
+    "split": "family_ood",
+    "path": "data_prxq/device_regime/family_ood.npz",
+    "n": 1024,
+    "dim": 2,
+    "mae_F_e": 3.8489154713427023e-08,
+    "max_abs_err_F_e": 1.870980810281253e-07,
+    "latency_ms_per_seq_median": 0.4440088569026557,
+    "latency_ms_per_seq_min": 0.4434786533238366,
+    "repeats": 5
+  }
+]

@@ -5,6 +5,7 @@ import numpy as np
 import pytest
 
 from physics.baselines.dfe import (
+    _allocate_stratified_shots,
     chi_channel,
     chi_unitary,
     direct_fidelity_estimate,
@@ -66,3 +67,24 @@ def test_dfe_finite_shot_std_decreases_with_M() -> None:
         err_low.append(e_low); err_high.append(e_high)
     # tighter shots should yield smaller average error
     assert np.mean(err_high) < np.mean(err_low)
+
+
+def test_stratified_allocation_uses_exact_budget() -> None:
+    idx, shots = _allocate_stratified_shots(np.ones(4) / 4, total_shots=23)
+    np.testing.assert_array_equal(idx, np.arange(4))
+    assert int(shots.sum()) == 23
+    assert int(shots.max() - shots.min()) <= 1
+
+
+def test_stratified_dfe_is_exact_for_identity_channel() -> None:
+    res = direct_fidelity_estimate(
+        [depolarizing(p=0.0)],
+        num_paulis=4,
+        M_per_pauli=10,
+        noise="finite",
+        strategy="stratified",
+        rng=np.random.default_rng(2),
+    )
+    assert res.F_hat == pytest.approx(1.0)
+    assert res.quantum_shots == 40
+    assert res.n_unique_paulis == 4
