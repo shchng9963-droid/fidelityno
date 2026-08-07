@@ -23,10 +23,10 @@
 \section{Oracle ground-truth verification}
 \label{supp:oracle}
 
-For Markovian regimes, ground-truth entanglement fidelity $F_{\mathrm{e}}$ follows exact channel composition and the closed-form identity-target formula. Collision labels instead use exact joint system--bath propagation, retaining the bath between steps according to $\eta$. We verify three properties of the Markovian pipeline:
+For the Markovian regimes, ground-truth entanglement fidelity $F_{\mathrm{e}}$ follows from exact channel composition and the closed-form identity-target formula. Collision labels use exact joint propagation of the system and bath. Bath retention between steps is set by $\eta$. We verify three properties of the Markovian pipeline.
 
 \paragraph*{Associativity of Choi composition.}
-For $2 \times 10^3$ randomly drawn channel triples ($10^3$ each at $d{=}2$ and $d{=}4$) $(\Lambda_a, \Lambda_b, \Lambda_c)$ with $d \in \{2, 4\}$, we compute the composed superoperator using two associativity orderings $(\Lambda_a \star \Lambda_b) \star \Lambda_c$ and $\Lambda_a \star (\Lambda_b \star \Lambda_c)$. Maximum elementwise discrepancy is below $2 \times 10^{-13}$ (numerical floor); the corresponding $F_{\mathrm{e}}$ values agree to within $10^{-10}$. The corresponding unit test is included in the released test suite.
+We draw 2000 random channel triples $\Lambda_a, \Lambda_b, \Lambda_c$. Half use $d=2$ and half use $d=4$. We compare the two orderings $(\Lambda_a \star \Lambda_b) \star \Lambda_c$ and $\Lambda_a \star (\Lambda_b \star \Lambda_c)$. The maximum elementwise discrepancy is below $2\times10^{-13}$, which is at the numerical floor. The corresponding $F_{\mathrm{e}}$ values agree within $10^{-10}$. The released test suite includes this check.
 
 \paragraph*{Cross-validation against an independent simulator.}
 For $1{,}024$ Markovian sequences of mixed amplitude-damping, depolarising, and phase-damping channels with lengths $L \in \{2, 4, 8, 16, 24\}$ we compare our $F_{\mathrm{e}}$ against the value obtained by reconstructing the same superoperators in QuTiP and invoking \texttt{qutip.process\_fidelity}. The maximum discrepancy is $2.4 \times 10^{-8}$, the mean is $4.3 \times 10^{-9}$, and the median is $1.1 \times 10^{-15}$ (i.e.~most pairs agree to floating-point precision). This check provides an independent validation of the composition pipeline. The corresponding unit test uses 256 random sequences and gives identical statistics to within seed noise.
@@ -40,7 +40,7 @@ Every channel produced by the channel libraries passes a CPTP test that checks (
 \section{Extended calibration diagnostics}
 \label{supp:calibration}
 
-Table~\ref{tab:supp_calibration} reports distribution-quality metrics for the collision regime. The legacy \texttt{family\_ood} filename denotes the held-out high-retention interval $\eta\in[0.85,0.99]$, not a held-out collision family. We add two figure-level diagnostics here to make the same point visually: (i) an expected-calibration-error (ECE) summary before and after split-conformal recalibration on the in-distribution split, and (ii) reliability diagrams on ID and on the hardest length-OOD endpoint ($n=48$).
+Table~\ref{tab:supp_calibration} reports distributional metrics for the collision regime. The legacy \texttt{family\_ood} filename refers to the high-retention interval $\eta\in[0.85,0.99]$. The collision family is shared with training. Two figures provide additional diagnostics. The first compares expected calibration error (ECE) before and after split-conformal recalibration on ID. The second gives reliability diagrams for ID and the $n=48$ length-OOD endpoint.
 
 \begin{figure}[h]
 \centering
@@ -53,13 +53,13 @@ Table~\ref{tab:supp_calibration} reports distribution-quality metrics for the co
 \centering
 \includegraphics[width=0.48\linewidth]{reliability_id.pdf}\hfill
 \includegraphics[width=0.48\linewidth]{reliability_len48.pdf}
-\caption{Reliability diagrams after split-conformal recalibration. \textbf{Left:} ID test; the neural surrogates track the diagonal closely, matching the low ECE values in Table~\ref{tab:supp_calibration}. \textbf{Right:} length-OOD at $n=48$; all methods become conservative, confirming that IID conformal offsets fit on $n\le 16$ are too cautious under length shift even when average MAE remains competitive.}
+\caption{Reliability diagrams after split-conformal recalibration. The left panel shows ID, where the neural surrogates follow the diagonal and agree with the low ECE values in Table~\ref{tab:supp_calibration}. The right panel shows length OOD at $n=48$. All methods become conservative because conformal offsets fitted on $n\le16$ overstate uncertainty under this length shift.}
 \label{fig:supp_reliability}
 \end{figure}
 
 \begin{table}[h]
 \centering
-\caption{Extended pre-affine distribution metrics for FidelityNO on the collision regime, with quantile recalibration via additive conformal offsets fit on the held-out \texttt{calib.npz} split. MAE is the raw/pre-affine point error; it is intentionally not the labelled-OOD affine-calibrated MAE reported for FidelityNO+cal in the main collision table. Five seeds, 1024 sequences per split.}
+\caption{Extended pre-affine distribution metrics for FidelityNO on the collision regime. Additive conformal offsets are fitted on \texttt{calib.npz}. MAE gives the raw point error before the labelled-OOD affine correction used in the main collision table. Results cover five seeds and 1024 sequences per split.}
 \label{tab:supp_calibration}
 \begin{tabular}{lcccc}
 \toprule
@@ -73,10 +73,10 @@ Split & MAE & Pinball & CRPS & ECE \\
 \end{table}
 
 \paragraph*{Calibration interpretation.}
-The ID-split ECE of $0.004$ is well below the calibration threshold of $0.05$ used in our analysis. The OOD-split ECEs at $0.39$ and $0.50$ confirm that the conformal offsets fit on the ID calibration set do \emph{not} transfer to OOD: this is the failure mode identified in the main-paper distribution-calibration analysis, and the reason we add a separate affine recalibration on a labelled OOD calibration set for FidelityNO+cal. The MAE column here is pre-affine and therefore matches the raw FidelityNO row in the main collision table up to rounding. In synthetic experiments these OOD labels come from exact joint system--bath propagation. Experimental deployment would have to obtain them through measurement or characterisation; Sec.~\ref{supp:sample_complexity} quantifies finite-shot DFE labels explicitly.
+The ID ECE is $0.004$, below the threshold of $0.05$ used in our analysis. ECE rises to $0.39$ and $0.50$ on the two OOD splits. Conformal offsets fitted on ID transfer poorly across these shifts. FidelityNO+cal uses a separate affine correction fitted on labelled OOD data. The MAE column is measured before that correction and matches the raw FidelityNO result up to rounding. Synthetic OOD labels come from exact joint propagation of the system and bath. A hardware experiment would obtain them through measurement or characterisation. Section~\ref{supp:sample_complexity} counts the cost of finite-shot DFE labels.
 
 \paragraph*{Reliability diagram.}
-A reliability diagram of per-quantile empirical coverage on the three splits is provided in the released figure-generation outputs. The ID curves track the diagonal closely, while the OOD curves systematically over-cover at the lower quantile levels and under-cover at the upper levels, consistent with the systematic mean shift identified in the main-paper affine-recalibration analysis.
+The released figures show empirical coverage for each predicted quantile. ID curves follow the diagonal closely. On OOD data, lower quantiles tend to over-cover and upper quantiles tend to under-cover. This pattern agrees with the mean shift measured in the affine-recalibration analysis.
 %%%% END flattened: supp/S2_calibration.tex
 
 
@@ -84,7 +84,7 @@ A reliability diagram of per-quantile empirical coverage on the three splits is 
 \section{Corrected DFE and calibration-cost audit}
 \label{supp:sample_complexity}
 
-The first DFE implementation sampled Pauli settings with replacement and assigned 200 shots to every draw. That is unbiased, but it is inefficient for the present single-qubit identity target, whose relevance support contains only the four Pauli settings. The corrected implementation enumerates that support, allocates a fixed total shot budget across settings, and samples exact binomial $\{+1,-1\}$ outcomes. Table~\ref{tab:supp_dfe} reports the resulting low-shot curve on 1024 memory-strength-OOD sequences.
+The first DFE implementation sampled Pauli settings with replacement and assigned 200 shots to each draw. This estimator is unbiased and has extra protocol variance for the single-qubit identity target, whose relevance support contains four Pauli settings. The revised implementation enumerates the support, allocates a fixed total budget across settings, and samples exact binomial $\{+1,-1\}$ outcomes. Table~\ref{tab:supp_dfe} reports the low-shot curve on 1024 memory-strength-OOD sequences.
 
 \begin{table}[h]
 \centering
@@ -107,7 +107,7 @@ total shots/sequence & MAE in $F_{\mathrm e}$ & RMSE in $F_{\mathrm e}$ \\
 \end{tabular}
 \end{table}
 
-At 2000 shots per sequence, stratified DFE gives MAE $0.0069$, $0.0112$, and $0.0116$ on ID, length-OOD, and memory-strength-OOD, respectively. These values replace the earlier with-replacement curve. The measurement crossover with the $N_{\mathrm{cal}}=64$ bidirectional model (MAE about $0.087$) occurs near 32 shots per query; at 64 shots DFE is already more accurate.
+At 2000 shots per sequence, stratified DFE gives MAE $0.0069$ on ID, $0.0112$ on length OOD, and $0.0116$ on memory-strength OOD. These values replace the earlier with-replacement curve. The bidirectional model with $N_{\mathrm{cal}}=64$ reaches MAE about $0.087$. Stratified DFE approaches this error near 32 shots per query and gives a lower error at 64 shots.
 
 \paragraph*{Finite-shot calibration labels.}
 The main text also audits the one-time cost of labelled OOD calibration. We estimate every calibration label by stratified DFE, fit the same affine map, and evaluate against exact held-out labels. Table~\ref{tab:supp_noisy_cal} pools five bidirectional checkpoints and five independent measurement repetitions. With 64 labels, 64 shots per label are enough for the calibration-noise penalty to be negligible.
@@ -133,7 +133,7 @@ shots/label & total offline shots & test MAE (mean $\pm$ std) \\
 Run \texttt{scripts/eval\_dfe.py} with \texttt{--strategy stratified --M 1} and the total-shot values above. The companion noisy-calibration evaluation script reproduces the calibration audit. Both scripts record the seed, evaluated sample count, and total shot budget in CSV output.
 
 \paragraph*{Marginal Monte Carlo.}
-Classical Kraus-path sampling on reset-bath marginals remains blind to the retained bath. Increasing its path count reduces sampling variance around the wrong marginal-composed process and cannot remove the memory-strength shift.
+Classical Kraus-path sampling uses reset-bath marginals and has no observation of the retained bath. Increasing the path count reduces sampling variance around the marginal-composed process. The bias from memory strength remains.
 %%%% END flattened: supp/S3_sample_complexity.tex
 
 
@@ -141,14 +141,14 @@ Classical Kraus-path sampling on reset-bath marginals remains blind to the retai
 \section{Additional ablations}
 \label{supp:ablations}
 
-We report three supplemental ablations of FidelityNO on the collision regime: (i) the auxiliary physics-consistency loss weight, (ii) the distribution head, and (iii) the channel encoder representation. The fourth architectural comparison discussed in the paper, causal versus bidirectional attention, is already reported in main-paper Sec.~5.2 on the present collision protocol, so we do not repeat it here. All variants below use the same collision-regime training data, optimiser, and curriculum as the default model. Pooled MAE is computed over 5 seeds for the default and 3 seeds for each ablation variant; each split contains 1024 sequences.
+We test the auxiliary physics-consistency weight, the distribution head, and the channel representation. The main paper reports the comparison between causal and bidirectional attention. All variants use the same collision data, optimiser, and curriculum. The default model uses five seeds and each ablation uses three. Every split contains 1024 sequences.
 
 \paragraph*{Auxiliary physics-consistency loss.}
 The default model uses an auxiliary head predicting the purity and trace of the composed Choi, with weight $\lambda_{\mathrm{aux}} = 0.1$. Table~\ref{tab:supp_ablation_aux} reports collision-regime raw (uncalibrated) MAE with this loss off, default, and at heavier weight.
 
 \begin{table}[h]
 \centering
-\caption{Auxiliary physics-consistency loss ablation. Pooled raw MAE on the collision regime; ID-split ECE for distribution-quality reference.}
+\caption{Auxiliary physics-consistency loss ablation. The table reports pooled raw MAE on the collision regime and ID ECE for distributional calibration.}
 \label{tab:supp_ablation_aux}
 \begin{tabular}{lccccc}
 \toprule
@@ -161,7 +161,7 @@ $0.5$ & 3 & $0.0238$ & $0.1384$ & $0.3881$ & $0.020$ \\
 \end{tabular}
 \end{table}
 
-The auxiliary loss does not affect point-prediction MAE on this dataset: all three variants land within $0.0014$ of one another across all three splits, well inside seed noise. We retain the default $\lambda_{\mathrm{aux}} = 0.1$ for compatibility with our earlier runs; it can be removed without material change in performance.
+The three auxiliary-loss settings differ by at most $0.0014$ across the collision splits, which lies within seed variation. We keep $\lambda_{\mathrm{aux}}=0.1$ for consistency with the earlier runs. Removing the auxiliary loss produces similar point-prediction MAE.
 
 \paragraph*{Quantile head versus Gaussian head.}
 Table~\ref{tab:supp_ablation_head} compares the primary 9-quantile pinball head against a parametric truncated-Gaussian head trained with NLL.
@@ -180,10 +180,10 @@ Gaussian & 3 & $0.0248$ & $0.1369$ & $0.3876$ & $0.039$ \\
 \end{tabular}
 \end{table}
 
-The two heads are statistically indistinguishable on point-prediction MAE. The Gaussian head yields substantially worse ID-split calibration (ECE $0.039$ vs.~$0.018$), confirming the main-paper claim that the per-quantile pinball loss adapts predictive shape better than a parametric Gaussian. We therefore keep the quantile head for calibration quality, not because it improves MAE.
+The two heads give similar point-prediction MAE. Their calibration differs on ID. The Gaussian head has ECE $0.039$, compared with $0.018$ for the quantile head. We use the quantile head for its lower calibration error.
 
 \paragraph*{Choi versus Pauli-transfer-matrix encoder.}
-We additionally tested a Pauli-transfer-matrix (PTM) variant of the per-channel encoder: for each channel we replace the $32$-real Choi (real/imag) feature with the $16$-real PTM ($R_{ij} = (1/d) \mathrm{Tr}[P_i \Lambda(P_j)]$) and zero-pad to keep the $32$-dimensional input slot. Conversion is a single tensor contraction via a precomputed Choi-to-PTM tensor; the per-batch cost is negligible. Table~\ref{tab:supp_ablation_encoder} reports collision-regime MAE for both encoders.
+We also test a Pauli-transfer-matrix (PTM) encoder. For a single-qubit channel, the Choi feature has 32 real and imaginary entries. The PTM has 16 real entries given by $R_{ij}=(1/d)\mathrm{Tr}[P_i\Lambda(P_j)]$. We zero-pad the PTM to the same input width. A precomputed Choi-to-PTM tensor performs the conversion in one contraction. Table~\ref{tab:supp_ablation_encoder} reports the collision MAE for both encoders.
 
 \begin{table}[h]
 \centering
@@ -199,10 +199,10 @@ PTM & 3 & $0.0247$ & $0.1356$ & $0.3863$ & $0.018$ \\
 \end{tabular}
 \end{table}
 
-The two encoders are statistically indistinguishable on $d = 2$ across all three splits and all metrics (differences $\leq 0.0021$, well inside seed noise). We default to Choi because it is the primary representation used throughout the paper and carries over unchanged from the single-qubit to the $d = 4$ experiments. For $d = 4$, the PTM becomes a $16 \times 16$ real matrix ($256$ reals per channel), whereas our real/imag Choi feature uses $2 d^4 = 512$ reals per channel. PTM is therefore not larger in raw feature count; the reason we do not switch to it is simply that the $d = 2$ ablation shows no accuracy or calibration gain to justify changing the representation used in the main experiments. We document the PTM encoder for reproducibility but do not extend the ablation to $d = 4$.
+For $d=2$, the two encoders differ by at most $0.0021$ across all splits and metrics. This difference lies within seed variation. We use Choi throughout the paper so that the representation stays unchanged between the single-qubit and $d=4$ experiments. At $d=4$, the PTM contains 256 real values per channel and the real-imaginary Choi feature contains 512. The single-qubit ablation shows similar accuracy and calibration for the two choices. The released implementation documents the PTM encoder, and the reported $d=4$ runs use Choi.
 
 \paragraph*{Interpretation of the ablations.}
-The collision regime has bath-mediated cross-correlations that the architecture must capture. Once the core backbone is in place (a causal transformer over CPTP-respecting channel tokens, followed by the post-hoc OOD recalibration described in the main paper), the auxiliary loss, the choice between quantile and Gaussian heads, and the choice between Choi and PTM encoders are all second-order. These mostly null ablations delineate which modelling choices affect performance and which have only secondary effects.
+The collision regime contains bath-mediated correlations across time steps. A causal transformer processes channel tokens, and the OOD affine fit corrects the deployment shift. Within this configuration, the auxiliary loss and the channel representation have little effect on MAE. The distribution head mainly affects calibration.
 %%%% END flattened: supp/S4_ablations.tex
 
 
@@ -210,11 +210,11 @@ The collision regime has bath-mediated cross-correlations that the architecture 
 \section{Length-OOD diagnostics}
 \label{supp:length_ood}
 
-The main paper reports pooled affine-recalibrated MAE for length-OOD ($L \in \{24, 32, 48\}$), equal to $0.077$ after labelled-OOD affine recalibration. Here we provide a stricter length-by-length diagnostic recorded before that pooled affine correction is applied, to show how the uncorrected bias steepens with sequence length.
+The main paper reports pooled affine-recalibrated MAE of $0.077$ for length OOD with $L\in\{24,32,48\}$. The following diagnostic reports each length before the pooled affine correction and shows how the raw bias changes with sequence length.
 
 \begin{table}[h]
 \centering
-\caption{Pre-affine length-by-length diagnostic for the collision regime. Five seeds, 1024 sequences per length. Sampling baselines are omitted here because the legacy table used a different evaluation subset; their corrected pooled values are reported in the main text and Sec.~\ref{supp:sample_complexity}.}
+\caption{Pre-affine length-by-length diagnostic for the collision regime. Results cover five seeds and 1024 sequences per length. The legacy sampling table used a different subset. Corrected pooled sampling results appear in the main text and Sec.~\ref{supp:sample_complexity}.}
 \label{tab:supp_length_breakdown}
 \begin{tabular}{lcc}
 \toprule
@@ -228,10 +228,10 @@ $48$ & $0.209$ & $0.114$ \\
 \end{table}
 
 \paragraph*{Length-dependent error trends.}
-The table isolates the raw length dependence before pooled affine OOD recalibration. Both predictors degrade with $L$, and the uncorrected learned predictor has the steeper bias at $L=48$. This motivates the post-hoc labelled affine correction used for the pooled length-OOD split in the main paper: with that correction, the pooled FidelityNO+cal MAE drops to $0.077$ (main text), whereas the per-length pre-affine numbers here identify where the bias originates. A length-conditioned recalibration (one $(a, b)$ pair per $L$ bin) reduces the $L = 48$ MAE further in our experiments, but at the cost of needing labelled samples for each deployment $L$. We do not include that variant in the main results because it changes the labelled-OOD-data assumption (more labels needed at deployment time).
+The table reports length dependence before pooled affine OOD recalibration. Both predictors degrade as $L$ grows, and the raw learned predictor has the larger bias at $L=48$. The pooled affine correction reduces the overall length-OOD MAE to $0.077$. The per-length values show that much of the raw bias comes from the longest sequences. A separate affine fit for each length reduces the $L=48$ error further and requires labelled examples for every deployment length. The reported configuration uses one pooled fit and one shared label budget.
 
 \paragraph*{Per-seed (a, b) coefficients.}
-\Cref{tab:supp_per_seed_ab} reports the affine $(a, b)$ on \texttt{family\_ood} per seed, recalled from the main-paper affine-recalibration analysis for completeness. The coefficient std (a: 0.091, b: 0.081) is two orders of magnitude larger than the post-cal MAE std (0.0013), supporting the main-text conclusion that the seed-to-seed bias is structural rather than seed-dependent.
+\Cref{tab:supp_per_seed_ab} reports the affine coefficients for each \texttt{family\_ood} seed. The slope and intercept have standard deviations $0.091$ and $0.081$. The post-calibration MAE has standard deviation $0.0013$. Different coefficient pairs give similar predictive error.
 
 \begin{table}[h]
 \centering
@@ -262,7 +262,7 @@ Fix an observed representation $x$ and choose $z,z'\in\mathcal A_\phi(x)$. Every
 \[
 |F(z)-F(z')|\leq |F(z)-h(x)|+|h(x)-F(z')|.
 \]
-At least one term on the right is at least $|F(z)-F(z')|/2$. Taking the supremum over pairs proves Eq.~(8) of the main text. For absolute loss under a conditional distribution, the subgradient of $\mathbb E[|F-a|\mid x]$ changes sign at any conditional median, establishing Eq.~(9). The minimax quantity is fibre-wise and worst-case; the Bayes quantity depends on a stated distribution and averages over fibres.
+At least one term on the right is at least $|F(z)-F(z')|/2$. Taking the supremum over pairs proves Eq.~(8) of the main text. For absolute loss, the subgradient of $\mathbb E[|F-a|\mid x]$ changes sign at a conditional median. This establishes Eq.~(9). The minimax quantity applies to the worst case within each fibre. The Bayes quantity averages over fibres under a stated distribution.
 
 \subsection{Counterfactual protocol and random-stream control}
 We sample 2048 base collision sequences with lengths in $\{8,16,24\}$. For each base, we retain its couplings, frequencies, durations, bath initial state, and reset-bath marginal Choi sequence, then replay joint propagation at 15 equally spaced values in $\eta\in[0.85,0.99]$. This gives 30,720 physical labels grouped into 2048 exactly identical observable inputs. The maximum tensor difference within every group is zero in float32 storage. Diameter is the within-group maximum minus minimum. The empirical Bayes estimate is the mean absolute deviation from the within-group median under the uniform 15-point grid.
@@ -270,7 +270,7 @@ We sample 2048 base collision sequences with lengths in $\{8,16,24\}$. For each 
 To exclude pseudorandom coupling, we also generate a fresh 4096-instance evaluation set using seed 20260807 for collision parameters and a separate seed 920260807 for $\eta$. Its label mean and standard deviation are 0.4472 and 0.1979. On this split, 64-label affine BiDir calibration gives MAE 0.0894, summary ridge 0.0977, exact-marginal affine 0.1101, and an oracle ridge that additionally observes $\eta$ 0.0800. These values reproduce the legacy split ordering without sharing a random stream.
 
 \subsection{Full finite-label shot sweep}
-Every finite-label run uses 64 calibration instances. Their target labels are independent 64-shot stratified-DFE estimates. For each budget $B$, an additional independent $B$-shot outcome on every calibration instance fits $w_B$ in Eq.~(11); a third independent stream is used at test. Thus no DFE outcome is reused as both target and feature. All methods use the same test indices and the same test DFE outcomes. Neural entries aggregate five checkpoints and five measurement repeats; other entries use five measurement repeats.
+Every finite-label run uses 64 calibration instances. Independent 64-shot stratified-DFE estimates provide their target labels. For each budget $B$, a separate $B$-shot outcome on every calibration instance fits $w_B$ in Eq.~(11). A third random stream generates the test measurements. Target labels and pilot features come from different outcomes. All methods use the same test indices and test DFE outcomes. Neural entries aggregate five checkpoints and five measurement repeats. Other entries use five measurement repeats.
 
 \begin{table}[h]
 \centering
@@ -293,7 +293,7 @@ $B$ & stratified DFE & BiDir hybrid & summary-ridge hybrid \\
 \end{tabular}
 \end{table}
 
-The fitted mean neural fusion weights increase from 0.071 at four shots to 0.783 at 128 shots, consistent with a shrinkage interpretation: the model supplies most of the estimate when measurement variance is large, and DFE dominates as the pilot becomes precise. Exact-label calibration gives nearly identical curves, showing that the finite 64-shot target labels do not drive the gain. At high budgets all priors converge toward DFE; the largest neural-versus-ridge advantage occurs at low and intermediate budgets.
+The mean neural fusion weight rises from 0.071 at four shots to 0.783 at 128 shots. At low budgets, the model supplies most of the estimate because the pilot has high variance. As the pilot becomes more precise, DFE receives more weight. Exact-label and finite-label calibration give similar curves. At high budgets, all priors converge toward DFE. The largest difference between neural and ridge priors occurs at low and intermediate budgets.
 
 
 \end{document}
