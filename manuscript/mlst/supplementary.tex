@@ -10,7 +10,7 @@
 \renewcommand{\thetable}{S\arabic{table}}
 \renewcommand{\thefigure}{S\arabic{figure}}
 
-\title{\textbf{Supplementary Material:}\\ Cost--accuracy regimes for neural surrogate fidelity estimation of composed quantum channels}
+\title{\textbf{Supplementary Material:}\\ Information-limited fidelity estimation of composed quantum channels: when to compose, measure, or learn}
 \author{}
 \date{}
 
@@ -253,6 +253,47 @@ std & $0.091$ & $0.081$ & $0.0008$ & $0.0013$ \\
 \end{tabular}
 \end{table}
 %%%% END flattened: supp/S5_length_ood.tex
+
+\section{Representation ambiguity and measurement-conditioned fusion}
+\label{supp:identifiability}
+
+\subsection{Proof of the fibre-wise lower bound}
+Fix an observed representation $x$ and choose $z,z'\in\mathcal A_\phi(x)$. Every estimator using only $x$ returns the same value $h(x)$ on both instances. The triangle inequality gives
+\[
+|F(z)-F(z')|\leq |F(z)-h(x)|+|h(x)-F(z')|.
+\]
+At least one term on the right is at least $|F(z)-F(z')|/2$. Taking the supremum over pairs proves Eq.~(8) of the main text. For absolute loss under a conditional distribution, the subgradient of $\mathbb E[|F-a|\mid x]$ changes sign at any conditional median, establishing Eq.~(9). The minimax quantity is fibre-wise and worst-case; the Bayes quantity depends on a stated distribution and averages over fibres.
+
+\subsection{Counterfactual protocol and random-stream control}
+We sample 2048 base collision sequences with lengths in $\{8,16,24\}$. For each base, we retain its couplings, frequencies, durations, bath initial state, and reset-bath marginal Choi sequence, then replay joint propagation at 15 equally spaced values in $\eta\in[0.85,0.99]$. This gives 30,720 physical labels grouped into 2048 exactly identical observable inputs. The maximum tensor difference within every group is zero in float32 storage. Diameter is the within-group maximum minus minimum. The empirical Bayes estimate is the mean absolute deviation from the within-group median under the uniform 15-point grid.
+
+To exclude pseudorandom coupling, we also generate a fresh 4096-instance evaluation set using seed 20260807 for collision parameters and a separate seed 920260807 for $\eta$. Its label mean and standard deviation are 0.4472 and 0.1979. On this split, 64-label affine BiDir calibration gives MAE 0.0894, summary ridge 0.0977, exact-marginal affine 0.1101, and an oracle ridge that additionally observes $\eta$ 0.0800. These values reproduce the legacy split ordering without sharing a random stream.
+
+\subsection{Full finite-label shot sweep}
+Every finite-label run uses 64 calibration instances. Their target labels are independent 64-shot stratified-DFE estimates. For each budget $B$, an additional independent $B$-shot outcome on every calibration instance fits $w_B$ in Eq.~(11); a third independent stream is used at test. Thus no DFE outcome is reused as both target and feature. All methods use the same test indices and the same test DFE outcomes. Neural entries aggregate five checkpoints and five measurement repeats; other entries use five measurement repeats.
+
+\begin{table}[h]
+\centering
+\caption{Full independent-random-stream shot sweep. Values are MAE mean $\pm$ standard deviation. Offline shots for either hybrid are $4096+64B$.}
+\label{tab:supp_hybrid_sweep}
+\small
+\begin{tabular}{rccc}
+\toprule
+$B$ & stratified DFE & BiDir hybrid & summary-ridge hybrid \\
+\midrule
+4   & $0.2755\pm0.0029$ & $0.0849\pm0.0043$ & $0.0946\pm0.0051$ \\
+8   & $0.1856\pm0.0021$ & $0.0810\pm0.0025$ & $0.0868\pm0.0029$ \\
+16  & $0.1299\pm0.0015$ & $0.0758\pm0.0039$ & $0.0805\pm0.0050$ \\
+32  & $0.0909\pm0.0012$ & $0.0657\pm0.0019$ & $0.0683\pm0.0027$ \\
+48  & $0.0743\pm0.0013$ & $0.0590\pm0.0014$ & $0.0605\pm0.0016$ \\
+64  & $0.0641\pm0.0005$ & $0.0539\pm0.0012$ & $0.0557\pm0.0024$ \\
+96  & $0.0525\pm0.0004$ & $0.0473\pm0.0011$ & $0.0485\pm0.0024$ \\
+128 & $0.0455\pm0.0004$ & $0.0424\pm0.0016$ & $0.0438\pm0.0028$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The fitted mean neural fusion weights increase from 0.071 at four shots to 0.783 at 128 shots, consistent with a shrinkage interpretation: the model supplies most of the estimate when measurement variance is large, and DFE dominates as the pilot becomes precise. Exact-label calibration gives nearly identical curves, showing that the finite 64-shot target labels do not drive the gain. At high budgets all priors converge toward DFE; the largest neural-versus-ridge advantage occurs at low and intermediate budgets.
 
 
 \end{document}

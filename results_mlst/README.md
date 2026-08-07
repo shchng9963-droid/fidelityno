@@ -16,3 +16,41 @@ Key outputs:
 
 The collision filename `family_ood` is retained for compatibility and means a
 memory-strength shift in eta, not a different functional channel family.
+
+
+## Information-limited collision audit and measurement-conditioned estimator
+
+The MLST novelty revision adds two paired evaluations on the high-memory
+collision family.
+
+- `collision_ood_identifiability_{inputs,per_base,models,summary}.*` replays
+  2048 fixed observable marginal sequences at 15 values of the hidden
+  retention parameter in `[0.85, 0.99]`.  It reports the representation
+  ambiguity diameter, the pointwise minimax absolute-error lower bound, and
+  the uniform-grid Bayes MAE.
+- `measurement_conditioned_hybrid_independent_rng{,_summary}.csv` compares
+  stratified DFE with a constrained fusion of the marginal prior and a
+  same-query DFE pilot.  Finite-label rows include independent 64-shot target
+  labels and independent pilot shots used to fit the fusion weight.
+- `independent_rng_label_budget.csv` verifies the marginal-only label-budget
+  ordering on a split whose physical parameters and retention values use
+  independent random streams.
+
+Reproduce the independent split, audits, and figures with:
+
+```bash
+python scripts/gen_collision_independent_eta_split.py \
+  --out data_mlst/collision_family_ood_independent_rng.npz
+python scripts/eval_collision_ood_identifiability.py \
+  --n-base 2048 --n-eta 15 --eta-min 0.85 --eta-max 0.99 \
+  --n-calib 64 --calib-repeats 20 --ckpts <five-checkpoints>
+python scripts/eval_measurement_conditioned_hybrid.py \
+  --data data_mlst/collision_family_ood_independent_rng.npz \
+  --ckpts <five-checkpoints> --budgets 4,8,16,32,48,64,96,128 \
+  --n-calib 64 --n-test 4032 --label-shots 64 --repeats 5 \
+  --out results_mlst/measurement_conditioned_hybrid_independent_rng.csv
+python scripts/plot_novelty_results.py
+```
+
+The checkpoint arguments must point to the five seed-controlled bidirectional
+collision models used by the original benchmark.
