@@ -3,20 +3,23 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage[utf8]{inputenc}
-\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[letterpaper,margin=1in]{geometry}
 \usepackage{amsmath,amssymb,booktabs,graphicx,xcolor,hyperref,cleveref}
 \graphicspath{{figures/}}
 \renewcommand{\thesection}{S\arabic{section}}
 \renewcommand{\thetable}{S\arabic{table}}
 \renewcommand{\thefigure}{S\arabic{figure}}
 
-\title{\textbf{Supplementary Material:}\\ Information-limited fidelity estimation of composed quantum channels: when to compose, measure, or learn}
+\title{\textbf{Supplementary Material}}
 \author{}
 \date{}
 
 \begin{document}
 \maketitle
-\noindent This supplement reports oracle ground-truth verification (S1), extended distribution-quality metrics and reliability diagnostics (S2), per-seed sample-complexity tables for DFE and Monte Carlo (S3), ablation tables (S4), and extended length-OOD diagnostics (S5). All numbers are reproducible from the released code described in the Data and code availability statement of the main paper.
+\noindent\textbf{Associated article:} Information-limited fidelity estimation of composed quantum channels: when to compose, measure, or learn.
+
+\medskip
+\noindent This supplement reports oracle verification, calibration diagnostics, sample-complexity results, ablations, length-shift analyses, and representation-ambiguity and measurement-conditioned-fusion experiments. All numbers are reproducible from the code described in the Data and Code Availability statements of the main paper.
 
 
 %%%% BEGIN flattened: supp/S1_oracle.tex
@@ -28,8 +31,8 @@ For the Markovian regimes, ground-truth entanglement fidelity $F_{\mathrm{e}}$ f
 \paragraph*{Associativity of Choi composition.}
 We draw 2000 random channel triples $\Lambda_a, \Lambda_b, \Lambda_c$. Half use $d=2$ and half use $d=4$. We compare the two orderings $(\Lambda_a \star \Lambda_b) \star \Lambda_c$ and $\Lambda_a \star (\Lambda_b \star \Lambda_c)$. The maximum elementwise discrepancy is below $2\times10^{-13}$, which is at the numerical floor. The corresponding $F_{\mathrm{e}}$ values agree within $10^{-10}$. The released test suite includes this check.
 
-\paragraph*{Cross-validation against an independent simulator.}
-For $1{,}024$ Markovian sequences of mixed amplitude-damping, depolarising, and phase-damping channels with lengths $L \in \{2, 4, 8, 16, 24\}$ we compare our $F_{\mathrm{e}}$ against the value obtained by reconstructing the same superoperators in QuTiP and invoking \texttt{qutip.process\_fidelity}. The maximum discrepancy is $2.4 \times 10^{-8}$, the mean is $4.3 \times 10^{-9}$, and the median is $1.1 \times 10^{-15}$ (i.e.~most pairs agree to floating-point precision). This check provides an independent validation of the composition pipeline. The corresponding unit test uses 256 random sequences and gives identical statistics to within seed noise.
+\paragraph*{Independent simulator check.}
+For $1{,}024$ Markovian sequences of mixed amplitude-damping, depolarising, and phase-damping channels with lengths $L \in \{2, 4, 8, 16, 24\}$ we compare our $F_{\mathrm{e}}$ against the value obtained by reconstructing the same superoperators with QuTiP and using its process-fidelity routine. The maximum discrepancy is $2.4 \times 10^{-8}$, the mean is $4.3 \times 10^{-9}$, and the median is $1.1 \times 10^{-15}$ (i.e.~most pairs agree to floating-point precision). This check provides an independent validation of the composition pipeline. The corresponding unit test uses 256 random sequences and gives identical statistics to within seed noise.
 
 \paragraph*{CPTP sanity at every channel.}
 Every channel produced by the channel libraries passes a CPTP test that checks (i) Choi positive semi-definiteness via Cholesky with tolerance $10^{-9}$, (ii) trace preservation $\mathrm{Tr}_{\mathrm{out}}\,J(\Lambda) = I$ to the same tolerance. The test runs as part of the standard validation suite and is required to succeed before any data-generation script is run.
@@ -45,7 +48,7 @@ Table~\ref{tab:supp_calibration} reports distributional metrics for the collisio
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.86\linewidth]{calibration_ece.pdf}
-\caption{ECE before and after split-conformal recalibration on the in-distribution test split. The quantile-head neural surrogates improve after recalibration, with FidelityNO reaching the low-ECE region used in the main-paper comparison.}
+\caption{Expected calibration error before and after split-conformal recalibration on the in-distribution test split. The quantile-head neural surrogates improve after recalibration, with FidelityNO reaching the low-error region used in the main-paper comparison.}
 \label{fig:supp_ece}
 \end{figure}
 
@@ -53,13 +56,13 @@ Table~\ref{tab:supp_calibration} reports distributional metrics for the collisio
 \centering
 \includegraphics[width=0.48\linewidth]{reliability_id.pdf}\hfill
 \includegraphics[width=0.48\linewidth]{reliability_len48.pdf}
-\caption{Reliability diagrams after split-conformal recalibration. The left panel shows ID, where the neural surrogates follow the diagonal and agree with the low ECE values in Table~\ref{tab:supp_calibration}. The right panel shows length OOD at $n=48$. All methods become conservative because conformal offsets fitted on $n\le16$ overstate uncertainty under this length shift.}
+\caption{Reliability diagrams after split-conformal recalibration. The left panel shows the in-distribution split, where the neural surrogates follow the diagonal and agree with the low expected calibration errors in Table~\ref{tab:supp_calibration}. The right panel shows the length out-of-distribution split at $n=48$. All methods become conservative because conformal offsets fitted on $n\le16$ overstate uncertainty under this length shift.}
 \label{fig:supp_reliability}
 \end{figure}
 
 \begin{table}[h]
 \centering
-\caption{Extended pre-affine distribution metrics for FidelityNO on the collision regime. Additive conformal offsets are fitted on \texttt{calib.npz}. MAE gives the raw point error before the labelled-OOD affine correction used in the main collision table. Results cover five seeds and 1024 sequences per split.}
+\caption{Extended pre-affine distribution metrics for FidelityNO on the collision regime. Additive conformal offsets are fitted on \texttt{calib.npz}. Mean absolute error gives the raw point error before the labelled out-of-distribution affine correction used in the main collision table. Results cover five seeds and 1024 sequences per split.}
 \label{tab:supp_calibration}
 \begin{tabular}{lcccc}
 \toprule
@@ -88,7 +91,7 @@ The first DFE implementation sampled Pauli settings with replacement and assigne
 
 \begin{table}[h]
 \centering
-\caption{Stratified DFE on the collision memory-strength-OOD split. The estimator acts on the true composed process.}
+\caption{Stratified Direct Fidelity Estimation on the collision memory-strength out-of-distribution split. The estimator acts on the true composed process.}
 \label{tab:supp_dfe}
 \begin{tabular}{rrr}
 \toprule
@@ -114,7 +117,7 @@ The main text also audits the one-time cost of labelled OOD calibration. We esti
 
 \begin{table}[h]
 \centering
-\caption{Bidirectional model with $N_{\mathrm{cal}}=64$ finite-shot calibration labels. The exact-label reference MAE is $0.087$.}
+\caption{Bidirectional model with $N_{\mathrm{cal}}=64$ finite-shot calibration labels. The exact-label reference mean absolute error is $0.087$.}
 \label{tab:supp_noisy_cal}
 \begin{tabular}{rrc}
 \toprule
@@ -148,7 +151,7 @@ The default model uses an auxiliary head predicting the purity and trace of the 
 
 \begin{table}[h]
 \centering
-\caption{Auxiliary physics-consistency loss ablation. The table reports pooled raw MAE on the collision regime and ID ECE for distributional calibration.}
+\caption{Auxiliary physics-consistency loss ablation. The table reports pooled raw mean absolute error on the collision regime and in-distribution expected calibration error.}
 \label{tab:supp_ablation_aux}
 \begin{tabular}{lccccc}
 \toprule
@@ -168,7 +171,7 @@ Table~\ref{tab:supp_ablation_head} compares the primary 9-quantile pinball head 
 
 \begin{table}[h]
 \centering
-\caption{Distribution-head ablation. Pooled raw MAE and ID ECE on the collision regime.}
+\caption{Distribution-head ablation. Pooled raw mean absolute error and in-distribution expected calibration error on the collision regime.}
 \label{tab:supp_ablation_head}
 \begin{tabular}{lccccc}
 \toprule
@@ -235,7 +238,7 @@ The table reports length dependence before pooled affine OOD recalibration. Both
 
 \begin{table}[h]
 \centering
-\caption{Affine recalibration coefficients $(a, b)$ on \texttt{family\_ood}, per seed. Linear fit $F_{\mathrm{cal}} = a \cdot F_{\mathrm{raw}} + b$ on a labelled, held-out 10\% OOD calibration set.}
+\caption{Affine recalibration coefficients $(a, b)$ on \texttt{family\_ood}, per seed. The linear fit $F_{\mathrm{cal}} = a \cdot F_{\mathrm{raw}} + b$ uses a labelled, held-out 10\% out-of-distribution calibration set.}
 \label{tab:supp_per_seed_ab}
 \begin{tabular}{ccccc}
 \toprule
@@ -262,7 +265,7 @@ Fix an observed representation $x$ and choose $z,z'\in\mathcal A_\phi(x)$. Every
 \[
 |F(z)-F(z')|\leq |F(z)-h(x)|+|h(x)-F(z')|.
 \]
-At least one term on the right is at least $|F(z)-F(z')|/2$. Taking the supremum over pairs proves Eq.~(8) of the main text. For absolute loss, the subgradient of $\mathbb E[|F-a|\mid x]$ changes sign at a conditional median. This establishes Eq.~(9). The minimax quantity applies to the worst case within each fibre. The Bayes quantity averages over fibres under a stated distribution.
+At least one term on the right is at least $|F(z)-F(z')|/2$. Taking the supremum over pairs proves Eq.~(5) of the main text. For absolute loss, the subgradient of $\mathbb E[|F-a|\mid x]$ changes sign at a conditional median. This establishes Eq.~(6). The minimax quantity applies to the worst case within each fibre. The Bayes quantity averages over fibres under a stated distribution.
 
 \subsection{Counterfactual protocol and random-stream control}
 We sample 2048 base collision sequences with lengths in $\{8,16,24\}$. For each base, we retain its couplings, frequencies, durations, bath initial state, and reset-bath marginal Choi sequence, then replay joint propagation at 15 equally spaced values in $\eta\in[0.85,0.99]$. This gives 30,720 physical labels grouped into 2048 exactly identical observable inputs. The maximum tensor difference within every group is zero in float32 storage. Diameter is the within-group maximum minus minimum. The empirical Bayes estimate is the mean absolute deviation from the within-group median under the uniform 15-point grid.
@@ -270,11 +273,11 @@ We sample 2048 base collision sequences with lengths in $\{8,16,24\}$. For each 
 To exclude pseudorandom coupling, we also generate a fresh 4096-instance evaluation set using seed 20260807 for collision parameters and a separate seed 920260807 for $\eta$. Its label mean and standard deviation are 0.4472 and 0.1979. On this split, 64-label affine BiDir calibration gives MAE 0.0894, summary ridge 0.0977, exact-marginal affine 0.1101, and an oracle ridge that additionally observes $\eta$ 0.0800. These values reproduce the legacy split ordering without sharing a random stream.
 
 \subsection{Full finite-label shot sweep}
-Every finite-label run uses 64 calibration instances. Independent 64-shot stratified-DFE estimates provide their target labels. For each budget $B$, a separate $B$-shot outcome on every calibration instance fits $w_B$ in Eq.~(11). A third random stream generates the test measurements. Target labels and pilot features come from different outcomes. All methods use the same test indices and test DFE outcomes. Neural entries aggregate five checkpoints and five measurement repeats. Other entries use five measurement repeats.
+Every finite-label run uses 64 calibration instances. Independent 64-shot stratified Direct Fidelity Estimation estimates provide their target labels. For each budget $B$, a separate $B$-shot outcome on every calibration instance fits $w_B$ in Eq.~(10). A third random stream generates the test measurements. Target labels and pilot features come from different outcomes. All methods use the same test indices and test Direct Fidelity Estimation outcomes. Neural entries aggregate five checkpoints and five measurement repeats. Other entries use five measurement repeats.
 
 \begin{table}[h]
 \centering
-\caption{Full independent-random-stream shot sweep. Values are MAE mean $\pm$ standard deviation. Offline shots for either hybrid are $4096+64B$.}
+\caption{Full independent-random-stream shot sweep. Values give the mean and standard deviation of the mean absolute error. Offline shots for either hybrid are $4096+64B$.}
 \label{tab:supp_hybrid_sweep}
 \small
 \begin{tabular}{rccc}

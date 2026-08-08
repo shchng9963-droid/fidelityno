@@ -48,7 +48,7 @@
 \ead{qubit@ustc.edu.cn}
 
 \begin{abstract}
-Scientific machine-learning estimators should be evaluated using the information and measurement budget available at inference. We study this issue for the end-to-end entanglement fidelity of composed quantum channels. With complete Markovian Choi descriptions, deterministic superoperator composition is numerically exact and faster than learned models at the dimensions studied here. When the deployed process can be measured, stratified Direct Fidelity Estimation (DFE) is accurate at low shot counts. In our non-Markovian collision benchmark, the input contains reset-bath marginal channels but omits bath retention, so one observed input can correspond to several target fidelities. We quantify this ambiguity by replaying 2048 collision sequences at 15 retention values while keeping each observed input fixed. The target fidelities for one input span $0.229$ on average. For each input, half of this range lower-bounds the worst-case error of any estimator based on the same representation. The resulting bound is $0.115$ on average. Under a uniform distribution over the tested high-memory values, the minimum achievable average MAE is $0.060$. We then combine a calibrated marginal prediction with a same-query DFE pilot. On a fresh split of 4096 samples generated with independent random streams, a 32-shot neural hybrid reaches MAE $0.0657$, close to the $0.0641$ of 64-shot DFE. A 64-shot hybrid reaches $0.0539$, close to the $0.0525$ of 96-shot DFE. After including the finite-shot calibration data, these two hybrids recover their offline measurement costs after 192 and 256 deployment queries. Before model fitting, a representation audit checks whether the input identifies the target. The available information and query volume then determine whether direct composition, measurement, a learned prior, or a hybrid is appropriate.
+Scientific machine-learning estimators should be evaluated using the information and measurement budget available at inference. We study this issue for the end-to-end entanglement fidelity of composed quantum channels. With complete Markovian Choi descriptions, deterministic superoperator composition is numerically exact and faster than learned models at the dimensions studied here. When the deployed process can be measured, stratified Direct Fidelity Estimation (DFE) is accurate at low shot counts. In our non-Markovian collision benchmark, the input contains reset-bath marginal channels but omits bath retention, so one observed input can correspond to several target fidelities. We quantify this ambiguity by replaying 2048 collision sequences at 15 retention values while keeping each observed input fixed. The target fidelities for one input span $0.229$ on average. For each input, half of this range lower-bounds the worst-case error of any estimator based on the same representation. The resulting bound is $0.115$ on average. Under a uniform distribution over the tested high-memory values, the minimum achievable average mean absolute error (MAE) is $0.060$. We then combine a calibrated marginal prediction with a same-query DFE pilot. On a fresh split of 4096 samples generated with independent random streams, a 32-shot neural hybrid reaches MAE $0.0657$, close to the $0.0641$ of 64-shot DFE. A 64-shot hybrid reaches $0.0539$, close to the $0.0525$ of 96-shot DFE. After including the finite-shot calibration data, these two hybrids recover their offline measurement costs after 192 and 256 deployment queries. Before model fitting, a representation audit checks whether the input identifies the target. The available information and query volume then determine whether direct composition, measurement, a learned prior, or a hybrid is appropriate.
 \end{abstract}
 
 \vspace{1pc}
@@ -155,7 +155,7 @@ We evaluate the estimators in three regimes spanning more than two orders of mag
 
 \begin{description}[itemsep=3pt,topsep=2pt,leftmargin=*]
 \item[(R1) Device regime ($d{=}2$, $\eps \approx 10^{-3}$).]
-Single-qubit channels are sampled from hardware-calibrated parametric noise models spanning amplitude damping, phase damping, depolarising, and Lindblad families, with parameter ranges matched to the reported single-qubit gate-error scale of current superconducting and trapped-ion processors~\cite{ibm_fake_backends}. The \texttt{family\_ood} split holds out the Pauli-channel family entirely. The per-channel infidelity is $\eps \approx 10^{-3}$, matching the hardware gate-error scale.
+Single-qubit channels are sampled from parametric noise models spanning amplitude damping, phase damping, depolarising, and Lindblad families. The numerical ranges are centred near a per-channel infidelity of $\eps \approx 10^{-3}$ and define a synthetic low-noise benchmark. Qiskit provides the channel representations and simulation tools used in this construction~\cite{ibm_fake_backends}. The \texttt{family\_ood} split holds out the Pauli-channel family entirely.
 
 \item[(R2) Non-Markovian collision regime ($d{=}2$, $\eps \approx 0.4$).]
 The system and a bath qubit initially in $|+\rangle$ interact through step-dependent commuting $ZZ$ Hamiltonians. After each collision, the joint state is retained with probability $\eta$. The bath is reset in the remaining cases. Training, calibration, and ID data use $\eta\in[0,0.7]$. The legacy \texttt{family\_ood} file contains the stronger interval $\eta\in[0.85,0.99]$. This split changes memory strength while keeping the collision family fixed.
@@ -304,7 +304,7 @@ We present the results by operating regime. \Cref{fig:central} gives the cost-ac
 \centering
 \includegraphics[width=\textwidth]{central_sample_complexity.pdf}
 \caption{\textbf{Negative controls and corrected cost-accuracy comparison.}
-(a) Direct composition is numerically exact on Markovian full-Choi inputs at the studied $d\leq4$ scale. Collision points use observable reset-bath marginals and retain an error from missing memory. (b) All OOD-calibrated methods receive identical labelled indices. (c) Stratified DFE reaches the calibrated neural error near 32 shots per query and gives a lower error at 64 shots.}
+(a) Direct composition is numerically exact on Markovian full-Choi inputs at the studied $d\leq4$ scale. Collision points use observable reset-bath marginals and retain an error from missing memory. (b) All out-of-distribution calibrated methods receive identical labelled indices. (c) Stratified Direct Fidelity Estimation reaches the calibrated neural error near 32 shots per query and gives a lower error at 64 shots.}
 \label{fig:central}
 \end{figure*}
 
@@ -315,7 +315,7 @@ We present the results by operating regime. \Cref{fig:central} gives the cost-ac
 
 \begin{table}[h]
 \centering
-\caption{\textbf{Device regime: pooled MAE on $\Fe$.} Exact composition uses 1024 sequences per split. Neural rows use five seeds and labelled-OOD calibration. Stored float32 precision sets the error floor for the full-Choi exact baseline.}
+\caption{\textbf{Device regime: pooled mean absolute error on $\Fe$.} Exact composition uses 1024 sequences per split. Neural rows use five seeds and labelled out-of-distribution calibration. Stored float32 precision sets the error floor for the full-Choi exact baseline.}
 \label{tab:device}
 \small
 \begin{tabular}{lccc}
@@ -379,7 +379,7 @@ We generate a fresh OOD split of 4096 instances with independent random streams 
 
 \begin{table}[h]
 \centering
-\caption{\textbf{Collision OOD MAE on the independent-random-stream split.} Hybrid rows include finite 64-shot calibration labels. Uncertainties are standard deviations over measurement repeats and, for neural rows, five checkpoints.}
+\caption{\textbf{Collision out-of-distribution mean absolute error on the independent-random-stream split.} Hybrid rows include finite 64-shot calibration labels. Uncertainties are standard deviations over measurement repeats and, for neural rows, five checkpoints.}
 \label{tab:hybrid}
 \small
 \begin{tabular}{lccc}
@@ -405,7 +405,7 @@ Summary-ridge hybrid & 64 & 8192 & $0.0557\pm0.0024$ \\
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.98\textwidth]{identifiability_hybrid.pdf}
-\caption{\textbf{Diagnosing and repairing missing information.} (a) Fixed marginal inputs can correspond to different fidelities as hidden bath retention varies. Curves show representative input groups. (b) The empirical ambiguity distribution yields a mean diameter of $0.229$, a mean pointwise minimax floor of $0.115$, and a uniform-$\eta$ Bayes MAE floor of $0.060$. (c) A same-query DFE pilot supplies information about the deployed process. In the highlighted regimes, the neural hybrid reaches the accuracy of DFE using roughly one half to two thirds of its per-query shots. Error bars show run-to-run standard deviations.}
+\caption{\textbf{Diagnosing and repairing missing information.} (a) Fixed marginal inputs can correspond to different fidelities as hidden bath retention varies. Curves show representative input groups. (b) The empirical ambiguity distribution yields a mean diameter of $0.229$, a mean pointwise minimax floor of $0.115$, and a uniform-$\eta$ Bayes mean absolute error floor of $0.060$. (c) A same-query Direct Fidelity Estimation pilot supplies information about the deployed process. In the highlighted regimes, the neural hybrid reaches the accuracy of this estimator using roughly one half to two thirds of its per-query shots. Error bars show run-to-run standard deviations.}
 \label{fig:identifiability_hybrid}
 \end{figure*}
 
@@ -423,7 +423,7 @@ Classical Monte Carlo gives lower error when a sufficient marginal-simulation bu
 
 \begin{table}[h]
 \centering
-\caption{\textbf{$d{=}4$ two-qubit order-sensitive: pooled MAE on $\Fe$.}}
+\caption{\textbf{$d{=}4$ two-qubit order-sensitive regime: pooled mean absolute error on $\Fe$.}}
 \label{tab:d4}
 \begin{tabular}{lccc}
 \toprule
@@ -463,7 +463,7 @@ We compare methods at two similar accuracy levels. First, the 32-shot hybrid rea
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.78\linewidth]{break_even_queries.pdf}
-\caption{\textbf{Full amortised measurement cost.} The build cost includes 64 independent 64-shot target labels and 64 independent $B$-shot fusion pilots. The 32-shot hybrid and 64-shot DFE have equal total cost after 192 queries at similar MAE. The corresponding crossing for the 64-shot hybrid and 96-shot DFE occurs after 256 queries.}
+\caption{\textbf{Full amortised measurement cost.} The build cost includes 64 independent 64-shot target labels and 64 independent $B$-shot fusion pilots. The 32-shot hybrid and 64-shot Direct Fidelity Estimation have equal total cost after 192 queries at similar mean absolute error. The corresponding crossing for the 64-shot hybrid and 96-shot Direct Fidelity Estimation occurs after 256 queries.}
 \label{fig:collision_amortised}
 \end{figure}
 
@@ -498,7 +498,7 @@ MC, $K{=}1000$ & $298.9\pm4.6$ \\
 
 \begin{table}[h]
 \centering
-\caption{\textbf{Collision regime: pre-affine distribution metrics for \fidno{}.} Results pool five seeds and 1024 sequences. MAE is the raw point error before affine calibration. ECE uses the predicted median band, and CRPS uses all nine quantiles after the ID-fitted correction.}
+\caption{\textbf{Collision regime: pre-affine distribution metrics for \fidno{}.} Results pool five seeds and 1024 sequences. Mean absolute error is the raw point error before affine calibration. Expected calibration error uses the predicted median band. Continuous ranked probability score uses all nine quantiles after the in-distribution correction.}
 \label{tab:cal_metrics}
 \begin{tabular}{lccc}
 \toprule
@@ -554,7 +554,7 @@ We use $\eps^2L^2$ as a screening diagnostic. Small values indicate little room 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.72\linewidth]{eta_sweep.pdf}
-\caption{\textbf{Bath-retention sweep for the decision rule.} The retention coefficient $\eta$ moves from reset-bath dynamics at $\eta=0$ toward strong memory as $\eta$ approaches one. Each point uses 1024 sequences. Neural curves average five seeds. Analytic and MC-1000 curves use the same split.}
+\caption{\textbf{Bath-retention sweep for the decision rule.} The retention coefficient $\eta$ moves from reset-bath dynamics at $\eta=0$ toward strong memory as $\eta$ approaches one. Each point uses 1024 sequences. Neural curves average five seeds. Analytic and 1000-sample Monte Carlo curves use the same split.}
 \label{fig:eta_sweep}
 \end{figure}
 
@@ -630,7 +630,7 @@ The two-qubit channels in R3 are order-sensitive and use coherent correlations. 
 \label{sec:related}
 
 \paragraph*{Fidelity-estimation tools.}
-The estimators in \cref{sec:baselines} are standard tools in quantum information. Product-style approximations appear in repeater-chain and quantum-network analyses~\cite{repeater_review}. Direct Fidelity Estimation~\cite{flammia_liu_2011} uses Pauli measurements on the implemented channel. Randomised benchmarking~\cite{rb_review,rb_recent} estimates Clifford-averaged gate fidelity. Cross-entropy benchmarking~\cite{xeb_review} provides a related sequence-level diagnostic. Diamond-norm semidefinite programs~\cite{watrous_dnorm_sdp,khatri_dnorm} estimate worst-case channel distance at a higher classical cost.
+The estimators in \cref{sec:baselines} are standard tools in quantum information. Product-style approximations appear in repeater-chain and quantum-network analyses~\cite{repeater_review}. Direct Fidelity Estimation~\cite{flammia_liu_2011} uses Pauli measurements on the implemented channel. Randomised benchmarking~\cite{rb_review,rb_recent} estimates Clifford-averaged gate fidelity. Cross-entropy benchmarking~\cite{xeb_review} provides a related sequence-level diagnostic. Diamond-norm semidefinite programs~\cite{watrous_dnorm_sdp} estimate worst-case channel distance at a higher classical cost.
 
 \paragraph*{Learned surrogates for scientific computation.}
 Learned surrogates that replace an expensive numerical estimator with a fast forward model are now widespread across the sciences. Operator-learning architectures such as the Fourier Neural Operator~\cite{fno} and DeepONet~\cite{deeponet} approximate solution maps of parametric differential equations and have become standard tools in scientific machine learning. This literature also studies the conditions under which a surrogate can replace its numerical reference and how its error changes out of distribution. We examine these questions for composed-channel fidelity. The analysis compares learned surrogates with analytic, sampling, and measurement-based estimators and counts the labels used for OOD calibration.
@@ -644,8 +644,8 @@ Collision models are widely used to study non-Markovian open-system dynamics~\ci
 \paragraph*{Distribution shift and post-hoc calibration.}
 Post-hoc calibration methods such as affine, temperature, and isotonic calibration are standard in classification and probabilistic regression~\cite{guo_calibration,kuleshov_calibrated}. Our labelled-OOD calibration setting is closer to bias correction than to classical coverage calibration: the goal is to remove a systematic shift in the median fidelity prediction. Conformal prediction~\cite{conformal_review} could be used to calibrate predictive intervals for $\Fe$ and is a natural extension.
 
-\paragraph*{Surrogate-driven QEC code design.}
-Learned surrogates have recently been proposed as inner-loop fidelity proxies for QEC code design~\cite{qec_surrogate}. Our results place these methods in a regime-dependent setting. Analytic estimators can be sufficient for low-infidelity Pauli-like noise. Learned priors become more useful when correlated noise produces corrections absent from marginal estimators. Decoder-level and threshold-level quantities require their own evaluation.
+\paragraph*{Machine learning for quantum error correction.}
+Neural networks have recently been used to decode syndrome data from near-term surface-code experiments~\cite{qec_surrogate}. This task differs from channel-fidelity estimation, but both require a clear account of the information available to the learned estimator and the baseline it replaces. Analytic channel estimators can be sufficient for low-infidelity Pauli-like noise. Learned priors become more useful when correlated noise produces corrections absent from marginal estimators. Decoder-level and threshold-level quantities require separate evaluation.
 %%%% END flattened: sections/07_related
 
 
@@ -669,18 +669,15 @@ All authors declare no financial or non-financial competing interests.
 
 \section*{Data availability}
 
-All datasets are generated synthetically by scripts in the public repository, \url{https://github.com/shchng9963-droid/fidelityno}. Versioned data and result archives will receive an archival DOI before acceptance. The submission bundle records the code revision and random seeds.
+All datasets are generated synthetically by scripts in the code repository at \url{https://github.com/shchng9963-droid/fidelityno}. The repository contains the data generators, evaluation scripts, random seeds, and machine-readable result tables used in this study. Training arrays and model checkpoints can be regenerated using the documented commands. A versioned archive and archival DOI will be added when the public release is deposited.
 
 \section*{Code availability}
 
-Code is available on GitHub at \url{https://github.com/shchng9963-droid/fidelityno}.
+Source code is available on GitHub at \url{https://github.com/shchng9963-droid/fidelityno}. The release associated with this manuscript will identify the exact Git commit and software environment.
 
-\section*{Use of AI and AI-assisted technologies}
+\section*{Acknowledgements}
 
-LLMs were used to improve grammar, wording, and readability of the manuscript text.
-
-\bibliographystyle{iopart-num}
-\bibliography{bibliography}
+OpenAI Codex using GPT-5 was used during manuscript preparation to improve grammar, wording, and readability and to assist with consistency checks. The authors reviewed all resulting text and take responsibility for the content of the manuscript.
 
 \newpage
 
@@ -764,8 +761,12 @@ Architecture and training hyperparameters were selected on the device calibratio
 Collision and $d=4$ splits contain 8000 sequences. Device splits contain 1024 sequences for each backend. Training, calibration, and ID lengths are drawn from $\{2,4,8,16\}$. Length OOD uses $\{24,32,48\}$. In the collision data, training uses $\eta\in[0,0.7]$ and the legacy family\_ood file uses $\eta\in[0.85,0.99]$. Random seeds are disjoint across splits.
 
 \paragraph*{Reproducibility and validation.}
-The five seeds are $\{0, 1, 2, 3, 4\}$, applied to (a) NumPy / PyTorch global RNG, (b) channel parameter sampling, (c) train/val/test split assignment, (d) model initialisation, (e) data shuffling. The 84 unit tests cover CPTP sanity for every channel-family generator, Choi composition associativity, quantile-head monotonicity, recalibration coefficient stability, diamond-SDP correctness against a QuTiP reference, and an end-to-end smoke-train on a 100-sample subset. Total wall-clock for a fresh reproduction on a 2$\times$ RTX 5090 setup: $\sim 5$ hours, dominated by neural training.
+The five seeds are $\{0, 1, 2, 3, 4\}$, applied to (a) NumPy / PyTorch global RNG, (b) channel parameter sampling, (c) train/val/test split assignment, (d) model initialisation, and (e) data shuffling. The 91 unit tests cover CPTP sanity for every channel-family generator, Choi composition associativity, quantile-head monotonicity, recalibration coefficient stability, diamond-SDP correctness against a QuTiP reference, and an end-to-end smoke-train on a 100-sample subset. Total wall-clock for a fresh reproduction on a 2$\times$ RTX 5090 setup is approximately 5 hours, dominated by neural training.
 
 %%%% END flattened: appendices/C_implementation
+
+\clearpage
+\bibliographystyle{iopart-num}
+\bibliography{bibliography}
 
 \end{document}
