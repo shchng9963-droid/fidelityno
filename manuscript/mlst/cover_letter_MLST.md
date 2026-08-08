@@ -43,10 +43,10 @@ through scientific applications.
 
 The manuscript is original, has not been published elsewhere, and is not under
 consideration by another journal. The authors declare no competing interests.
-The code repository contains the data generators, evaluation scripts, random
-seeds, and machine-readable result tables used in the study. The manuscript
-identifies the repository, and the corresponding public release will identify
-the exact commit and software environment.
+The manuscript identifies the public project repository. The
+manuscript-specific release will include the data generators, evaluation
+scripts, random seeds, and machine-readable result tables used in the study. It
+will also identify the exact commit and software environment.
 
 Thank you for considering the manuscript.
 
