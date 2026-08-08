@@ -48,7 +48,7 @@
 \ead{qubit@ustc.edu.cn}
 
 \begin{abstract}
-Scientific machine-learning estimators should be evaluated under the information and measurement budget available at inference. We apply this principle to the end-to-end entanglement fidelity of composed quantum channels. Complete Markovian Choi descriptions permit deterministic superoperator composition. At the dimensions studied here, this calculation is numerically exact and faster than the learned models. Measurements of the deployed process also provide a strong reference. Stratified Direct Fidelity Estimation (DFE) is accurate at low shot counts. Our collision benchmark presents a different setting because the input contains reset-bath marginal channels and omits bath retention. A representation ambiguity diameter measures the spread of targets with identical inputs. Half of this diameter lower-bounds the worst-case error for any estimator that uses the same representation. Counterfactual replay covers 2048 collision sequences and 15 indistinguishable retention values. It gives a mean diameter of $0.229$ and a mean pointwise minimax lower bound of $0.115$. A uniform high-memory prior gives a Bayes MAE floor of $0.060$. We then combine a calibrated marginal prior with a same-query DFE pilot. On a fresh split of 4096 samples with independent random streams, a 32-shot neural hybrid reaches MAE $0.0657$. A 64-shot DFE estimate reaches $0.0641$. The 64-shot hybrid reaches $0.0539$, compared with $0.0525$ for 96-shot DFE. The offline costs include finite-shot labels and fusion fitting. They amortise after 192 and 256 deployment queries. The resulting procedure tests input sufficiency and allocates a small measurement budget when the representation omits relevant variables.
+Scientific machine-learning estimators should be evaluated using the information and measurement budget available at inference. We study this issue for the end-to-end entanglement fidelity of composed quantum channels. With complete Markovian Choi descriptions, deterministic superoperator composition is numerically exact and faster than learned models at the dimensions studied here. When the deployed process can be measured, stratified Direct Fidelity Estimation (DFE) is accurate at low shot counts. In our non-Markovian collision benchmark, the input contains reset-bath marginal channels but omits bath retention, so one observed input can correspond to several target fidelities. We quantify this ambiguity by replaying 2048 collision sequences at 15 retention values while keeping each observed input fixed. The target fidelities for one input span $0.229$ on average. For each input, half of this range lower-bounds the worst-case error of any estimator based on the same representation. The resulting bound is $0.115$ on average. Under a uniform distribution over the tested high-memory values, the minimum achievable average MAE is $0.060$. We then combine a calibrated marginal prediction with a same-query DFE pilot. On a fresh split of 4096 samples generated with independent random streams, a 32-shot neural hybrid reaches MAE $0.0657$, close to the $0.0641$ of 64-shot DFE. A 64-shot hybrid reaches $0.0539$, close to the $0.0525$ of 96-shot DFE. After including the finite-shot calibration data, these two hybrids recover their offline measurement costs after 192 and 256 deployment queries. Before model fitting, a representation audit checks whether the input identifies the target. The available information and query volume then determine whether direct composition, measurement, a learned prior, or a hybrid is appropriate.
 \end{abstract}
 
 \vspace{1pc}
@@ -76,7 +76,7 @@ Our contributions are:
 \begin{enumerate}[label=(\alph*),itemsep=2pt,topsep=2pt]
 \item We formalise a representation-dependent ambiguity diameter for composed-channel fidelity and derive worst-case and distributional MAE lower bounds that apply to every estimator using the same inputs.
 \item A paired counterfactual collision audit covers 2048 fixed marginal inputs and 15 high-memory values. It measures a mean ambiguity diameter of $0.229$ and a Bayes MAE floor of $0.060$.
-\item We develop a measurement-conditioned prior and DFE fusion rule with an explicit finite-shot calibration contract. It approximately halves the per-query shots needed to reach MAE $\simeq0.065$ and reduces them by one third near MAE $\simeq0.053$.
+\item We combine a calibrated marginal prediction with same-query DFE measurements. The cost analysis includes every finite-shot calibration label and pilot. The hybrid approximately halves the per-query shots needed to reach MAE $\simeq0.065$ and reduces them by one third near MAE $\simeq0.053$.
 \item The benchmark includes exact composition, low-capacity regressors, Monte Carlo, stratified DFE, independent random streams, and full amortised costs. These controls define when to compose, measure, learn, or combine estimators.
 \end{enumerate}
 The study focuses on diagnosing information insufficiency and reducing its effect with a costed measurement. Architectural comparisons provide supporting evidence.
@@ -128,23 +128,26 @@ where $p_\theta$ is a calibrated distribution over $\Fe \in [0,1]$, implemented 
 \subsection{Representation ambiguity and estimator-independent limits}
 \label{sec:ambiguity}
 
-Let $z$ denote a complete physical instance, $F(z)\in[0,1]$ its target fidelity, and $x=\phi(z)$ the representation supplied to an estimator. The fibre $\mathcal{A}_{\phi}(x)=\{z:\phi(z)=x\}$ contains all physical instances indistinguishable from the input. Define its target diameter
+The central issue can be stated without reference to a particular model. Two physical instances may produce exactly the same estimator input while differing in a hidden variable. If their true fidelities differ, an estimator that sees only the shared input must return the same prediction for both. The separation between the two targets therefore creates an error floor before any model is trained.
+
+We formalise this observation as follows. Let $z$ denote a complete physical instance, $F(z)\in[0,1]$ its target fidelity, and $x=\phi(z)$ the representation supplied to an estimator. The indistinguishable set
+$\mathcal{A}_{\phi}(x)=\{z:\phi(z)=x\}$, also called a fibre, contains all physical instances that produce the same input $x$. Define the range of possible targets within this set as
 \begin{equation}
 \Delta_{\phi}(x)=\sup_{z,z'\in\mathcal{A}_{\phi}(x)} |F(z)-F(z')|.
 \label{eq:ambiguity_diameter}
 \end{equation}
-For any deterministic estimator $h(x)$,
+We call $\Delta_{\phi}(x)$ the representation ambiguity diameter. For any deterministic estimator $h(x)$,
 \begin{equation}
 \sup_{z\in\mathcal{A}_{\phi}(x)} |h(x)-F(z)|\geq \tfrac{1}{2}\Delta_{\phi}(x).
 \label{eq:minimax_floor}
 \end{equation}
-The triangle inequality applied to two targets near the fibre extrema gives $\Delta_{\phi}(x)\leq |F(z)-h(x)|+|h(x)-F(z')|$. Equation~\eqref{eq:minimax_floor} concerns the pointwise worst case. Average MAE requires a conditional distribution $p(F\mid x)$. Under that distribution, a conditional median minimises MAE and gives the Bayes risk
+To see why, choose two instances whose targets lie near the two ends of the range. The prediction $h(x)$ is shared by both instances. The triangle inequality then gives $\Delta_{\phi}(x)\leq |F(z)-h(x)|+|h(x)-F(z')|$, so at least one error must be half the range or larger. This is a worst-case statement for each observed input. To obtain an average MAE floor, we must also specify how likely the possible targets are. Under a conditional distribution $p(F\mid x)$, the conditional median minimises MAE and gives the Bayes risk
 \begin{equation}
 R^{\star}_{\phi}=\mathbb{E}_{x}\mathbb{E}_{F\mid x}
 \bigl[|F-\mathop{\mathrm{median}}(F\mid x)|\bigr].
 \label{eq:bayes_floor}
 \end{equation}
-We estimate both quantities by counterfactually replaying fixed collision parameters across a grid of hidden retention values. The supplementary material gives the protocol and proof details.
+We estimate the two floors by replaying fixed collision parameters across a grid of hidden retention values. The first floor describes the worst case within each indistinguishable set. The second describes average error under the chosen distribution over retention values. The supplementary material gives the protocol and proof details.
 
 \subsection{Three operating regimes}
 
@@ -161,6 +164,8 @@ The system and a bath qubit initially in $|+\rangle$ interact through step-depen
 This regime contains two-qubit channels built from correlated dephasing, two-qubit depolarising noise, and imperfect SWAP/CNOT operations with both coherent and incoherent errors. The order-sensitive variant introduces non-commutativity between consecutive channels, so order-invariant baselines such as DeepSets lose relevant information. This regime tests whether the behaviour observed at $d=2$ extends to larger systems.
 \end{description}
 
+The three regimes answer different questions. R1 is a negative control in which complete Markovian inputs should favour direct composition over learning. R2 is the central information test and asks what can be estimated when the input omits bath memory. R3 tests approximate estimators under richer, order-sensitive two-qubit dynamics.
+
 \subsection{Splits and metrics}
 
 Each regime contains \texttt{train}, \texttt{calib}, \texttt{id\_test}, \texttt{length\_ood}, and distribution-shift splits. The first three use lengths in $\{2,4,8,16\}$. The length split uses $\{24,32,48\}$. R1 and R3 hold out a noise family. R2 holds out a high-$\eta$ interval and keeps the legacy filename \texttt{family\_ood} for code compatibility.
@@ -172,6 +177,8 @@ The main metric is pooled MAE on $\Fe$ across five independent seed-controlled s
 %%%% BEGIN flattened: sections/03_architecture
 \section{Architecture}
 \label{sec:arch}
+
+The model below supplies the marginal prediction used both as a zero-shot estimator and as the prior in the hybrid. The representation audit and measurement procedure apply to other predictor architectures as well.
 
 \subsection{Choi-aware per-channel encoder}
 
@@ -347,7 +354,7 @@ For nearly Pauli-diagonal channels, the leading correction missed by the product
 The collision benchmark isolates an information failure. Its input contains reset-bath marginal Choi matrices. The label comes from joint propagation of the system and bath. For fixed collision parameters, changing the omitted retention $\eta$ leaves the input tensor unchanged to machine precision and changes the target fidelity.
 
 \paragraph*{Paired counterfactual certificate.}
-We draw 2048 base sequences and replay each at 15 equally spaced values of $\eta$ from $0.85$ to $0.99$. The supplied marginals remain identical within numerical precision. The mean target diameter is $0.2292$, which gives a mean pointwise minimax lower bound of $0.1146$. Assigning equal probability to the 15 retention values gives a conditional-median Bayes MAE of $0.0600$. The first value concerns the worst case within each fibre. The second averages over the specified distribution. We also fit the bidirectional model with one realised retention label for each of 64 calibration inputs. Across 100 combinations of models and calibration draws, its MAE is $0.0902\pm0.0018$. The excess above the Bayes floor is $0.0302$. The comparison attributes a substantial part of the residual error to unobserved bath memory.
+We draw 2048 base sequences and replay each at 15 equally spaced values of $\eta$ from $0.85$ to $0.99$. The supplied marginals remain identical within numerical precision. The mean target diameter is $0.2292$, which gives a mean pointwise minimax lower bound of $0.1146$. Assigning equal probability to the 15 retention values gives a conditional-median Bayes MAE of $0.0600$. The first value concerns the worst case within each indistinguishable input group. The second averages over the specified distribution. We also fit the bidirectional model with one realised retention label for each of 64 calibration inputs. Across 100 combinations of models and calibration draws, its MAE is $0.0902\pm0.0018$. The excess above the Bayes floor is $0.0302$. The comparison attributes a substantial part of the residual error to unobserved bath memory.
 
 \begin{table}[h]
 \centering
@@ -398,7 +405,7 @@ Summary-ridge hybrid & 64 & 8192 & $0.0557\pm0.0024$ \\
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.98\textwidth]{identifiability_hybrid.pdf}
-\caption{\textbf{Diagnosing and repairing missing information.} (a) Fixed marginal inputs can correspond to different fidelities as hidden bath retention varies. Curves show representative fibres. (b) The empirical ambiguity distribution yields a mean diameter of $0.229$, a mean pointwise minimax floor of $0.115$, and a uniform-$\eta$ Bayes MAE floor of $0.060$. (c) A same-query DFE pilot buys back the missing information: the neural hybrid reaches the accuracy of DFE with roughly one half to two thirds of its per-query shots in the highlighted regimes. Error bars show run-to-run standard deviations.}
+\caption{\textbf{Diagnosing and repairing missing information.} (a) Fixed marginal inputs can correspond to different fidelities as hidden bath retention varies. Curves show representative input groups. (b) The empirical ambiguity distribution yields a mean diameter of $0.229$, a mean pointwise minimax floor of $0.115$, and a uniform-$\eta$ Bayes MAE floor of $0.060$. (c) A same-query DFE pilot supplies information about the deployed process. In the highlighted regimes, the neural hybrid reaches the accuracy of DFE using roughly one half to two thirds of its per-query shots. Error bars show run-to-run standard deviations.}
 \label{fig:identifiability_hybrid}
 \end{figure*}
 
@@ -407,6 +414,8 @@ The bidirectional transformer gives the strongest marginal prior in the collisio
 
 \subsection{Two-qubit $d{=}4$ scaling}
 \label{sec:exp_d4}
+
+Exact composition remains preferable when complete Markovian Choi matrices and the required calculation are available, as R1 establishes. R3 compares approximate analytic, learned, and sampling estimators for a larger and order-sensitive channel family.
 
 \Cref{tab:d4} reports results for the two-qubit order-sensitive regime. Here \fidno{}+cal improves over the product approximation by factors of $1.9$, $2.3$, and $1.8$ on \texttt{id\_test}, \texttt{length\_ood}, and \texttt{family\_ood}, respectively. The order-aware neural models also outperform the closed-form analytic baselines across the three splits.
 
@@ -447,7 +456,9 @@ The \textsc{generic\_gnn} model gives the lowest \texttt{family\_ood} MAE in thi
 \subsection{Sample-complexity crossover}
 \label{sec:exp_sample}
 
-The cost comparison contains three types of estimator. A marginal neural prior uses 4096 offline shots and reaches MAE $0.0885$ with zero shots at query time. Stratified DFE has no offline cost and its error decreases approximately as $B^{-1/2}$. The hybrid uses both resources. A 32-shot hybrid and 64-shot DFE reach MAE $0.0657$ and $0.0641$. A 64-shot hybrid and 96-shot DFE reach $0.0539$ and $0.0525$. The hybrid offline costs are 6144 and 8192 shots after counting finite-shot labels and independent fusion pilots. The total costs become equal after $6144/(64-32)=192$ queries for the first comparison and $8192/(96-64)=256$ queries for the second. Training-set simulation is a separate classical cost in this benchmark.
+The cost comparison separates measurements made once during calibration from measurements made for every deployment query. The marginal neural prior uses 4096 offline shots and reaches MAE $0.0885$ without query-time measurements. Stratified DFE has no offline measurement cost and uses $B$ shots for each query. Its error decreases approximately as $B^{-1/2}$. The hybrid pays both an offline calibration cost and a smaller per-query measurement cost. Training-set simulation is a separate classical cost in this benchmark.
+
+We compare methods at two similar accuracy levels. First, the 32-shot hybrid reaches MAE $0.0657$, while 64-shot DFE reaches $0.0641$. The hybrid saves 32 shots per query and has an offline cost of 6144 shots after counting finite-shot labels and independent fusion pilots. It recovers this cost after $6144/32=192$ queries. Second, the 64-shot hybrid reaches MAE $0.0539$, while 96-shot DFE reaches $0.0525$. This hybrid also saves 32 shots per query. Its offline cost of 8192 shots is recovered after $8192/32=256$ queries.
 
 \begin{figure}[h]
 \centering
