@@ -63,6 +63,6 @@ The audit includes:
   and exact binomial measurement outcomes;
 - finite-shot DFE labels for the offline OOD calibration set.
 
-All audit CSV files record sample counts, seeds, and cost variables. The public
-release should be cited by an immutable commit hash; a versioned data/result
-archive and DOI will be added before acceptance.
+All audit CSV files record sample counts, seeds, and cost variables. The
+manuscript-specific public snapshot is tagged mlst-submission-v1. An archival
+DOI will be added when the versioned data and result release is deposited.

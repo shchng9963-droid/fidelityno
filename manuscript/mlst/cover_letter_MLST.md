@@ -43,10 +43,10 @@ through scientific applications.
 
 The manuscript is original, has not been published elsewhere, and is not under
 consideration by another journal. The authors declare no competing interests.
-The manuscript identifies the public project repository. The
-manuscript-specific release will include the data generators, evaluation
-scripts, random seeds, and machine-readable result tables used in the study. It
-will also identify the exact commit and software environment.
+The public repository includes the manuscript-specific release tagged
+mlst-submission-v1. It contains the data generators, evaluation scripts, random
+seeds, and machine-readable result tables used in the study. The tag identifies
+the exact commit, and the software environment is documented in the repository.
 
 Thank you for considering the manuscript.
 
