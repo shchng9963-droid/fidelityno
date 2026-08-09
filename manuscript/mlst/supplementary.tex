@@ -19,7 +19,7 @@
 \noindent\textbf{Associated article:} Information-limited fidelity estimation of composed quantum channels: when to compose, measure, or learn.
 
 \medskip
-\noindent This supplement reports oracle verification, calibration diagnostics, sample-complexity results, ablations, length-shift analyses, and representation-ambiguity and measurement-conditioned-fusion experiments. All numbers are reproducible from the code described in the Data and Code Availability statements of the main paper.
+\noindent This supplement reports oracle verification, calibration diagnostics, sample-complexity results, ablations, length-shift analyses, representation ambiguity, measurement-conditioned fusion, readout-noise robustness, adaptive shot allocation, and ranking utility. All numbers are reproducible from the code described in the Data and Code Availability statements of the main paper.
 
 
 %%%% BEGIN flattened: supp/S1_oracle.tex
@@ -272,6 +272,34 @@ We sample 2048 base collision sequences with lengths in $\{8,16,24\}$. For each 
 
 To exclude pseudorandom coupling, we also generate a fresh 4096-instance evaluation set using seed 20260807 for collision parameters and a separate seed 920260807 for $\eta$. Its label mean and standard deviation are 0.4472 and 0.1979. On this split, 64-label affine BiDir calibration gives MAE 0.0894, summary ridge 0.0977, exact-marginal affine 0.1101, and an oracle ridge that additionally observes $\eta$ 0.0800. These values reproduce the legacy split ordering without sharing a random stream.
 
+\subsection{Independent exchange-coupled memory audit}
+The second audit uses the step Hamiltonian
+\begin{equation}
+H_t=\frac{J_t}{2}(X_SX_B+Y_SY_B)
++\frac{\Delta_t}{2}Z_SZ_B
++\frac{\omega_t}{2}I_SZ_B.
+\end{equation}
+The exchange term and local bath-precession term do not commute. The reset state is $\rho_B=0.8|0\rangle\langle0|+0.2|1\rangle\langle1|$. We sample $J_t\in[0.08,0.25]$, $\Delta_t\in[0.02,0.12]$, $\omega_t\in[0.08,0.30]$, and collision duration $\tau_t\in[0.25,0.90]$. For each of 1024 base sequences, the same reset-bath marginals are replayed at 15 retention values in $[0.85,0.99]$. The parameter seed is 20260810.
+
+\begin{table}[h]
+\centering
+\caption{Length-resolved ambiguity for the exchange-coupled audit.}
+\label{tab:supp_exchange_audit}
+\begin{tabular}{rrrrr}
+\toprule
+Length & inputs & mean diameter & mean minimax floor & Bayes MAE floor \\
+\midrule
+8  & 346 & 0.0617 & 0.0309 & 0.0164 \\
+16 & 322 & 0.1000 & 0.0500 & 0.0269 \\
+24 & 356 & 0.1372 & 0.0686 & 0.0307 \\
+\midrule
+All & 1024 & 0.1000 & 0.0500 & 0.0247 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The maximum marginal-Choi change across the retention grid is zero. At $\eta=0$, joint propagation and exact marginal composition agree within $5.6\times10^{-16}$. Exact composition of the reset-bath marginals has mean absolute error $0.247$ over the high-memory grid. This value measures missing memory rather than numerical composition error.
+
 \subsection{Full finite-label shot sweep}
 Every finite-label run uses 64 calibration instances. Independent 64-shot stratified Direct Fidelity Estimation estimates provide their target labels. For each budget $B$, a separate $B$-shot outcome on every calibration instance fits $w_B$ in Eq.~(10). A third random stream generates the test measurements. Target labels and pilot features come from different outcomes. All methods use the same test indices and test Direct Fidelity Estimation outcomes. Neural entries aggregate five checkpoints and five measurement repeats. Other entries use five measurement repeats.
 
@@ -297,6 +325,49 @@ $B$ & stratified DFE & BiDir hybrid & summary-ridge hybrid \\
 \end{table}
 
 The mean neural fusion weight rises from 0.071 at four shots to 0.783 at 128 shots. At low budgets, the model supplies most of the estimate because the pilot has high variance. As the pilot becomes more precise, DFE receives more weight. Exact-label and finite-label calibration give similar curves. At high budgets, all priors converge toward DFE. The largest difference between neural and ridge priors occurs at low and intermediate budgets.
+
+\subsection{Symmetric readout-noise stress test}
+We independently flip each sampled binary Pauli outcome with probability $p_r$. This attenuates the observed expectation by $1-2p_r$. The calibrated result divides each observed expectation by this factor. The inversion is left unclipped until the final fidelity estimate, so its finite-shot variance is retained. Offline target labels use the clean finite-shot protocol from the main experiment. The query and fusion-pilot outcomes contain the stated readout error.
+
+\begin{table}[h]
+\centering
+\caption{MAE under symmetric readout error. DFE and hybrid entries use calibrated linear inversion. Hybrid values average five checkpoints and five measurement repeats.}
+\label{tab:supp_readout}
+\begin{tabular}{ccccc}
+\toprule
+$p_r$ & DFE-32 & hybrid-32 & DFE-64 & hybrid-64 \\
+\midrule
+0.00 & 0.0908 & 0.0650 & 0.0642 & 0.0533 \\
+0.01 & 0.0949 & 0.0659 & 0.0670 & 0.0552 \\
+0.03 & 0.1043 & 0.0697 & 0.0737 & 0.0598 \\
+0.05 & 0.1128 & 0.0712 & 0.0807 & 0.0623 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At $p_r=0.05$, leaving the readout error uncorrected gives MAE 0.1089 and 0.0823 for 32-shot and 64-shot DFE. The corrected values are 0.1128 and 0.0807. Linear inversion is unbiased before final clipping but increases variance, so it need not improve MAE at low shot counts. The hybrid changes its fitted measurement weight and improves after correction at both budgets. Its corresponding uncorrected errors are 0.0735 and 0.0660.
+
+\subsection{Two-stage shot allocation}
+Every query first receives an 8-shot stratified pilot. At average budget 32, half of the queries finish at 16 shots and half at 48. At average budget 64, the two levels are 32 and 96. The combined policy ranks queries by the sum of the fractional ranks of predictive interval width and prior-pilot disagreement. A random allocation with the same total budget is included as a control. Fusion weights are fitted separately for the two realised budgets.
+
+\begin{table}[h]
+\centering
+\caption{Uniform and combined-score allocation for the neural hybrid. The interval is a paired two-way cluster bootstrap confidence interval over five checkpoints and five measurement repeats for adaptive minus uniform MAE.}
+\label{tab:supp_adaptive}
+\begin{tabular}{rrrrc}
+\toprule
+Average shots & allocation levels & uniform MAE & adaptive MAE & difference, 95\% CI \\
+\midrule
+32 & 16 / 48 & 0.0660 & 0.0648 & $-0.00116\;[-0.00312,0.00136]$ \\
+64 & 32 / 96 & 0.0531 & 0.0543 & $\phantom{-}0.00113\;[-0.00035,0.00341]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Both confidence intervals include zero. Random allocation is worse than uniform at both budgets. This experiment does not establish a general gain from query-adaptive allocation. The low-budget point estimate suggests a possible benefit, while the variance cost of reducing shots on other queries remains substantial.
+
+\subsection{Zero-shot ranking utility}
+We evaluate raw BiDir predictions before OOD affine correction. Across five checkpoints, Pearson correlation is $0.815\pm0.005$, Spearman correlation is $0.710\pm0.002$, and Kendall correlation is $0.534\pm0.002$. The predicted highest-fidelity 10\% set overlaps the true set by $0.858\pm0.004$. The lowest-fidelity 10\% overlap is $0.144\pm0.012$, compared with 0.10 in expectation for a random set. The uncalibrated predictor is useful for selecting high-fidelity candidates on this split. It gives little support for low-fidelity failure triage.
 
 
 \end{document}

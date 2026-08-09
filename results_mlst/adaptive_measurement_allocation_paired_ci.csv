@@ -1,0 +1,13 @@
+comparison,average_query_shots,left_key,right_key,delta_mae_left_minus_right,ci95_low,ci95_high,paired_runs,checkpoint_clusters,measurement_repeat_clusters
+fixed_hybrid_vs_double_dfe,32,fixed_hybrid|fixed|32,fixed_dfe|fixed|64,0.0016300426401994698,0.0008116085443229819,0.0027991825814202022,25,5,5
+adaptive_combined_vs_fixed_hybrid,32,adaptive_hybrid|combined|32,fixed_hybrid|fixed|32,-0.0011639643730102847,-0.0031181235337779177,0.0013562722573123075,25,5,5
+adaptive_disagreement_vs_fixed_hybrid,32,adaptive_hybrid|disagreement|32,fixed_hybrid|fixed|32,0.0006753291850723456,-0.0007803534908611453,0.002193854078637311,25,5,5
+adaptive_width_vs_fixed_hybrid,32,adaptive_hybrid|width|32,fixed_hybrid|fixed|32,0.0015256367027038026,-0.0009346865182460696,0.004521390818002867,25,5,5
+adaptive_random_vs_fixed_hybrid,32,adaptive_hybrid|random|32,fixed_hybrid|fixed|32,0.003741706862646434,0.0015850605064329486,0.006534432852697999,25,5,5
+adaptive_combined_vs_double_dfe,32,adaptive_hybrid|combined|32,fixed_dfe|fixed|64,0.00046607826718918514,-0.002015944022438833,0.004118841025653092,25,5,5
+fixed_hybrid_vs_double_dfe,64,fixed_hybrid|fixed|64,fixed_dfe|fixed|128,0.008293376656587019,0.0075340776191108435,0.009028616025696679,25,5,5
+adaptive_combined_vs_fixed_hybrid,64,adaptive_hybrid|combined|64,fixed_hybrid|fixed|64,0.0011319730682509506,-0.00034651416639469573,0.0034110516503756986,25,5,5
+adaptive_disagreement_vs_fixed_hybrid,64,adaptive_hybrid|disagreement|64,fixed_hybrid|fixed|64,0.0028551818077980555,0.0016842499874540197,0.003974684405485052,25,5,5
+adaptive_width_vs_fixed_hybrid,64,adaptive_hybrid|width|64,fixed_hybrid|fixed|64,0.0019419600109905977,0.000817473820470979,0.0030613660290434086,25,5,5
+adaptive_random_vs_fixed_hybrid,64,adaptive_hybrid|random|64,fixed_hybrid|fixed|64,0.004038678446104478,0.0029004172170316424,0.005484782012246955,25,5,5
+adaptive_combined_vs_double_dfe,64,adaptive_hybrid|combined|64,fixed_dfe|fixed|128,0.00942534972483797,0.007491840119156254,0.012183170652094488,25,5,5

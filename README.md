@@ -62,7 +62,22 @@ The audit includes:
 - DFE with enumeration of the target Pauli support, fixed total-shot allocation,
   and exact binomial measurement outcomes;
 - finite-shot DFE labels for the offline OOD calibration set.
+- a second exchange-coupled memory family with noncommuting Hamiltonian terms;
+- symmetric readout-error stress tests and two-stage shot allocation;
+- zero-shot rank and candidate-selection metrics;
+- exact composition on all three two-qubit order-sensitive splits.
 
 All audit CSV files record sample counts, seeds, and cost variables. The
-manuscript-specific public snapshot is tagged mlst-submission-v1. An archival
+manuscript-specific public snapshot is tagged `mlst-submission-v2`. An archival
 DOI will be added when the versioned data and result release is deposited.
+
+The headline checkpoints belong under `checkpoints/collision/`. Files with the
+same basename directly under `checkpoints/` are older runs and should not be
+used for the MLST tables. The SHA-256 values for the five reported checkpoints
+are stored in `results_mlst/checkpoint_manifest.sha256`. Run the extended audit
+with:
+
+```bash
+make mlst-independent-data
+make mlst-enhanced-audit
+```

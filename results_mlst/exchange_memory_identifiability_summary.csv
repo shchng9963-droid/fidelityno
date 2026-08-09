@@ -1,0 +1,2 @@
+group,n_base,ambiguity_diameter_mean,ambiguity_diameter_median,ambiguity_diameter_q90,minimax_abs_lower_bound_mean,bayes_mae_lower_bound_mean,exact_composition_grid_mae_mean,fraction_grid_error_above_0p05_mean
+all,1024,0.09997677541255733,0.08919296469159715,0.16736858850035696,0.04998838770627866,0.024675717035050913,0.24655551892008612,0.9979166666666667

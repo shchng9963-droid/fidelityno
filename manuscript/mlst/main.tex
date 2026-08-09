@@ -48,7 +48,7 @@
 \ead{qubit@ustc.edu.cn}
 
 \begin{abstract}
-Scientific machine-learning estimators should be evaluated using the information and measurement budget available at inference. We study this issue for the end-to-end entanglement fidelity of composed quantum channels. With complete Markovian Choi descriptions, deterministic superoperator composition is numerically exact and faster than learned models at the dimensions studied here. When the deployed process can be measured, stratified Direct Fidelity Estimation (DFE) is accurate at low shot counts. In our non-Markovian collision benchmark, the input contains reset-bath marginal channels but omits bath retention, so one observed input can correspond to several target fidelities. We quantify this ambiguity by replaying 2048 collision sequences at 15 retention values while keeping each observed input fixed. The target fidelities for one input span $0.229$ on average. For each input, half of this range lower-bounds the worst-case error of any estimator based on the same representation. The resulting bound is $0.115$ on average. Under a uniform distribution over the tested high-memory values, the minimum achievable average mean absolute error (MAE) is $0.060$. We then combine a calibrated marginal prediction with a same-query DFE pilot. On a fresh split of 4096 samples generated with independent random streams, a 32-shot neural hybrid reaches MAE $0.0657$, close to the $0.0641$ of 64-shot DFE. A 64-shot hybrid reaches $0.0539$, close to the $0.0525$ of 96-shot DFE. After including the finite-shot calibration data, these two hybrids recover their offline measurement costs after 192 and 256 deployment queries. Before model fitting, a representation audit checks whether the input identifies the target. The available information and query volume then determine whether direct composition, measurement, a learned prior, or a hybrid is appropriate.
+Scientific machine-learning estimators should be assessed against the information available at inference and the cost of the reference calculation. We study end-to-end entanglement fidelity for composed quantum channels. Complete Markovian Choi descriptions favour deterministic superoperator composition, which is numerically exact at the dimensions considered here. Our main collision benchmark instead supplies reset-bath marginal channels and omits bath retention. Counterfactual replay of 2048 fixed inputs at 15 retention values gives a mean target range of $0.229$. Half of this range gives a mean worst-case error lower bound of $0.115$ for every estimator using the same input. The Bayes mean absolute error (MAE) under a uniform high-memory grid is $0.060$. An independent exchange-coupled model with noncommuting interaction and bath terms gives a mean range of $0.100$ and a corresponding lower bound of $0.050$. We then combine a calibrated marginal prediction with a same-query Direct Fidelity Estimation (DFE) measurement. On a fresh 4096-sample split, a 32-shot hybrid reaches MAE $0.0657$, close to the $0.0641$ of 64-shot DFE. A 64-shot hybrid reaches $0.0539$, close to the $0.0525$ of 96-shot DFE. Under a 5\% symmetric outcome-flip stress test, calibrated hybrids remain below the error of same-budget DFE. The finite-shot calibration costs are recovered after 192 and 256 deployment queries in the two matched-accuracy comparisons. These results support an estimator-selection procedure that begins with a representation audit, then accounts for measurement access and query volume.
 \end{abstract}
 
 \vspace{1pc}
@@ -66,9 +66,9 @@ The variables available at inference determine which scientific estimator is app
 
 We study the end-to-end entanglement fidelity $\Fe$ of a channel sequence. This quantity appears in repeater and purification design~\cite{repeater_review,dur2007entanglement}, NISQ circuit validation~\cite{nisq_validation}, and fidelity-based screening for quantum error correction~\cite{qec_review}. Each estimator uses a different source of information. Products of marginal fidelities and Kraus-path Monte Carlo use per-step channel descriptions. Exact superoperator composition applies when these descriptions specify a Markovian process. Direct Fidelity Estimation (DFE)~\cite{flammia_liu_2011} measures the deployed composed channel. A learned sequence model can amortise computation or prior characterisation. Its accuracy remains subject to the information contained in its inputs.
 
-We examine this information constraint with a non-Markovian collision process. The inputs are reset-bath marginal Choi matrices. The target comes from joint propagation of the system and bath, and the input omits the bath-retention variable $\eta$. Counterfactual replay keeps every supplied input fixed and varies $\eta$. The resulting target values define a set of physically valid answers for the same observed input. Their spread gives estimator-independent lower bounds that can be compared with trained predictors. The gap separates fitting error from error caused by omitted physical variables.
+We examine this information constraint with a non-Markovian collision process. The inputs are reset-bath marginal Choi matrices. The target comes from joint propagation of the system and bath, and the input omits the bath-retention variable $\eta$. Counterfactual replay keeps every supplied input fixed and varies $\eta$. The resulting target values define a set of physically valid answers for the same observed input. Their spread gives estimator-independent lower bounds that can be compared with trained predictors. We repeat the audit with an exchange-coupled model whose interaction and bath terms do not commute. This checks whether the ambiguity is specific to the original dephasing construction.
 
-The same analysis motivates a measurement-conditioned estimator. It forms a constrained convex combination of the marginal prediction and a low-shot DFE estimate from the same query. The fitted weight favours the prior when the pilot has high variance. It shifts toward the measurement as the shot budget grows. Calibration labels, calibration pilots, and test measurements use independent binomial outcomes. The cost analysis includes every calibration shot. We also generate a fresh OOD dataset with separate random streams for the collision parameters and $\eta$. This control removes random-number coupling from the evaluation.
+The same analysis motivates a measurement-conditioned estimator. It forms a constrained convex combination of the marginal prediction and a low-shot DFE estimate from the same query. The fitted weight favours the prior when the pilot has high variance and shifts toward the measurement as the shot budget grows. Calibration labels, calibration pilots, and test measurements use independent binomial outcomes. The cost analysis includes every calibration shot. We generate a fresh OOD dataset with separate random streams for the collision parameters and $\eta$. We also test symmetric readout errors and a two-stage allocation rule. These controls probe random-number coupling, measurement noise, and sensitivity to nonuniform shot allocation.
 
 The benchmark includes strong deterministic and sampling controls. Exact composition gives the best result in the hardware-like Markovian regime. Classical Monte Carlo gives the best result in the two-qubit regime when a large sampling budget is available. In the collision regime, DFE enumerates all four Pauli settings and avoids the extra variance from sampling settings with replacement. The learned estimators are assessed within the regimes left open by these controls.
 
@@ -76,8 +76,9 @@ Our contributions are:
 \begin{enumerate}[label=(\alph*),itemsep=2pt,topsep=2pt]
 \item We formalise a representation-dependent ambiguity diameter for composed-channel fidelity and derive worst-case and distributional MAE lower bounds that apply to every estimator using the same inputs.
 \item A paired counterfactual collision audit covers 2048 fixed marginal inputs and 15 high-memory values. It measures a mean ambiguity diameter of $0.229$ and a Bayes MAE floor of $0.060$.
+\item A second audit uses 1024 exchange-coupled sequences with noncommuting interaction and bath terms. It recovers the same information failure with a mean ambiguity diameter of $0.100$.
 \item We combine a calibrated marginal prediction with same-query DFE measurements. The cost analysis includes every finite-shot calibration label and pilot. The hybrid approximately halves the per-query shots needed to reach MAE $\simeq0.065$ and reduces them by one third near MAE $\simeq0.053$.
-\item The benchmark includes exact composition, low-capacity regressors, Monte Carlo, stratified DFE, independent random streams, and full amortised costs. These controls define when to compose, measure, learn, or combine estimators.
+\item The benchmark includes exact composition, low-capacity regressors, Monte Carlo, stratified DFE, independent random streams, symmetric readout errors, and full amortised costs. These controls define when to compose, measure, learn, or combine estimators.
 \end{enumerate}
 The study focuses on diagnosing information insufficiency and reducing its effect with a costed measurement. Architectural comparisons provide supporting evidence.
 
@@ -159,6 +160,8 @@ Single-qubit channels are sampled from parametric noise models spanning amplitud
 
 \item[(R2) Non-Markovian collision regime ($d{=}2$, $\eps \approx 0.4$).]
 The system and a bath qubit initially in $|+\rangle$ interact through step-dependent commuting $ZZ$ Hamiltonians. After each collision, the joint state is retained with probability $\eta$. The bath is reset in the remaining cases. Training, calibration, and ID data use $\eta\in[0,0.7]$. The legacy \texttt{family\_ood} file contains the stronger interval $\eta\in[0.85,0.99]$. This split changes memory strength while keeping the collision family fixed.
+
+An independent representation audit replaces this interaction with excitation exchange and uses a diagonal bath state. Its exchange and local bath-precession terms do not commute. This family is used to test the ambiguity claim and is not used to train or select the neural model.
 
 \item[(R3) Two-qubit order-sensitive regime ($d{=}4$).]
 This regime contains two-qubit channels built from correlated dephasing, two-qubit depolarising noise, and imperfect SWAP/CNOT operations with both coherent and incoherent errors. The order-sensitive variant introduces non-commutativity between consecutive channels, so order-invariant baselines such as DeepSets lose relevant information. This regime tests whether the behaviour observed at $d=2$ extends to larger systems.
@@ -358,21 +361,24 @@ We draw 2048 base sequences and replay each at 15 equally spaced values of $\eta
 
 \begin{table}[h]
 \centering
-\caption{\textbf{Information audit on the high-memory collision family.} Each of 2048 marginal inputs is replayed at 15 indistinguishable retention values.}
+\caption{\textbf{Counterfactual information audits.} Both families use 15 retention values in $[0.85,0.99]$. The model receives the same marginal input at every value within a group.}
 \label{tab:ambiguity}
 \small
-\begin{tabular}{lc}
+\begin{tabular}{lcc}
 \toprule
-Quantity & Value \\
+Quantity & $ZZ$ dephasing & exchange coupling \\
 \midrule
-Maximum marginal-input change across $\eta$ & $0.0$ \\
-Mean ambiguity diameter $\mathbb{E}[\Delta_\phi]$ & $0.2292$ \\
-Mean pointwise minimax floor $\mathbb{E}[\Delta_\phi/2]$ & $0.1146$ \\
-Uniform-$\eta$ Bayes MAE floor $R^\star_\phi$ & $0.0600$ \\
-Calibrated BiDir MAE, 64 realised labels & $0.0902\pm0.0018$ \\
+Fixed marginal inputs & 2048 & 1024 \\
+Maximum input change across $\eta$ & $0.0$ & $0.0$ \\
+Mean diameter $\mathbb{E}[\Delta_\phi]$ & $0.2292$ & $0.1000$ \\
+Mean minimax floor $\mathbb{E}[\Delta_\phi/2]$ & $0.1146$ & $0.0500$ \\
+Uniform-$\eta$ Bayes MAE floor $R^\star_\phi$ & $0.0600$ & $0.0247$ \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\paragraph*{Independent noncommuting audit.}
+The exchange model uses an excitation-exchange interaction, a dispersive $ZZ$ term, and local bath precession. The exchange and precession terms do not commute. The bath begins in $0.8|0\rangle\langle0|+0.2|1\rangle\langle1|$. Across 1024 independently drawn parameter sequences, the mean ambiguity diameter is $0.1000$. It increases from $0.0617$ at length 8 to $0.1372$ at length 24. Exact composition agrees with joint propagation at $\eta=0$ to within $5.6\times10^{-16}$, while every reset-bath marginal remains unchanged across the retention grid. The omitted-memory limitation therefore persists outside the commuting dephasing model. The supplementary material gives the Hamiltonian and length-resolved results.
 
 \paragraph*{Measurement-conditioned recovery.}
 We generate a fresh OOD split of 4096 instances with independent random streams for the physical parameters and $\eta$. A set of 64 examples is used to fit the prior and fusion weight. The remaining 4032 examples form the test set. Five neural checkpoints and five measurement repeats give 25 neural-hybrid runs. Independent 64-shot DFE outcomes provide the finite calibration labels. The 32-shot hybrid reaches MAE $0.0657$, compared with $0.0641$ for 64-shot DFE. The 64-shot hybrid reaches $0.0539$, compared with $0.0525$ for 96-shot DFE. The summary-ridge hybrid approaches the neural hybrid at high shot counts. Its error is higher at low and intermediate budgets, where the prior receives more weight.
@@ -402,6 +408,11 @@ Summary-ridge hybrid & 64 & 8192 & $0.0557\pm0.0024$ \\
 \end{tabular}
 \end{table}
 
+\paragraph*{Nonideal measurements and allocation.}
+We apply an independent symmetric sign flip to each sampled Pauli outcome with probability up to 5\%. A calibrated linear inversion corrects the known attenuation before fusion. At 5\% readout error, the 32-shot and 64-shot hybrids give MAE $0.0712$ and $0.0623$. Their clean controls are $0.0650$ and $0.0533$. Same-budget DFE with the same correction gives $0.1128$ and $0.0807$. Linear inversion increases variance, so it does not improve finite-shot DFE in every setting. Fusion limits this variance by reducing the fitted measurement weight.
+
+A two-stage allocation experiment gives every query an 8-shot pilot, then assigns either 16 or 48 total shots at an average budget of 32. Ranking queries by a combination of predictive width and prior-pilot disagreement reduces hybrid MAE from $0.0660$ to $0.0648$. A two-way cluster bootstrap over checkpoints and measurement repeats gives a 95\% interval of $[-0.00312,0.00136]$ for the change. At an average budget of 64, the point estimate is worse than uniform allocation. We treat this as a boundary result rather than evidence for a general adaptive advantage. Full readout and allocation sweeps appear in the supplementary material.
+
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.98\textwidth]{identifiability_hybrid.pdf}
@@ -415,11 +426,11 @@ The bidirectional transformer gives the strongest marginal prior in the collisio
 \subsection{Two-qubit $d{=}4$ scaling}
 \label{sec:exp_d4}
 
-Exact composition remains preferable when complete Markovian Choi matrices and the required calculation are available, as R1 establishes. R3 compares approximate analytic, learned, and sampling estimators for a larger and order-sensitive channel family.
+R3 is Markovian and supplies complete per-step Choi matrices. Exact composition therefore remains the reference estimator. It reaches the $10^{-8}$ numerical floor on every split and takes $0.51$--$0.83$ ms per sequence on the test server. This result fixes the interpretation of R3. The remaining rows compare approximate estimators for cases where exact composition is deliberately unavailable or its input is not exposed to the estimator.
 
-\Cref{tab:d4} reports results for the two-qubit order-sensitive regime. Here \fidno{}+cal improves over the product approximation by factors of $1.9$, $2.3$, and $1.8$ on \texttt{id\_test}, \texttt{length\_ood}, and \texttt{family\_ood}, respectively. The order-aware neural models also outperform the closed-form analytic baselines across the three splits.
+Among these approximate methods, \fidno{}+cal improves over the product approximation by factors of $1.9$, $2.3$, and $1.8$ on \texttt{id\_test}, \texttt{length\_ood}, and \texttt{family\_ood}. Order-aware neural models also outperform the two closed-form approximations. They do not improve on exact composition.
 
-Classical Monte Carlo gives lower error when a sufficient marginal-simulation budget is available. MC with $K=100$ reaches MAE $0.021$ on \texttt{id\_test}. Increasing the budget to $K=1000$ reduces MAE to $0.007$, below the neural results. The neural estimators occupy the setting where closed-form formulas are too coarse and repeated simulation or measurement is costly. Monte Carlo is preferable when its sampling cost is acceptable.
+Classical Monte Carlo gives lower error than the learned models when a sufficient marginal-simulation budget is available. MC with $K=100$ reaches MAE $0.021$ on \texttt{id\_test}, and $K=1000$ reduces it to $0.007$. These rows map the cost-accuracy tradeoff among approximate methods. They do not replace the deterministic result when full Markovian Choi matrices are available.
 
 \begin{table}[h]
 \centering
@@ -428,6 +439,8 @@ Classical Monte Carlo gives lower error when a sufficient marginal-simulation bu
 \begin{tabular}{lccc}
 \toprule
 Method & \texttt{id\_test} & \texttt{length\_ood} & \texttt{family\_ood} \\
+\midrule
+Exact composition  & $1.4\!\times\!10^{-8}$ & $8.3\!\times\!10^{-9}$ & $1.1\!\times\!10^{-8}$ \\
 \midrule
 Product approx.    & $0.110$ & $0.076$ & $0.091$ \\
 FvG bound          & $0.238$ & $0.102$ & $0.218$ \\
@@ -447,7 +460,7 @@ MC, $K{=}1000$     & $0.007$ & $0.007$ & $0.007$ \\
 \end{table}
 
 \paragraph*{Higher-dimensional regime pattern.}
-The $d=4$ results show that closed-form analytic baselines lose accuracy as the channel family becomes richer and more order-sensitive. They also show the limit of the learned approach: when classical marginal Monte-Carlo is affordable, it is simpler and more accurate.
+The $d=4$ results repeat the main negative control at a larger dimension. Complete Markovian inputs favour direct composition. If only approximate estimators are permitted, richer order-sensitive families increase the error of product and bound-based formulas. Monte Carlo can then outperform the learned models when its sampling budget is affordable.
 
 \paragraph*{GNN under family shift.}
 The \textsc{generic\_gnn} model gives the lowest \texttt{family\_ood} MAE in this regime. Its MAE is $0.039$, compared with $0.051$ for \fidno{}. This single split suggests that a path-graph inductive bias can help under some family shifts. Broader architectural comparisons require additional shifts.
@@ -570,11 +583,14 @@ We use $\eps^2L^2$ as a screening diagnostic. Small values indicate little room 
 \toprule
 Regime & Diagnostic signal & Recommended estimator \\
 \midrule
+Complete Markovian channel descriptions
+& full per-step Choi matrices available
+& exact superoperator composition \\
 Weak correlations / low infidelity
 & $\eps^{2}L^{2} \lesssim 10^{-3}$
 & Product approximation \\
-Moderate correction, quantum shots affordable
-& $10^{-3} \lesssim \eps^{2}L^{2} \lesssim 10^{-1}$
+Deployed channel measurable
+& query-time quantum shots available
 & \dfe{}, with shot budget matched to accuracy target \\
 Marginals valid and classical simulation affordable
 & $\eta \approx 0$ or validated Markovian marginals
@@ -583,13 +599,15 @@ Strong memory, stable shift, and many measurement-free queries
 & marginals fail and offline labels can be amortised
 & calibrated low-capacity or neural surrogate \\
 Strong memory without labels or shots
-& large raw OOD bias expected
-& raw surrogate for ranking or triage \\
+& high-fidelity ranking validated on deployment data
+& raw surrogate for candidate ranking only \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The non-trivial cases are the middle and lower rows, where the deployment channel is correlated or non-Markovian. The choice is then a tradeoff among classical simulation cost, per-query quantum measurement cost, and one-time labelled characterisation cost. In our experiments, measurement-only DFE is the clean default when its required shot count is affordable, and a marginal-only prior is justified only when deployment measurements are prohibited. Between them, the conditioned hybrid reduces the shots needed for a target MAE by using the learned predictor as a shrinkage prior. It becomes cost-effective after the finite calibration expense is amortised over sufficiently many queries.
+The non-trivial cases are the middle and lower rows, where the deployment channel is correlated or non-Markovian. The choice is then a tradeoff among classical simulation cost, per-query quantum measurement cost, and one-time labelled characterisation cost. In our experiments, measurement-only DFE is the clean default when its required shot count is affordable. A marginal-only prior is justified when deployment measurements are prohibited and the shift has been characterised. Between them, the conditioned hybrid reduces the shots needed for a target MAE by using the learned predictor as a shrinkage prior. It becomes cost-effective after the finite calibration expense is amortised over sufficiently many queries.
+
+The uncalibrated BiDir predictions preserve broad ordering on the independent-memory split, with Spearman $\rho=0.710\pm0.002$ and Kendall $\tau=0.534\pm0.002$ across five checkpoints. The predicted highest-fidelity 10\% set overlaps the true set by $0.858\pm0.004$. The lowest-fidelity 10\% overlap is only $0.144\pm0.012$, close to the random baseline of $0.10$. The raw model can therefore support high-fidelity candidate selection in this benchmark. The same evidence does not support low-fidelity failure triage.
 
 \subsection{QEC compatibility}
 
@@ -607,17 +625,20 @@ In both cases, the surrogate supplies a preliminary fidelity estimate within a l
 
 \subsection{Scope and caveats}
 
-Our claims are subject to four limitations.
+Our claims are subject to five limitations.
 
 \begin{enumerate}[itemsep=2pt,topsep=2pt,leftmargin=*]
 \item \emph{Labelled-OOD calibration requires labels.}
 The headline configuration uses $N_{\mathrm{cal}}=64$, and the supplementary sweep includes sizes down to eight. These labels come from exact simulation, an offline characterisation campaign, or another labelled source. Their quantum or classical cost is paid once and amortised over later queries. Section~\ref{app:recalibration} discusses extensions based on unlabelled distribution matching.
 
 \item \emph{The input omits collision memory strength.}
-For fixed collision parameters, the reset-bath marginals are independent of $\eta$. Predictions estimate a correction averaged under the deployment distribution. The realised bath state and the retention value remain unobserved.
+For fixed collision parameters, the reset-bath marginals are independent of $\eta$. Predictions estimate a correction averaged under the deployment distribution. The realised bath state and retention value remain unobserved. The exchange-coupled audit shows that this issue is not confined to a commuting dephasing Hamiltonian, but both audits use a qubit bath.
 
 \item \emph{The $d=4$ regime uses coherent correlations.}
 The two-qubit channels in R3 are order-sensitive and use coherent correlations. Bath-mediated systems with $d>2$ may have different recalibration behaviour and require a separate study.
+
+\item \emph{The readout model is controlled but limited.}
+The robustness audit assumes independent symmetric outcome flips and a known error probability. State-preparation error, asymmetric confusion matrices, drift, and correlated readout faults require a device-specific experiment. The two-stage allocation rule also gives no consistent advantage across the tested budgets.
 
 \item \emph{The architecture has a secondary role.}
 \fidno{} is one member of a broader class of causal sequence models. Several learned backbones reach comparable accuracy within seed variation. The operating-regime analysis and the calibration protocol carry across these architectures.
@@ -655,7 +676,9 @@ Neural networks have recently been used to decode syndrome data from near-term s
 
 Scientific surrogate modelling begins with the variables available at inference and the cost of existing estimators. For composed-channel fidelity, exact superoperator composition is suitable for complete Markovian descriptions. Stratified DFE provides a direct estimate when a per-query measurement budget is available.
 
-The non-Markovian collision setting is information-limited because the marginal input omits bath retention. Paired counterfactual replay gives a mean fidelity range of $0.229$ for identical inputs. Under the uniform high-memory grid, the Bayes MAE floor is $0.060$. A same-query measurement supplies information about the realised process. Convex fusion of the prior and DFE reaches the accuracy of 64-shot DFE with 32 shots. It also reaches the accuracy of 96-shot DFE with 64 shots on the independent-random-stream split. Full calibration costs amortise after 192 and 256 queries.
+The non-Markovian collision setting is information-limited because the marginal input omits bath retention. Paired counterfactual replay gives a mean fidelity range of $0.229$ for identical inputs. Under the uniform high-memory grid, the Bayes MAE floor is $0.060$. A separate exchange-coupled audit gives a mean range of $0.100$ while keeping the same representation fixed. This second result supports the representation-level interpretation beyond the original dephasing family.
+
+A same-query measurement supplies information about the realised process. Convex fusion of the prior and DFE reaches the accuracy of 64-shot DFE with 32 shots. It also reaches the accuracy of 96-shot DFE with 64 shots on the independent-random-stream split. Full calibration costs amortise after 192 and 256 queries. Under symmetric readout flips, the fitted hybrid reduces its reliance on the noisier measurement and remains more accurate than same-budget DFE at the tested error rates. Nonuniform shot allocation gives mixed results and is not required for the main gain.
 
 Estimator selection follows the available information and query volume. Complete channel descriptions favour composition. Access to the deployed process favours measurement. A learned prior can serve repeated queries under a stable deployment distribution. Combining that prior with a small measurement budget gives intermediate points on the cost-accuracy curve. Counterfactual representation audits make the information assumptions behind these choices explicit.
 
@@ -669,11 +692,11 @@ All authors declare no financial or non-financial competing interests.
 
 \section*{Data availability}
 
-All datasets are generated synthetically. The manuscript-specific data generators, evaluation scripts, random seeds, and machine-readable result tables are publicly available at \url{https://github.com/shchng9963-droid/fidelityno} under the release tag mlst-submission-v1. Training arrays and model checkpoints can be regenerated using the documented commands. An archival DOI will be added when the versioned release is deposited.
+All datasets are generated synthetically. The manuscript-specific data generators, evaluation scripts, random seeds, and machine-readable result tables are publicly available at \url{https://github.com/shchng9963-droid/fidelityno} under the release tag mlst-submission-v2. Training arrays and model checkpoints can be regenerated using the documented commands. An archival DOI will be added when the versioned release is deposited.
 
 \section*{Code availability}
 
-The source code associated with this manuscript is publicly available at \url{https://github.com/shchng9963-droid/fidelityno} under the release tag mlst-submission-v1. The tag identifies the exact Git commit, and the software environment is documented in the repository.
+The source code associated with this manuscript is publicly available at \url{https://github.com/shchng9963-droid/fidelityno} under the release tag mlst-submission-v2. The tag identifies the exact Git commit, and the software environment is documented in the repository.
 
 \section*{Acknowledgements}
 
@@ -759,7 +782,7 @@ Architecture and training hyperparameters were selected on the device calibratio
 Collision and $d=4$ splits contain 8000 sequences. Device splits contain 1024 sequences for each backend. Training, calibration, and ID lengths are drawn from $\{2,4,8,16\}$. Length OOD uses $\{24,32,48\}$. In the collision data, training uses $\eta\in[0,0.7]$ and the legacy family\_ood file uses $\eta\in[0.85,0.99]$. Random seeds are disjoint across splits.
 
 \paragraph*{Reproducibility and validation.}
-The five seeds are $\{0, 1, 2, 3, 4\}$, applied to (a) NumPy / PyTorch global RNG, (b) channel parameter sampling, (c) train/val/test split assignment, (d) model initialisation, and (e) data shuffling. The 91 unit tests cover CPTP sanity for every channel-family generator, Choi composition associativity, quantile-head monotonicity, recalibration coefficient stability, diamond-SDP correctness against a QuTiP reference, and an end-to-end smoke-train on a 100-sample subset. Total wall-clock for a fresh reproduction on a 2$\times$ RTX 5090 setup is approximately 5 hours, dominated by neural training.
+The five seeds are $\{0, 1, 2, 3, 4\}$, applied to (a) NumPy / PyTorch global RNG, (b) channel parameter sampling, (c) train/val/test split assignment, (d) model initialisation, and (e) data shuffling. The 99 unit tests cover CPTP sanity for every channel-family generator, Choi composition associativity, quantile-head monotonicity, recalibration coefficient stability, diamond-SDP correctness against a QuTiP reference, readout-noise sampling, and an end-to-end smoke-train on a 100-sample subset. Total wall-clock for a fresh reproduction on a 2$\times$ RTX 5090 setup is approximately 5 hours, dominated by neural training.
 
 %%%% END flattened: appendices/C_implementation
 

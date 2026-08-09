@@ -26,14 +26,19 @@ The main contributions are as follows.
 2. We construct a counterfactual collision experiment that replays 2048 fixed
    observable inputs at 15 hidden retention values. This experiment measures the
    error caused by missing information without changing the model input.
-3. We combine a calibrated marginal prediction with a same-query measurement
+3. We repeat the representation audit on 1024 exchange-coupled sequences whose
+   interaction and bath terms do not commute. The second family reproduces the
+   ambiguity without being used for model training or selection.
+4. We combine a calibrated marginal prediction with a same-query measurement
    pilot. On a fresh split generated with independent random streams, the
    32-shot and 64-shot hybrids approach the accuracy of 64-shot and 96-shot
    Direct Fidelity Estimation. Their full calibration costs amortise after 192
    and 256 deployment queries.
-4. We compare these results with exact composition, analytic approximations,
+5. We compare these results with exact composition, analytic approximations,
    Monte Carlo estimators, label-budget controls, and Direct Fidelity Estimation
-   under explicit cost accounting.
+   under explicit cost accounting. We also test symmetric readout errors and
+   two-stage shot allocation. Exact composition is included for every Markovian
+   two-qubit split and reaches the expected numerical floor.
 
 The contribution is methodological rather than architecture-centred. The
 representation audit and information-conditioned comparison apply to scientific
@@ -44,7 +49,7 @@ through scientific applications.
 The manuscript is original, has not been published elsewhere, and is not under
 consideration by another journal. The authors declare no competing interests.
 The public repository includes the manuscript-specific release tagged
-mlst-submission-v1. It contains the data generators, evaluation scripts, random
+mlst-submission-v2. It contains the data generators, evaluation scripts, random
 seeds, and machine-readable result tables used in the study. The tag identifies
 the exact commit, and the software environment is documented in the repository.
 

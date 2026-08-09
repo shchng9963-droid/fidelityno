@@ -35,7 +35,8 @@ from torch.utils.data import DataLoader, TensorDataset
 from train import make_model, prediction_to_quantiles
 
 
-def predict_means(ckpt_path: str, npz_path: str) -> tuple[np.ndarray, np.ndarray]:
+def predict_quantiles(ckpt_path: str, npz_path: str) -> tuple[np.ndarray, np.ndarray]:
+    """Return all predictive quantiles and targets for one checkpoint."""
     ck = torch.load(ckpt_path, map_location="cpu", weights_only=False)
     cfg = OmegaConf.create(ck["cfg"])
     levels = list(cfg.model.quantiles)
@@ -57,6 +58,11 @@ def predict_means(ckpt_path: str, npz_path: str) -> tuple[np.ndarray, np.ndarray
             preds.append(q.numpy()); ys.append(y.numpy())
     q = np.concatenate(preds)
     y = np.concatenate(ys)
+    return q, y
+
+
+def predict_means(ckpt_path: str, npz_path: str) -> tuple[np.ndarray, np.ndarray]:
+    q, y = predict_quantiles(ckpt_path, npz_path)
     return q.mean(axis=1), y
 
 

@@ -1,0 +1,4 @@
+split,path,n,dim,mae_F_e,max_abs_err_F_e,latency_ms_per_seq_median,latency_ms_per_seq_min,repeats
+id_test,/home/wangshuchang/fidelityno/data/benchmarks/two_qubit_order_sensitive/id_test.npz,2000,4,1.3523094130482583e-08,7.933314360997201e-08,0.5112002780660987,0.5099558504298329,5
+length_ood,/home/wangshuchang/fidelityno/data/benchmarks/two_qubit_order_sensitive/length_ood.npz,2000,4,8.3350155230498e-09,5.234115155183794e-08,0.829749736469239,0.8276050123386085,5
+family_ood,/home/wangshuchang/fidelityno/data/benchmarks/two_qubit_order_sensitive/family_ood.npz,2000,4,1.1145883697553233e-08,6.461800605706003e-08,0.5705697671510279,0.5692248055711389,5
