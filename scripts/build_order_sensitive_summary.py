@@ -5,9 +5,10 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-BENCH_DIR = Path('/home/wangshuchang/fidelityno/data/benchmarks/two_qubit_order_sensitive')
-RESULT_DIR = Path('/home/wangshuchang/fidelityno/results/benchmarks/two_qubit_order_sensitive')
-OUT_DIR = Path('/home/wangshuchang/fidelityno/results/order_sensitive')
+ROOT = Path(__file__).resolve().parents[1]
+BENCH_DIR = ROOT / 'data' / 'benchmarks' / 'two_qubit_order_sensitive'
+RESULT_DIR = ROOT / 'results' / 'benchmarks' / 'two_qubit_order_sensitive'
+OUT_DIR = ROOT / 'results' / 'order_sensitive'
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 

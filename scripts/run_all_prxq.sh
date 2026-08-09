@@ -3,7 +3,7 @@
 #
 # Pre-reqs:
 #   - conda env `fidelityno` activated
-#   - /home/wangshuchang/fidelityno_prxq is the working directory
+#   - the repository root is the working directory
 #   - 2x NVIDIA GPU (or single-GPU mode by setting DEVICE_GPUS=0)
 #
 # Total budget at default settings: ~5-7 hours on 2x RTX 5090.

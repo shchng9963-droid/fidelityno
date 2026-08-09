@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PATH:-}
-cd /home/wangshuchang/fidelityno
-ENV=/home/wangshuchang/miniforge3/envs/fidelityno/bin
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+export PYTHON="${PYTHON:-python}"
 export WANDB_MODE=${WANDB_MODE:-offline}
 export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0}
 DATA_DIR=${DATA_DIR:-data}
@@ -19,7 +20,7 @@ mkdir -p "$OUT_DIR" "$CKPT_DIR" logs
 start_ts=$(date '+%Y%m%d_%H%M%S')
 run_id="head_ablation_${start_ts}"
 echo "[$(date '+%F %T')] run_id=${run_id} data=${DATA_DIR} out=${OUT_DIR} ckpt=${CKPT_DIR} epochs=${EPOCHS} batch=${BATCH} device=${DEVICE} heads=${HEADS} seeds=${SEEDS} aux=${AUX}"
-$ENV/python - <<'CHECKPY'
+"$PYTHON" - <<'CHECKPY'
 from pathlib import Path
 import numpy as np, os
 root=Path(os.environ.get('DATA_DIR','data'))
@@ -34,7 +35,7 @@ for seed in $SEEDS; do
   for head in $HEADS; do
     ckpt="fidelityno_${head}_seed${seed}.pt"
     echo "[$(date '+%F %T')] train head=${head} seed=${seed}"
-    $ENV/python train.py \
+    "$PYTHON" train.py \
       model.name=fidelityno \
       model.head_type="$head" \
       model.aux="$AUX" \
@@ -47,10 +48,10 @@ for seed in $SEEDS; do
       train.ckpt_name="$ckpt" \
       device="$DEVICE"
     echo "[$(date '+%F %T')] eval head=${head} seed=${seed}"
-    $ENV/python eval.py --ckpt "$CKPT_DIR/$ckpt" --data-dir "$DATA_DIR" --out "$OUT_DIR/fidelityno_${head}_seed${seed}.csv"
+    "$PYTHON" eval.py --ckpt "$CKPT_DIR/$ckpt" --data-dir "$DATA_DIR" --out "$OUT_DIR/fidelityno_${head}_seed${seed}.csv"
   done
 done
-$ENV/python - <<'AGGPY'
+"$PYTHON" - <<'AGGPY'
 from pathlib import Path
 import pandas as pd, os
 out=Path(os.environ.get('OUT_DIR','results/ablations/head'))

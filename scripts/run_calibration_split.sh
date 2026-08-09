@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PATH:-}
-cd /home/wangshuchang/fidelityno
-ENV=/home/wangshuchang/miniforge3/envs/fidelityno/bin
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+export PYTHON="${PYTHON:-python}"
 export WANDB_MODE=${WANDB_MODE:-offline}
 export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0}
 DATA_DIR=${DATA_DIR:-data/calibration_split}
@@ -23,7 +24,7 @@ run_id="calibration_split_${start_ts}"
 echo "[$(date '+%F %T')] run_id=${run_id} data=${DATA_DIR} out=${OUT_DIR} ckpt=${CKPT_DIR} n_train=${N_TRAIN} n_calib=${N_CALIB} n_test=${N_TEST} epochs=${EPOCHS} batch=${BATCH} device=${DEVICE} models=${MODELS} seeds=${SEEDS}"
 
 if [[ "${FORCE_REGEN_DATA:-0}" == "1" || ! -f "$DATA_DIR/calib.npz" || ! -f "$DATA_DIR/train.npz" ]]; then
-  "$ENV/python" scripts/gen_data.py \
+  "$PYTHON" scripts/gen_data.py \
     --outdir "$DATA_DIR" \
     --n-train "$N_TRAIN" \
     --n-calib "$N_CALIB" \
@@ -32,7 +33,7 @@ if [[ "${FORCE_REGEN_DATA:-0}" == "1" || ! -f "$DATA_DIR/calib.npz" || ! -f "$DA
     --holdout-family "$HOLDOUT_FAMILY"
 fi
 
-"$ENV/python" - <<'CHECKPY'
+"$PYTHON" - <<'CHECKPY'
 from pathlib import Path
 import numpy as np, os, json
 root=Path(os.environ.get('DATA_DIR','data/calibration_split'))
@@ -49,7 +50,7 @@ for seed in $SEEDS; do
   for model in $MODELS; do
     ckpt="${model}_seed${seed}.pt"
     echo "[$(date '+%F %T')] train model=${model} seed=${seed}"
-    "$ENV/python" train.py \
+    "$PYTHON" train.py \
       model.name="$model" \
       model.head_type=quantile \
       seed="$seed" \
@@ -61,13 +62,13 @@ for seed in $SEEDS; do
       train.ckpt_name="$ckpt" \
       device="$DEVICE"
     echo "[$(date '+%F %T')] eval raw model=${model} seed=${seed}"
-    "$ENV/python" eval.py --ckpt "$CKPT_DIR/$ckpt" --data-dir "$DATA_DIR" --out "$OUT_DIR/${model}_seed${seed}.csv"
+    "$PYTHON" eval.py --ckpt "$CKPT_DIR/$ckpt" --data-dir "$DATA_DIR" --out "$OUT_DIR/${model}_seed${seed}.csv"
     echo "[$(date '+%F %T')] eval calibrated model=${model} seed=${seed}"
-    "$ENV/python" scripts/eval_calibrated.py --ckpt "$CKPT_DIR/$ckpt" --data-dir "$DATA_DIR" --out "$OUT_DIR/${model}_seed${seed}_calibrated.csv"
+    "$PYTHON" scripts/eval_calibrated.py --ckpt "$CKPT_DIR/$ckpt" --data-dir "$DATA_DIR" --out "$OUT_DIR/${model}_seed${seed}_calibrated.csv"
   done
 done
 
-"$ENV/python" - <<'AGGPY'
+"$PYTHON" - <<'AGGPY'
 from pathlib import Path
 import pandas as pd, os
 out=Path(os.environ.get('OUT_DIR','results/ablations/calibration_split'))

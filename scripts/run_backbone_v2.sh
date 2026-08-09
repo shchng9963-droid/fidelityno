@@ -20,8 +20,9 @@
 
 set -euo pipefail
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PATH:-}
-cd /home/wangshuchang/fidelityno
-ENV=/home/wangshuchang/miniforge3/envs/fidelityno/bin
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+export PYTHON="${PYTHON:-python}"
 export WANDB_MODE=${WANDB_MODE:-offline}
 export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0}
 DATA_DIR=${DATA_DIR:-data}
@@ -60,7 +61,7 @@ for spec in "${RUNS[@]}"; do
     fi
     echo "[$(date '+%F %T')] train ${label} seed=${seed} (model=${mname} d=${d} depth=${depth} layers=${layers} bidir=${bidir})"
     if [[ "$mname" == "fidelityno_gru" ]]; then
-      $ENV/python train.py \
+      "$PYTHON" train.py \
         model.name="$mname" \
         model.d_model="$d" \
         model.depth="$depth" \
@@ -77,7 +78,7 @@ for spec in "${RUNS[@]}"; do
         device="$DEVICE"
     else
       # fnoG (gnn) -- uses layers, not depth
-      $ENV/python train.py \
+      "$PYTHON" train.py \
         model.name="$mname" \
         model.d_model="$d" \
         model.layers="$layers" \
@@ -93,10 +94,10 @@ for spec in "${RUNS[@]}"; do
         device="$DEVICE"
     fi
     echo "[$(date '+%F %T')] eval ${label} seed=${seed}"
-    $ENV/python eval.py --ckpt "$CKPT_DIR/$ckpt" --data-dir "$DATA_DIR" --out "$csv"
+    "$PYTHON" eval.py --ckpt "$CKPT_DIR/$ckpt" --data-dir "$DATA_DIR" --out "$csv"
     # Patch the model column in the CSV to use our `label` (not cfg.model.name)
     # This is the fix for the prior labeling bug.
-    $ENV/python - "$csv" "$label" <<'PYFIX'
+    "$PYTHON" - "$csv" "$label" <<'PYFIX'
 import sys, pandas as pd
 csv, label = sys.argv[1], sys.argv[2]
 df = pd.read_csv(csv)
@@ -107,7 +108,7 @@ PYFIX
 done
 
 # Aggregate using filename-derived label (proper, not cfg.model.name).
-$ENV/python - <<'AGGPY'
+"$PYTHON" - <<'AGGPY'
 from pathlib import Path
 import os, re, pandas as pd
 out = Path(os.environ.get('OUT_DIR','results/ablations/backbone_v2'))

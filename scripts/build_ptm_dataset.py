@@ -5,7 +5,7 @@ import sys, time
 from pathlib import Path
 import numpy as np
 
-ROOT = Path('/home/wangshuchang/fidelityno_prxq')
+ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from physics.channels.ptm import _pauli_basis
 

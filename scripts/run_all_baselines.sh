@@ -7,8 +7,9 @@
 # ============================================================================
 set -euo pipefail
 
-ENV=/home/wangshuchang/miniforge3/envs/fidelityno/bin
-cd /home/wangshuchang/fidelityno
+export PYTHON="${PYTHON:-python}"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
 export WANDB_MODE=offline
 
 # --- Defaults (override via env vars) ---
@@ -28,7 +29,7 @@ echo "============================================"
 
 # --- Step 1: Generate data if needed ---
 echo "[Step 1] Checking / generating data..."
-$ENV/python - <<'PY'
+"$PYTHON" - <<'PY'
 import json, numpy as np, os, subprocess, sys
 regen = os.environ.get('FORCE_REGEN_DATA','0') == '1' or not os.path.exists('data/train.npz')
 if not regen:
@@ -46,7 +47,7 @@ if not regen:
 if regen:
     print(f"Generating data: N_TRAIN={os.environ.get('N_TRAIN','200000')}, N_TEST={os.environ.get('N_TEST','10000')}")
     subprocess.check_call([
-        '/home/wangshuchang/miniforge3/envs/fidelityno/bin/python',
+        os.environ.get('PYTHON', sys.executable),
         'scripts/gen_data.py',
         '--n-train', os.environ.get('N_TRAIN','200000'),
         '--n-test', os.environ.get('N_TEST','10000'),
@@ -59,11 +60,11 @@ PY
 
 # --- Step 2: Analytical baselines (B1, B2) ---
 echo "[Step 2] Analytical baselines..."
-$ENV/python scripts/eval_analytic.py --out results/analytic.csv
+"$PYTHON" scripts/eval_analytic.py --out results/analytic.csv
 
 # --- Step 3: Monte Carlo baseline (B3) ---
 echo "[Step 3] Monte Carlo baseline..."
-$ENV/python scripts/eval_mc.py --out results/mc.csv --budgets $MC_BUDGETS ${MC_MAX_EVAL:+--max-eval $MC_MAX_EVAL}
+"$PYTHON" scripts/eval_mc.py --out results/mc.csv --budgets $MC_BUDGETS ${MC_MAX_EVAL:+--max-eval $MC_MAX_EVAL}
 
 # --- Step 4: Neural model training (5 seeds × 7 models, parallel on 2 GPUs) ---
 echo "[Step 4] Training neural models..."
@@ -98,7 +99,7 @@ run_job() {
     local seed=$1 model=$2 gpu=$3
     local cfg="${MODEL_CFGS[$model]}"
     echo "  [GPU $gpu] Training $model seed=$seed"
-    CUDA_VISIBLE_DEVICES=$gpu $ENV/python train.py \
+    CUDA_VISIBLE_DEVICES=$gpu "$PYTHON" train.py \
         $cfg seed=$seed \
         train.epochs=$EPOCHS train.batch_size=$BATCH device=cuda \
         train.ckpt_dir=checkpoints train.ckpt_name=${model}_seed${seed}.pt \
@@ -154,7 +155,7 @@ for seed in 0 1 2 3 4; do
     for model in fidelityno fidelityno_large bidir mlp deepsets gnn generic_gnn; do
         ckpt="checkpoints/${model}_seed${seed}.pt"
         if [ -f "$ckpt" ]; then
-            $ENV/python eval.py --ckpt "$ckpt" --out "results/${model}_seed${seed}.csv"
+            "$PYTHON" eval.py --ckpt "$ckpt" --out "results/${model}_seed${seed}.csv"
         else
             echo "  WARNING: $ckpt not found, skipping eval"
         fi
@@ -163,7 +164,7 @@ done
 
 # --- Step 6: Aggregate results ---
 echo "[Step 6] Aggregating results..."
-$ENV/python - <<'PY'
+"$PYTHON" - <<'PY'
 from pathlib import Path
 import pandas as pd
 files = [Path('results/analytic.csv'), Path('results/mc.csv')]
@@ -184,7 +185,7 @@ PY
 
 # --- Step 7: Make figures ---
 echo "[Step 7] Generating figures..."
-$ENV/python scripts/make_figures.py
+"$PYTHON" scripts/make_figures.py
 
 echo "============================================"
 echo "DONE. Results in results/summary.csv"

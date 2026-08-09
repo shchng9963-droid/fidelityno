@@ -7,8 +7,9 @@
 # question (we already have causal-vs-bidir transformer via B6).
 set -euo pipefail
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PATH:-}
-cd /home/wangshuchang/fidelityno
-ENV=/home/wangshuchang/miniforge3/envs/fidelityno/bin
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+export PYTHON="${PYTHON:-python}"
 export WANDB_MODE=${WANDB_MODE:-offline}
 export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0}
 DATA_DIR=${DATA_DIR:-data}
@@ -36,7 +37,7 @@ for seed in $SEEDS; do
     IFS=':' read -r mname depth bidir label <<<"$cfg"
     ckpt="${label}_seed${seed}.pt"
     echo "[$(date '+%F %T')] train ${label} seed=${seed} (model=${mname} depth=${depth} bidir=${bidir})"
-    $ENV/python train.py \
+    "$PYTHON" train.py \
       model.name="$mname" \
       model.depth="$depth" \
       +model.bidir="$bidir" \
@@ -51,11 +52,11 @@ for seed in $SEEDS; do
       train.ckpt_name="$ckpt" \
       device="$DEVICE"
     echo "[$(date '+%F %T')] eval ${label} seed=${seed}"
-    $ENV/python eval.py --ckpt "$CKPT_DIR/$ckpt" --data-dir "$DATA_DIR" --out "$OUT_DIR/${label}_seed${seed}.csv"
+    "$PYTHON" eval.py --ckpt "$CKPT_DIR/$ckpt" --data-dir "$DATA_DIR" --out "$OUT_DIR/${label}_seed${seed}.csv"
   done
 done
 
-$ENV/python - <<'AGGPY'
+"$PYTHON" - <<'AGGPY'
 from pathlib import Path
 import pandas as pd, os
 out=Path(os.environ.get('OUT_DIR','results/ablations/backbone'))

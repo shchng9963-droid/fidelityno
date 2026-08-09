@@ -6,7 +6,8 @@
 # capture of stdout (which broke the previous launcher and ran 35 jobs at once
 # on 2 GPUs).
 set -uo pipefail
-cd /home/wangshuchang/fidelityno
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
 
 ENV=fidelityno
 EPOCHS=${EPOCHS:-80}

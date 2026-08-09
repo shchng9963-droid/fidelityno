@@ -3,9 +3,9 @@ import subprocess, sys, os
 from pathlib import Path
 
 def test_end_to_end_training_on_100_sample_subset(tmp_path):
-    root=Path('/home/wangshuchang/fidelityno')
+    root=Path(__file__).resolve().parents[1]
     env=os.environ.copy(); env['WANDB_MODE']='offline'
-    py='/home/wangshuchang/miniforge3/envs/fidelityno/bin/python'
+    py=sys.executable
     data_dir=tmp_path/'data'
     ckpt_dir=tmp_path/'checkpoints'
     subprocess.run([py,'scripts/gen_data.py','--outdir',str(data_dir),'--n-train','100','--n-test','40','--seed','123'],cwd=root,env=env,check=True,timeout=120)

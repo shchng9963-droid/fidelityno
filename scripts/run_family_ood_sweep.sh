@@ -18,8 +18,8 @@
 # ============================================================================
 set -euo pipefail
 
-ENV=/home/wangshuchang/miniforge3/envs/fidelityno/bin
-ROOT=/home/wangshuchang/fidelityno
+export PYTHON="${PYTHON:-python}"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 export WANDB_MODE=offline
 export PYTHONPATH="$ROOT:${PYTHONPATH:-}"
@@ -69,7 +69,7 @@ gen_one_holdout() {
     mkdir -p "$outdir"
     local glog="logs/family_ood/gen_${h}.log"
     echo "  [data] holdout=${h} -> ${outdir} (log: ${glog})"
-    "$ENV/python" scripts/gen_data.py \
+    "$PYTHON" scripts/gen_data.py \
         --outdir "$outdir" \
         --n-train "$N_TRAIN" --n-test "$N_TEST" \
         --seed 0 \
@@ -77,7 +77,7 @@ gen_one_holdout() {
         --max-len 48 \
         --representation choi_hermitian \
         > "$glog" 2>&1
-    "$ENV/python" scripts/split_data_holdout.py --indir "$outdir" >> "$glog" 2>&1
+    "$PYTHON" scripts/split_data_holdout.py --indir "$outdir" >> "$glog" 2>&1
 }
 
 if [ "$PHASE" = "data" ] || [ "$PHASE" = "all" ]; then
@@ -124,7 +124,7 @@ run_train_eval() {
         export CUDA_VISIBLE_DEVICES=$gpu
         cd "$ROOT"
         echo "  [GPU $gpu] train: $tag"
-        "$ENV/python" train.py \
+        "$PYTHON" train.py \
             $cfg seed=$seed \
             data.train="${datadir}/train_split.npz" \
             data.val="${datadir}/val_split.npz" \
@@ -133,7 +133,7 @@ run_train_eval() {
             train.ckpt_name="${tag}.pt" \
             > "$log" 2>&1
         echo "  [GPU $gpu] eval:  $tag"
-        "$ENV/python" eval.py \
+        "$PYTHON" eval.py \
             --ckpt "$ckpt" \
             --data-dir "$datadir" \
             --out "$out" \

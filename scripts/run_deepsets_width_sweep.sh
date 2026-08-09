@@ -4,8 +4,9 @@
 # representation ablation (20k train / 3k test, 30 epochs, mixed single-qubit benchmark).
 set -euo pipefail
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PATH:-}
-cd /home/wangshuchang/fidelityno
-ENV=/home/wangshuchang/miniforge3/envs/fidelityno/bin
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+export PYTHON="${PYTHON:-python}"
 export WANDB_MODE=${WANDB_MODE:-offline}
 export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-1}
 
@@ -37,7 +38,7 @@ for W in $WIDTHS; do
       continue
     fi
     echo "[$(date '+%F %T')] train deepsets width=$W seed=$S"
-    "$ENV/python" train.py \
+    "$PYTHON" train.py \
         model=deepsets \
         model.d_model="$W" \
         seed="$S" \
@@ -48,15 +49,15 @@ for W in $WIDTHS; do
         train.ckpt_dir="$CKPT_DIR" \
         train.ckpt_name="$CKPT_FILE" \
         device=cuda >"$LOG" 2>&1 || { echo "[FAIL] train $TAG (see $LOG)"; continue; }
-    "$ENV/python" eval.py --ckpt "$CKPT_DIR/$CKPT_FILE" --data-dir "$DATA_DIR" --out "$RAW_CSV" >>"$LOG" 2>&1
-    "$ENV/python" - <<PY >>"$LOG"
+    "$PYTHON" eval.py --ckpt "$CKPT_DIR/$CKPT_FILE" --data-dir "$DATA_DIR" --out "$RAW_CSV" >>"$LOG" 2>&1
+    "$PYTHON" - <<PY >>"$LOG"
 import pandas as pd
 df=pd.read_csv("$RAW_CSV"); df['width']=$W; df.to_csv("$RAW_CSV",index=False)
 PY
   done
 done
 
-"$ENV/python" - <<'AGG'
+"$PYTHON" - <<'AGG'
 from pathlib import Path
 import os, pandas as pd
 out=Path(os.environ.get('OUT_DIR','results/ablations/deepsets_width'))

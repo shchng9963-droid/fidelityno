@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd /home/wangshuchang/fidelityno
-ENV=/home/wangshuchang/miniforge3/envs/fidelityno/bin
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+export PYTHON="${PYTHON:-python}"
 export WANDB_MODE=offline
 export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0}
 mkdir -p logs results checkpoints
 for seed in 0 1 2 3 4; do
   echo "[$(date '+%F %T')] train FidelityNO-T no-aux seed=${seed}"
-  $ENV/python train.py \
+  "$PYTHON" train.py \
     model.name=fidelityno_noaux \
     model.aux=false \
     seed=${seed} \
@@ -16,10 +17,10 @@ for seed in 0 1 2 3 4; do
     train.ckpt_name=fidelityno_noaux_seed${seed}.pt \
     device=${DEVICE:-cuda}
   echo "[$(date '+%F %T')] eval FidelityNO-T no-aux seed=${seed}"
-  $ENV/python eval.py --ckpt checkpoints/fidelityno_noaux_seed${seed}.pt --out results/fidelityno_noaux_seed${seed}.csv
-  $ENV/python scripts/eval_calibrated.py --ckpt checkpoints/fidelityno_noaux_seed${seed}.pt --out results/fidelityno_noaux_seed${seed}_calibrated.csv
+  "$PYTHON" eval.py --ckpt checkpoints/fidelityno_noaux_seed${seed}.pt --out results/fidelityno_noaux_seed${seed}.csv
+  "$PYTHON" scripts/eval_calibrated.py --ckpt checkpoints/fidelityno_noaux_seed${seed}.pt --out results/fidelityno_noaux_seed${seed}_calibrated.csv
  done
-$ENV/python - <<'PY'
+"$PYTHON" - <<'PY'
 from pathlib import Path
 import pandas as pd
 files=[Path('results/analytic.csv'), Path('results/mc.csv')] + sorted(Path('results').glob('*_seed*.csv'))
@@ -31,4 +32,4 @@ if cal_files:
     pd.concat([pd.read_csv(f) for f in cal_files], ignore_index=True).to_csv('results/calibrated_summary.csv', index=False)
 print('updated summary and calibrated_summary')
 PY
-$ENV/python scripts/make_figures.py
+"$PYTHON" scripts/make_figures.py

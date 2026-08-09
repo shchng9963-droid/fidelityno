@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Resume representation ablation — only run missing experiments
 set -euo pipefail
-cd /home/wangshuchang/fidelityno
-ENV=/home/wangshuchang/miniforge3/envs/fidelityno/bin
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+export PYTHON="${PYTHON:-python}"
 export WANDB_MODE=${WANDB_MODE:-offline}
 export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0}
 BASE_DATA_DIR=data/ablations/representation
@@ -23,7 +24,7 @@ ptm_dir="$BASE_DATA_DIR/ptm"
 mkdir -p "$ptm_dir"
 if [[ ! -f "$ptm_dir/train.npz" || ! -f "$ptm_dir/manifest.json" ]]; then
   echo "[$(date '+%F %T')] generate representation=ptm"
-  "$ENV/python" scripts/gen_data.py \
+  "$PYTHON" scripts/gen_data.py \
     --outdir "$ptm_dir" \
     --n-train "$N_TRAIN" \
     --n-test "$N_TEST" \
@@ -59,7 +60,7 @@ for entry in "${MISSING[@]}"; do
   fi
 
   echo "[$(date '+%F %T')] train model=$model rep=$rep seed=$seed"
-  "$ENV/python" train.py \
+  "$PYTHON" train.py \
     model.name="$model" \
     model.head_type=quantile \
     seed="$seed" \
@@ -72,10 +73,10 @@ for entry in "${MISSING[@]}"; do
     device="$DEVICE"
 
   echo "[$(date '+%F %T')] eval model=$model rep=$rep seed=$seed"
-  "$ENV/python" eval.py --ckpt "$CKPT_DIR/$ckpt" --data-dir "$data_dir" --out "$raw_csv"
+  "$PYTHON" eval.py --ckpt "$CKPT_DIR/$ckpt" --data-dir "$data_dir" --out "$raw_csv"
 
   # Tag with representation column
-  "$ENV/python" -c "
+  "$PYTHON" -c "
 import pandas as pd
 df=pd.read_csv('$raw_csv')
 df['representation']='$rep'
@@ -86,7 +87,7 @@ done
 echo "[$(date '+%F %T')] All missing runs complete. Aggregating..."
 
 # Aggregate all results
-"$ENV/python" - <<'AGGPY'
+"$PYTHON" - <<'AGGPY'
 from pathlib import Path
 import pandas as pd
 out = Path("results/ablations/representation")

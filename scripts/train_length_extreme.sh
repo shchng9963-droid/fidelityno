@@ -2,7 +2,8 @@
 # C2: Train all architectures on L<=4 only (extreme length-OOD probe).
 # Outputs go to checkpoints/length_extreme/  and logs to logs/length_extreme/
 set -uo pipefail
-cd /home/wangshuchang/fidelityno
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
 
 ENV=fidelityno
 EPOCHS=${EPOCHS:-40}            # smaller dataset, fewer epochs needed

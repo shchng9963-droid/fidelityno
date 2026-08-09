@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd /home/wangshuchang/fidelityno
-ENV=/home/wangshuchang/miniforge3/envs/fidelityno/bin
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+export PYTHON="${PYTHON:-python}"
 MAX_EVAL=${MC1000_MAX_EVAL:-500}
 mkdir -p logs
 for bench in single_qubit_mixed single_qubit_lindblad_holdout two_qubit_mixed; do
   echo "[$(date '+%F %T')] MC-1000 capped benchmark=$bench max_eval=$MAX_EVAL"
-  $ENV/python scripts/eval_mc.py \
+  "$PYTHON" scripts/eval_mc.py \
     --data-dir "data/benchmarks/$bench" \
     --out "results/benchmarks/$bench/mc1000_cap${MAX_EVAL}.csv" \
     --budgets 1000 \
     --max-eval "$MAX_EVAL"
 done
-$ENV/python - <<'PY'
+"$PYTHON" - <<'PY'
 from pathlib import Path
 import pandas as pd
 rows=[]

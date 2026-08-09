@@ -6,8 +6,9 @@
 # Datasets are 10k train (matches the production run_benchmark_suites.sh).
 set -euo pipefail
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PATH:-}
-cd /home/wangshuchang/fidelityno
-ENV=/home/wangshuchang/miniforge3/envs/fidelityno/bin
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+export PYTHON="${PYTHON:-python}"
 export WANDB_MODE=${WANDB_MODE:-offline}
 export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-1}
 EPOCHS=${EPOCHS:-30}
@@ -35,7 +36,7 @@ for bench in $BENCHES; do
       continue
     fi
     echo "[$(date '+%F %T')] train bench=${bench} ${label} seed=${seed}"
-    $ENV/python train.py \
+    "$PYTHON" train.py \
       model.name=fidelityno_gru \
       model.d_model=128 \
       model.depth=4 \
@@ -51,15 +52,15 @@ for bench in $BENCHES; do
       train.ckpt_name="$ckpt" \
       device="$DEVICE"
     echo "[$(date '+%F %T')] eval bench=${bench} ${label} seed=${seed}"
-    $ENV/python eval.py --ckpt "$ckpt_dir/$ckpt" --data-dir "$data_dir" --out "$csv"
+    "$PYTHON" eval.py --ckpt "$ckpt_dir/$ckpt" --data-dir "$data_dir" --out "$csv"
     # Re-label so it doesn't collide with cfg.model.name='fidelityno_gru'
-    $ENV/python - "$csv" "$label" <<'PYFIX'
+    "$PYTHON" - "$csv" "$label" <<'PYFIX'
 import sys, pandas as pd
 df=pd.read_csv(sys.argv[1]); df['model']=sys.argv[2]; df.to_csv(sys.argv[1], index=False)
 PYFIX
   done
   # Aggregate this benchmark (gru_bidir + existing baselines + analytic + mc).
-  $ENV/python - "$out_dir" <<'AGGPY'
+  "$PYTHON" - "$out_dir" <<'AGGPY'
 import sys, pandas as pd
 from pathlib import Path
 out = Path(sys.argv[1])

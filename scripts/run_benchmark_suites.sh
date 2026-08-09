@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd /home/wangshuchang/fidelityno
-ENV=/home/wangshuchang/miniforge3/envs/fidelityno/bin
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+export PYTHON="${PYTHON:-python}"
 export WANDB_MODE=offline
 export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0}
 N_TRAIN=${N_TRAIN:-10000}
@@ -16,21 +17,21 @@ OUT_ROOT=${OUT_ROOT:-results/benchmarks}
 mkdir -p logs checkpoints "$OUT_ROOT"
 
 echo "[$(date '+%F %T')] generate benchmark datasets: train=${N_TRAIN} test=${N_TEST} root=${BENCH_ROOT}"
-$ENV/python scripts/gen_benchmarks.py --out-root "$BENCH_ROOT" --n-train "$N_TRAIN" --n-test "$N_TEST" --seed 0
+"$PYTHON" scripts/gen_benchmarks.py --out-root "$BENCH_ROOT" --n-train "$N_TRAIN" --n-test "$N_TEST" --seed 0
 
 for bench in single_qubit_mixed single_qubit_lindblad_holdout two_qubit_mixed two_qubit_order_sensitive; do
   data_dir="$BENCH_ROOT/$bench"
   out_dir="$OUT_ROOT/$bench"
   mkdir -p "$out_dir"
   echo "[$(date '+%F %T')] benchmark=$bench analytical baselines"
-  $ENV/python scripts/eval_analytic.py --data-dir "$data_dir" --out "$out_dir/analytic.csv"
+  "$PYTHON" scripts/eval_analytic.py --data-dir "$data_dir" --out "$out_dir/analytic.csv"
   echo "[$(date '+%F %T')] benchmark=$bench MC budgets=${MC_BUDGETS} max_eval=${MC_MAX_EVAL}"
-  $ENV/python scripts/eval_mc.py --data-dir "$data_dir" --out "$out_dir/mc.csv" --budgets "$MC_BUDGETS" --max-eval "$MC_MAX_EVAL"
+  "$PYTHON" scripts/eval_mc.py --data-dir "$data_dir" --out "$out_dir/mc.csv" --budgets "$MC_BUDGETS" --max-eval "$MC_MAX_EVAL"
   for seed in 0 1 2 3 4; do
     for model in fidelityno gnn generic_gnn mlp; do
       ckpt="${model}_${bench}_seed${seed}.pt"
       echo "[$(date '+%F %T')] benchmark=$bench train model=$model seed=$seed"
-      $ENV/python train.py \
+      "$PYTHON" train.py \
         model.name=$model \
         seed=$seed \
         data.train="$data_dir/train.npz" \
@@ -40,13 +41,13 @@ for bench in single_qubit_mixed single_qubit_lindblad_holdout two_qubit_mixed tw
         train.ckpt_name="$ckpt" \
         device="$DEVICE"
       echo "[$(date '+%F %T')] benchmark=$bench eval model=$model seed=$seed"
-      $ENV/python eval.py --ckpt "checkpoints/$ckpt" --data-dir "$data_dir" --out "$out_dir/${model}_seed${seed}.csv"
+      "$PYTHON" eval.py --ckpt "checkpoints/$ckpt" --data-dir "$data_dir" --out "$out_dir/${model}_seed${seed}.csv"
       if [[ "$model" == "fidelityno" || "$model" == "gnn" || "$model" == "generic_gnn" || "$model" == "mlp" ]]; then
-        $ENV/python scripts/eval_calibrated.py --ckpt "checkpoints/$ckpt" --data-dir "$data_dir" --out "$out_dir/${model}_seed${seed}_calibrated.csv"
+        "$PYTHON" scripts/eval_calibrated.py --ckpt "checkpoints/$ckpt" --data-dir "$data_dir" --out "$out_dir/${model}_seed${seed}_calibrated.csv"
       fi
     done
   done
-  $ENV/python - "$out_dir" <<'PY'
+  "$PYTHON" - "$out_dir" <<'PY'
 from pathlib import Path
 import sys, pandas as pd
 out=Path(sys.argv[1])
@@ -58,8 +59,8 @@ if cal:
 print('wrote', out/'summary.csv')
 PY
  done
-$ENV/python scripts/build_order_sensitive_summary.py || true
-$ENV/python - <<'PY'
+"$PYTHON" scripts/build_order_sensitive_summary.py || true
+"$PYTHON" - <<'PY'
 from pathlib import Path
 import pandas as pd
 rows=[]

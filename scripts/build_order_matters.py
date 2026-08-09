@@ -16,11 +16,12 @@ import glob, json
 from pathlib import Path
 import numpy as np, pandas as pd
 
-OUT = Path('/home/wangshuchang/fidelityno/results/order_matters')
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / 'results' / 'order_matters'
 OUT.mkdir(parents=True, exist_ok=True)
 
 rows = []
-for f in glob.glob('/home/wangshuchang/fidelityno/results/*_seed*.csv'):
+for f in glob.glob(str(ROOT / 'results' / '*_seed*.csv')):
     if 'calibrated' in f: continue
     rows.append(pd.read_csv(f))
 df = pd.concat(rows, ignore_index=True)

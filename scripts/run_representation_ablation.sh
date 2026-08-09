@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PATH:-}
-cd /home/wangshuchang/fidelityno
-ENV=/home/wangshuchang/miniforge3/envs/fidelityno/bin
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+export PYTHON="${PYTHON:-python}"
 export WANDB_MODE=${WANDB_MODE:-offline}
 export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-1}
 BASE_DATA_DIR=${BASE_DATA_DIR:-data/ablations/representation}
@@ -28,7 +29,7 @@ for rep in $REPRESENTATIONS; do
   mkdir -p "$data_dir"
   if [[ "${FORCE_REGEN_DATA:-0}" == "1" || ! -f "$data_dir/train.npz" || ! -f "$data_dir/manifest.json" ]]; then
     echo "[$(date '+%F %T')] generate representation=${rep}"
-    "$ENV/python" scripts/gen_data.py \
+    "$PYTHON" scripts/gen_data.py \
       --outdir "$data_dir" \
       --n-train "$N_TRAIN" \
       --n-test "$N_TEST" \
@@ -36,7 +37,7 @@ for rep in $REPRESENTATIONS; do
       --holdout-family "$HOLDOUT_FAMILY" \
       --representation "$rep"
   fi
-  CURRENT_REP="$rep" CURRENT_DATA_DIR="$data_dir" "$ENV/python" - <<'CHECKPY'
+  CURRENT_REP="$rep" CURRENT_DATA_DIR="$data_dir" "$PYTHON" - <<'CHECKPY'
 from pathlib import Path
 import numpy as np, os
 rep=os.environ['CURRENT_REP']; root=Path(os.environ['CURRENT_DATA_DIR'])
@@ -51,7 +52,7 @@ CHECKPY
       ckpt="${model}_${rep}_seed${seed}.pt"
       raw_csv="$OUT_DIR/${model}_${rep}_seed${seed}.csv"
       echo "[$(date '+%F %T')] train model=${model} rep=${rep} seed=${seed}"
-      "$ENV/python" train.py \
+      "$PYTHON" train.py \
         model.name="$model" \
         model.head_type=quantile \
         seed="$seed" \
@@ -63,8 +64,8 @@ CHECKPY
         train.ckpt_name="$ckpt" \
         device="$DEVICE"
       echo "[$(date '+%F %T')] eval model=${model} rep=${rep} seed=${seed}"
-      "$ENV/python" eval.py --ckpt "$CKPT_DIR/$ckpt" --data-dir "$data_dir" --out "$raw_csv"
-      CURRENT_REP="$rep" CURRENT_CSV="$raw_csv" "$ENV/python" - <<'TAGPY'
+      "$PYTHON" eval.py --ckpt "$CKPT_DIR/$ckpt" --data-dir "$data_dir" --out "$raw_csv"
+      CURRENT_REP="$rep" CURRENT_CSV="$raw_csv" "$PYTHON" - <<'TAGPY'
 import os, pandas as pd
 p=os.environ['CURRENT_CSV']; rep=os.environ['CURRENT_REP']
 df=pd.read_csv(p); df['representation']=rep; df.to_csv(p,index=False)
@@ -73,7 +74,7 @@ TAGPY
   done
 done
 
-"$ENV/python" - <<'AGGPY'
+"$PYTHON" - <<'AGGPY'
 from pathlib import Path
 import pandas as pd, os
 out=Path(os.environ.get('OUT_DIR','results/ablations/representation'))

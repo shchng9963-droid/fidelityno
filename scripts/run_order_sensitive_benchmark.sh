@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd /home/wangshuchang/fidelityno
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
 
-ENV_BIN=/home/wangshuchang/miniforge3/envs/fidelityno/bin
+export PYTHON="${PYTHON:-python}"
 export WANDB_MODE=${WANDB_MODE:-offline}
 
 BENCH=two_qubit_order_sensitive
@@ -32,7 +33,7 @@ mkdir -p logs "$CKPT_DIR" "$OUT_DIR" "$JOB_LOG_DIR"
 mkdir -p "$DATA_DIR"
 
 echo "[$(date '+%F %T')] generate benchmark dataset bench=$BENCH train=$N_TRAIN calib=$N_CALIB test=$N_TEST"
-$ENV_BIN/python scripts/gen_data.py \
+"$PYTHON" scripts/gen_data.py \
   --outdir "$DATA_DIR" \
   --n-train "$N_TRAIN" \
   --n-calib "$N_CALIB" \
@@ -48,10 +49,10 @@ $ENV_BIN/python scripts/gen_data.py \
   --family-ood-lengths 8,16,24
 
 echo "[$(date '+%F %T')] benchmark=$BENCH analytical baselines"
-$ENV_BIN/python scripts/eval_analytic.py --data-dir "$DATA_DIR" --out "$OUT_DIR/analytic.csv"
+"$PYTHON" scripts/eval_analytic.py --data-dir "$DATA_DIR" --out "$OUT_DIR/analytic.csv"
 
 echo "[$(date '+%F %T')] benchmark=$BENCH MC budgets=$MC_BUDGETS max_eval=$MC_MAX_EVAL"
-$ENV_BIN/python scripts/eval_mc.py --data-dir "$DATA_DIR" --out "$OUT_DIR/mc.csv" --budgets "$MC_BUDGETS" --max-eval "$MC_MAX_EVAL"
+"$PYTHON" scripts/eval_mc.py --data-dir "$DATA_DIR" --out "$OUT_DIR/mc.csv" --budgets "$MC_BUDGETS" --max-eval "$MC_MAX_EVAL"
 
 declare -a GPU_ARRAY
 read -r -a GPU_ARRAY <<< "$GPU_IDS"
@@ -87,9 +88,9 @@ run_job() {
 
   echo "[$(date '+%F %T')] benchmark=$BENCH start model=$model seed=$seed gpu=$gpu log=$job_log"
   (
-    CUDA_VISIBLE_DEVICES="$gpu" PYTHONUNBUFFERED=1 "$ENV_BIN/python" train.py "${train_overrides[@]}"
-    CUDA_VISIBLE_DEVICES="$gpu" PYTHONUNBUFFERED=1 "$ENV_BIN/python" eval.py --ckpt "$CKPT_DIR/$ckpt" --data-dir "$DATA_DIR" --out "$OUT_DIR/${model}_seed${seed}.csv"
-    CUDA_VISIBLE_DEVICES="$gpu" PYTHONUNBUFFERED=1 "$ENV_BIN/python" scripts/eval_calibrated.py --ckpt "$CKPT_DIR/$ckpt" --data-dir "$DATA_DIR" --out "$OUT_DIR/${model}_seed${seed}_calibrated.csv"
+    CUDA_VISIBLE_DEVICES="$gpu" PYTHONUNBUFFERED=1 "$PYTHON" train.py "${train_overrides[@]}"
+    CUDA_VISIBLE_DEVICES="$gpu" PYTHONUNBUFFERED=1 "$PYTHON" eval.py --ckpt "$CKPT_DIR/$ckpt" --data-dir "$DATA_DIR" --out "$OUT_DIR/${model}_seed${seed}.csv"
+    CUDA_VISIBLE_DEVICES="$gpu" PYTHONUNBUFFERED=1 "$PYTHON" scripts/eval_calibrated.py --ckpt "$CKPT_DIR/$ckpt" --data-dir "$DATA_DIR" --out "$OUT_DIR/${model}_seed${seed}_calibrated.csv"
   ) >"$job_log" 2>&1
 }
 
@@ -136,7 +137,7 @@ for ((slot=0; slot<NUM_GPUS; slot++)); do
   fi
 done
 
-$ENV_BIN/python - "$OUT_DIR" <<'PY'
+"$PYTHON" - "$OUT_DIR" <<'PY'
 from pathlib import Path
 import sys
 import pandas as pd
@@ -150,5 +151,5 @@ if cal:
 print('wrote', out / 'summary.csv')
 PY
 
-$ENV_BIN/python scripts/build_order_sensitive_summary.py
+"$PYTHON" scripts/build_order_sensitive_summary.py
 echo "[$(date '+%F %T')] order-sensitive benchmark complete"

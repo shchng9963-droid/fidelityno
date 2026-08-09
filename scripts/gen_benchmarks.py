@@ -1,5 +1,5 @@
 from __future__ import annotations
-import argparse, subprocess
+import argparse, subprocess, sys
 from pathlib import Path
 
 BENCHMARKS = [
@@ -19,7 +19,7 @@ def main():
     ap.add_argument("--representation", default="choi_hermitian", choices=["choi_hermitian", "raw_choi_flat", "ptm"])
     args = ap.parse_args()
     root = Path(args.out_root); root.mkdir(parents=True, exist_ok=True)
-    py = "/home/wangshuchang/miniforge3/envs/fidelityno/bin/python"
+    py = sys.executable
     for name, dim, family, holdout in BENCHMARKS:
         out = root / name
         extra = []

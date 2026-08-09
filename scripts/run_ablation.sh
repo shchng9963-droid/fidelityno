@@ -5,9 +5,9 @@
 # 9 runs total, 2 GPUs
 
 set -e
-cd /home/wangshuchang/fidelityno_prxq
-source /home/wangshuchang/miniforge3/etc/profile.d/conda.sh
-conda activate fidelityno
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+export PYTHON="${PYTHON:-python}"
 
 mkdir -p checkpoints/collision_ablation
 mkdir -p results_prxq/ablation/training_logs
@@ -29,7 +29,7 @@ for spec in "${JOBS[@]}"; do
     read -r tag seed extras <<< "$spec"
     LOG="results_prxq/ablation/training_logs/${tag}_seed${seed}.log"
     CKPT_NAME="${tag}_seed${seed}.pt"
-    CMD="CUDA_VISIBLE_DEVICES=${GPU} python train.py model.name=fidelityno seed=${seed} \
+    CMD="CUDA_VISIBLE_DEVICES=${GPU} ${PYTHON} train.py model.name=fidelityno seed=${seed} \
         data.train=data/collision/train.npz data.val=data/collision/calib.npz \
         train.epochs=80 train.batch_size=256 train.patience=20 \
         train.ckpt_dir=checkpoints/collision_ablation \
