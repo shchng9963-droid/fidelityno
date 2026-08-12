@@ -4,6 +4,9 @@ This repository contains the generators, baselines, sequence models, and tests
 used for the MLST manuscript. The scientific question is estimator selection,
 not whether one neural architecture wins universally.
 
+This public repository contains data-generation and experimental code only.
+The manuscript source and submission files are not distributed here.
+
 ## Important information boundary
 
 For Markovian datasets the input contains the full Choi matrix of every step.
@@ -68,7 +71,7 @@ The audit includes:
 - exact composition on all three two-qubit order-sensitive splits.
 
 All audit CSV files record sample counts, seeds, and cost variables. The
-manuscript-specific public snapshot is tagged `mlst-submission-v2`. An archival
+manuscript-specific public snapshot is tagged `mlst-submission-v4`. An archival
 DOI will be added when the versioned data and result release is deposited.
 
 The headline checkpoints belong under `checkpoints/collision/`. Files with the

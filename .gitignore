@@ -31,3 +31,5 @@ paper/*.bak
 *.bib.bak
 references (1).bib
 submission_NN/
+manuscript/
+scripts/audit_mlst_package.py

@@ -13,7 +13,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "results_mlst"
-OUT = ROOT / "manuscript" / "mlst" / "figures"
+OUT = ROOT / "results_mlst" / "figures"
 
 # FRESH: restrained colour-blind-safe hues, open axes, light guides, and
 # consistent typography.  The palette is also distinguishable in greyscale
@@ -30,24 +30,25 @@ GRID = "#DCE5EA"
 INK = "#25313B"
 
 mpl.rcParams.update({
-    "font.family": "DejaVu Sans",
-    "font.size": 8.0,
-    "axes.labelsize": 8.2,
-    "axes.titlesize": 8.7,
+    "font.family": "sans-serif",
+    "font.sans-serif": ["Arial", "Helvetica", "Liberation Sans", "DejaVu Sans"],
+    "font.size": 9.5,
+    "axes.labelsize": 9.8,
+    "axes.titlesize": 10.2,
     "axes.titleweight": "semibold",
     "axes.labelcolor": INK,
     "axes.edgecolor": INK,
-    "axes.linewidth": 0.75,
-    "xtick.labelsize": 7.4,
-    "ytick.labelsize": 7.4,
+    "axes.linewidth": 0.85,
+    "xtick.labelsize": 8.8,
+    "ytick.labelsize": 8.8,
     "xtick.color": INK,
     "ytick.color": INK,
     "xtick.major.width": 0.65,
     "ytick.major.width": 0.65,
-    "legend.fontsize": 6.9,
+    "legend.fontsize": 8.8,
     "legend.frameon": False,
-    "lines.linewidth": 1.55,
-    "lines.markersize": 4.2,
+    "lines.linewidth": 1.8,
+    "lines.markersize": 5.0,
     "figure.facecolor": "white",
     "axes.facecolor": "white",
     "savefig.facecolor": "white",
@@ -64,7 +65,7 @@ def finish_axis(ax: plt.Axes, *, grid_axis: str = "y") -> None:
 
 
 def panel_title(ax: plt.Axes, text: str) -> None:
-    ax.set_title(text, loc="left", pad=7)
+    ax.set_title(text, loc="left", pad=8)
 
 
 def save(fig: plt.Figure, stem: str) -> None:
@@ -126,7 +127,7 @@ def central_sample_complexity() -> None:
     neural64 = float(agg[(agg["family"] == "BiDir + affine") &
                          (agg["n_calib"] == 64)]["mae"].iloc[0])
 
-    fig, axes = plt.subplots(1, 3, figsize=(7.25, 2.75))
+    fig, axes = plt.subplots(1, 3, figsize=(7.25, 3.35))
     is_collision = exact["path"].str.contains("collision")
     for flag, marker, colour, label in [
         (False, "o", TEAL, "Markovian, exact target"),
@@ -134,7 +135,7 @@ def central_sample_complexity() -> None:
     ]:
         part = exact[is_collision == flag]
         axes[0].scatter(part["latency_ms_per_seq_median"], part["mae_F_e"],
-                        s=31, marker=marker, color=colour, edgecolor="white",
+                        s=42, marker=marker, color=colour, edgecolor="white",
                         linewidth=0.5, label=label, zorder=3)
     axes[0].set_yscale("log")
     axes[0].set_xlabel("CPU latency (ms/sequence)")
@@ -158,9 +159,9 @@ def central_sample_complexity() -> None:
     finish_axis(axes[2], grid_axis="both")
 
     for ax, cols in zip(axes, [1, 2, 1]):
-        ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.27), ncol=cols,
-                  handlelength=1.8, columnspacing=0.9)
-    fig.subplots_adjust(left=0.075, right=0.995, top=0.88, bottom=0.31, wspace=0.42)
+        ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.29), ncol=cols,
+                  handlelength=1.7, columnspacing=0.8, labelspacing=0.35)
+    fig.subplots_adjust(left=0.08, right=0.995, top=0.88, bottom=0.34, wspace=0.48)
     save(fig, "central_sample_complexity")
 
 
@@ -179,7 +180,7 @@ def identifiability_hybrid() -> None:
                   (table.prior == "bidir_affine") &
                   (table.calibration == "finite_64shot_labels")].iloc[0]
 
-    fig, axes = plt.subplots(1, 3, figsize=(7.25, 3.05),
+    fig, axes = plt.subplots(1, 3, figsize=(7.25, 3.45),
                              gridspec_kw={"width_ratios": [1.02, 0.95, 1.13]})
     order = np.argsort(diameter)
     chosen = order[np.linspace(0, len(order) - 1, 15).astype(int)]
@@ -189,7 +190,7 @@ def identifiability_hybrid() -> None:
                  label="pointwise median")
     axes[0].set(xlabel=r"bath retention $\eta$", ylabel=r"$F_{\mathrm{e}}$",
                 xlim=(eta.min(), eta.max()), ylim=(0, 1))
-    panel_title(axes[0], "(a) Fixed input, hidden memory")
+    panel_title(axes[0], "(a) Hidden memory")
     axes[0].legend(loc="lower left", handlelength=2.0)
     finish_axis(axes[0])
 
@@ -198,7 +199,7 @@ def identifiability_hybrid() -> None:
                  edgecolor="white", linewidth=0.35)
     axes[1].axvline(diameter.mean(), color=CORAL, linewidth=1.65)
     axes[1].set(xlabel=r"ambiguity diameter $\Delta_{\phi}(x)$", ylabel="input groups")
-    panel_title(axes[1], "(b) Ambiguity across inputs")
+    panel_title(axes[1], "(b) Input ambiguity")
     finish_axis(axes[1])
 
     axes[2].errorbar(dfe.per_query_shots, dfe.mae_mean, yerr=dfe.mae_std,
@@ -215,19 +216,19 @@ def identifiability_hybrid() -> None:
     axes[2].set_xscale("log", base=2)
     axes[2].set_xticks([4, 8, 16, 32, 64, 128], labels=[4, 8, 16, 32, 64, 128])
     axes[2].set(xlabel="projective shots per query", ylabel="MAE", ylim=(0.035, 0.295))
-    panel_title(axes[2], "(c) Same-query measurement")
+    panel_title(axes[2], "(c) Same-query fusion")
     finish_axis(axes[2])
 
     handles, labels = axes[2].get_legend_handles_labels()
-    fig.legend(handles, labels, loc="lower center", bbox_to_anchor=(0.78, 0.005),
-               ncol=2, columnspacing=0.9, handlelength=2.0)
-    fig.subplots_adjust(left=0.075, right=0.995, top=0.88, bottom=0.25, wspace=0.43)
+    fig.legend(handles, labels, loc="lower center", bbox_to_anchor=(0.77, 0.005),
+               ncol=2, columnspacing=0.75, handlelength=1.8, labelspacing=0.35)
+    fig.subplots_adjust(left=0.08, right=0.995, top=0.88, bottom=0.28, wspace=0.48)
     save(fig, "identifiability_hybrid")
 
 
 def break_even() -> None:
     q = np.arange(0, 701)
-    fig, ax = plt.subplots(figsize=(4.9, 3.05))
+    fig, ax = plt.subplots(figsize=(5.2, 3.65))
     lines = [
         (64 * q, CORAL, "-", "DFE, 64 shots/query (MAE 0.0641)"),
         (6144 + 32 * q, TEAL, "-", "hybrid, 32 shots/query (MAE 0.0657)"),
@@ -238,13 +239,13 @@ def break_even() -> None:
         ax.plot(q, y, color=colour, linestyle=style, label=label)
     for x in [192, 256]:
         ax.axvline(x, color=SLATE, linewidth=0.9, linestyle=":")
-        ax.text(x, 2100, str(x), ha="center", va="bottom", color=SLATE, fontsize=7.0)
+        ax.text(x, 2100, str(x), ha="center", va="bottom", color=SLATE, fontsize=9.0)
     ax.set(xlabel="deployment queries", ylabel="cumulative projective shots",
            xlim=(0, 700), ylim=(0, 68000))
     finish_axis(ax, grid_axis="both")
     ax.legend(loc="lower center", bbox_to_anchor=(0.5, 1.01), ncol=2,
-              columnspacing=1.0, handlelength=2.2)
-    fig.subplots_adjust(left=0.14, right=0.985, bottom=0.17, top=0.78)
+              columnspacing=0.9, handlelength=2.0, labelspacing=0.35)
+    fig.subplots_adjust(left=0.15, right=0.985, bottom=0.17, top=0.76)
     save(fig, "break_even_queries")
 
 
@@ -256,7 +257,7 @@ def eta_sweep() -> None:
         "fidelityno_raw": (CORAL, "o", "FidelityFormer, raw"),
         "fidelityno_cal": (TEAL, "s", "FidelityFormer + cal"),
     }
-    fig, ax = plt.subplots(figsize=(4.6, 3.1))
+    fig, ax = plt.subplots(figsize=(4.9, 3.65))
     for model, (colour, marker, label) in styles.items():
         part = data[data.model == model].sort_values("eta")
         ax.plot(part.eta, part.mae_mean, color=colour, marker=marker, label=label,
@@ -268,17 +269,17 @@ def eta_sweep() -> None:
     ax.set(xlabel=r"bath retention $\eta$", ylabel="MAE", xlim=(-0.02, 1.01))
     finish_axis(ax, grid_axis="both")
     ax.legend(loc="lower center", bbox_to_anchor=(0.5, 1.01), ncol=2,
-              columnspacing=1.1, handlelength=2.0)
-    fig.subplots_adjust(left=0.14, right=0.985, bottom=0.17, top=0.79)
+              columnspacing=0.9, handlelength=1.8, labelspacing=0.35)
+    fig.subplots_adjust(left=0.15, right=0.985, bottom=0.17, top=0.76)
     save(fig, "eta_sweep")
 
 
 def calibration_sweep() -> None:
-    fig, ax = plt.subplots(figsize=(4.9, 3.45))
+    fig, ax = plt.subplots(figsize=(5.2, 3.95))
     plot_label_budget(ax, label_budget_aggregate())
     ax.legend(loc="lower center", bbox_to_anchor=(0.5, 1.01), ncol=2,
-              columnspacing=1.0, handlelength=2.1)
-    fig.subplots_adjust(left=0.16, right=0.985, bottom=0.16, top=0.75)
+              columnspacing=0.9, handlelength=1.9, labelspacing=0.35)
+    fig.subplots_adjust(left=0.17, right=0.985, bottom=0.17, top=0.73)
     save(fig, "calibration_sweep")
 
 
@@ -301,18 +302,18 @@ def calibration_ece() -> None:
             colours.append(BLUE)
         else:
             colours.append(TEAL)
-    fig, ax = plt.subplots(figsize=(5.25, 3.55))
+    fig, ax = plt.subplots(figsize=(5.5, 4.1))
     y = np.arange(len(data))
     ax.barh(y, data.ece_mean, xerr=data.ece_std, color=colours, alpha=0.9,
             edgecolor="white", linewidth=0.45, error_kw={"ecolor": INK, "elinewidth": 0.7, "capsize": 1.8})
     ax.set_yticks(y, labels=[labels[m] for m in data.model])
     ax.axvline(0.05, color=CORAL, linestyle="--", linewidth=1.15)
     ax.text(0.05, 1.01, "ECE = 0.05", color=CORAL, ha="center", va="bottom",
-            transform=ax.get_xaxis_transform(), fontsize=7.0)
+            transform=ax.get_xaxis_transform(), fontsize=9.0)
     ax.set_xlabel("expected calibration error (ECE)")
     ax.set_xlim(0, 0.53)
     finish_axis(ax, grid_axis="x")
-    fig.subplots_adjust(left=0.32, right=0.98, bottom=0.15, top=0.94)
+    fig.subplots_adjust(left=0.34, right=0.98, bottom=0.15, top=0.93)
     save(fig, "calibration_ece")
 
 
@@ -341,7 +342,7 @@ def reliability(split: str, stem: str, title: str) -> None:
     agg = (raw.groupby(["model", "nominal_level"])
            .agg(mean=("empirical_coverage", "mean"), std=("empirical_coverage", "std"))
            .reset_index())
-    fig, ax = plt.subplots(figsize=(3.65, 3.35))
+    fig, ax = plt.subplots(figsize=(3.9, 3.85))
     ax.plot([0, 1], [0, 1], color=SLATE, linestyle="--", linewidth=1.0, label="ideal")
     for model in REL_COLOURS:
         part = agg[agg.model == model].sort_values("nominal_level")
@@ -359,8 +360,8 @@ def reliability(split: str, stem: str, title: str) -> None:
     panel_title(ax, title)
     finish_axis(ax, grid_axis="both")
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.20), ncol=2,
-              columnspacing=0.8, handlelength=1.8)
-    fig.subplots_adjust(left=0.17, right=0.98, bottom=0.34, top=0.88)
+              columnspacing=0.7, handlelength=1.7, labelspacing=0.35)
+    fig.subplots_adjust(left=0.18, right=0.98, bottom=0.35, top=0.88)
     save(fig, stem)
 
 
