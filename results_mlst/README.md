@@ -12,10 +12,10 @@ Key outputs:
 - `dfe_family_ood_low_shot.csv`: 4--1,024 total-shot crossover.
 - `noisy_ood_calibration.csv`: five measurement repeats for finite-shot labels.
 - `noisy_ood_calibration_summary.csv`: per-checkpoint summary.
-- `figures/`: plots generated only from the CSV files above.
-
-The collision filename `family_ood` is retained for compatibility and means a
-memory-strength shift in eta, not a different functional channel family.
+- `eta_sweep_aggregate.csv`: bath-retention sweep used in the decision-rule figure.
+- `calibration_ece_summary.csv`: model-wise ID calibration-error summary.
+- `reliability_curves.csv`: seed-level reliability curves exported from the checkpoints.
+- `figures/`: earlier diagnostic plots retained with the machine-readable results.
 
 
 ## Information-limited collision audit and measurement-conditioned estimator
@@ -49,7 +49,8 @@ python scripts/eval_measurement_conditioned_hybrid.py \
   --ckpts <five-checkpoints> --budgets 4,8,16,32,48,64,96,128 \
   --n-calib 64 --n-test 4032 --label-shots 64 --repeats 5 \
   --out results_mlst/measurement_conditioned_hybrid_independent_rng.csv
-python scripts/plot_novelty_results.py
+python scripts/export_reliability_curves.py
+python scripts/build_fresh_submission_figures.py
 ```
 
 The checkpoint arguments must point to the five seed-controlled bidirectional

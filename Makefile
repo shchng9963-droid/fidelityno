@@ -47,4 +47,4 @@ mlst-enhanced-audit:
 	$(PYTHON) scripts/eval_exact_composition.py --data $(ORDER_SENSITIVE_DATA)/id_test.npz $(ORDER_SENSITIVE_DATA)/length_ood.npz $(ORDER_SENSITIVE_DATA)/family_ood.npz --repeats 5 --warmup 1 --out $(RESULTS_MLST)/exact_composition_order_sensitive.csv
 
 mlst-figures:
-	$(PYTHON) scripts/build_mlst_revision_figures.py --results $(RESULTS_MLST) --outdir $(RESULTS_MLST)/figures
+	$(PYTHON) scripts/build_fresh_submission_figures.py

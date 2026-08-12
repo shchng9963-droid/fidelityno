@@ -62,13 +62,13 @@ Scientific machine-learning estimators should be assessed against the informatio
 \section{Introduction}
 \label{sec:intro}
 
-The variables available at inference determine which scientific estimator is appropriate. A deterministic calculation is suitable when those variables determine the target. Partial observations leave uncertainty that requires an additional measurement or a distributional assumption. Composed quantum channels make this issue explicit because per-step descriptions, classical simulators, and measurements of the deployed process provide different information.
+The variables available at inference determine which scientific estimator is appropriate. A deterministic calculation is suitable when they determine the target. Partial observations require either additional measurements or a distributional assumption. Composed quantum channels make this distinction explicit because per-step descriptions and measurements of the deployed process contain different information.
 
 We study the end-to-end entanglement fidelity $\Fe$ of a channel sequence. This quantity appears in repeater and purification design~\cite{repeater_review,dur2007entanglement}, NISQ circuit validation~\cite{nisq_validation}, and fidelity-based screening for quantum error correction~\cite{qec_review}. Each estimator uses a different source of information. Products of marginal fidelities and Kraus-path Monte Carlo use per-step channel descriptions. Exact superoperator composition applies when these descriptions specify a Markovian process. Direct Fidelity Estimation (DFE)~\cite{flammia_liu_2011} measures the deployed composed channel. A learned sequence model can amortise computation or prior characterisation. Its accuracy remains subject to the information contained in its inputs.
 
-We examine this information constraint with a non-Markovian collision process. The inputs are reset-bath marginal Choi matrices. The target comes from joint propagation of the system and bath, and the input omits the bath-retention variable $\eta$. Counterfactual replay keeps every supplied input fixed and varies $\eta$. The resulting target values define a set of physically valid answers for the same observed input. Their spread gives estimator-independent lower bounds that can be compared with trained predictors. We repeat the audit with an exchange-coupled model whose interaction and bath terms do not commute. This checks whether the ambiguity is specific to the original dephasing construction.
+We examine this constraint with a non-Markovian collision process. The inputs are reset-bath marginal Choi matrices, while the target comes from joint system-bath propagation and depends on the omitted retention variable $\eta$. Counterfactual replay fixes every input and varies $\eta$. The resulting target spread gives estimator-independent error bounds. An exchange-coupled audit with noncommuting interaction and bath terms tests whether the ambiguity extends beyond the original dephasing construction.
 
-The same analysis motivates a measurement-conditioned estimator. It forms a constrained convex combination of the marginal prediction and a low-shot DFE estimate from the same query. The fitted weight favours the prior when the pilot has high variance and shifts toward the measurement as the shot budget grows. Calibration labels, calibration pilots, and test measurements use independent binomial outcomes. The cost analysis includes every calibration shot. We generate a fresh OOD dataset with separate random streams for the collision parameters and $\eta$. We also test symmetric readout errors and a two-stage allocation rule. These controls probe random-number coupling, measurement noise, and sensitivity to nonuniform shot allocation.
+The analysis motivates a constrained convex combination of the marginal prediction and a low-shot DFE estimate from the same query. The fitted weight shifts from the prior toward the measurement as the shot budget grows. Calibration labels, pilots, and tests use independent outcomes, and the cost analysis counts every shot. A fresh OOD dataset separates the random streams for collision parameters and $\eta$. We also test symmetric readout errors and two-stage shot allocation.
 
 The benchmark includes strong deterministic and sampling controls. Exact composition gives the best result in the hardware-like Markovian regime. Classical Monte Carlo gives the best result in the two-qubit regime when a large sampling budget is available. In the collision regime, DFE enumerates all four Pauli settings and avoids the extra variance from sampling settings with replacement. The learned estimators are assessed within the regimes left open by these controls.
 
@@ -129,7 +129,7 @@ where $p_\theta$ is a calibrated distribution over $\Fe \in [0,1]$, implemented 
 \subsection{Representation ambiguity and estimator-independent limits}
 \label{sec:ambiguity}
 
-The central issue can be stated without reference to a particular model. Two physical instances may produce exactly the same estimator input while differing in a hidden variable. If their true fidelities differ, an estimator that sees only the shared input must return the same prediction for both. The separation between the two targets therefore creates an error floor before any model is trained.
+Two physical instances may produce the same estimator input while differing in a hidden variable. If their fidelities differ, every estimator using only that input has an error floor before training.
 
 We formalise this observation as follows. Let $z$ denote a complete physical instance, $F(z)\in[0,1]$ its target fidelity, and $x=\phi(z)$ the representation supplied to an estimator. The indistinguishable set
 $\mathcal{A}_{\phi}(x)=\{z:\phi(z)=x\}$, also called a fibre, contains all physical instances that produce the same input $x$. Define the range of possible targets within this set as
@@ -142,7 +142,7 @@ We call $\Delta_{\phi}(x)$ the representation ambiguity diameter. For any determ
 \sup_{z\in\mathcal{A}_{\phi}(x)} |h(x)-F(z)|\geq \tfrac{1}{2}\Delta_{\phi}(x).
 \label{eq:minimax_floor}
 \end{equation}
-To see why, choose two instances whose targets lie near the two ends of the range. The prediction $h(x)$ is shared by both instances. The triangle inequality then gives $\Delta_{\phi}(x)\leq |F(z)-h(x)|+|h(x)-F(z')|$, so at least one error must be half the range or larger. This is a worst-case statement for each observed input. To obtain an average MAE floor, we must also specify how likely the possible targets are. Under a conditional distribution $p(F\mid x)$, the conditional median minimises MAE and gives the Bayes risk
+For targets near the two ends of the range, the triangle inequality gives $\Delta_{\phi}(x)\leq |F(z)-h(x)|+|h(x)-F(z')|$, so one error is at least half the range. This bound is pointwise and worst-case. Under a conditional distribution $p(F\mid x)$, the median minimises MAE and gives the Bayes risk
 \begin{equation}
 R^{\star}_{\phi}=\mathbb{E}_{x}\mathbb{E}_{F\mid x}
 \bigl[|F-\mathop{\mathrm{median}}(F\mid x)|\bigr].
@@ -156,10 +156,10 @@ We evaluate the estimators in three regimes spanning more than two orders of mag
 
 \begin{description}[itemsep=3pt,topsep=2pt,leftmargin=*]
 \item[(R1) Device regime ($d{=}2$, $\eps \approx 10^{-3}$).]
-Single-qubit channels are sampled from parametric noise models spanning amplitude damping, phase damping, depolarising, and Lindblad families. The numerical ranges are centred near a per-channel infidelity of $\eps \approx 10^{-3}$ and define a synthetic low-noise benchmark. Qiskit provides the channel representations and simulation tools used in this construction~\cite{ibm_fake_backends}. The \texttt{family\_ood} split holds out the Pauli-channel family entirely.
+Single-qubit channels are sampled from parametric noise models spanning amplitude damping, phase damping, depolarising, and Lindblad families. The numerical ranges are centred near a per-channel infidelity of $\eps \approx 10^{-3}$ and define a synthetic low-noise benchmark. Qiskit provides the channel representations and simulation tools used in this construction~\cite{ibm_fake_backends}. The noise-family OOD split holds out the Pauli-channel family entirely.
 
 \item[(R2) Non-Markovian collision regime ($d{=}2$, $\eps \approx 0.4$).]
-The system and a bath qubit initially in $|+\rangle$ interact through step-dependent commuting $ZZ$ Hamiltonians. After each collision, the joint state is retained with probability $\eta$. The bath is reset in the remaining cases. Training, calibration, and ID data use $\eta\in[0,0.7]$. The legacy \texttt{family\_ood} file contains the stronger interval $\eta\in[0.85,0.99]$. This split changes memory strength while keeping the collision family fixed.
+The system and a bath qubit initially in $|+\rangle$ interact through step-dependent commuting $ZZ$ Hamiltonians. After each collision, the joint state is retained with probability $\eta$. The bath is reset in the remaining cases. Training, calibration, and ID data use $\eta\in[0,0.7]$, while the high-memory OOD split uses $\eta\in[0.85,0.99]$. This split changes memory strength while keeping the collision family fixed.
 
 An independent representation audit replaces this interaction with excitation exchange and uses a diagonal bath state. Its exchange and local bath-precession terms do not commute. This family is used to test the ambiguity claim and is not used to train or select the neural model.
 
@@ -171,9 +171,9 @@ The three regimes answer different questions. R1 is a negative control in which 
 
 \subsection{Splits and metrics}
 
-Each regime contains \texttt{train}, \texttt{calib}, \texttt{id\_test}, \texttt{length\_ood}, and distribution-shift splits. The first three use lengths in $\{2,4,8,16\}$. The length split uses $\{24,32,48\}$. R1 and R3 hold out a noise family. R2 holds out a high-$\eta$ interval and keeps the legacy filename \texttt{family\_ood} for code compatibility.
+Each regime contains training, calibration, ID test, length-OOD, and distribution-shift splits. The first three use lengths in $\{2,4,8,16\}$. The length-OOD split uses $\{24,32,48\}$. R1 and R3 hold out a noise family. R2 holds out the high-memory interval $\eta\in[0.85,0.99]$.
 
-The main metric is pooled MAE on $\Fe$ across five independent seed-controlled splits. We also report MAE after post-hoc affine recalibration, as described in \cref{app:recalibration}, and count the quantum shots used by measurement-based estimators. The supplementary material reports CRPS, expected calibration error (ECE), and quantile coverage. Tables give means over five seeds unless specified otherwise. Standard deviations accompany the neural results, and the appendix lists the recalibration coefficients for each seed.
+The main metric is pooled MAE on $\Fe$ across five independent seed-controlled splits. We also report post-hoc affine recalibration as described in \ref{app:recalibration}, and count quantum shots for measurement-based estimators. The supplementary material reports CRPS, expected calibration error (ECE), and quantile coverage. Tables give five-seed means unless specified otherwise, with standard deviations for neural results.
 %%%% END flattened: sections/02_setup
 
 
@@ -185,11 +185,11 @@ The model below supplies the marginal prediction used both as a zero-shot estima
 
 \subsection{Choi-aware per-channel encoder}
 
-Each channel $\Lset_i$ enters the model through its Choi matrix $\Choi(\Lset_i) \in \mathbb{C}^{d^2 \times d^2}$. This representation preserves positivity and the partial-trace constraint. We Hermitian-symmetrise $\Choi(\Lset_i) \to \tfrac{1}{2}\bigl(\Choi(\Lset_i) + \Choi(\Lset_i)^{\dagger}\bigr)$ and separate the real and imaginary parts. The resulting feature has $2d^4$ real values per channel. It contains 32 values for $d{=}2$ and 512 for $d{=}4$. The imaginary block is anti-symmetric and includes redundant entries. We keep this layout for a simple implementation. A two-layer multilayer perceptron with width $D=256$ and GELU activations maps the feature to a channel token $z_i \in \mathbb{R}^{D}$. The PTM encoder in Supplementary Sec.~S4 uses 16 real values per single-qubit channel. Its pooled MAE differs from the Choi encoder by less than $0.003$ on every collision split.
+Each channel $\Lset_i$ enters through its Choi matrix $\Choi(\Lset_i) \in \mathbb{C}^{d^2 \times d^2}$. We Hermitian-symmetrise it and separate the real and imaginary parts, giving $2d^4$ real values per channel. A two-layer MLP with width $D=256$ and GELU activations maps this feature to a token $z_i \in \mathbb{R}^{D}$. The PTM encoder in Supplementary Sec.~S4 uses 16 values per single-qubit channel and differs in pooled collision MAE by less than $0.003$.
 
 \subsection{Causal transformer backbone}
 
-A depth-$6$ causal transformer processes the channel tokens $z_1, \ldots, z_n$. It uses eight attention heads, model width 256, a fourfold feed-forward expansion, and rotary positional encoding. Causal masking prevents the token at position $i$ from attending to later channels. This choice gives more stable length-OOD behaviour. Bidirectional attention performs slightly better on $\texttt{id\_test}$ and gives similar results after OOD calibration, as reported in \cref{sec:experiments}. We use causal masking as a stable default that follows the order of channel composition.
+A depth-$6$ causal transformer processes $z_1, \ldots, z_n$ with eight attention heads, width 256, a fourfold feed-forward expansion, and rotary positions. Causal masking improves length-OOD stability. Bidirectional attention performs slightly better on ID and similarly after OOD calibration, as reported in \cref{sec:experiments}.
 
 \subsection{Quantile distribution head}
 
@@ -214,9 +214,9 @@ Distribution shift between training and OOD splits manifests as a near-affine bi
 \end{equation}
 Ordinary least squares fits $a$ and $b$ on a labelled OOD calibration set that is disjoint from the test set. We use $N_{\mathrm{cal}}=64$, where the calibration-size sweep begins to saturate. The supplementary material reports sizes down to eight. Test instances have no labels at inference. The labelled calibration set is collected once before deployment. Synthetic labels come from exact Choi composition in the Markovian regimes and joint propagation of the system and bath in the collision regime. A hardware deployment would obtain these labels from DFE, tomography, or another characterisation procedure. The corresponding cost is paid offline and amortised over later queries.
 
-We choose a linear correction because the residual after fitting $a$ and $b$ is small relative to the OOD bias, as shown in \cref{app:recalibration}. The same correction is applied to every predicted quantile.
+The fitted residual is small relative to the OOD bias, as shown in \ref{app:recalibration}. The same correction is applied to every predicted quantile.
 
-Across five seeds, the fitted slopes have a standard deviation near $0.09$. The post-calibration MAE has a standard deviation of $1.3\times10^{-3}$. Slope and intercept co-vary, so different affine coefficients produce similar calibrated errors. The detailed coefficients appear in \cref{app:recalibration}.
+Across five seeds, the slope standard deviation is near $0.09$ and the post-calibration MAE standard deviation is $1.3\times10^{-3}$. The correlated coefficients appear in \ref{app:recalibration}.
 %%%% END flattened: sections/03_architecture
 
 
@@ -323,7 +323,7 @@ We present the results by operating regime. \Cref{fig:central} gives the cost-ac
 \small
 \begin{tabular}{lccc}
 \toprule
-Method & \texttt{id\_test} & \texttt{length\_ood} & \texttt{family\_ood} \\
+Method & ID & Length OOD & Noise-family OOD \\
 \midrule
 \multicolumn{4}{l}{\emph{Deterministic and analytic, zero shots}} \\
 Exact composition & $\bm{2.4\!\times\!10^{-8}}$ & $\bm{4.2\!\times\!10^{-8}}$ & $\bm{3.8\!\times\!10^{-8}}$ \\
@@ -428,9 +428,9 @@ The bidirectional transformer gives the strongest marginal prior in the collisio
 
 R3 is Markovian and supplies complete per-step Choi matrices. Exact composition therefore remains the reference estimator. It reaches the $10^{-8}$ numerical floor on every split and takes $0.51$--$0.83$ ms per sequence on the test server. This result fixes the interpretation of R3. The remaining rows compare approximate estimators for cases where exact composition is deliberately unavailable or its input is not exposed to the estimator.
 
-Among these approximate methods, \fidno{}+cal improves over the product approximation by factors of $1.9$, $2.3$, and $1.8$ on \texttt{id\_test}, \texttt{length\_ood}, and \texttt{family\_ood}. Order-aware neural models also outperform the two closed-form approximations. They do not improve on exact composition.
+Among these approximate methods, \fidno{}+cal improves over the product approximation by factors of $1.9$, $2.3$, and $1.8$ on the ID, length-OOD, and noise-family-OOD splits. Order-aware neural models also outperform the two closed-form approximations. They do not improve on exact composition.
 
-Classical Monte Carlo gives lower error than the learned models when a sufficient marginal-simulation budget is available. MC with $K=100$ reaches MAE $0.021$ on \texttt{id\_test}, and $K=1000$ reduces it to $0.007$. These rows map the cost-accuracy tradeoff among approximate methods. They do not replace the deterministic result when full Markovian Choi matrices are available.
+Classical Monte Carlo gives lower error than the learned models when a sufficient marginal-simulation budget is available. MC with $K=100$ reaches MAE $0.021$ on the ID split, and $K=1000$ reduces it to $0.007$. These rows map the cost-accuracy tradeoff among approximate methods. They do not replace the deterministic result when full Markovian Choi matrices are available.
 
 \begin{table}[h]
 \centering
@@ -438,7 +438,7 @@ Classical Monte Carlo gives lower error than the learned models when a sufficien
 \label{tab:d4}
 \begin{tabular}{lccc}
 \toprule
-Method & \texttt{id\_test} & \texttt{length\_ood} & \texttt{family\_ood} \\
+Method & ID & Length OOD & Noise-family OOD \\
 \midrule
 Exact composition  & $1.4\!\times\!10^{-8}$ & $8.3\!\times\!10^{-9}$ & $1.1\!\times\!10^{-8}$ \\
 \midrule
@@ -460,10 +460,10 @@ MC, $K{=}1000$     & $0.007$ & $0.007$ & $0.007$ \\
 \end{table}
 
 \paragraph*{Higher-dimensional regime pattern.}
-The $d=4$ results repeat the main negative control at a larger dimension. Complete Markovian inputs favour direct composition. If only approximate estimators are permitted, richer order-sensitive families increase the error of product and bound-based formulas. Monte Carlo can then outperform the learned models when its sampling budget is affordable.
+The $d=4$ results repeat the negative control at a larger dimension: complete Markovian inputs favour direct composition, while Monte Carlo can outperform learned approximations when its sampling budget is affordable.
 
 \paragraph*{GNN under family shift.}
-The \textsc{generic\_gnn} model gives the lowest \texttt{family\_ood} MAE in this regime. Its MAE is $0.039$, compared with $0.051$ for \fidno{}. This single split suggests that a path-graph inductive bias can help under some family shifts. Broader architectural comparisons require additional shifts.
+The \textsc{generic\_gnn} model gives the lowest noise-family-OOD MAE in this regime. Its MAE is $0.039$, compared with $0.051$ for \fidno{}. This single split suggests that a path-graph inductive bias can help under some family shifts. Broader architectural comparisons require additional shifts.
 %%%% END flattened: sections/05_experiments
 
 \subsection{Sample-complexity crossover}
@@ -507,7 +507,7 @@ MC, $K{=}1000$ & $298.9\pm4.6$ \\
 \subsection{Distribution calibration: ECE and CRPS}
 \label{sec:exp_calibration}
 
-\Cref{tab:cal_metrics} reports distributional metrics for the collision regime before the labelled-OOD affine correction in \cref{tab:hybrid}. The MAE column contains pre-affine point errors and agrees with the raw \fidno{} result up to rounding. ECE and CRPS evaluate the conformally adjusted quantiles. On the in-distribution split, ECE is $0.0042$ and CRPS is $0.018$. The correction fitted on ID transfers poorly to the shifted splits. ECE rises to $0.39$ on length OOD and $0.50$ on family OOD. CRPS follows the same deterioration. Labelled-OOD affine recalibration corrects the mean prediction used in \cref{tab:hybrid}. The full predictive distribution still requires an OOD-specific calibration method.
+\Cref{tab:cal_metrics} reports distributional metrics for the collision regime before the labelled-OOD affine correction in \cref{tab:hybrid}. The MAE column contains pre-affine point errors and agrees with the raw \fidno{} result up to rounding. ECE and CRPS evaluate the conformally adjusted quantiles. On the ID split, ECE is $0.0042$ and CRPS is $0.018$. The correction fitted on ID transfers poorly to the shifted splits. ECE rises to $0.39$ on length OOD and $0.50$ on high-memory OOD. CRPS follows the same deterioration. Labelled-OOD affine recalibration corrects the mean prediction used in \cref{tab:hybrid}. The full predictive distribution still requires an OOD-specific calibration method.
 
 \begin{table}[h]
 \centering
@@ -517,9 +517,9 @@ MC, $K{=}1000$ & $298.9\pm4.6$ \\
 \toprule
 Split & MAE & ECE & CRPS \\
 \midrule
-\texttt{id\_test}      & $0.025$ & $\bm{0.004}$ & $0.018$ \\
-\texttt{length\_ood}   & $0.138$ & $0.394$ & $0.119$ \\
-\texttt{family\_ood}   & $0.383$ & $0.500$ & $0.359$ \\
+ID              & $0.025$ & $\bm{0.004}$ & $0.018$ \\
+Length OOD      & $0.138$ & $0.394$ & $0.119$ \\
+High-memory OOD & $0.383$ & $0.500$ & $0.359$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -558,7 +558,7 @@ In the device regime R1, $\eps\approx10^{-3}$. At $L=16$, the diagnostic scale i
 \paragraph*{Large $\eps$: bath-mediated noise.}
 In the collision regime R2, $\eps\approx0.4$. At $L=16$, the diagnostic scale exceeds the fidelity range and lies outside the perturbative regime. Marginal factorisation should be tested directly in this case. Bath-mediated correlations dominate the errors of marginal estimators in our data. A learned surrogate can provide repeated estimates after labelled-OOD recalibration. Stratified DFE reaches similar MAE with about 32 shots per query. The calibrated surrogate serves deployments that require zero-shot queries after an offline characterisation stage.
 
-We use $\eps^2L^2$ as a screening diagnostic. Small values indicate little room to improve on marginal estimators. Large values indicate that correlated alternatives should be included in the benchmark. The expression provides an order-of-magnitude signal outside the perturbative regime.
+We use $\eps^2L^2$ only as a screening diagnostic: large values call for correlated alternatives and direct tests of marginal factorisation.
 
 \subsection{Bath-retention sweep}
 
@@ -605,13 +605,13 @@ Strong memory without labels or shots
 \end{tabular}
 \end{table}
 
-The non-trivial cases are the middle and lower rows, where the deployment channel is correlated or non-Markovian. The choice is then a tradeoff among classical simulation cost, per-query quantum measurement cost, and one-time labelled characterisation cost. In our experiments, measurement-only DFE is the clean default when its required shot count is affordable. A marginal-only prior is justified when deployment measurements are prohibited and the shift has been characterised. Between them, the conditioned hybrid reduces the shots needed for a target MAE by using the learned predictor as a shrinkage prior. It becomes cost-effective after the finite calibration expense is amortised over sufficiently many queries.
+For correlated or non-Markovian channels, the choice balances simulation, per-query measurement, and one-time characterisation costs. DFE is the default when its shot count is affordable. A marginal prior suits measurement-free deployment after the shift is characterised. The conditioned hybrid occupies the middle ground and becomes cost-effective once calibration is amortised.
 
 The uncalibrated BiDir predictions preserve broad ordering on the independent-memory split, with Spearman $\rho=0.710\pm0.002$ and Kendall $\tau=0.534\pm0.002$ across five checkpoints. The predicted highest-fidelity 10\% set overlaps the true set by $0.858\pm0.004$. The lowest-fidelity 10\% overlap is only $0.144\pm0.012$, close to the random baseline of $0.10$. The raw model can therefore support high-fidelity candidate selection in this benchmark. The same evidence does not support low-fidelity failure triage.
 
 \subsection{QEC compatibility}
 
-Within QEC workflows, \fidno{} serves as a proxy for repeated queries of composed-channel fidelity. Decoder performance, thresholds, and logical error rates remain separate targets that require decoder-level simulation or experiments.
+Within QEC workflows, \fidno{} provides a proxy for repeated composed-channel fidelity queries. Decoder performance, thresholds, and logical error rates require separate evaluation.
 
 \begin{description}[itemsep=2pt,topsep=2pt,leftmargin=*]
 \item[Logical-channel quality estimation.]
@@ -621,7 +621,7 @@ During code design, a logical-channel fidelity proxy can screen code patches or 
 At higher infidelity, as in the collision regime, the practical question is often whether to keep, abort, or re-purify a noisy memory or partially purified state. In such settings, \fidno{}+cal can provide repeated fidelity estimates without consuming experimental shots, provided the deployment regime is fixed and labelled calibration data can be obtained offline.
 \end{description}
 
-In both cases, the surrogate supplies a preliminary fidelity estimate within a larger QEC workflow. Its practical value depends on whether repeated simulation or measurement costs exceed the cost of the offline labelled set.
+Its value depends on whether repeated simulation or measurement costs exceed the offline labelled-set cost.
 
 \subsection{Scope and caveats}
 
@@ -629,7 +629,7 @@ Our claims are subject to five limitations.
 
 \begin{enumerate}[itemsep=2pt,topsep=2pt,leftmargin=*]
 \item \emph{Labelled-OOD calibration requires labels.}
-The headline configuration uses $N_{\mathrm{cal}}=64$, and the supplementary sweep includes sizes down to eight. These labels come from exact simulation, an offline characterisation campaign, or another labelled source. Their quantum or classical cost is paid once and amortised over later queries. Section~\ref{app:recalibration} discusses extensions based on unlabelled distribution matching.
+The headline configuration uses $N_{\mathrm{cal}}=64$, with supplementary results down to eight. Labels may come from simulation or offline characterisation, and their cost is amortised over later queries. \ref{app:recalibration} discusses unlabelled distribution matching.
 
 \item \emph{The input omits collision memory strength.}
 For fixed collision parameters, the reset-bath marginals are independent of $\eta$. Predictions estimate a correction averaged under the deployment distribution. The realised bath state and retention value remain unobserved. The exchange-coupled audit shows that this issue is not confined to a commuting dephasing Hamiltonian, but both audits use a qubit bath.
@@ -692,11 +692,11 @@ All authors declare no financial or non-financial competing interests.
 
 \section*{Data availability}
 
-All datasets are generated synthetically. The manuscript-specific data generators, evaluation scripts, random seeds, and machine-readable result tables are publicly available at \url{https://github.com/shchng9963-droid/fidelityno} under the release tag mlst-submission-v2. Training arrays and model checkpoints can be regenerated using the documented commands. An archival DOI will be added when the versioned release is deposited.
+All datasets are generated synthetically. The manuscript-specific data generators, evaluation scripts, random seeds, and machine-readable result tables are publicly available at \url{https://github.com/shchng9963-droid/fidelityno} under the release tag mlst-submission-v3. Training arrays and model checkpoints can be regenerated using the documented commands. An archival DOI will be added when the versioned release is deposited.
 
 \section*{Code availability}
 
-The source code associated with this manuscript is publicly available at \url{https://github.com/shchng9963-droid/fidelityno} under the release tag mlst-submission-v2. The tag identifies the exact Git commit, and the software environment is documented in the repository.
+The source code associated with this manuscript is publicly available at \url{https://github.com/shchng9963-droid/fidelityno} under the release tag mlst-submission-v3. The tag identifies the exact Git commit, and the software environment is documented in the repository.
 
 \section*{Acknowledgements}
 
@@ -732,7 +732,7 @@ The experimental claims use measured errors directly. This derivation states the
 \section{Affine recalibration across random seeds}
 \label{app:recalibration}
 
-\Cref{tab:recal_seeds} reports a legacy audit with separate affine coefficients for each seed. The fit uses a labelled 10\% subset of the collision \texttt{family\_ood} data. This calibration set and split differ from the fixed $N_{\mathrm{cal}}=64$ audit in \cref{tab:ambiguity}. Its mean MAE of $0.094$ forms a separate result from the headline $0.090$. Across five seeds, the calibrated MAE has standard deviation $1.3\times10^{-3}$ and the slope has standard deviation about $0.09$. Slope and intercept are correlated and are reported together.
+\Cref{tab:recal_seeds} reports an auxiliary audit with separate affine coefficients for each seed. The fit uses a labelled 10\% subset of the high-memory collision data. This calibration set and split differ from the fixed $N_{\mathrm{cal}}=64$ audit in \cref{tab:ambiguity}. Its mean MAE of $0.094$ forms a separate result from the headline $0.090$. Across five seeds, the calibrated MAE has standard deviation $1.3\times10^{-3}$ and the slope has standard deviation about $0.09$. Slope and intercept are correlated and are reported together.
 
 \begin{table}[h]
 \centering
@@ -758,7 +758,7 @@ std    & $0.091$ & $0.081$ & $0.001$ & $\bm{0.001}$ \\
 The slope varies by about $0.1$. Test MAE varies much less because the slope and intercept co-vary over the narrow range of raw predictions. Predictive errors are reported across seeds. The coefficients alone leave the physical source of the OOD bias unresolved.
 
 \paragraph*{Quantile calibration.}
-We apply the same affine coefficients to all nine predicted quantiles. This preserves their ordering. On OOD data, empirical coverage can still differ from the nominal level. Medium and high quantiles with $q\geq0.5$ lie within $\pm0.04$ of nominal coverage. Low quantiles with $q\leq0.3$ sometimes over-cover on \texttt{family\_ood} because predictions are clipped at $\Fe=0$. A per-quantile shift is a possible extension.
+We apply the same affine coefficients to all nine predicted quantiles. This preserves their ordering. On OOD data, empirical coverage can still differ from the nominal level. Medium and high quantiles with $q\geq0.5$ lie within $\pm0.04$ of nominal coverage. Low quantiles with $q\leq0.3$ sometimes over-cover on the high-memory split because predictions are clipped at $\Fe=0$. A per-quantile shift is a possible extension.
 
 %%%% END flattened: appendices/B_recalibration
 
@@ -779,7 +779,7 @@ AdamW, lr $3 \times 10^{-4}$, cosine decay to $10^{-5}$, weight decay $10^{-2}$.
 Architecture and training hyperparameters were selected on the device calibration split and then fixed across regimes. This protocol evaluates one shared configuration across the three settings.
 
 \paragraph*{Dataset splits.}
-Collision and $d=4$ splits contain 8000 sequences. Device splits contain 1024 sequences for each backend. Training, calibration, and ID lengths are drawn from $\{2,4,8,16\}$. Length OOD uses $\{24,32,48\}$. In the collision data, training uses $\eta\in[0,0.7]$ and the legacy family\_ood file uses $\eta\in[0.85,0.99]$. Random seeds are disjoint across splits.
+Collision and $d=4$ splits contain 8000 sequences. Device splits contain 1024 sequences for each backend. Training, calibration, and ID lengths are drawn from $\{2,4,8,16\}$. Length OOD uses $\{24,32,48\}$. In the collision data, training uses $\eta\in[0,0.7]$ and high-memory OOD evaluation uses $\eta\in[0.85,0.99]$. Random seeds are disjoint across splits.
 
 \paragraph*{Reproducibility and validation.}
 The five seeds are $\{0, 1, 2, 3, 4\}$, applied to (a) NumPy / PyTorch global RNG, (b) channel parameter sampling, (c) train/val/test split assignment, (d) model initialisation, and (e) data shuffling. The 99 unit tests cover CPTP sanity for every channel-family generator, Choi composition associativity, quantile-head monotonicity, recalibration coefficient stability, diamond-SDP correctness against a QuTiP reference, readout-noise sampling, and an end-to-end smoke-train on a 100-sample subset. Total wall-clock for a fresh reproduction on a 2$\times$ RTX 5090 setup is approximately 5 hours, dominated by neural training.

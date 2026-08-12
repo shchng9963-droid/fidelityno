@@ -5,6 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[letterpaper,margin=1in]{geometry}
 \usepackage{amsmath,amssymb,booktabs,graphicx,xcolor,hyperref,cleveref}
+\hypersetup{hidelinks}
 \graphicspath{{figures/}}
 \renewcommand{\thesection}{S\arabic{section}}
 \renewcommand{\thetable}{S\arabic{table}}
@@ -19,7 +20,7 @@
 \noindent\textbf{Associated article:} Information-limited fidelity estimation of composed quantum channels: when to compose, measure, or learn.
 
 \medskip
-\noindent This supplement reports oracle verification, calibration diagnostics, sample-complexity results, ablations, length-shift analyses, representation ambiguity, measurement-conditioned fusion, readout-noise robustness, adaptive shot allocation, and ranking utility. All numbers are reproducible from the code described in the Data and Code Availability statements of the main paper.
+\noindent Additional calibration, robustness, ablation, representation-audit, and measurement-allocation results supporting the associated article.
 
 
 %%%% BEGIN flattened: supp/S1_oracle.tex
@@ -43,12 +44,12 @@ Every channel produced by the channel libraries passes a CPTP test that checks (
 \section{Extended calibration diagnostics}
 \label{supp:calibration}
 
-Table~\ref{tab:supp_calibration} reports distributional metrics for the collision regime. The legacy \texttt{family\_ood} filename refers to the high-retention interval $\eta\in[0.85,0.99]$. The collision family is shared with training. Two figures provide additional diagnostics. The first compares expected calibration error (ECE) before and after split-conformal recalibration on ID. The second gives reliability diagrams for ID and the $n=48$ length-OOD endpoint.
+Table~\ref{tab:supp_calibration} reports distributional metrics for the collision regime. The high-memory OOD split uses $\eta\in[0.85,0.99]$ while keeping the collision family fixed. Two figures provide additional diagnostics. The first compares expected calibration error (ECE) among estimators on ID. The second gives reliability diagrams for ID and the $n=48$ length-OOD endpoint.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.86\linewidth]{calibration_ece.pdf}
-\caption{Expected calibration error before and after split-conformal recalibration on the in-distribution test split. The quantile-head neural surrogates improve after recalibration, with FidelityNO reaching the low-error region used in the main-paper comparison.}
+\caption{Expected calibration error on the in-distribution test split. Bars show means over available seeds, error bars show standard deviations, and the dashed guide marks ECE $=0.05$.}
 \label{fig:supp_ece}
 \end{figure}
 
@@ -62,15 +63,15 @@ Table~\ref{tab:supp_calibration} reports distributional metrics for the collisio
 
 \begin{table}[h]
 \centering
-\caption{Extended pre-affine distribution metrics for FidelityNO on the collision regime. Additive conformal offsets are fitted on \texttt{calib.npz}. Mean absolute error gives the raw point error before the labelled out-of-distribution affine correction used in the main collision table. Results cover five seeds and 1024 sequences per split.}
+\caption{Extended pre-affine distribution metrics for FidelityNO on the collision regime. Additive conformal offsets are fitted on the ID calibration split. Mean absolute error gives the raw point error before the labelled out-of-distribution affine correction used in the main collision table. Results cover five seeds and 1024 sequences per split.}
 \label{tab:supp_calibration}
 \begin{tabular}{lcccc}
 \toprule
 Split & MAE & Pinball & CRPS & ECE \\
 \midrule
-\texttt{id\_test} & 0.025 & 0.009 & 0.018 & \textbf{0.004} \\
-\texttt{length\_ood} & 0.138 & 0.060 & 0.119 & 0.394 \\
-\texttt{family\_ood} & 0.383 & 0.179 & 0.359 & 0.500 \\
+ID & 0.025 & 0.009 & 0.018 & \textbf{0.004} \\
+Length OOD & 0.138 & 0.060 & 0.119 & 0.394 \\
+High-memory OOD & 0.383 & 0.179 & 0.359 & 0.500 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -133,7 +134,7 @@ shots/label & total offline shots & test MAE (mean $\pm$ std) \\
 \end{table}
 
 \paragraph*{Reproduction protocol.}
-Run \texttt{scripts/eval\_dfe.py} with \texttt{--strategy stratified --M 1} and the total-shot values above. The companion noisy-calibration evaluation script reproduces the calibration audit. Both scripts record the seed, evaluated sample count, and total shot budget in CSV output.
+The released DFE evaluation script reproduces these results with stratified allocation, one shot per setting in each allocation round, and the total-shot values above. The companion noisy-calibration evaluation reproduces the calibration audit. Both evaluations record the seed, sample count, and total shot budget in machine-readable output.
 
 \paragraph*{Marginal Monte Carlo.}
 Classical Kraus-path sampling uses reset-bath marginals and has no observation of the retained bath. Increasing the path count reduces sampling variance around the marginal-composed process. The bias from memory strength remains.
@@ -155,7 +156,7 @@ The default model uses an auxiliary head predicting the purity and trace of the 
 \label{tab:supp_ablation_aux}
 \begin{tabular}{lccccc}
 \toprule
-$\lambda_{\mathrm{aux}}$ & seeds & \texttt{id\_test} & \texttt{length\_ood} & \texttt{family\_ood} & ECE (\texttt{id\_test}) \\
+$\lambda_{\mathrm{aux}}$ & seeds & ID & Length OOD & High-memory OOD & ECE (ID) \\
 \midrule
 $0.0$ & 3 & $0.0240$ & $0.1390$ & $0.3867$ & $0.021$ \\
 $0.1$ (default) & 5 & $0.0247$ & $0.1377$ & $0.3869$ & $0.018$ \\
@@ -175,7 +176,7 @@ Table~\ref{tab:supp_ablation_head} compares the primary 9-quantile pinball head 
 \label{tab:supp_ablation_head}
 \begin{tabular}{lccccc}
 \toprule
-Head & seeds & \texttt{id\_test} & \texttt{length\_ood} & \texttt{family\_ood} & ECE (\texttt{id\_test}) \\
+Head & seeds & ID & Length OOD & High-memory OOD & ECE (ID) \\
 \midrule
 Quantile (default) & 5 & $0.0247$ & $0.1377$ & $0.3869$ & $0.018$ \\
 Gaussian & 3 & $0.0248$ & $0.1369$ & $0.3876$ & $0.039$ \\
@@ -194,7 +195,7 @@ We also test a Pauli-transfer-matrix (PTM) encoder. For a single-qubit channel, 
 \label{tab:supp_ablation_encoder}
 \begin{tabular}{lccccc}
 \toprule
-Encoder & seeds & \texttt{id\_test} & \texttt{length\_ood} & \texttt{family\_ood} & ECE (\texttt{id\_test}) \\
+Encoder & seeds & ID & Length OOD & High-memory OOD & ECE (ID) \\
 \midrule
 Choi (default) & 5 & $0.0247$ & $0.1377$ & $0.3869$ & $0.018$ \\
 PTM & 3 & $0.0247$ & $0.1356$ & $0.3863$ & $0.018$ \\
@@ -217,7 +218,7 @@ The main paper reports pooled affine-recalibrated MAE of $0.077$ for length OOD 
 
 \begin{table}[h]
 \centering
-\caption{Pre-affine length-by-length diagnostic for the collision regime. Results cover five seeds and 1024 sequences per length. The legacy sampling table used a different subset. Corrected pooled sampling results appear in the main text and Sec.~\ref{supp:sample_complexity}.}
+\caption{Pre-affine length-by-length diagnostic for the collision regime. Results cover five seeds and 1024 sequences per length. An earlier diagnostic used a different subset. Corrected pooled sampling results appear in the main text and Sec.~\ref{supp:sample_complexity}.}
 \label{tab:supp_length_breakdown}
 \begin{tabular}{lcc}
 \toprule
@@ -234,11 +235,11 @@ $48$ & $0.209$ & $0.114$ \\
 The table reports length dependence before pooled affine OOD recalibration. Both predictors degrade as $L$ grows, and the raw learned predictor has the larger bias at $L=48$. The pooled affine correction reduces the overall length-OOD MAE to $0.077$. The per-length values show that much of the raw bias comes from the longest sequences. A separate affine fit for each length reduces the $L=48$ error further and requires labelled examples for every deployment length. The reported configuration uses one pooled fit and one shared label budget.
 
 \paragraph*{Per-seed (a, b) coefficients.}
-\Cref{tab:supp_per_seed_ab} reports the affine coefficients for each \texttt{family\_ood} seed. The slope and intercept have standard deviations $0.091$ and $0.081$. The post-calibration MAE has standard deviation $0.0013$. Different coefficient pairs give similar predictive error.
+\Cref{tab:supp_per_seed_ab} reports the affine coefficients for each high-memory-OOD seed. The slope and intercept have standard deviations $0.091$ and $0.081$. The post-calibration MAE has standard deviation $0.0013$. Different coefficient pairs give similar predictive error.
 
 \begin{table}[h]
 \centering
-\caption{Affine recalibration coefficients $(a, b)$ on \texttt{family\_ood}, per seed. The linear fit $F_{\mathrm{cal}} = a \cdot F_{\mathrm{raw}} + b$ uses a labelled, held-out 10\% out-of-distribution calibration set.}
+\caption{Affine recalibration coefficients $(a, b)$ on the high-memory OOD split, per seed. The linear fit $F_{\mathrm{cal}} = a \cdot F_{\mathrm{raw}} + b$ uses a labelled, held-out 10\% out-of-distribution calibration set.}
 \label{tab:supp_per_seed_ab}
 \begin{tabular}{ccccc}
 \toprule
@@ -270,7 +271,7 @@ At least one term on the right is at least $|F(z)-F(z')|/2$. Taking the supremum
 \subsection{Counterfactual protocol and random-stream control}
 We sample 2048 base collision sequences with lengths in $\{8,16,24\}$. For each base, we retain its couplings, frequencies, durations, bath initial state, and reset-bath marginal Choi sequence, then replay joint propagation at 15 equally spaced values in $\eta\in[0.85,0.99]$. This gives 30,720 physical labels grouped into 2048 exactly identical observable inputs. The maximum tensor difference within every group is zero in float32 storage. Diameter is the within-group maximum minus minimum. The empirical Bayes estimate is the mean absolute deviation from the within-group median under the uniform 15-point grid.
 
-To exclude pseudorandom coupling, we also generate a fresh 4096-instance evaluation set using seed 20260807 for collision parameters and a separate seed 920260807 for $\eta$. Its label mean and standard deviation are 0.4472 and 0.1979. On this split, 64-label affine BiDir calibration gives MAE 0.0894, summary ridge 0.0977, exact-marginal affine 0.1101, and an oracle ridge that additionally observes $\eta$ 0.0800. These values reproduce the legacy split ordering without sharing a random stream.
+To exclude pseudorandom coupling, we also generate a fresh 4096-instance evaluation set using seed 20260807 for collision parameters and a separate seed 920260807 for $\eta$. Its label mean and standard deviation are 0.4472 and 0.1979. On this split, 64-label affine BiDir calibration gives MAE 0.0894, summary ridge 0.0977, exact-marginal affine 0.1101, and an oracle ridge that additionally observes $\eta$ 0.0800. These values preserve the ordering of estimator errors observed on the original evaluation split without sharing a random stream.
 
 \subsection{Independent exchange-coupled memory audit}
 The second audit uses the step Hamiltonian
