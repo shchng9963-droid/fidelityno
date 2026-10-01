@@ -1,0 +1,13 @@
+{
+  "family": "exchange",
+  "split": "validation",
+  "data_sha256": "5c4f4556b947bb9929162fcbb79717a02a30cf59332ac7391ab3f6cf16f12558",
+  "calibration_sha256": "5f8075721c39bfc94559f08c58ba68600b31413bd89db2f352efd2a93148c6a1",
+  "design_sha256": "898974637b1d41e3fc6f304a6b036f08fe365f6365f72d809072012ed6269fa7",
+  "selection": null,
+  "settings": "20 calibration groups x 5 measurement repeats x 5 fixed checkpoints",
+  "transfer": "frozen ZZ-trained checkpoints; labelled target-domain recalibration",
+  "n": 4096,
+  "calibration_n": 1280,
+  "query_calibration_input_overlap": 0
+}

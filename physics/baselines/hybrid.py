@@ -6,6 +6,21 @@ import numpy as np
 from physics.baselines.dfe import PAULIS, _allocate_stratified_shots
 
 
+def _identity_allocation(expectations: np.ndarray, total_shots: int):
+    """Validate TP inputs and allocate only to X, Y, Z."""
+    expectations = np.asarray(expectations, dtype=np.float64)
+    if expectations.ndim != 2 or expectations.shape[1] != 4:
+        raise ValueError("expectations must have shape (N, 4)")
+    if not np.isfinite(expectations).all() or np.max(np.abs(expectations)) > 1.0 + 1e-7:
+        raise ValueError("invalid Pauli expectations")
+    if not np.allclose(expectations[:, 0], 1.0, atol=1e-7, rtol=0):
+        raise ValueError("identity contribution requires trace preservation")
+    if int(total_shots) != total_shots:
+        raise ValueError("total_shots must be an integer")
+    support, shots = _allocate_stratified_shots(np.array([0., 1., 1., 1.]), int(total_shots))
+    return np.clip(expectations[:, support], -1., 1.), shots
+
+
 def batch_pauli_expectations_from_choi(choi: np.ndarray) -> np.ndarray:
     """Return single-qubit ``chi_L(P)`` for I, X, Y, Z from batched Choi data."""
     choi = np.asarray(choi, dtype=np.complex128)
@@ -35,13 +50,11 @@ def sample_identity_dfe(
     expectations = np.asarray(expectations, dtype=np.float64)
     if expectations.ndim != 2 or expectations.shape[1] != 4:
         raise ValueError("expectations must have shape (N, 4)")
-    support, shots = _allocate_stratified_shots(np.full(4, 0.25), int(total_shots))
-    if not np.array_equal(support, np.arange(4)):
-        raise RuntimeError("identity-target DFE must use all four Paulis")
+    expectations, shots = _identity_allocation(expectations, total_shots)
     probs = np.clip(0.5 * (1.0 + expectations), 0.0, 1.0)
     plus = rng.binomial(shots[None, :], probs)
     observed = 2.0 * plus / shots[None, :] - 1.0
-    estimate = observed.mean(axis=1)
+    estimate = (1.0 + observed.sum(axis=1)) / 4.0
     variance = np.sum((1.0 - np.square(expectations)) / shots[None, :], axis=1) / 16.0
     return estimate, np.sqrt(np.maximum(variance, 0.0))
 
@@ -65,21 +78,19 @@ def sample_identity_dfe_readout(
         raise ValueError("expectations must have shape (N, 4)")
     if not 0.0 <= readout_error < 0.5:
         raise ValueError("readout_error must lie in [0, 0.5)")
-    support, shots = _allocate_stratified_shots(np.full(4, 0.25), int(total_shots))
-    if not np.array_equal(support, np.arange(4)):
-        raise RuntimeError("identity-target DFE must use all four Paulis")
+    expectations, shots = _identity_allocation(expectations, total_shots)
 
     attenuation = 1.0 - 2.0 * readout_error
     observed_expectations = attenuation * expectations
     probs = np.clip(0.5 * (1.0 + observed_expectations), 0.0, 1.0)
     plus = rng.binomial(shots[None, :], probs)
     observed = 2.0 * plus / shots[None, :] - 1.0
-    raw = observed.mean(axis=1)
+    raw = (1.0 + observed.sum(axis=1)) / 4.0
     # Linear inversion is intentionally left unclipped at the observable
     # level. Finite-shot mitigated estimates can lie outside the physical
     # interval; clipping is applied only to the final fidelity prediction.
     mitigated_observed = observed / attenuation
-    mitigated = mitigated_observed.mean(axis=1)
+    mitigated = (1.0 + mitigated_observed.sum(axis=1)) / 4.0
 
     raw_variance = (
         np.sum(
@@ -105,13 +116,11 @@ def sample_identity_dfe_pilot(
     expectations = np.asarray(expectations, dtype=np.float64)
     if expectations.ndim != 2 or expectations.shape[1] != 4:
         raise ValueError("expectations must have shape (N, 4)")
-    if total_shots < 4 or total_shots % 4:
-        raise ValueError("pilot total_shots must be a positive multiple of four")
-    shots_per_setting = total_shots // 4
+    expectations, shots_per_setting = _identity_allocation(expectations, total_shots)
     probs = np.clip(0.5 * (1.0 + expectations), 0.0, 1.0)
     plus = rng.binomial(shots_per_setting, probs)
     observed = 2.0 * plus / shots_per_setting - 1.0
-    return plus.astype(np.int64), observed.mean(axis=1)
+    return plus.astype(np.int64), (1.0 + observed.sum(axis=1)) / 4.0
 
 
 def complete_identity_dfe(
@@ -121,32 +130,38 @@ def complete_identity_dfe(
     final_total_shots: np.ndarray,
     rng: np.random.Generator,
 ) -> tuple[np.ndarray, np.ndarray]:
-    """Complete a nested stratified DFE estimate at query-specific budgets."""
+    """Complete DFE at budgets fixed independently of the reused pilot.
+
+    The reported variance is valid for prespecified budgets. Do not use it
+    as a conditional variance after outcome-dependent budget selection.
+    New variance-adaptive comparisons use revision_measurement instead.
+    """
     expectations = np.asarray(expectations, dtype=np.float64)
     pilot_plus = np.asarray(pilot_plus, dtype=np.int64)
     final_total_shots = np.asarray(final_total_shots, dtype=np.int64)
     if expectations.ndim != 2 or expectations.shape[1] != 4:
         raise ValueError("expectations must have shape (N, 4)")
-    if pilot_plus.shape != expectations.shape:
-        raise ValueError("pilot_plus must match expectations")
+    if pilot_plus.shape != (len(expectations), 3):
+        raise ValueError("pilot_plus must have shape (N, 3), for X,Y,Z")
     if final_total_shots.shape != (len(expectations),):
         raise ValueError("final_total_shots must have shape (N,)")
-    if pilot_shots < 4 or pilot_shots % 4:
-        raise ValueError("pilot_shots must be a positive multiple of four")
-    if np.any(final_total_shots < pilot_shots) or np.any(final_total_shots % 4):
-        raise ValueError("final budgets must be multiples of four and include the pilot")
+    if np.any(final_total_shots < pilot_shots):
+        raise ValueError("final budgets must include the pilot")
 
-    pilot_per_setting = pilot_shots // 4
-    final_per_setting = final_total_shots // 4
+    expectations, pilot_per_setting = _identity_allocation(expectations, pilot_shots)
+    final_per_setting = np.array([
+        _allocate_stratified_shots(np.array([0., 1., 1., 1.]), int(b))[1]
+        for b in final_total_shots
+    ])
     extra_per_setting = final_per_setting - pilot_per_setting
     probs = np.clip(0.5 * (1.0 + expectations), 0.0, 1.0)
-    extra_plus = rng.binomial(extra_per_setting[:, None], probs)
+    extra_plus = rng.binomial(extra_per_setting, probs)
     total_plus = pilot_plus + extra_plus
-    observed = 2.0 * total_plus / final_per_setting[:, None] - 1.0
-    estimate = observed.mean(axis=1)
+    observed = 2.0 * total_plus / final_per_setting - 1.0
+    estimate = (1.0 + observed.sum(axis=1)) / 4.0
     variance = (
         np.sum(
-            (1.0 - np.square(expectations)) / final_per_setting[:, None], axis=1
+            (1.0 - np.square(expectations)) / final_per_setting, axis=1
         )
         / 16.0
     )
@@ -163,8 +178,8 @@ def allocate_two_level_budget(
     scores = np.asarray(scores, dtype=np.float64)
     if scores.ndim != 1 or len(scores) < 2 or not np.isfinite(scores).all():
         raise ValueError("scores must be a finite one-dimensional array")
-    if low_shots < 4 or low_shots % 4 or high_shots <= low_shots or high_shots % 4:
-        raise ValueError("shot levels must be distinct positive multiples of four")
+    if low_shots < 3 or high_shots <= low_shots:
+        raise ValueError("shot levels must be distinct integers of at least three")
     if not 0.0 < high_fraction < 1.0:
         raise ValueError("high_fraction must lie in (0, 1)")
     n_high = int(round(high_fraction * len(scores)))

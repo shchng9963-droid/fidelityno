@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-01",
+  "status": "specified after stage-one development and before any new validation/test outcomes",
+  "families": ["zz", "exchange"],
+  "zz_seeds": {"validation": [202610011, 9202610011, 4096], "test": [202610012, 9202610012, 4096], "calibration": [202610013, 9202610013, 1280]},
+  "exchange_seeds": {"validation": [202610021, 9202610021, 4096], "test": [202610022, 9202610022, 4096], "calibration": [202610023, 9202610023, 1280]},
+  "budgets": [3,4,6,8,12,16,20,24,28,32,36,40,44,48,52,56,60,64,68,72,76,80,84,88,92,96,128,192,256],
+  "budget_amendment": "Densify all methods equally at four-shot intervals over 12..96 after pilot, to avoid coarse-grid artifacts. No new test has been inspected.",
+  "exchange_transfer": "All neural checkpoints remain trained on ZZ source data. No exchange source training, no checkpoint selection. All adapted priors use the same 64 labelled exchange calibration examples.",
+  "calibration": "20 disjoint groups of 64, five independent measurement repeats each; 64-shot labels from zz_known allocation for ZZ and fixed allocation for exchange",
+  "validation_selection": "For each target 0.065 and 0.053 select minimum-shot candidate whose validation selection score is <= target; ties: lower offline cost then score. The selection score is mean MAE plus 1.645 times a conservative sum-of-variance-components standard error across query means, calibration-group means, and checkpoint means. It is a selection guardrail, not a reported confidence interval.",
+  "primary_hybrid_candidates": ["neural_fusion", "neural_eb"],
+  "baseline_candidates": "DFE fixed, pilot and (ZZ only) zz_known; compare all at identical budget grid",
+  "controls": "all six prior classes, raw and adapted, and both fusion types; same-budget 32-shot neural versus ridge is prespecified secondary",
+  "selection_storage": "Write selection JSON with validation hash before starting test evaluation; test evaluator rejects unselected configurations",
+  "test_intervals": "2000 paired crossed/hierarchical bootstrap samples; preserve shared measurements across checkpoints; no budget tuning on test",
+  "multiplicity_amendment": "Use Bonferroni simultaneous one-sided bounds (97.5th percentile per contrast for two targets), conservative relative to the originally planned Holm procedure. Equivalence requires the 95% interval to lie within +/-0.002. Never equate noninferiority with equivalence.",
+  "target_confirmation": "Report test MAE and intervals separately from difference intervals. Call common target certified only if upper 95% one-sided MAE bounds for both estimators are <= target; otherwise report the shortfall without choosing replacement budgets.",
+  "break_even": "Report for fixed validation-selected shot budgets only when accuracy criterion and positive shot difference hold; no confidence interval on a deterministic cost quotient. Uncertainty in accuracy validity is reported separately.",
+  "cost_scope": "Deployment measurement shots and per-deployment finite-label calibration/pilots only. Research validation sweeps, source synthetic labels, input Choi acquisition and classical compute are separate excluded costs.",
+  "label_noise": "Independent label and fusion-fit measurements; out-of-fold priors for fusion fitting; EB residual variance subtracts observed finite-label variance",
+  "grid": "Same parameter seeds and sample counts as archived audits; nested grids 15/29/57/113 and separate 128-point quadrature for explicitly approximate continuous risk"
+}

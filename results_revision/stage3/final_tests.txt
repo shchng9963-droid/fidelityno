@@ -1,0 +1,9 @@
+........................................................................ [ 59%]
+..................................................                       [100%]
+=============================== warnings summary ===============================
+tests/test_qutip_xval.py::test_process_fidelity_xval_qutip
+  /home/wangshuchang/miniforge3/envs/fidelityno/lib/python3.11/site-packages/qutip/core/data/expm.py:146: LinAlgWarning: Matrix is singular. The result might be inaccurate or the array might not have a square root.
+    return Dense(scipy.linalg.sqrtm(matrix.as_ndarray()))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+122 passed, 1 warning in 24.63s

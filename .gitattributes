@@ -1,0 +1,6 @@
+# Preserve provenance hashes across Windows/Linux checkouts.
+* -text
+*.sh text eol=lf
+Makefile text eol=lf
+*.npz binary
+*.pt binary

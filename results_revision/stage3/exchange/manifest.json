@@ -1,0 +1,9 @@
+{
+  "status": "secondary stress test, no post-test budget selection",
+  "family": "exchange",
+  "calibration_labels": "64 labels of 64 shots, same known readout rate as queries",
+  "assumptions": "independent symmetric flips; known rate; bath reset before each full execution",
+  "uncertainty": "raw nine quantiles; no conformal adjustment or claimed OOD coverage",
+  "calibration_sha256": "5f8075721c39bfc94559f08c58ba68600b31413bd89db2f352efd2a93148c6a1",
+  "test_sha256": "44c0b3e07666424ed5ebf2223f4ad5694cb2a4fe2d2c5db5d680374178462d93"
+}

@@ -1,0 +1,27 @@
+{
+  "status": "additional control locked after validation and before test",
+  "motivation": "strong simple and zero-query-shot alternatives required by reviewers",
+  "validation_summary_sha256": "b12f83b5e00cb5770cf6e502d084bbd3c7ce25bcedc3a97f28a9ef73728b2e84",
+  "controls": [
+    {
+      "target": 0.065,
+      "control": {
+        "method": "summary_ridge_prior",
+        "allocation": "none",
+        "shots": 0,
+        "offline_shots": 4096,
+        "validation_mae": 0.049917787173855
+      }
+    },
+    {
+      "target": 0.053,
+      "control": {
+        "method": "summary_ridge_prior",
+        "allocation": "none",
+        "shots": 0,
+        "offline_shots": 4096,
+        "validation_mae": 0.049917787173855
+      }
+    }
+  ]
+}

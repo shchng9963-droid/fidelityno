@@ -35,14 +35,14 @@ from torch.utils.data import DataLoader, TensorDataset
 from train import make_model, prediction_to_quantiles
 
 
-def predict_quantiles(ckpt_path: str, npz_path: str) -> tuple[np.ndarray, np.ndarray]:
+def predict_quantiles(ckpt_path: str, npz_path: str, device: str = "cpu") -> tuple[np.ndarray, np.ndarray]:
     """Return all predictive quantiles and targets for one checkpoint."""
     ck = torch.load(ckpt_path, map_location="cpu", weights_only=False)
     cfg = OmegaConf.create(ck["cfg"])
     levels = list(cfg.model.quantiles)
     raw = np.load(npz_path, allow_pickle=True)
     model = make_model(cfg.model.name, raw["x"].shape[-1], raw["x"].shape[1], cfg)
-    model.load_state_dict(ck["model"]); model.eval()
+    model.load_state_dict(ck["model"]); model.to(device); model.eval()
 
     ds = TensorDataset(
         torch.tensor(raw["x"]).float(),
@@ -53,9 +53,9 @@ def predict_quantiles(ckpt_path: str, npz_path: str) -> tuple[np.ndarray, np.nda
     preds, ys = [], []
     with torch.no_grad():
         for x, m, y, _ in DataLoader(ds, batch_size=256):
-            pred, _ = model(x, m)
-            q = prediction_to_quantiles(pred, torch.tensor(levels))
-            preds.append(q.numpy()); ys.append(y.numpy())
+            pred, _ = model(x.to(device), m.to(device))
+            q = prediction_to_quantiles(pred, torch.tensor(levels, device=device))
+            preds.append(q.cpu().numpy()); ys.append(y.numpy())
     q = np.concatenate(preds)
     y = np.concatenate(ys)
     return q, y

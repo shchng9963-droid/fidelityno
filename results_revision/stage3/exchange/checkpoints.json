@@ -1,0 +1,82 @@
+[
+  {
+    "checkpoint": "bidir_seed0",
+    "sha256": "a6acc4da694ee9595c2f4cac9c65a765fd8e550a4b585d77d298b8f3f18925e6",
+    "cfg": "{'model': {'name': 'bidir', 'd_model': 128, 'depth': 4, 'heads': 4, 'layers': 4, 'head_type': 'quantile', 'causal': True, 'aux': True, 'quantiles': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9], 'choi_representation': 'hermitian_real_vector', 'ptm_ablation': False}, 'seed': 0, 'device': 'cuda', 'wandb': {'mode': 'offline'}, 'data': {'train': 'data/collision/train.npz', 'val': 'data/collision/calib.npz'}, 'train': {'epochs': 80, 'batch_size': 256, 'lr': 0.0003, 'lr_min': 1e-06, 'warmup_epochs': 10, 'restart_epochs': 20, 'weight_decay': 0.0001, 'aux_weight': 0.1, 'grad_clip': 1.0, 'ckpt_dir': 'checkpoints/collision', 'ckpt_name': 'bidir_seed0.pt', 'curriculum': False, 'curriculum_schedule': [4, 8, 16, 48], 'patience': 20}}",
+    "projection_bias": [
+      0.0020742130000144243,
+      -3.0021233558654785,
+      -3.007026195526123,
+      -3.019479513168335,
+      -3.0165960788726807,
+      -3.025545597076416,
+      -3.028353691101074,
+      -3.0348658561706543,
+      -3.039641857147217
+    ]
+  },
+  {
+    "checkpoint": "bidir_seed1",
+    "sha256": "98b32a983c5f92c5368d6b2a33ca2f912612f0957191e93a672f4c655f1d54cc",
+    "cfg": "{'model': {'name': 'bidir', 'd_model': 128, 'depth': 4, 'heads': 4, 'layers': 4, 'head_type': 'quantile', 'causal': True, 'aux': True, 'quantiles': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9], 'choi_representation': 'hermitian_real_vector', 'ptm_ablation': False}, 'seed': 1, 'device': 'cuda', 'wandb': {'mode': 'offline'}, 'data': {'train': 'data/collision/train.npz', 'val': 'data/collision/calib.npz'}, 'train': {'epochs': 80, 'batch_size': 256, 'lr': 0.0003, 'lr_min': 1e-06, 'warmup_epochs': 10, 'restart_epochs': 20, 'weight_decay': 0.0001, 'aux_weight': 0.1, 'grad_clip': 1.0, 'ckpt_dir': 'checkpoints/collision', 'ckpt_name': 'bidir_seed1.pt', 'curriculum': False, 'curriculum_schedule': [4, 8, 16, 48], 'patience': 20}}",
+    "projection_bias": [
+      0.002374236239120364,
+      -3.00453519821167,
+      -3.0124576091766357,
+      -3.0081419944763184,
+      -3.017132520675659,
+      -3.0180916786193848,
+      -3.020813465118408,
+      -3.0423145294189453,
+      -3.0312869548797607
+    ]
+  },
+  {
+    "checkpoint": "bidir_seed2",
+    "sha256": "55f1fdbcf7b873aea1738d354181d852ab213df5bfa7b8c4bf297f45bb19321c",
+    "cfg": "{'model': {'name': 'bidir', 'd_model': 128, 'depth': 4, 'heads': 4, 'layers': 4, 'head_type': 'quantile', 'causal': True, 'aux': True, 'quantiles': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9], 'choi_representation': 'hermitian_real_vector', 'ptm_ablation': False}, 'seed': 2, 'device': 'cuda', 'wandb': {'mode': 'offline'}, 'data': {'train': 'data/collision/train.npz', 'val': 'data/collision/calib.npz'}, 'train': {'epochs': 80, 'batch_size': 256, 'lr': 0.0003, 'lr_min': 1e-06, 'warmup_epochs': 10, 'restart_epochs': 20, 'weight_decay': 0.0001, 'aux_weight': 0.1, 'grad_clip': 1.0, 'ckpt_dir': 'checkpoints/collision', 'ckpt_name': 'bidir_seed2.pt', 'curriculum': False, 'curriculum_schedule': [4, 8, 16, 48], 'patience': 20}}",
+    "projection_bias": [
+      0.0028787734918296337,
+      -3.003674030303955,
+      -3.0044169425964355,
+      -3.010037660598755,
+      -3.009505271911621,
+      -3.013521194458008,
+      -3.0215485095977783,
+      -3.020479679107666,
+      -3.032308340072632
+    ]
+  },
+  {
+    "checkpoint": "bidir_seed3",
+    "sha256": "4f9dc64186f0c1efba4acd2280c76c653e4cd689045d81db24c8dfe0fd407138",
+    "cfg": "{'model': {'name': 'bidir', 'd_model': 128, 'depth': 4, 'heads': 4, 'layers': 4, 'head_type': 'quantile', 'causal': True, 'aux': True, 'quantiles': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9], 'choi_representation': 'hermitian_real_vector', 'ptm_ablation': False}, 'seed': 3, 'device': 'cuda', 'wandb': {'mode': 'offline'}, 'data': {'train': 'data/collision/train.npz', 'val': 'data/collision/calib.npz'}, 'train': {'epochs': 80, 'batch_size': 256, 'lr': 0.0003, 'lr_min': 1e-06, 'warmup_epochs': 10, 'restart_epochs': 20, 'weight_decay': 0.0001, 'aux_weight': 0.1, 'grad_clip': 1.0, 'ckpt_dir': 'checkpoints/collision', 'ckpt_name': 'bidir_seed3.pt', 'curriculum': False, 'curriculum_schedule': [4, 8, 16, 48], 'patience': 20}}",
+    "projection_bias": [
+      0.0030345115810632706,
+      -3.0020182132720947,
+      -3.0091543197631836,
+      -3.0115485191345215,
+      -3.0165374279022217,
+      -3.0127971172332764,
+      -3.0208640098571777,
+      -3.022649049758911,
+      -3.0173707008361816
+    ]
+  },
+  {
+    "checkpoint": "bidir_seed4",
+    "sha256": "02814370955653c73f5f9ddc939ff080b6dd47a484264140f1a3c15e1b995a0f",
+    "cfg": "{'model': {'name': 'bidir', 'd_model': 128, 'depth': 4, 'heads': 4, 'layers': 4, 'head_type': 'quantile', 'causal': True, 'aux': True, 'quantiles': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9], 'choi_representation': 'hermitian_real_vector', 'ptm_ablation': False}, 'seed': 4, 'device': 'cuda', 'wandb': {'mode': 'offline'}, 'data': {'train': 'data/collision/train.npz', 'val': 'data/collision/calib.npz'}, 'train': {'epochs': 80, 'batch_size': 256, 'lr': 0.0003, 'lr_min': 1e-06, 'warmup_epochs': 10, 'restart_epochs': 20, 'weight_decay': 0.0001, 'aux_weight': 0.1, 'grad_clip': 1.0, 'ckpt_dir': 'checkpoints/collision', 'ckpt_name': 'bidir_seed4.pt', 'curriculum': False, 'curriculum_schedule': [4, 8, 16, 48], 'patience': 20}}",
+    "projection_bias": [
+      0.0010820021852850914,
+      -3.003354072570801,
+      -3.0084824562072754,
+      -3.005817413330078,
+      -3.0194919109344482,
+      -3.0129685401916504,
+      -3.0121710300445557,
+      -3.0242528915405273,
+      -3.0267536640167236
+    ]
+  }
+]

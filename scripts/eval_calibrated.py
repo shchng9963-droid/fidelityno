@@ -22,6 +22,7 @@ def ece_quantile(q, y, levels):
 
 
 def crps_from_quantiles(q, y, levels):
+    """Finite-grid quantile score, retained under this name for the API."""
     return float(2 * pinball_np(q, y, levels))
 
 
@@ -48,7 +49,10 @@ def predict(model, ds, batch_size=256):
 
 
 def conformal_offsets(q_cal, y_cal, levels):
-    """Additive per-quantile calibration: q'_a(x)=q_a(x)+Quantile_a(y-q_a(x))."""
+    """Empirical residual offsets, without finite-sample conformal guarantees.
+
+    Uses interpolated empirical quantiles without the conformal rank correction.
+    """
     levels = np.asarray(levels)
     residuals = y_cal[:, None] - q_cal
     offsets = np.array([np.quantile(residuals[:, j], levels[j]) for j in range(len(levels))], dtype=float)
@@ -121,7 +125,9 @@ def eval_ckpt_calibrated(ckpt_path, data_dir, out_csv, cal_fraction=0.5, cal_see
                 'mae': float(np.abs(mean[mask] - y[mask]).mean()),
                 'pinball': pinball_np(q[mask], y[mask], levels),
                 'crps': crps_from_quantiles(q[mask], y[mask], levels),
-                'ece': ece,
+                'ece': ece_quantile(q[mask], y[mask], levels)[0],
+                'pooled_ece': ece,
+                'quantile_score': crps_from_quantiles(q[mask], y[mask], levels),
                 'latency_ms': latency,
                 'cal_fraction': effective_cal_fraction,
                 'calibration_source': calibration_source,

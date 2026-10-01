@@ -1,0 +1,575 @@
+{
+  "design_sha256": "3ae9c2a5ef5e2da33433197758e27614ecd0adb7b340b6a06d1cc2cba600269a",
+  "validation_sha256": "b12f83b5e00cb5770cf6e502d084bbd3c7ce25bcedc3a97f28a9ef73728b2e84",
+  "selections": [
+    {
+      "target": 0.03,
+      "role": "dfe",
+      "configuration": null
+    },
+    {
+      "target": 0.03,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 256,
+        "offline_shots": 4096,
+        "validation_mae": 0.0296251639787144,
+        "guard": 0.0297445865684539
+      }
+    },
+    {
+      "target": 0.03,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "fixed",
+        "shots": 256,
+        "offline_shots": 4096,
+        "validation_mae": 0.0277262467541957,
+        "guard": 0.028161793966181
+      }
+    },
+    {
+      "target": 0.03,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "fixed",
+        "shots": 256,
+        "offline_shots": 4096,
+        "validation_mae": 0.0290075303248533,
+        "guard": 0.0297734770519098
+      }
+    },
+    {
+      "target": 0.035,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 256,
+        "offline_shots": 0,
+        "validation_mae": 0.0313446333663141,
+        "guard": 0.0314840428979432
+      }
+    },
+    {
+      "target": 0.035,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 192,
+        "offline_shots": 4096,
+        "validation_mae": 0.0336638932960237,
+        "guard": 0.0337866276327046
+      }
+    },
+    {
+      "target": 0.035,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "fixed",
+        "shots": 192,
+        "offline_shots": 4096,
+        "validation_mae": 0.0306341788757684,
+        "guard": 0.0310824694556576
+      }
+    },
+    {
+      "target": 0.035,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "fixed",
+        "shots": 192,
+        "offline_shots": 4096,
+        "validation_mae": 0.0321802841523389,
+        "guard": 0.0330767083146366
+      }
+    },
+    {
+      "target": 0.04,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 192,
+        "offline_shots": 0,
+        "validation_mae": 0.0361935270078538,
+        "guard": 0.0363545451787033
+      }
+    },
+    {
+      "target": 0.04,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 192,
+        "offline_shots": 4096,
+        "validation_mae": 0.0336638932960237,
+        "guard": 0.0337866276327046
+      }
+    },
+    {
+      "target": 0.04,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "fixed",
+        "shots": 80,
+        "offline_shots": 4096,
+        "validation_mae": 0.0388984061207618,
+        "guard": 0.0394196895992517
+      }
+    },
+    {
+      "target": 0.04,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "fixed",
+        "shots": 128,
+        "offline_shots": 4096,
+        "validation_mae": 0.0367360032901045,
+        "guard": 0.0380228659438665
+      }
+    },
+    {
+      "target": 0.045,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 128,
+        "offline_shots": 0,
+        "validation_mae": 0.044316884572334,
+        "guard": 0.044512221788862
+      }
+    },
+    {
+      "target": 0.045,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 128,
+        "offline_shots": 4096,
+        "validation_mae": 0.0399553310189312,
+        "guard": 0.0401107781381243
+      }
+    },
+    {
+      "target": 0.045,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "fixed",
+        "shots": 44,
+        "offline_shots": 4096,
+        "validation_mae": 0.0438632189255576,
+        "guard": 0.0445280580954679
+      }
+    },
+    {
+      "target": 0.045,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "fixed",
+        "shots": 76,
+        "offline_shots": 4096,
+        "validation_mae": 0.0425482440002421,
+        "guard": 0.0446991305688071
+      }
+    },
+    {
+      "target": 0.05,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 128,
+        "offline_shots": 0,
+        "validation_mae": 0.044316884572334,
+        "guard": 0.044512221788862
+      }
+    },
+    {
+      "target": 0.05,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 76,
+        "offline_shots": 4096,
+        "validation_mae": 0.0493162025061109,
+        "guard": 0.049530214484535
+      }
+    },
+    {
+      "target": 0.05,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "fixed",
+        "shots": 24,
+        "offline_shots": 4096,
+        "validation_mae": 0.0486682670742919,
+        "guard": 0.0494831784549738
+      }
+    },
+    {
+      "target": 0.05,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "fixed",
+        "shots": 52,
+        "offline_shots": 4096,
+        "validation_mae": 0.0464243781325141,
+        "guard": 0.0493663730963516
+      }
+    },
+    {
+      "target": 0.053,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 92,
+        "offline_shots": 0,
+        "validation_mae": 0.0524713510970775,
+        "guard": 0.0527216498845087
+      }
+    },
+    {
+      "target": 0.053,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 64,
+        "offline_shots": 4096,
+        "validation_mae": 0.0524186904263464,
+        "guard": 0.0526750840137378
+      }
+    },
+    {
+      "target": 0.053,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "pilot",
+        "shots": 3,
+        "offline_shots": 4096,
+        "validation_mae": 0.0493428687295323,
+        "guard": 0.0503556907898576
+      }
+    },
+    {
+      "target": 0.053,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "fixed",
+        "shots": 40,
+        "offline_shots": 4096,
+        "validation_mae": 0.0490546636650857,
+        "guard": 0.0525505905080103
+      }
+    },
+    {
+      "target": 0.055,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 84,
+        "offline_shots": 0,
+        "validation_mae": 0.0546729003881254,
+        "guard": 0.0549176772381692
+      }
+    },
+    {
+      "target": 0.055,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 60,
+        "offline_shots": 4096,
+        "validation_mae": 0.0536510010717931,
+        "guard": 0.0538956268289289
+      }
+    },
+    {
+      "target": 0.055,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "pilot",
+        "shots": 3,
+        "offline_shots": 4096,
+        "validation_mae": 0.0493428687295323,
+        "guard": 0.0503556907898576
+      }
+    },
+    {
+      "target": 0.055,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "fixed",
+        "shots": 36,
+        "offline_shots": 4096,
+        "validation_mae": 0.0500822657394434,
+        "guard": 0.0537958917614684
+      }
+    },
+    {
+      "target": 0.06,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 72,
+        "offline_shots": 0,
+        "validation_mae": 0.0591593926674492,
+        "guard": 0.0594278729767335
+      }
+    },
+    {
+      "target": 0.06,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 48,
+        "offline_shots": 4096,
+        "validation_mae": 0.0581326165218741,
+        "guard": 0.0584496665052676
+      }
+    },
+    {
+      "target": 0.06,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "pilot",
+        "shots": 3,
+        "offline_shots": 4096,
+        "validation_mae": 0.0493428687295323,
+        "guard": 0.0503556907898576
+      }
+    },
+    {
+      "target": 0.06,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "fixed",
+        "shots": 24,
+        "offline_shots": 4096,
+        "validation_mae": 0.0542134620631693,
+        "guard": 0.0587086949941765
+      }
+    },
+    {
+      "target": 0.065,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 60,
+        "offline_shots": 0,
+        "validation_mae": 0.0646360719611693,
+        "guard": 0.0649249958231745
+      }
+    },
+    {
+      "target": 0.065,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 36,
+        "offline_shots": 4096,
+        "validation_mae": 0.0640953288336682,
+        "guard": 0.064513049795535
+      }
+    },
+    {
+      "target": 0.065,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "pilot",
+        "shots": 3,
+        "offline_shots": 4096,
+        "validation_mae": 0.0493428687295323,
+        "guard": 0.0503556907898576
+      }
+    },
+    {
+      "target": 0.065,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "fixed",
+        "shots": 4,
+        "offline_shots": 4096,
+        "validation_mae": 0.0579135959358208,
+        "guard": 0.0645801611071598
+      }
+    },
+    {
+      "target": 0.07,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 52,
+        "offline_shots": 0,
+        "validation_mae": 0.0696385010555131,
+        "guard": 0.0699424097582679
+      }
+    },
+    {
+      "target": 0.07,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 32,
+        "offline_shots": 4096,
+        "validation_mae": 0.0668226725031174,
+        "guard": 0.0672891614733565
+      }
+    },
+    {
+      "target": 0.07,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "pilot",
+        "shots": 3,
+        "offline_shots": 4096,
+        "validation_mae": 0.0493428687295323,
+        "guard": 0.0503556907898576
+      }
+    },
+    {
+      "target": 0.07,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "pilot",
+        "shots": 3,
+        "offline_shots": 4096,
+        "validation_mae": 0.0582171302546666,
+        "guard": 0.0650312455492604
+      }
+    },
+    {
+      "target": 0.075,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 48,
+        "offline_shots": 0,
+        "validation_mae": 0.072494277414371,
+        "guard": 0.072817304413569
+      }
+    },
+    {
+      "target": 0.075,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 24,
+        "offline_shots": 4096,
+        "validation_mae": 0.0730703403041811,
+        "guard": 0.0736331391220632
+      }
+    },
+    {
+      "target": 0.075,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "pilot",
+        "shots": 3,
+        "offline_shots": 4096,
+        "validation_mae": 0.0493428687295323,
+        "guard": 0.0503556907898576
+      }
+    },
+    {
+      "target": 0.075,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "pilot",
+        "shots": 3,
+        "offline_shots": 4096,
+        "validation_mae": 0.0582171302546666,
+        "guard": 0.0650312455492604
+      }
+    },
+    {
+      "target": 0.08,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 40,
+        "offline_shots": 0,
+        "validation_mae": 0.0794084702155493,
+        "guard": 0.0797514070578492
+      }
+    },
+    {
+      "target": 0.08,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 20,
+        "offline_shots": 4096,
+        "validation_mae": 0.0780208677675943,
+        "guard": 0.0787025052205864
+      }
+    },
+    {
+      "target": 0.08,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "pilot",
+        "shots": 3,
+        "offline_shots": 4096,
+        "validation_mae": 0.0493428687295323,
+        "guard": 0.0503556907898576
+      }
+    },
+    {
+      "target": 0.08,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "pilot",
+        "shots": 3,
+        "offline_shots": 4096,
+        "validation_mae": 0.0582171302546666,
+        "guard": 0.0650312455492604
+      }
+    }
+  ]
+}

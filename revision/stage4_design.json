@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-02",
+  "status": "external-review follow-up fixed before new test generation",
+  "families": ["zz", "exchange"],
+  "test_seeds": {"zz": [202610041, 9202610041], "exchange": [202610042, 9202610042]},
+  "test_n": 4096,
+  "selection": "Reuse completed stage-two validation curves only. Select each shrinkage class separately, same grid and guard, before fresh test generation. Preserve original primary results as historical confirmation.",
+  "classes": {"dfe": "dfe", "constant": "constant_mean_eb", "ridge": "summary_ridge_eb", "neural": "neural_eb"},
+  "targets": [0.03, 0.035, 0.04, 0.045, 0.05, 0.053, 0.055, 0.06, 0.065, 0.07, 0.075, 0.08],
+  "primary_followup_targets": [0.065, 0.053],
+  "zero_query": "Report adapted constant, product, exact-marginal, ridge and neural priors separately. Shrinkage-class selections here require positive query shots so any zero-query dominance remains visible.",
+  "calibration": "Reuse the 20 disjoint 64-example groups and original finite-shot label streams. Evaluate all 5 frozen neural checkpoints and all 5 label-outcome repetitions.",
+  "inference": "2000 shared crossed/hierarchical bootstrap resamples. Pointwise mean-risk intervals for all target curves, explicitly exploratory beyond two headline targets. Simultaneous one-sided 97.5th percentile for two headline neural-vs-constant contrasts; report paired ridge and DFE contrasts separately.",
+  "deployment_variability": "Across single fitted calibrations/checkpoints report distribution of test-set MAE: median, 5th/95th percentile, fraction below target. Retain label-outcome repeat as part of one deployment. Also aggregate repeats within group/checkpoint. These are empirical frequencies, not deployment guarantees.",
+  "larger_bath": {"system_qubits": 1, "bath_qubits": 2, "model": "noncommuting exchange to both bath spins, bath-bath XX+YY interaction, local Z fields, dispersive ZZ; full bath retained or reset together", "calibration_n": 1280, "validation_n": 4096, "test_n": 4096, "audit_n": 512, "lengths": [8,16,24], "eta": [0.85,0.99], "calibration_parameter_seed": 202610051, "validation_parameter_seed": 202610052, "test_parameter_seed": 202610053, "eta_seeds": [9202610051,9202610052,9202610053], "audit_seed": 202610054, "budgets": [4,8,12,16,20,24,28,32,36,40,48,56,64,80,96,128,192,256], "methods": ["dfe", "constant_mean_eb", "summary_ridge_eb"], "allocation": "balanced nonidentity X,Y,Z; no neural checkpoint or ancilla", "test_access": "lock non-neural budgets from validation before evaluating generated test outcomes"},
+  "interval_extrema": "Counterfactual retention trajectory only, not entire fibre. Chebyshev polynomial degree at most L-1, stationary points plus endpoints, independently validated physical values and bounded local polishing. Compare [0.85,0.99] with [0,1]. Numerical extrema, not a formal global certificate.",
+  "conformal": "Do not claim noiseless-target split-conformal coverage from 64 finite-shot DFE labels without a valid measurement-error treatment. Retain reduced uncertainty claims; explain this constraint.",
+  "publication": "User authorises release of code, data and frozen models only. No manuscript, editor letter or reviewer report in public repository/release. All three authors have affiliations 1 and 2."
+}

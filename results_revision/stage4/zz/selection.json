@@ -1,0 +1,582 @@
+{
+  "design_sha256": "3ae9c2a5ef5e2da33433197758e27614ecd0adb7b340b6a06d1cc2cba600269a",
+  "validation_sha256": "72750f5a22fbe859231d00caf036d41353284a97af36d66c56f5d8474e9ba20f",
+  "selections": [
+    {
+      "target": 0.03,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "zz_known",
+        "shots": 192,
+        "offline_shots": 0,
+        "validation_mae": 0.0260428725857673,
+        "guard": 0.0261390120224858
+      }
+    },
+    {
+      "target": 0.03,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "zz_known",
+        "shots": 192,
+        "offline_shots": 4096,
+        "validation_mae": 0.0258350385078968,
+        "guard": 0.0259216448467612
+      }
+    },
+    {
+      "target": 0.03,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "zz_known",
+        "shots": 192,
+        "offline_shots": 4096,
+        "validation_mae": 0.0252169555621031,
+        "guard": 0.0253039327366879
+      }
+    },
+    {
+      "target": 0.03,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "zz_known",
+        "shots": 192,
+        "offline_shots": 4096,
+        "validation_mae": 0.0251194296546381,
+        "guard": 0.0252151391798978
+      }
+    },
+    {
+      "target": 0.035,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "zz_known",
+        "shots": 128,
+        "offline_shots": 0,
+        "validation_mae": 0.0319834163577797,
+        "guard": 0.0321046409013759
+      }
+    },
+    {
+      "target": 0.035,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "zz_known",
+        "shots": 128,
+        "offline_shots": 4096,
+        "validation_mae": 0.0315877935900165,
+        "guard": 0.0316940322017325
+      }
+    },
+    {
+      "target": 0.035,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "zz_known",
+        "shots": 96,
+        "offline_shots": 4096,
+        "validation_mae": 0.0346352387553573,
+        "guard": 0.0347818703725524
+      }
+    },
+    {
+      "target": 0.035,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "zz_known",
+        "shots": 96,
+        "offline_shots": 4096,
+        "validation_mae": 0.0343328677085217,
+        "guard": 0.0345105778267677
+      }
+    },
+    {
+      "target": 0.04,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "zz_known",
+        "shots": 84,
+        "offline_shots": 0,
+        "validation_mae": 0.0393779318261251,
+        "guard": 0.0395235165035639
+      }
+    },
+    {
+      "target": 0.04,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "zz_known",
+        "shots": 80,
+        "offline_shots": 4096,
+        "validation_mae": 0.0396842278537523,
+        "guard": 0.0398199096354065
+      }
+    },
+    {
+      "target": 0.04,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "zz_known",
+        "shots": 72,
+        "offline_shots": 4096,
+        "validation_mae": 0.0392848246496422,
+        "guard": 0.0394389462997171
+      }
+    },
+    {
+      "target": 0.04,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "zz_known",
+        "shots": 72,
+        "offline_shots": 4096,
+        "validation_mae": 0.0388059322505865,
+        "guard": 0.0390113390680788
+      }
+    },
+    {
+      "target": 0.045,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "zz_known",
+        "shots": 68,
+        "offline_shots": 0,
+        "validation_mae": 0.0439220306551439,
+        "guard": 0.0440939291090819
+      }
+    },
+    {
+      "target": 0.045,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "zz_known",
+        "shots": 64,
+        "offline_shots": 4096,
+        "validation_mae": 0.0442096063940368,
+        "guard": 0.044348502840353
+      }
+    },
+    {
+      "target": 0.045,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "zz_known",
+        "shots": 56,
+        "offline_shots": 4096,
+        "validation_mae": 0.0436281035573676,
+        "guard": 0.0438489560933427
+      }
+    },
+    {
+      "target": 0.045,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "zz_known",
+        "shots": 52,
+        "offline_shots": 4096,
+        "validation_mae": 0.0443380938000364,
+        "guard": 0.0446302930382254
+      }
+    },
+    {
+      "target": 0.05,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "zz_known",
+        "shots": 56,
+        "offline_shots": 0,
+        "validation_mae": 0.0482641665250152,
+        "guard": 0.048444334031664
+      }
+    },
+    {
+      "target": 0.05,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "zz_known",
+        "shots": 52,
+        "offline_shots": 4096,
+        "validation_mae": 0.0487280460639115,
+        "guard": 0.0488753439183653
+      }
+    },
+    {
+      "target": 0.05,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "zz_known",
+        "shots": 44,
+        "offline_shots": 4096,
+        "validation_mae": 0.0481818135852379,
+        "guard": 0.048429970103999
+      }
+    },
+    {
+      "target": 0.05,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "zz_known",
+        "shots": 40,
+        "offline_shots": 4096,
+        "validation_mae": 0.0489774044378063,
+        "guard": 0.0493522342279869
+      }
+    },
+    {
+      "target": 0.053,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "zz_known",
+        "shots": 48,
+        "offline_shots": 0,
+        "validation_mae": 0.0522340236813094,
+        "guard": 0.0524324567821581
+      }
+    },
+    {
+      "target": 0.053,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "zz_known",
+        "shots": 44,
+        "offline_shots": 4096,
+        "validation_mae": 0.0527493599794565,
+        "guard": 0.0529451487331549
+      }
+    },
+    {
+      "target": 0.053,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "zz_known",
+        "shots": 36,
+        "offline_shots": 4096,
+        "validation_mae": 0.0520909430637757,
+        "guard": 0.0523971236682245
+      }
+    },
+    {
+      "target": 0.053,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "zz_known",
+        "shots": 36,
+        "offline_shots": 4096,
+        "validation_mae": 0.0509883813413205,
+        "guard": 0.0514042348611887
+      }
+    },
+    {
+      "target": 0.055,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "zz_known",
+        "shots": 44,
+        "offline_shots": 0,
+        "validation_mae": 0.0546579509793032,
+        "guard": 0.0548774157602558
+      }
+    },
+    {
+      "target": 0.055,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "zz_known",
+        "shots": 44,
+        "offline_shots": 4096,
+        "validation_mae": 0.0527493599794565,
+        "guard": 0.0529451487331549
+      }
+    },
+    {
+      "target": 0.055,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "zz_known",
+        "shots": 32,
+        "offline_shots": 4096,
+        "validation_mae": 0.0542643940539867,
+        "guard": 0.0546334215412374
+      }
+    },
+    {
+      "target": 0.055,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "zz_known",
+        "shots": 32,
+        "offline_shots": 4096,
+        "validation_mae": 0.0530944382506809,
+        "guard": 0.0535409485525195
+      }
+    },
+    {
+      "target": 0.06,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "zz_known",
+        "shots": 40,
+        "offline_shots": 0,
+        "validation_mae": 0.0571878339016184,
+        "guard": 0.0573973656923772
+      }
+    },
+    {
+      "target": 0.06,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "zz_known",
+        "shots": 36,
+        "offline_shots": 4096,
+        "validation_mae": 0.0579579097270367,
+        "guard": 0.058130440256602
+      }
+    },
+    {
+      "target": 0.06,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "zz_known",
+        "shots": 28,
+        "offline_shots": 4096,
+        "validation_mae": 0.0571825832947732,
+        "guard": 0.0575956480129117
+      }
+    },
+    {
+      "target": 0.06,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "zz_known",
+        "shots": 24,
+        "offline_shots": 4096,
+        "validation_mae": 0.0585552695631509,
+        "guard": 0.0591400132434827
+      }
+    },
+    {
+      "target": 0.065,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "zz_known",
+        "shots": 32,
+        "offline_shots": 0,
+        "validation_mae": 0.063958408982271,
+        "guard": 0.0642004963030414
+      }
+    },
+    {
+      "target": 0.065,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "zz_known",
+        "shots": 32,
+        "offline_shots": 4096,
+        "validation_mae": 0.0610256120024949,
+        "guard": 0.0612075767776251
+      }
+    },
+    {
+      "target": 0.065,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "zz_known",
+        "shots": 20,
+        "offline_shots": 4096,
+        "validation_mae": 0.0642858908488617,
+        "guard": 0.064857425979215
+      }
+    },
+    {
+      "target": 0.065,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "zz_known",
+        "shots": 20,
+        "offline_shots": 4096,
+        "validation_mae": 0.0622647181505336,
+        "guard": 0.0629663365509955
+      }
+    },
+    {
+      "target": 0.07,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "zz_known",
+        "shots": 28,
+        "offline_shots": 0,
+        "validation_mae": 0.0685572267031992,
+        "guard": 0.0688321589223763
+      }
+    },
+    {
+      "target": 0.07,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "zz_known",
+        "shots": 24,
+        "offline_shots": 4096,
+        "validation_mae": 0.0696546859318633,
+        "guard": 0.0698933927591158
+      }
+    },
+    {
+      "target": 0.07,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "zz_known",
+        "shots": 16,
+        "offline_shots": 4096,
+        "validation_mae": 0.0692926512972155,
+        "guard": 0.0699812010801462
+      }
+    },
+    {
+      "target": 0.07,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "zz_known",
+        "shots": 16,
+        "offline_shots": 4096,
+        "validation_mae": 0.0667092460635936,
+        "guard": 0.0675329222307409
+      }
+    },
+    {
+      "target": 0.075,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "zz_known",
+        "shots": 24,
+        "offline_shots": 0,
+        "validation_mae": 0.0740709402641368,
+        "guard": 0.0743634953944324
+      }
+    },
+    {
+      "target": 0.075,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "zz_known",
+        "shots": 24,
+        "offline_shots": 4096,
+        "validation_mae": 0.0696546859318633,
+        "guard": 0.0698933927591158
+      }
+    },
+    {
+      "target": 0.075,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "zz_known",
+        "shots": 16,
+        "offline_shots": 4096,
+        "validation_mae": 0.0692926512972155,
+        "guard": 0.0699812010801462
+      }
+    },
+    {
+      "target": 0.075,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "zz_known",
+        "shots": 12,
+        "offline_shots": 4096,
+        "validation_mae": 0.0735375250496676,
+        "guard": 0.0744857008489301
+      }
+    },
+    {
+      "target": 0.08,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "zz_known",
+        "shots": 24,
+        "offline_shots": 0,
+        "validation_mae": 0.0740709402641368,
+        "guard": 0.0743634953944324
+      }
+    },
+    {
+      "target": 0.08,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "zz_known",
+        "shots": 20,
+        "offline_shots": 4096,
+        "validation_mae": 0.0755679083707589,
+        "guard": 0.0758683838621647
+      }
+    },
+    {
+      "target": 0.08,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "zz_known",
+        "shots": 12,
+        "offline_shots": 4096,
+        "validation_mae": 0.0766302717879467,
+        "guard": 0.0774623194859356
+      }
+    },
+    {
+      "target": 0.08,
+      "role": "neural",
+      "configuration": {
+        "method": "neural_eb",
+        "allocation": "zz_known",
+        "shots": 12,
+        "offline_shots": 4096,
+        "validation_mae": 0.0735375250496676,
+        "guard": 0.0744857008489301
+      }
+    }
+  ]
+}

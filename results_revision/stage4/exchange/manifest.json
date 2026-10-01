@@ -1,0 +1,7 @@
+{
+  "selection_sha256": "e2c52a68f31facafa1a758d092bc90238262799de886d8005e951677dd0b95e1",
+  "test_sha256": "990e8b41178141330a991cecf52a12b1cb082e5073f225626e58c374ad9cd3ff",
+  "design_sha256": "3ae9c2a5ef5e2da33433197758e27614ecd0adb7b340b6a06d1cc2cba600269a",
+  "test_n": 4096,
+  "independent_of_stage2_test": true
+}

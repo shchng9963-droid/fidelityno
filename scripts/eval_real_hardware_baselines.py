@@ -2,7 +2,7 @@
 
 Reads each ``data/real_hardware/<backend>/real_hw_test.npz`` and computes:
   - product_bound:        F = ∏ F_i
-  - fvg_bound:            F = max(0, 1 - Σ (1 - F_i))   (Fuchs–van de Graaf)
+  - infidelity_sum_heuristic: F = max(0, 1 - Σ (1 - F_i)); not a general bound
   - diamond_telescope:    F = max(0, 1 - Σ √(1 - F_i^2))
   - analytic_best:        max of the above
   - mc_K                  for K ∈ {10, 100, 1000}: importance-sampled
@@ -74,7 +74,7 @@ def analytic_predictions(d: dict) -> dict[str, np.ndarray]:
     diamond_lb = np.clip(1.0 - np.sum(np.where(mask > 0, sqrt_term, 0.0), axis=1), 0, 1)
     return {
         "product_bound": prod,
-        "fvg_bound": fvg,
+        "infidelity_sum_heuristic": fvg,
         "diamond_telescope": diamond_lb,
         "analytic_best": np.maximum(diamond_lb, prod),
     }

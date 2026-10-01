@@ -1,0 +1,26 @@
+{
+  "design_sha256": "3ae9c2a5ef5e2da33433197758e27614ecd0adb7b340b6a06d1cc2cba600269a",
+  "physical_source_sha256": "aa98d2e7ba0115bc6b4d76b563745e2f9b308ead27cddbf8c6639f2314247cac",
+  "parameter_low": [
+    0.08,
+    0.08,
+    0.02,
+    0.02,
+    0.08,
+    0.08,
+    0.02,
+    0.25
+  ],
+  "parameter_high": [
+    0.25,
+    0.25,
+    0.12,
+    0.12,
+    0.3,
+    0.3,
+    0.1,
+    0.9
+  ],
+  "max_reset_composition_error": 4.440892098500626e-15,
+  "data_sha256": "4cfe26cf759cebfa64e0fe6a1390cd367174637c1cf39f8b04b50b79b54863c1"
+}

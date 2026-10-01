@@ -1,0 +1,62 @@
+MLST major revision: exact evaluation order
+
+This file documents the original corrected confirmation. The follow-up in
+REPRODUCE_FOLLOWUP.txt adds per-class locks, fresh tests and a larger bath.
+Manuscript and review correspondence are excluded from this data/code archive.
+
+1. Use Python 3.11 and the declared dependencies. The recorded evaluation
+   environment used NumPy 2.4.6, SciPy 1.17.1 and PyTorch 2.12.0+cu130.
+   Run: python -m pytest -q
+
+2. Five frozen source checkpoints are under checkpoints/collision/ in the
+   archive. Their hashes and source configurations are recorded in
+   results_revision/stage3/{zz,exchange}/checkpoints.json. The evaluation
+   does not retrain them on target data.
+
+3. Original generated target data and completed results are included. To
+   regenerate, use a separate clean working copy. Generation and completed
+   audit scripts intentionally reject overwriting completed outputs.
+   For each family in zz and exchange:
+   python scripts/run_revision_generation.py --family FAMILY
+
+4. In a clean results directory, run eval_revision_confirmatory.py with
+   --family FAMILY --split validation --ckpts checkpoint_paths for BOTH
+   families. Then run python scripts/lock_revision_controls.py once, without
+   arguments. It locks both families before either test is evaluated.
+   Only then run eval_revision_confirmatory.py with
+   --family FAMILY --split test --ckpts checkpoint_paths.
+   Use all five checkpoints, not the best seed.
+
+5. Run: python scripts/analyze_revision_confirmation.py --family FAMILY
+   This reconstructs paired intervals from per-query saved errors.
+   Primary model selection is fixed by stage2_design.json and the saved
+   validation hashes. Do not replace failed test choices.
+
+6. The grid audit uses eval_revision_grid.py, with --family zz --n-base 2048
+   --seed 20260807, or --family exchange --n-base 1024 --seed 20260810,
+   plus --out results_revision/stage2/FAMILY/grid in a clean copy.
+
+7. Secondary readout/uncertainty:
+   python scripts/audit_revision_uncertainty_readout.py --family FAMILY
+       --ckpts checkpoint_paths
+   This uses completed stage-two caches and the original data. It does not
+   choose new budgets. Its zero-noise measurement streams are independent of
+   the primary analysis and need not reproduce its exact sample means.
+
+8. Figure reproduction:
+   python scripts/plot_revision_manuscript.py
+   Figures/tables are derived only from saved numerical results. The script
+   creates revision/manuscript/ outputs when needed; manuscript prose is not
+   distributed in the data/code archive.
+
+Key findings to preserve when reporting
+- ZZ common targets: DFE32 versus neural residual-shrinkage20 and DFE48
+  versus neural residual-shrinkage36. Savings 37.5% and 25%, respectively.
+- Offline cost4096; 12 shots saved/query; first strict saving at query342.
+- Exchange ridge prior alone confirms both targets, with no query shots.
+- Exchange0.065 neural/DFE pair fails common-target confirmation.
+- Ordered bounded raw quantiles have near-zero OOD central coverage.
+- Readout stress at known 5% flips does not confirm unchanged clean targets.
+
+These conclusions are about deployment measurement shots, not full lifecycle
+cost. Stage four adds a larger retained bath, not hardware execution.

@@ -87,4 +87,4 @@ def test_stratified_dfe_is_exact_for_identity_channel() -> None:
     )
     assert res.F_hat == pytest.approx(1.0)
     assert res.quantum_shots == 40
-    assert res.n_unique_paulis == 4
+    assert res.n_unique_paulis == 3

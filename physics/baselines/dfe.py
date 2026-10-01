@@ -1,8 +1,7 @@
 """Direct Fidelity Estimation (DFE) baseline.
 
-Implements the Flammia-Liu (PRL 106, 230501, 2011) protocol for estimating
-the entanglement fidelity F_e(Lambda, V) between a target unitary V and a
-noisy implementation Lambda from a small number of Pauli measurements.
+Identity-target Pauli estimator for entanglement fidelity. This diagonal
+PTM implementation does not implement arbitrary-unitary-target DFE.
 
 We support two "noise" levels for the simulated hardware reference:
 
@@ -15,18 +14,11 @@ We support two "noise" levels for the simulated hardware reference:
                      measurement on hardware (default M=200).  This is the
                      real-experiment estimator.
 
-For an n-qubit register acting on dimension d=2**n the protocol is:
-
-  1. Build the characteristic function chi_V(P) = Tr[P V P V^dagger] / d
-     for the IDEAL target.  For V = I (the case for noise channels), this
-     gives chi_V(P) = 1 for all P, so the relevance distribution is
-     uniform; for a general target unitary V, importance sampling sharply
-     reduces variance.
-  2. Compute chi_V(P)^2 / d^2 to get the importance distribution Pr(P).
-  3. Sample S Paulis from Pr(P).  For each, compute chi_Lambda(P) =
-     Tr[P Lambda(P)] / d.
-  4. Average X_i = chi_Lambda(P_i) / chi_V(P_i) to estimate F_e:
-       Fhat = (1/S) sum_i X_i.
+For dimension d=2**n, chi_Lambda(P)=Tr[P Lambda(P)]/d and
+F_e=(1+sum_{P != I} chi_Lambda(P))/d**2. The identity contribution is
+known from trace preservation and is never sampled. IID samples the
+nonidentity settings uniformly; stratified enumerates them at a fixed
+total shot budget. Exact mode is a diagnostic and counts zero shots.
 
 Cited:  Flammia & Liu, PRL 106, 230501 (2011); da Silva, Landon-Cardinal,
 Poulin, PRL 107, 210404 (2011).
@@ -160,14 +152,14 @@ def direct_fidelity_estimate(
     Parameters
     ----------
     channels:        ordered list of `Channel` objects in the cascade.
-    target_unitary:  ideal unitary V on the same dimension. If None, V = I
-                     (noise-channel case).
+    target_unitary:  identity up to global phase, or None. A general target
+                     requires a different measurement protocol and is rejected.
     num_paulis:      S, number of importance-sampled Paulis.
     M_per_pauli:     M, projective-measurement repetitions per Pauli, used
                      to inject finite-shot variance when noise="finite".
     noise:           "exact" or "finite".
     strategy:        "iid" samples Paulis with replacement; "stratified"
-                     enumerates every nonzero-relevance Pauli.
+                     enumerates nonidentity Pauli settings.
     total_shots:     fixed budget for stratified DFE. Defaults to
                      ``num_paulis * M_per_pauli``.
     rng:             numpy Generator (defaults to default_rng()).
@@ -186,13 +178,25 @@ def direct_fidelity_estimate(
     if target_unitary is None:
         target_unitary = np.eye(d, dtype=complex)
 
+    # This implementation samples diagonal PTM entries. Their overlap is
+    # sufficient for the identity target, not a general target unitary.
+    phase = np.trace(target_unitary) / d
+    if not np.allclose(target_unitary, phase * np.eye(d), atol=1e-12) or not np.isclose(abs(phase), 1.0):
+        raise NotImplementedError("diagonal-PTM DFE supports only the identity target up to global phase")
     chi_V = chi_unitary(target_unitary, num_qubits)        # (4^n,)
     chi_L = chi_channel(composed, num_qubits)              # (4^n,)
+    if not np.isclose(chi_L[0], 1.0, atol=1e-7):
+        raise ValueError("identity contribution requires a trace-preserving channel")
+    chi_L[0] = 1.0
     F_exact = float(np.dot(chi_L, chi_V) / d ** 2)
 
     # Importance sampling: Pr(P) = chi_V(P)^2 / d^2
     weights = chi_V ** 2 / d ** 2
     weights = weights / weights.sum()  # numerical safety
+    # Trace preservation fixes the identity contribution at 1/d**2.
+    # Every counted shot is spent on a nonidentity observable.
+    weights[0] = 0.0
+    weights /= weights.sum()
     if noise not in {"exact", "finite"}:
         raise ValueError(noise)
     S = int(num_paulis)
@@ -204,8 +208,8 @@ def direct_fidelity_estimate(
         observed = chi_L[idx]
         if noise == "finite":
             observed = _sample_pauli_mean(observed, np.full(S, M_per_pauli), rng)
-        X = observed / chi_V[idx]
-        F_hat = float(X.mean())
+        X = (d ** 2 - 1) * observed / d ** 2
+        F_hat = float(1.0 / d ** 2 + X.mean())
         sigma_proto = float(X.std(ddof=1) / np.sqrt(S)) if S > 1 else float("nan")
         quantum_shots = S * M_per_pauli if noise == "finite" else 0
         n_unique = int(np.unique(idx).size)
@@ -215,9 +219,9 @@ def direct_fidelity_estimate(
         observed = chi_L[idx]
         if noise == "finite":
             observed = _sample_pauli_mean(observed, shots, rng)
-        F_hat = float(np.sum(observed * chi_V[idx]) / d ** 2)
+        F_hat = float((1.0 + np.sum(observed * chi_V[idx])) / d ** 2)
         variances = np.maximum(1.0 - np.square(chi_L[idx]), 0.0) / shots
-        sigma_proto = float(np.sqrt(np.sum(np.square(chi_V[idx]) * variances)) / d ** 2)
+        sigma_proto = float(np.sqrt(np.sum(np.square(chi_V[idx]) * variances)) / d ** 2) if noise == "finite" else 0.0
         quantum_shots = budget if noise == "finite" else 0
         n_unique = len(idx)
     else:

@@ -1,0 +1,417 @@
+{
+  "design_sha256": "3ae9c2a5ef5e2da33433197758e27614ecd0adb7b340b6a06d1cc2cba600269a",
+  "validation_sha256": "8f77706042ddfc279fe03c3c0376cc81c97e1665946e8f01dc08ed14006b8953",
+  "selections": [
+    {
+      "target": 0.03,
+      "role": "dfe",
+      "configuration": null
+    },
+    {
+      "target": 0.03,
+      "role": "constant",
+      "configuration": null
+    },
+    {
+      "target": 0.03,
+      "role": "ridge",
+      "configuration": null
+    },
+    {
+      "target": 0.035,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 256,
+        "mae": 0.0346506163,
+        "selection_score": 0.034766219,
+        "offline_shots": 0
+      }
+    },
+    {
+      "target": 0.035,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 256,
+        "mae": 0.0322385468,
+        "selection_score": 0.0323788115,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.035,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "fixed",
+        "shots": 256,
+        "mae": 0.0315366983,
+        "selection_score": 0.0323042626,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.04,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 256,
+        "mae": 0.0346506163,
+        "selection_score": 0.034766219,
+        "offline_shots": 0
+      }
+    },
+    {
+      "target": 0.04,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 192,
+        "mae": 0.0363478288,
+        "selection_score": 0.0364887653,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.04,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "fixed",
+        "shots": 192,
+        "mae": 0.0348692089,
+        "selection_score": 0.035612103,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.045,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 192,
+        "mae": 0.0399754643,
+        "selection_score": 0.0401004595,
+        "offline_shots": 0
+      }
+    },
+    {
+      "target": 0.045,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 128,
+        "mae": 0.0428562202,
+        "selection_score": 0.0430777301,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.045,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "fixed",
+        "shots": 96,
+        "mae": 0.0432428978,
+        "selection_score": 0.0438403939,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.05,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 128,
+        "mae": 0.0489988364,
+        "selection_score": 0.0491611673,
+        "offline_shots": 0
+      }
+    },
+    {
+      "target": 0.05,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 96,
+        "mae": 0.047741387,
+        "selection_score": 0.048010817,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.05,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "fixed",
+        "shots": 56,
+        "mae": 0.0490522161,
+        "selection_score": 0.0496637248,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.053,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 128,
+        "mae": 0.0489988364,
+        "selection_score": 0.0491611673,
+        "offline_shots": 0
+      }
+    },
+    {
+      "target": 0.053,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 80,
+        "mae": 0.0508012995,
+        "selection_score": 0.0511272988,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.053,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "fixed",
+        "shots": 40,
+        "mae": 0.0521815754,
+        "selection_score": 0.0528407913,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.055,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 128,
+        "mae": 0.0489988364,
+        "selection_score": 0.0491611673,
+        "offline_shots": 0
+      }
+    },
+    {
+      "target": 0.055,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 80,
+        "mae": 0.0508012995,
+        "selection_score": 0.0511272988,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.055,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "fixed",
+        "shots": 36,
+        "mae": 0.0532770827,
+        "selection_score": 0.0539469434,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.06,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 96,
+        "mae": 0.0565721542,
+        "selection_score": 0.0567602286,
+        "offline_shots": 0
+      }
+    },
+    {
+      "target": 0.06,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 56,
+        "mae": 0.0571858287,
+        "selection_score": 0.0576285361,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.06,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "fixed",
+        "shots": 20,
+        "mae": 0.0583340563,
+        "selection_score": 0.0591588974,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.065,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 80,
+        "mae": 0.0621202849,
+        "selection_score": 0.0623226272,
+        "offline_shots": 0
+      }
+    },
+    {
+      "target": 0.065,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 40,
+        "mae": 0.0630341768,
+        "selection_score": 0.0635982995,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.065,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "fixed",
+        "shots": 4,
+        "mae": 0.0613658205,
+        "selection_score": 0.0624892214,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.07,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 64,
+        "mae": 0.0694219321,
+        "selection_score": 0.0696375445,
+        "offline_shots": 0
+      }
+    },
+    {
+      "target": 0.07,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 28,
+        "mae": 0.0692185685,
+        "selection_score": 0.0699157482,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.07,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "fixed",
+        "shots": 4,
+        "mae": 0.0613658205,
+        "selection_score": 0.0624892214,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.075,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 56,
+        "mae": 0.0742219985,
+        "selection_score": 0.0744693044,
+        "offline_shots": 0
+      }
+    },
+    {
+      "target": 0.075,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 24,
+        "mae": 0.0717334896,
+        "selection_score": 0.0725027963,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.075,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "fixed",
+        "shots": 4,
+        "mae": 0.0613658205,
+        "selection_score": 0.0624892214,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.08,
+      "role": "dfe",
+      "configuration": {
+        "method": "dfe",
+        "allocation": "fixed",
+        "shots": 56,
+        "mae": 0.0742219985,
+        "selection_score": 0.0744693044,
+        "offline_shots": 0
+      }
+    },
+    {
+      "target": 0.08,
+      "role": "constant",
+      "configuration": {
+        "method": "constant_mean_eb",
+        "allocation": "fixed",
+        "shots": 20,
+        "mae": 0.0751726031,
+        "selection_score": 0.0760211719,
+        "offline_shots": 4096
+      }
+    },
+    {
+      "target": 0.08,
+      "role": "ridge",
+      "configuration": {
+        "method": "summary_ridge_eb",
+        "allocation": "fixed",
+        "shots": 4,
+        "mae": 0.0613658205,
+        "selection_score": 0.0624892214,
+        "offline_shots": 4096
+      }
+    }
+  ]
+}

@@ -12,7 +12,13 @@ def pinball_np(q,y,levels):
 def ece_quantile(q,y,levels):
     cov=(y[:,None] <= q).mean(0); return float(np.abs(cov-np.asarray(levels)).mean()), cov
 
-def crps_from_quantiles(q,y,levels): return float(2*pinball_np(q,y,levels))
+def quantile_score(q,y,levels):
+    """Twice the mean pinball loss on the supplied grid, not exact CRPS."""
+    return float(2*pinball_np(q,y,levels))
+
+def crps_from_quantiles(q,y,levels):
+    """Legacy API for the finite-grid quantile score; no full-CDF integral."""
+    return quantile_score(q,y,levels)
 def load(path): d=np.load(path, allow_pickle=True); return d, TensorDataset(torch.tensor(d['x']).float(),torch.tensor(d['mask']).float(),torch.tensor(d['y']).float(),torch.tensor(d['stats']).float())
 def eval_ckpt(ckpt_path,splits,out_csv):
     ck=torch.load(ckpt_path,map_location='cpu',weights_only=False); cfg=OmegaConf.create(ck['cfg']); rows=[]; levels=cfg.model.quantiles
@@ -25,7 +31,9 @@ def eval_ckpt(ckpt_path,splits,out_csv):
                 pred,_=model(x,m); q=prediction_to_quantiles(pred, torch.tensor(levels, dtype=torch.float32)); preds.append(q.numpy()); ys.append(y.numpy()); nseq+=len(y)
         elapsed=time.perf_counter()-t0; q=np.concatenate(preds); y=np.concatenate(ys); mean=q.mean(1); ece,cov=ece_quantile(q,y,levels)
         for L in sorted(set(raw['length'].tolist())):
-            idx=raw['length']==L; rows.append({'model':cfg.model.name,'head_type':cfg.model.get('head_type','quantile'),'seed':cfg.seed,'split':name,'length':int(L),'mae':float(np.abs(mean[idx]-y[idx]).mean()),'pinball':pinball_np(q[idx],y[idx],levels),'crps':crps_from_quantiles(q[idx],y[idx],levels),'ece':ece,'latency_ms':1000*elapsed/max(nseq,1)})
+            idx=raw['length']==L
+            local_ece,_=ece_quantile(q[idx],y[idx],levels)
+            rows.append({'model':cfg.model.name,'head_type':cfg.model.get('head_type','quantile'),'seed':cfg.seed,'split':name,'length':int(L),'mae':float(np.abs(mean[idx]-y[idx]).mean()),'pinball':pinball_np(q[idx],y[idx],levels),'crps':crps_from_quantiles(q[idx],y[idx],levels),'quantile_score':quantile_score(q[idx],y[idx],levels),'ece':local_ece,'pooled_ece':ece,'latency_ms':1000*elapsed/max(nseq,1)})
     df=pd.DataFrame(rows); Path(out_csv).parent.mkdir(parents=True,exist_ok=True); df.to_csv(out_csv,index=False); print(df)
 if __name__=='__main__':
     ap=argparse.ArgumentParser(); ap.add_argument('--ckpt',required=True); ap.add_argument('--data-dir',default='data'); ap.add_argument('--out',default='results/summary.csv'); args=ap.parse_args()

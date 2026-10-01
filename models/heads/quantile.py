@@ -27,7 +27,7 @@ class QuantileHead(nn.Module):
         self.proj = nn.Linear(d_model, n_levels)
         # Anti-collapse init: increment bias = -3 so softplus(-3) ~= 0.049,
         # giving an initial quantile spread of ~0.4 across all 9 levels.
-        # Base bias = 0 keeps median initial output near 0.5.
+        # Base bias = 0 sets the first quantile to 0.5 for zero input.
         with torch.no_grad():
             self.proj.bias.zero_()
             if n_levels > 1:

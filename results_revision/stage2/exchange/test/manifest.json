@@ -1,0 +1,84 @@
+{
+  "family": "exchange",
+  "split": "test",
+  "data_sha256": "44c0b3e07666424ed5ebf2223f4ad5694cb2a4fe2d2c5db5d680374178462d93",
+  "calibration_sha256": "5f8075721c39bfc94559f08c58ba68600b31413bd89db2f352efd2a93148c6a1",
+  "design_sha256": "898974637b1d41e3fc6f304a6b036f08fe365f6365f72d809072012ed6269fa7",
+  "selection": {
+    "status": "locked before test",
+    "validation_summary_sha256": "b12f83b5e00cb5770cf6e502d084bbd3c7ce25bcedc3a97f28a9ef73728b2e84",
+    "design_sha256": "898974637b1d41e3fc6f304a6b036f08fe365f6365f72d809072012ed6269fa7",
+    "selections": [
+      {
+        "target": 0.065,
+        "dfe": {
+          "method": "dfe",
+          "allocation": "fixed",
+          "shots": 60,
+          "offline_shots": 0,
+          "validation_mae": 0.06463607196116936,
+          "selection_score": 0.06492499582317451
+        },
+        "hybrid": {
+          "method": "neural_eb",
+          "allocation": "fixed",
+          "shots": 4,
+          "offline_shots": 4096,
+          "validation_mae": 0.057913595935820864,
+          "selection_score": 0.06458016110715983
+        }
+      },
+      {
+        "target": 0.053,
+        "dfe": {
+          "method": "dfe",
+          "allocation": "fixed",
+          "shots": 92,
+          "offline_shots": 0,
+          "validation_mae": 0.05247135109707753,
+          "selection_score": 0.05272164988450875
+        },
+        "hybrid": {
+          "method": "neural_fusion",
+          "allocation": "fixed",
+          "shots": 36,
+          "offline_shots": 6400,
+          "validation_mae": 0.04906440116304262,
+          "selection_score": 0.05267011811007814
+        }
+      }
+    ]
+  },
+  "settings": "20 calibration groups x 5 measurement repeats x 5 fixed checkpoints",
+  "transfer": "frozen ZZ-trained checkpoints; labelled target-domain recalibration",
+  "n": 4096,
+  "calibration_n": 1280,
+  "query_calibration_input_overlap": 0,
+  "control_selection": {
+    "status": "additional control locked after validation and before test",
+    "motivation": "strong simple and zero-query-shot alternatives required by reviewers",
+    "validation_summary_sha256": "b12f83b5e00cb5770cf6e502d084bbd3c7ce25bcedc3a97f28a9ef73728b2e84",
+    "controls": [
+      {
+        "target": 0.065,
+        "control": {
+          "method": "summary_ridge_prior",
+          "allocation": "none",
+          "shots": 0,
+          "offline_shots": 4096,
+          "validation_mae": 0.049917787173855
+        }
+      },
+      {
+        "target": 0.053,
+        "control": {
+          "method": "summary_ridge_prior",
+          "allocation": "none",
+          "shots": 0,
+          "offline_shots": 4096,
+          "validation_mae": 0.049917787173855
+        }
+      }
+    ]
+  }
+}

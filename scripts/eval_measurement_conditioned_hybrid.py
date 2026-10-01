@@ -58,8 +58,8 @@ def main() -> None:
     args = ap.parse_args()
 
     budgets = [int(value) for value in args.budgets.split(",") if value.strip()]
-    if min(budgets) < 4:
-        raise ValueError("single-qubit stratified DFE requires at least four shots")
+    if min(budgets) < 3:
+        raise ValueError("single-qubit stratified DFE requires at least three nonidentity shots")
 
     raw = np.load(args.data, allow_pickle=True)
     y = raw["y"].astype(np.float64)

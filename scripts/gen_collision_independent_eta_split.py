@@ -16,6 +16,7 @@ import numpy as np
 from tqdm import tqdm
 
 from physics.channels.collision_nonmarkov import collision_sequence
+from physics.channels.collision_exchange_memory import exchange_collision_sequence
 from physics.composition import composed_stats, sequence_features
 from physics.fidelity import entanglement_fidelity
 from physics.representations import feature_dim_for_representation
@@ -31,7 +32,11 @@ def main() -> None:
     ap.add_argument("--eta-range", default="0.85,0.99")
     ap.add_argument("--max-len", type=int, default=48)
     ap.add_argument("--representation", default="choi_hermitian")
+    ap.add_argument("--family", choices=["zz", "exchange"], default="zz")
     args = ap.parse_args()
+    if Path(args.out).exists():
+        raise FileExistsError("Refusing to overwrite generated data: " + args.out)
+    generator = collision_sequence if args.family == "zz" else exchange_collision_sequence
 
     lengths = np.array(sorted({int(value) for value in args.lengths.split(",") if value.strip()}))
     eta_low, eta_high = (float(value) for value in args.eta_range.split(","))
@@ -48,10 +53,11 @@ def main() -> None:
     eta_values = eta_rng.uniform(eta_low, eta_high, size=args.n).astype(np.float32)
     true_real = np.zeros((args.n, 4, 4), dtype=np.float32)
     true_imag = np.zeros((args.n, 4, 4), dtype=np.float32)
+    params = np.full((args.n, args.max_len, 3 if args.family == "zz" else 4), np.nan)
 
     for index in tqdm(range(args.n), desc=Path(args.out).name):
         length = int(parameter_rng.choice(lengths))
-        sample = collision_sequence(
+        sample = generator(
             length,
             eta=float(eta_values[index]),
             rng=parameter_rng,
@@ -66,6 +72,7 @@ def main() -> None:
         sequence_lengths[index] = length
         true_real[index] = sample.true_choi.real.astype(np.float32)
         true_imag[index] = sample.true_choi.imag.astype(np.float32)
+        params[index, :length] = sample.params
         for step, channel in enumerate(sample.marginals):
             per_fid[index, step] = entanglement_fidelity(channel)
 
@@ -82,6 +89,8 @@ def main() -> None:
         eta=eta_values,
         true_choi_real=true_real,
         true_choi_imag=true_imag,
+        physical_parameters=params,
+        physical_family=np.array(args.family),
         parameter_seed=np.array(args.parameter_seed),
         eta_seed=np.array(args.eta_seed),
         rng_streams_independent=np.array(True),

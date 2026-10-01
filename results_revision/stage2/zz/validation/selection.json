@@ -1,0 +1,45 @@
+{
+  "status": "locked before test",
+  "validation_summary_sha256": "72750f5a22fbe859231d00caf036d41353284a97af36d66c56f5d8474e9ba20f",
+  "design_sha256": "898974637b1d41e3fc6f304a6b036f08fe365f6365f72d809072012ed6269fa7",
+  "selections": [
+    {
+      "target": 0.065,
+      "dfe": {
+        "method": "dfe",
+        "allocation": "zz_known",
+        "shots": 32,
+        "offline_shots": 0,
+        "validation_mae": 0.06395840898227106,
+        "selection_score": 0.06420049630304142
+      },
+      "hybrid": {
+        "method": "neural_eb",
+        "allocation": "zz_known",
+        "shots": 20,
+        "offline_shots": 4096,
+        "validation_mae": 0.0622647181505336,
+        "selection_score": 0.06296633655099557
+      }
+    },
+    {
+      "target": 0.053,
+      "dfe": {
+        "method": "dfe",
+        "allocation": "zz_known",
+        "shots": 48,
+        "offline_shots": 0,
+        "validation_mae": 0.05223402368130943,
+        "selection_score": 0.05243245678215819
+      },
+      "hybrid": {
+        "method": "neural_eb",
+        "allocation": "zz_known",
+        "shots": 36,
+        "offline_shots": 4096,
+        "validation_mae": 0.05098838134132055,
+        "selection_score": 0.05140423486118879
+      }
+    }
+  ]
+}

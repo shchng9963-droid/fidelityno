@@ -1,0 +1,7 @@
+{
+  "bootstrap": 2000,
+  "selection_sha256": "0c85e94239402597781f850d6f6596dcda619b07036c793f06d857809a3ed3ef",
+  "design_sha256": "898974637b1d41e3fc6f304a6b036f08fe365f6365f72d809072012ed6269fa7",
+  "statistical_scope": "selected budgets fixed before test; two target comparisons per family; exchange is external replication",
+  "break_even_scope": "deterministic quotient at fixed budgets, conditional on accuracy confirmation"
+}

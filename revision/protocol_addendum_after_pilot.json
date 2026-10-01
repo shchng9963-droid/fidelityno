@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-01",
+  "status": "amendment after observing development-pilot results, before new validation or confirmatory test data",
+  "unchanged_protocol": "statistical_protocol.json, SHA256 b33067474c45eb666f25a263d3791c62a38d25c3d4ba98913d8c107daf3290c8",
+  "structural_baseline": {
+    "name": "zz_known",
+    "justification": "Each ZZ system-bath unitary commutes with system Z, and bath resetting preserves system populations; hence chi_Z=1 at every retention and sequence length",
+    "estimator": "F_e=1/2+(chi_X+chi_Y)/4; sample only X and Y, with all shots counted",
+    "evidence": "max(abs(chi_Z-1))=0 in the archived 4096-case development dataset",
+    "role": "required family-informed DFE and matched-family hybrid comparator in the ZZ benchmark; not available in exchange benchmark without separate proof",
+    "equal_access": "all ZZ hybrid priors receive the same family-informed measurements, and may also use this label-acquisition protocol with its cost counted"
+  },
+  "head_correction": "Archived evaluations average nine quantiles, despite manuscript median wording. Preserve mean-of-quantiles results as the reproduction track; report actual median separately if evaluated",
+  "norm_correction": "The historical FvG estimator is an infidelity-sum heuristic, not a general lower bound; use normalised Choi trace-distance bound only for the channel actually represented",
+  "new_test_policy": "Do not use development-pilot confidence intervals as confirmation, or use the archived sample for final budget selection and test confirmation"
+}

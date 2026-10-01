@@ -1,0 +1,61 @@
+Revision follow-up: 2026-10-02
+
+The scientific simulations and analyses were executed on the experimental
+server. No source checkpoint was retrained. Read stage4_design.json before
+running. Results are not selected using the fresh test.
+
+Reanalyse the supplied arrays without generating new data:
+python scripts/analyze_revision_followup.py --family zz
+python scripts/analyze_revision_followup.py --family exchange
+python scripts/analyze_revision_followup.py --family two_bath
+python scripts/plot_revision_manuscript.py
+
+Full regeneration requires a NEW working copy without completed stage-four
+outputs. Preserve the supplied results for comparison; do not overwrite them.
+Use the completed original validation curves and calibration data from stage two.
+
+1. Before generating either new test:
+python scripts/eval_revision_followup.py --mode select --family zz
+python scripts/eval_revision_followup.py --mode select --family exchange
+
+2. Generate independent tests:
+python scripts/gen_collision_independent_eta_split.py --family zz --n 4096 --parameter-seed 202610041 --eta-seed 9202610041 --out data_revision/stage4/zz/test.npz
+python scripts/gen_collision_independent_eta_split.py --family exchange --n 4096 --parameter-seed 202610042 --eta-seed 9202610042 --out data_revision/stage4/exchange/test.npz
+
+3. Evaluate all five source checkpoints (shell expands the brace expression):
+python scripts/eval_revision_followup.py --mode test --family zz --ckpts checkpoints/collision/bidir_seed{0..4}.pt
+python scripts/eval_revision_followup.py --mode test --family exchange --ckpts checkpoints/collision/bidir_seed{0..4}.pt
+Then run the two corresponding analysis commands above. Checkpoint content
+hashes, rather than installation paths, validate relocated caches.
+
+4. Two-bath extension, with fixed Hamiltonian ranges in
+physics/channels/two_bath_memory.py:
+python -m pytest tests/test_two_bath_memory.py -q
+python scripts/eval_revision_two_bath.py --mode development
+python scripts/eval_revision_two_bath.py --mode test
+python scripts/analyze_revision_followup.py --family two_bath
+The development command creates calibration and validation data, the audit,
+and a locked selection record before the test command generates its data.
+
+5. Fixed-trajectory numerical extrema on original audit inputs:
+python scripts/eval_revision_extrema.py --family zz
+python scripts/eval_revision_extrema.py --family exchange
+The derivative-root calculation is numerical, not a certified full-fibre bound.
+
+6. Full implementation tests:
+python -m pytest -q
+
+Interpretation:
+- Target confirmation is for mean risk over fitted deployments. The CSV
+  deployment_variability.csv gives separate individual-fit and group/checkpoint
+  summaries. Shared queries mean these are not independent binomial trials.
+- selected_results.csv retains failed checks and the coarse budget grid.
+- paired_contrasts.csv reports margin sensitivity. Passing a target does not
+  establish equivalent or noninferior accuracy relative to another estimator.
+- Readout and raw-uncertainty results in stage three use the original test,
+  not the new stage-four queries.
+- Zero-query exchange and two-bath priors must be considered before interpreting
+  selected positive-shot comparisons as a need to measure.
+
+AI-assisted code and analysis were checked with saved provenance, numerical
+cross-checks and tests. Human authors remain responsible for verification.

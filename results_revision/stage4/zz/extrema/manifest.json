@@ -1,0 +1,5 @@
+{
+  "scope": "one fixed-parameter eta trajectory, not full representation fibre",
+  "method": "degree L-1 Chebyshev fit; all real derivative roots and endpoints; physical checks and local bounded polishing",
+  "certificate": "numerical double-precision extrema, no formal global certificate"
+}

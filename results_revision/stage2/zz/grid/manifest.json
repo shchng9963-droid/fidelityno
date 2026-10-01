@@ -1,0 +1,11 @@
+{
+  "args": {
+    "family": "zz",
+    "n_base": 2048,
+    "seed": 20260807,
+    "out": "results_revision/stage2/zz/grid"
+  },
+  "max_eta_zero_delta": 6.661338147750939e-16,
+  "continuous_risk_is_quadrature_approximation": true,
+  "interpretation": "nested-grid empirical spans are lower bounds, not certified continuous suprema"
+}
