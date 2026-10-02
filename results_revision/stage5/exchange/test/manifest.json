@@ -1,0 +1,13 @@
+{
+  "design_sha256": "25d62bb23dc459c33f9c808773f1e3ac7ce2d8969bf092c6f71259a1f0eaa521",
+  "code_sha256": {
+    "revision/stage5_design.json": "25d62bb23dc459c33f9c808773f1e3ac7ce2d8969bf092c6f71259a1f0eaa521",
+    "/home/wangshuchang/fidelityno_mlst_major_revision_20261001/scripts/eval_revision_independent_weights.py": "a9ab73b9d1d8a6e52de28bcab89e8a186f76fba8fe6fbd059868a40c6679b8a5",
+    "physics/baselines/revision_measurement.py": "5e9b3c51509f452357e3bb5cfe16b3d702c1c302943dc8f00cfa109e87e0d230",
+    "scripts/eval_revision_confirmatory.py": "72fc97c9ecdf5359f851c14cb5a32ae8f8fe7ea8298d9f52fc0271c7066bfaa3"
+  },
+  "selection_sha256": "2c3be1881433840b191a051e1b8a5862839c449278c598b62aa180a9e48fccf2",
+  "test_sha256": "41817665a6ffdb3012d5e5650522af4e552b64bff185325fbedf00adb51c2391",
+  "n": 4096,
+  "calibration_n": 1280
+}

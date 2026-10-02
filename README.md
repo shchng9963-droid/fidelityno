@@ -2,6 +2,27 @@
 
 ## Revision evaluation (2026-10-02)
 
+The latest technical follow-up is documented in
+`revision/REPRODUCE_INDEPENDENT_WEIGHTS.txt` and fixed by `revision/stage5_design.json`.
+It replaces outcome-dependent fusion variances with a calibration-derived proxy,
+at unchanged 4096-shot calibration cost. All validation budgets are recomputed
+before new independent tests. Ridge and neural still select 20/36 dephasing shots
+versus DFE 32/48; constant selects 28/44. Neural has lower mean errors but no extra
+shot saving over ridge at either headline target. Its six primary comparisons
+per physical family include DFE, constant and ridge at both targets. In exchange,
+60-shot DFE fails the 0.065 mean-risk target, while zero-query ridge meets both.
+The two-bath 8-shot excursion is substantially reduced by the independent rule.
+Results and old-versus-new diagnostics are under `results_revision/stage5`.
+
+The additive asset `mlst_independent_weights_20261002.zip`, release
+`mlst-independent-weights-20261002`, contains the new code, data and per-query
+errors. It is used alongside the base asset `mlst_revision_data_code_20261002.zip`
+for the original calibration/validation data and frozen checkpoints. Prior releases
+remain unchanged. The independent-weight readout stress test has not been run;
+stage-three readout results describe the older estimators only.
+
+### Earlier outcome-dependent evaluation (preserved)
+
 The corrected evaluation is documented in `revision/REPRODUCE_STAGE2_STAGE3.txt`
 and `revision/REPRODUCE_FOLLOWUP.txt`. The follow-up separately selects constant,
 ridge and neural shrinkage before fresh independent tests. Both ridge and neural

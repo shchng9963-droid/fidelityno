@@ -11,7 +11,8 @@ from physics.baselines.dfe import _allocate_stratified_shots
 from physics.baselines.hybrid import _identity_allocation
 
 
-def sample_measurement(expectations, budget, rng, allocation="fixed", readout_error=0.0):
+def sample_measurement(expectations, budget, rng, allocation="fixed", readout_error=0.0,
+                       return_observations=False):
     """Return estimate, observable variance estimate, and counted shots.
 
     Pilot allocation uses its pilot only to choose independent stage-two
@@ -63,7 +64,45 @@ def sample_measurement(expectations, budget, rng, allocation="fixed", readout_er
     # At n=1 use a conservative upper bound instead of an oracle variance.
     obs_var = np.where(shots > 1, (1 - obs**2) / np.maximum(shots - 1, 1), 1.0)
     estimated_variance = factor**2 * obs_var.sum(axis=1) / attenuation**2
-    return estimate, estimated_variance, np.full(n, budget, dtype=int)
+    result = (estimate, estimated_variance, np.full(n, budget, dtype=int))
+    if return_observations:
+        # Observations and realised final-stage counts, never oracle means.
+        # Returning these does not draw new shots or change legacy streams.
+        return (*result, dict(observed_means=obs, setting_shots=np.broadcast_to(shots, obs.shape).copy(),
+                              allocation=allocation, attenuation=attenuation))
+    return result
+
+
+def calibration_outcome_variances(observations):
+    """Estimate average outcome variances from existing calibration shots only.
+
+    These are variances of individual +/-1 outcomes, not of label means.
+    The pool contains 64 separate calibration channels. X/Y are pooled for
+    known-Z dephasing because that model has equal X/Y expectations.
+    """
+    obs = np.asarray(observations['observed_means'])
+    counts = np.asarray(observations['setting_shots'])
+    if np.any(counts < 2):
+        raise ValueError('calibration needs at least two shots per setting')
+    variance = np.clip(np.mean(counts / (counts - 1) * (1 - obs**2), axis=0), 0, 1)
+    if observations['allocation'] == 'zz_known':
+        variance[:] = variance.mean()
+    return variance
+
+
+def independent_measurement_variance(calibration_variances, setting_shots, attenuation=1.0):
+    """Variance proxy independent of the final query outcomes.
+
+    For pilot allocation, counts depend only on the independent pilot. The
+    same calibration pool is used by every prior. There is no query-truth input.
+    """
+    v = np.asarray(calibration_variances, dtype=float)
+    counts = np.asarray(setting_shots)
+    if v.ndim != 1 or counts.shape[-1] != len(v) or np.any(counts <= 0):
+        raise ValueError('incompatible calibration variances and counts')
+    if not 0 < attenuation <= 1 or np.any((v < 0) | (v > 1)):
+        raise ValueError('invalid attenuation or variance')
+    return np.sum(v / counts, axis=-1) / (16 * attenuation**2)
 
 
 def residual_prior_variance(oof_prior, noisy_labels, label_variance):

@@ -1,0 +1,64 @@
+Independent-weight technical follow-up, 2 October 2026
+
+ASSETS AND VERSIONING
+Extract mlst_revision_data_code_20261002.zip from release mlst-revision-20261002,
+then overlay mlst_independent_weights_20261002.zip from release
+mlst-independent-weights-20261002 in a new working directory. The latter contains
+updated code and only the additional stage-five data/results. It deliberately
+does not duplicate the base calibration sets, old audits or five frozen models.
+Keep the two original archives unchanged. Neither archive contains a manuscript,
+editorial correspondence, reviewer material or response letter.
+
+DESIGN
+Read stage5_design.json. Calibration-based average Pauli outcome variances replace
+the query-outcome variance proxy used inside shrinkage. Query measurement rules,
+label streams, priors and the 4096-shot offline cost remain unchanged. In pilot
+allocation the proxy can depend on pilot-derived counts, not final-stage outcomes.
+The within-family comparison set includes neural versus DFE, constant and ridge at
+two targets (six comparisons), or ridge versus DFE and constant for two baths
+(four comparisons). These sets and 4000 bootstrap draws were fixed before the new
+validation rerun and independent tests. Earlier designs/results remain historical.
+
+REANALYSIS WITHOUT NEW MEASUREMENTS
+export OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2
+python scripts/audit_revision_stage5.py
+python scripts/analyze_revision_independent_weights.py --family zz
+python scripts/analyze_revision_independent_weights.py --family exchange
+python scripts/analyze_revision_independent_weights.py --family two_bath
+python scripts/plot_revision_manuscript.py
+python scripts/plot_revision_independent_weights.py
+python -m pytest -q
+
+REGENERATION
+Use a separate working copy retaining the base assets but without completed
+data_revision/stage5 or results_revision/stage5 outputs. Do not delete supplied
+results in the evidence copy. Bash expands the five checkpoint paths below:
+
+python scripts/run_revision_stage5_jobs.py --phase validation --ckpts checkpoints/collision/bidir_seed{0..4}.pt
+python scripts/audit_revision_stage5.py
+python scripts/run_revision_stage5_jobs.py --phase test --ckpts checkpoints/collision/bidir_seed{0..4}.pt
+
+The validation phase writes immutable selection files. The test phase verifies
+design, evaluation-source and validation hashes, generates new independent
+4096-query sets, then evaluates only locked or prespecified diagnostic budgets.
+It never replaces a failed test budget. Five checkpoints are frozen; no retraining.
+Path relocation is permitted when file contents and provenance hashes agree.
+
+RESULTS
+- validation/summary.csv includes legacy (_eb) and independent (_iv) curves on
+  identical outcomes. Selection only considers independent weights.
+- selected_results.csv includes all target checks, including failures.
+- paired_contrasts.csv has pointwise intervals, fixed-family upper bounds and
+  margin sensitivities. primary_family=False rows have only pointwise inference.
+- deployment_variability.csv contains finite-test single-fit percentiles and
+  fractions, plus separate repeat-averaged group/checkpoint summaries.
+- weight_diagnostics.csv compares the two weight rules on exactly the same new
+  test outcomes at budgets fixed before test generation. These are exploratory.
+- test/paired_errors.npz, runs.csv and calibration_moments.json retain sufficient
+  data to audit the published tables and independent-weight calculation.
+
+Known limitations: finite-test fractions are not independent deployment trials.
+The calibration-average variance proxy may be misspecified per query. No optimal
+MAE claim is made. Stage-three readout tests use the older estimators and do not
+establish noisy-readout performance of the new weight rule. Scientific authors
+remain responsible for independent validation of AI-assisted code and analysis.

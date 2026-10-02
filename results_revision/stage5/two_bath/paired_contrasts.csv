@@ -1,0 +1,5 @@
+target,method,baseline,query_saving,difference,low,high,primary_family,bonferroni_divisor,upper_fwer,common_mean_target,noninferior_001,noninferior_002,noninferior_003,validated_shot_saving,first_strict_saving_query
+0.065,ridge,dfe,76,-0.0010168105363845825,-0.002390097128227353,0.00045227742521092296,True,4,0.0007206453010439873,True,True,True,True,True,54.0
+0.065,ridge,constant,36,-0.0030743367969989777,-0.004644378088414669,-0.0015170907136052847,True,4,-0.0012200588826090097,True,True,True,True,True,1.0
+0.053,ridge,dfe,88,0.002596575766801834,0.001687128678895533,0.0035755103453993797,True,4,0.0037203768733888865,True,False,False,False,False,
+0.053,ridge,constant,40,-0.00023980066180229187,-0.0011716944864019752,0.0007329331710934639,True,4,0.0008634996484033763,True,True,True,True,True,1.0
