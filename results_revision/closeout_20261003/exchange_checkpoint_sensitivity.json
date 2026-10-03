@@ -1,0 +1,410 @@
+{
+  "status": "Exploratory analysis after viewing the final primary test",
+  "family": "exchange",
+  "bootstrap_seed": 202610301,
+  "bootstrap_draws": 4000,
+  "protocol": "Keep final budgets, priors, predictions, calibration and query outcomes fixed. Delete each neural checkpoint in turn; resample the four retained checkpoints, 20 calibration groups, five nested repeats and 4096 queries. Comparators are unchanged. Reuse primary 1-0.05/6 quantile for sensitivity only; no multiplicity guarantee across omissions, no new confirmatory claims.",
+  "input_sha256": {
+    "results_revision/stage5/exchange/test/runs.csv": "0c6b75a92d1baeeafd2a5c20372e2fd28822d9c5b06c8a916bde526c43a5e32e",
+    "results_revision/stage5/exchange/test/paired_errors.npz": "d7becea833cee52025f407bf8af463bf97dadf3e83b8f9f970ce84ca9c29aea2",
+    "results_revision/stage5/exchange/selection.json": "2c3be1881433840b191a051e1b8a5862839c449278c598b62aa180a9e48fccf2",
+    "results_revision/stage5/exchange/risk_intervals.csv": "260139fc0d3de019d0878e50638297bce53064353399d1310c8d62850b800a0a",
+    "results_revision/stage5/exchange/paired_contrasts.csv": "ecf3172628a389990aa62e446a9edfaf44380a9fb7ece1d3437efe3e40d49a89",
+    "revision/stage5_design.json": "25d62bb23dc459c33f9c808773f1e3ac7ce2d8969bf092c6f71259a1f0eaa521"
+  },
+  "script_sha256": "98c92e87963a1cac53e6bff1f8fc832597aa6eb1bf70065f38e6dfdf162833c0",
+  "checkpoint_mae": [
+    {
+      "configuration": "prior",
+      "checkpoint_index": 0,
+      "checkpoint": "neural_bidir_seed0_prior",
+      "shots": 0,
+      "allocation": "none",
+      "mae": 0.06758450474080746
+    },
+    {
+      "configuration": "prior",
+      "checkpoint_index": 1,
+      "checkpoint": "neural_bidir_seed1_prior",
+      "shots": 0,
+      "allocation": "none",
+      "mae": 0.07227464022755158
+    },
+    {
+      "configuration": "prior",
+      "checkpoint_index": 2,
+      "checkpoint": "neural_bidir_seed2_prior",
+      "shots": 0,
+      "allocation": "none",
+      "mae": 0.05310188977426151
+    },
+    {
+      "configuration": "prior",
+      "checkpoint_index": 3,
+      "checkpoint": "neural_bidir_seed3_prior",
+      "shots": 0,
+      "allocation": "none",
+      "mae": 0.04936781274314853
+    },
+    {
+      "configuration": "prior",
+      "checkpoint_index": 4,
+      "checkpoint": "neural_bidir_seed4_prior",
+      "shots": 0,
+      "allocation": "none",
+      "mae": 0.05500899999795365
+    },
+    {
+      "configuration": "target_0065",
+      "checkpoint_index": 0,
+      "checkpoint": "neural_bidir_seed0_iv",
+      "shots": 3,
+      "allocation": "pilot",
+      "mae": 0.06582071964272421
+    },
+    {
+      "configuration": "target_0065",
+      "checkpoint_index": 1,
+      "checkpoint": "neural_bidir_seed1_iv",
+      "shots": 3,
+      "allocation": "pilot",
+      "mae": 0.07006154285837038
+    },
+    {
+      "configuration": "target_0065",
+      "checkpoint_index": 2,
+      "checkpoint": "neural_bidir_seed2_iv",
+      "shots": 3,
+      "allocation": "pilot",
+      "mae": 0.05236415422970734
+    },
+    {
+      "configuration": "target_0065",
+      "checkpoint_index": 3,
+      "checkpoint": "neural_bidir_seed3_iv",
+      "shots": 3,
+      "allocation": "pilot",
+      "mae": 0.04882401621035037
+    },
+    {
+      "configuration": "target_0065",
+      "checkpoint_index": 4,
+      "checkpoint": "neural_bidir_seed4_iv",
+      "shots": 3,
+      "allocation": "pilot",
+      "mae": 0.05420597165490215
+    },
+    {
+      "configuration": "target_0053",
+      "checkpoint_index": 0,
+      "checkpoint": "neural_bidir_seed0_iv",
+      "shots": 36,
+      "allocation": "fixed",
+      "mae": 0.05303444243686945
+    },
+    {
+      "configuration": "target_0053",
+      "checkpoint_index": 1,
+      "checkpoint": "neural_bidir_seed1_iv",
+      "shots": 36,
+      "allocation": "fixed",
+      "mae": 0.054926129314453134
+    },
+    {
+      "configuration": "target_0053",
+      "checkpoint_index": 2,
+      "checkpoint": "neural_bidir_seed2_iv",
+      "shots": 36,
+      "allocation": "fixed",
+      "mae": 0.04586816209079218
+    },
+    {
+      "configuration": "target_0053",
+      "checkpoint_index": 3,
+      "checkpoint": "neural_bidir_seed3_iv",
+      "shots": 36,
+      "allocation": "fixed",
+      "mae": 0.043688026633448056
+    },
+    {
+      "configuration": "target_0053",
+      "checkpoint_index": 4,
+      "checkpoint": "neural_bidir_seed4_iv",
+      "shots": 36,
+      "allocation": "fixed",
+      "mae": 0.047063823225075005
+    }
+  ],
+  "leave_one_out": [
+    {
+      "target": 0.065,
+      "omitted_checkpoint_index": 0,
+      "neural_shots": 3,
+      "mae": 0.05636392123833255,
+      "upper95": 0.0639062151312828,
+      "contrasts": {
+        "dfe": {
+          "difference": -0.008437927304612104,
+          "low": -0.014914781786501408,
+          "high": 0.000648948538582772,
+          "upper_matching_primary_quantile": 0.001826377003453672
+        },
+        "constant": {
+          "difference": -0.00796959236352502,
+          "low": -0.01452197227627039,
+          "high": 0.0012102446053177118,
+          "upper_matching_primary_quantile": 0.002298016333952546
+        },
+        "ridge": {
+          "difference": 0.006680754571457184,
+          "low": 2.511441743990872e-05,
+          "high": 0.015762990340590477,
+          "upper_matching_primary_quantile": 0.016944412142038345
+        }
+      }
+    },
+    {
+      "target": 0.065,
+      "omitted_checkpoint_index": 1,
+      "neural_shots": 3,
+      "mae": 0.05530371543442101,
+      "upper95": 0.06092569977045059,
+      "contrasts": {
+        "dfe": {
+          "difference": -0.009498133108523647,
+          "low": -0.014914781786501408,
+          "high": -0.0024830796755850315,
+          "upper_matching_primary_quantile": -0.001422792673110962
+        },
+        "constant": {
+          "difference": -0.009029798167436563,
+          "low": -0.01452197227627039,
+          "high": -0.0019678750541061163,
+          "upper_matching_primary_quantile": -0.0009767913725227118
+        },
+        "ridge": {
+          "difference": 0.005620548767545641,
+          "low": 2.511441743990872e-05,
+          "high": 0.012665710411965847,
+          "upper_matching_primary_quantile": 0.013756467029452324
+        }
+      }
+    },
+    {
+      "target": 0.065,
+      "omitted_checkpoint_index": 2,
+      "neural_shots": 3,
+      "mae": 0.05972806259158677,
+      "upper95": 0.06715264916419983,
+      "contrasts": {
+        "dfe": {
+          "difference": -0.005073785951357886,
+          "low": -0.01384752243757248,
+          "high": 0.0034916563890874386,
+          "upper_matching_primary_quantile": 0.00456138513982296
+        },
+        "constant": {
+          "difference": -0.0046054510102708016,
+          "low": -0.013247943483293056,
+          "high": 0.004031998571008444,
+          "upper_matching_primary_quantile": 0.0049925814382731915
+        },
+        "ridge": {
+          "difference": 0.010044895924711403,
+          "low": 0.0010786554776132107,
+          "high": 0.018747517839074135,
+          "upper_matching_primary_quantile": 0.02002066746354103
+        }
+      }
+    },
+    {
+      "target": 0.065,
+      "omitted_checkpoint_index": 3,
+      "neural_shots": 3,
+      "mae": 0.060613097096426004,
+      "upper95": 0.06715264916419983,
+      "contrasts": {
+        "dfe": {
+          "difference": -0.004188751446518653,
+          "low": -0.011733615770936012,
+          "high": 0.0034916563890874386,
+          "upper_matching_primary_quantile": 0.00456138513982296
+        },
+        "constant": {
+          "difference": -0.003720416505431569,
+          "low": -0.011329276487231255,
+          "high": 0.004031998571008444,
+          "upper_matching_primary_quantile": 0.0049925814382731915
+        },
+        "ridge": {
+          "difference": 0.010929930429550636,
+          "low": 0.0032586983870714903,
+          "high": 0.018747517839074135,
+          "upper_matching_primary_quantile": 0.02002066746354103
+        }
+      }
+    },
+    {
+      "target": 0.065,
+      "omitted_checkpoint_index": 4,
+      "neural_shots": 3,
+      "mae": 0.05926760823528804,
+      "upper95": 0.06710785627365112,
+      "contrasts": {
+        "dfe": {
+          "difference": -0.005534240307656618,
+          "low": -0.014544338919222355,
+          "high": 0.0034916563890874386,
+          "upper_matching_primary_quantile": 0.00456138513982296
+        },
+        "constant": {
+          "difference": -0.005065905366569534,
+          "low": -0.014027479104697704,
+          "high": 0.004031998571008444,
+          "upper_matching_primary_quantile": 0.0049925814382731915
+        },
+        "ridge": {
+          "difference": 0.00958444156841267,
+          "low": 0.0005073653301224113,
+          "high": 0.018747517839074135,
+          "upper_matching_primary_quantile": 0.02002066746354103
+        }
+      }
+    },
+    {
+      "target": 0.053,
+      "omitted_checkpoint_index": 0,
+      "neural_shots": 36,
+      "mae": 0.04788653531594211,
+      "upper95": 0.05167469009757042,
+      "contrasts": {
+        "dfe": {
+          "difference": -0.0043931968784395176,
+          "low": -0.007979662157595158,
+          "high": 0.0002705116639845073,
+          "upper_matching_primary_quantile": 0.0009839015547186136
+        },
+        "constant": {
+          "difference": -0.004242801379318893,
+          "low": -0.007809866685420275,
+          "high": 0.0005175849655643106,
+          "upper_matching_primary_quantile": 0.0010345577029511333
+        },
+        "ridge": {
+          "difference": -0.0017966313509332615,
+          "low": -0.005639872048050165,
+          "high": 0.002984790364280343,
+          "upper_matching_primary_quantile": 0.0038258784916251898
+        }
+      }
+    },
+    {
+      "target": 0.053,
+      "omitted_checkpoint_index": 1,
+      "neural_shots": 36,
+      "mae": 0.04741361359654619,
+      "upper95": 0.0505034402012825,
+      "contrasts": {
+        "dfe": {
+          "difference": -0.0048661185978354365,
+          "low": -0.007979662157595158,
+          "high": -0.0011513353092595935,
+          "upper_matching_primary_quantile": -0.0005351087311282754
+        },
+        "constant": {
+          "difference": -0.004715723098714812,
+          "low": -0.007809866685420275,
+          "high": -0.0008691305993124843,
+          "upper_matching_primary_quantile": -0.00033654001890681684
+        },
+        "ridge": {
+          "difference": -0.0022695530703291805,
+          "low": -0.005659281741827726,
+          "high": 0.0016382429748773575,
+          "upper_matching_primary_quantile": 0.0024004438892006874
+        }
+      }
+    },
+    {
+      "target": 0.053,
+      "omitted_checkpoint_index": 2,
+      "neural_shots": 36,
+      "mae": 0.04967810540246143,
+      "upper95": 0.05362197756767273,
+      "contrasts": {
+        "dfe": {
+          "difference": -0.002601626791920192,
+          "low": -0.007243760395795107,
+          "high": 0.001953942934051156,
+          "upper_matching_primary_quantile": 0.0024956176057457924
+        },
+        "constant": {
+          "difference": -0.0024512312927995675,
+          "low": -0.007107849232852459,
+          "high": 0.002052337396889925,
+          "upper_matching_primary_quantile": 0.0026078405790030956
+        },
+        "ridge": {
+          "difference": -5.06126441393584e-06,
+          "low": -0.004813883453607559,
+          "high": 0.0047288923524320126,
+          "upper_matching_primary_quantile": 0.005370716564357281
+        }
+      }
+    },
+    {
+      "target": 0.053,
+      "omitted_checkpoint_index": 3,
+      "neural_shots": 36,
+      "mae": 0.050223139266797466,
+      "upper95": 0.05362916737794876,
+      "contrasts": {
+        "dfe": {
+          "difference": -0.0020565929275841582,
+          "low": -0.006013596896082163,
+          "high": 0.001953942934051156,
+          "upper_matching_primary_quantile": 0.0024956176057457924
+        },
+        "constant": {
+          "difference": -0.0019061974284635338,
+          "low": -0.005878277588635683,
+          "high": 0.002052337396889925,
+          "upper_matching_primary_quantile": 0.0026078405790030956
+        },
+        "ridge": {
+          "difference": 0.0005399725999220978,
+          "low": -0.0035293465480208397,
+          "high": 0.0047288923524320126,
+          "upper_matching_primary_quantile": 0.005391967948526144
+        }
+      }
+    },
+    {
+      "target": 0.053,
+      "omitted_checkpoint_index": 4,
+      "neural_shots": 36,
+      "mae": 0.0493791901188907,
+      "upper95": 0.05355632305145264,
+      "contrasts": {
+        "dfe": {
+          "difference": -0.002900542075490925,
+          "low": -0.007748002652078867,
+          "high": 0.0019267273601144552,
+          "upper_matching_primary_quantile": 0.0024956176057457924
+        },
+        "constant": {
+          "difference": -0.0027501465763703006,
+          "low": -0.007593222893774509,
+          "high": 0.002052337396889925,
+          "upper_matching_primary_quantile": 0.0026078405790030956
+        },
+        "ridge": {
+          "difference": -0.000303976547984669,
+          "low": -0.0053499010391533375,
+          "high": 0.004619305022060871,
+          "upper_matching_primary_quantile": 0.005391967948526144
+        }
+      }
+    }
+  ]
+}

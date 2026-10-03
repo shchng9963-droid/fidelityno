@@ -1,8 +1,20 @@
 # FidelityNO: cost--accuracy audits for composed-channel fidelity
 
+## Checkpoint sensitivity supplement (2026-10-03)
+
+`revision/REPRODUCE_CLOSEOUT.txt` documents exploratory exchange checkpoint
+sensitivity using the unchanged final stage-five predictions and locked budgets.
+Per-checkpoint MAEs and all five leave-one-checkpoint-out analyses are saved in
+`results_revision/closeout_20261003/exchange_checkpoint_sensitivity.json`.
+This analysis does not replace the five-checkpoint primary results or establish
+reliable training-population inference from four or five checkpoints. It includes
+input hashes and reproducible bootstrap settings. The release
+`mlst-closeout-20261003` is a small additive supplement to the two releases below.
+No additional physical observations, model fitting or budget selection are used.
+
 ## Revision evaluation (2026-10-02)
 
-The latest technical follow-up is documented in
+The independent-weight technical follow-up is documented in
 `revision/REPRODUCE_INDEPENDENT_WEIGHTS.txt` and fixed by `revision/stage5_design.json`.
 It replaces outcome-dependent fusion variances with a calibration-derived proxy,
 at unchanged 4096-shot calibration cost. All validation budgets are recomputed

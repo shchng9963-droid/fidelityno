@@ -81,7 +81,7 @@ fig.legend(*axes[0].get_legend_handles_labels(),loc='outside lower center',ncol=
 save(fig,'revision_two_bath')
 
 fig,axes=plt.subplots(1,2,figsize=(7.4,4),layout='constrained')
-for ax,family,title in zip(axes,['exchange','two_bath'],['(a) One-qubit bath','(b) Two-qubit bath']):
+for ax,family,title in zip(axes,['exchange','two_bath'],['(a) Exchange (one bath qubit)','(b) Two-qubit bath']):
     df=pd.read_csv(ROOT/family/'validation/summary.csv')
     for role in ['constant','ridge']:
         for suffix,style,label in [('_eb','--','Legacy'),('_iv','-','Independent')]:

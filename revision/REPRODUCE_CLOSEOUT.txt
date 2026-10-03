@@ -1,0 +1,35 @@
+Checkpoint sensitivity and plot-label correction, 3 October 2026
+
+This additive code/data supplement requires the unchanged public archives:
+1. mlst-revision-20261002
+2. mlst-independent-weights-20261002
+Both are at https://github.com/shchng9963-droid/fidelityno/releases
+Overlay the base, independent-weight and closeout archives in that order in a
+new working directory. Keep the previous releases as the primary record.
+
+No new physical data, model fitting, budget selection or primary inference is
+performed. The new diagnostic reuses the stage-five exchange per-query errors.
+Primary input hashes are checked before and after the diagnostic.
+
+Run from the repository root in the original Python environment:
+OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2 python scripts/analyze_revision_checkpoint_sensitivity.py
+python -m pytest tests/test_checkpoint_sensitivity.py -q
+
+Output: results_revision/closeout_20261003/exchange_checkpoint_sensitivity.json
+Includes 15 per-checkpoint means, every one-checkpoint omission at the two
+locked headline budgets, bootstrap seed and draw count, source hashes and
+the script hash. No subset replaces the original five-checkpoint analysis.
+
+The leave-one-out diagnostic uses 4000 draws, seed 202610301. It resamples 20
+calibration groups, five nested repeats, four retained checkpoints and 4096
+queries. Comparators and their locked budgets remain fixed. Difference upper
+bounds use the original 1-0.05/6 quantile solely for sensitivity comparison.
+There is no multiplicity guarantee across omissions, and this analysis does
+not repair inference from a very small population of training checkpoints.
+
+The updated plot script changes the model label on the low-budget variance
+diagnostic to Exchange (one bath qubit). No scientific curve data are changed.
+python scripts/plot_revision_independent_weights.py
+
+The scripts can produce plot/table artifacts when run; no manuscript, reviewer
+reports or editorial correspondence are distributed in this archive.
