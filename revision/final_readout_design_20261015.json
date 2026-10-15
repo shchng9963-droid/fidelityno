@@ -1,0 +1,11 @@
+{
+  "status": "secondary sensitivity of frozen stage-five configurations, fixed before simulation",
+  "targets": [0.065, 0.053],
+  "flip_rates": [0.0, 0.01, 0.03, 0.05],
+  "seed": 202610151,
+  "calibration": "same 20 groups of 64 sequences, five 64-shot label repetitions; noisy labels at each supplied rate",
+  "query_sets": "reuse final stage-five 4096-query caches, no new independent test claim",
+  "budget_rule": "reuse stage-five headline selection.json for each family without retuning",
+  "variance_rule": "pooled calibration outcome variance divided by attenuation squared and actual per-setting query counts",
+  "inference": "descriptive mean risk and fit variability, no additional hypothesis tests"
+}

@@ -1,0 +1,28 @@
+{
+  "status": "secondary fixed-configuration sensitivity, no new confirmation or budget selection",
+  "family": "zz",
+  "design_sha256": "3cb8b3c0509525ebd2d15f6f4953266a73fbfad1c737c269ea1660feb367d56a",
+  "selection_sha256": "af35c63903314e57efa6c06d5db867b6aa47e450e25a5305247f2325f01b643f",
+  "calibration_cache_sha256": "a5393b94679e7b25fe6a64b5af1a10e02bf5641f88777a2fd2c638f066bf294c",
+  "test_cache_sha256": "07f387577d0994ca993d903b33fa8697c958db6b3e1b4e3ceefe7be1d1ceabcf",
+  "checkpoint_sha256": {
+    "/home/wangshuchang/fidelityno_prxq/checkpoints/collision/bidir_seed0.pt": "a6acc4da694ee9595c2f4cac9c65a765fd8e550a4b585d77d298b8f3f18925e6",
+    "/home/wangshuchang/fidelityno_prxq/checkpoints/collision/bidir_seed1.pt": "98b32a983c5f92c5368d6b2a33ca2f912612f0957191e93a672f4c655f1d54cc",
+    "/home/wangshuchang/fidelityno_prxq/checkpoints/collision/bidir_seed2.pt": "55f1fdbcf7b873aea1738d354181d852ab213df5bfa7b8c4bf297f45bb19321c",
+    "/home/wangshuchang/fidelityno_prxq/checkpoints/collision/bidir_seed3.pt": "4f9dc64186f0c1efba4acd2280c76c653e4cd689045d81db24c8dfe0fd407138",
+    "/home/wangshuchang/fidelityno_prxq/checkpoints/collision/bidir_seed4.pt": "02814370955653c73f5f9ddc939ff080b6dd47a484264140f1a3c15e1b995a0f"
+  },
+  "clean_regression_check": "all MAEs within 1e-12",
+  "code_sha256": {
+    "/home/wangshuchang/fidelityno_mlst_major_revision_20261001/scripts/audit_revision_final_readout.py": "00b4010494570de7c2b61f8644ff4cc3f51943d101d2f4940bbe8213d841c2e4",
+    "physics/baselines/revision_measurement.py": "5e9b3c51509f452357e3bb5cfe16b3d702c1c302943dc8f00cfa109e87e0d230",
+    "scripts/eval_revision_confirmatory.py": "72fc97c9ecdf5359f851c14cb5a32ae8f8fe7ea8298d9f52fc0271c7066bfaa3"
+  },
+  "assumptions": "known independent symmetric flips; same rate for calibration and queries; independent bath preparation",
+  "costs": "4096 calibration shots per prior; rate estimation and input characterisation excluded",
+  "output_sha256": {
+    "runs.csv": "74c02fde672de5b531dc8372294f7553e5756ba034b87b5e92f7ad4a94adcabc",
+    "summary.csv": "48549cd33d620ba7a764a9660f114772cb9e5925a7a5725e09662786f1da3a7e",
+    "calibration_moments.json": "a7b0fd4266bfaa707786ae2adcbaf51cbc4a2d96affa96fd681594c11f7994c6"
+  }
+}

@@ -1,0 +1,3602 @@
+[
+  {
+    "readout_error": 0.0,
+    "cal_draw": 0,
+    "repeat": 0,
+    "variance": [
+      0.8267074092741938,
+      0.8267074092741938
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 0,
+    "repeat": 1,
+    "variance": [
+      0.8233681955645162,
+      0.8233681955645162
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 0,
+    "repeat": 2,
+    "variance": [
+      0.8127520161290325,
+      0.8127520161290325
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 0,
+    "repeat": 3,
+    "variance": [
+      0.8389931955645161,
+      0.8389931955645161
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 0,
+    "repeat": 4,
+    "variance": [
+      0.8251638104838707,
+      0.8251638104838707
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 1,
+    "repeat": 0,
+    "variance": [
+      0.8161227318548387,
+      0.8161227318548387
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 1,
+    "repeat": 1,
+    "variance": [
+      0.8549647177419357,
+      0.8549647177419357
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 1,
+    "repeat": 2,
+    "variance": [
+      0.846648185483871,
+      0.846648185483871
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 1,
+    "repeat": 3,
+    "variance": [
+      0.835118447580645,
+      0.835118447580645
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 1,
+    "repeat": 4,
+    "variance": [
+      0.8320627520161292,
+      0.8320627520161292
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 2,
+    "repeat": 0,
+    "variance": [
+      0.8278729838709679,
+      0.8278729838709679
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 2,
+    "repeat": 1,
+    "variance": [
+      0.8535471270161292,
+      0.8535471270161292
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 2,
+    "repeat": 2,
+    "variance": [
+      0.823147681451613,
+      0.823147681451613
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 2,
+    "repeat": 3,
+    "variance": [
+      0.8423009072580647,
+      0.8423009072580647
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 2,
+    "repeat": 4,
+    "variance": [
+      0.8252898185483872,
+      0.8252898185483872
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 3,
+    "repeat": 0,
+    "variance": [
+      0.7979145665322582,
+      0.7979145665322582
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 3,
+    "repeat": 1,
+    "variance": [
+      0.7907636088709679,
+      0.7907636088709679
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 3,
+    "repeat": 2,
+    "variance": [
+      0.7845892137096775,
+      0.7845892137096775
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 3,
+    "repeat": 3,
+    "variance": [
+      0.7910156250000001,
+      0.7910156250000001
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 3,
+    "repeat": 4,
+    "variance": [
+      0.7919921874999999,
+      0.7919921874999999
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 4,
+    "repeat": 0,
+    "variance": [
+      0.8329763104838711,
+      0.8329763104838711
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 4,
+    "repeat": 1,
+    "variance": [
+      0.830802671370968,
+      0.830802671370968
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 4,
+    "repeat": 2,
+    "variance": [
+      0.8370400705645162,
+      0.8370400705645162
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 4,
+    "repeat": 3,
+    "variance": [
+      0.8342363911290324,
+      0.8342363911290324
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 4,
+    "repeat": 4,
+    "variance": [
+      0.8340788810483873,
+      0.8340788810483873
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 5,
+    "repeat": 0,
+    "variance": [
+      0.8060105846774195,
+      0.8060105846774195
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 5,
+    "repeat": 1,
+    "variance": [
+      0.8145476310483873,
+      0.8145476310483873
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 5,
+    "repeat": 2,
+    "variance": [
+      0.8034274193548389,
+      0.8034274193548389
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 5,
+    "repeat": 3,
+    "variance": [
+      0.7853452620967745,
+      0.7853452620967745
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 5,
+    "repeat": 4,
+    "variance": [
+      0.802387852822581,
+      0.802387852822581
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 6,
+    "repeat": 0,
+    "variance": [
+      0.8607925907258065,
+      0.8607925907258065
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 6,
+    "repeat": 1,
+    "variance": [
+      0.8646988407258063,
+      0.8646988407258063
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 6,
+    "repeat": 2,
+    "variance": [
+      0.8833795362903227,
+      0.8833795362903227
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 6,
+    "repeat": 3,
+    "variance": [
+      0.8594065020161292,
+      0.8594065020161292
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 6,
+    "repeat": 4,
+    "variance": [
+      0.861832157258065,
+      0.861832157258065
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 7,
+    "repeat": 0,
+    "variance": [
+      0.8381426411290321,
+      0.8381426411290321
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 7,
+    "repeat": 1,
+    "variance": [
+      0.8489793346774195,
+      0.8489793346774195
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 7,
+    "repeat": 2,
+    "variance": [
+      0.8471207157258066,
+      0.8471207157258066
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 7,
+    "repeat": 3,
+    "variance": [
+      0.843340473790323,
+      0.843340473790323
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 7,
+    "repeat": 4,
+    "variance": [
+      0.8566028225806455,
+      0.8566028225806455
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 8,
+    "repeat": 0,
+    "variance": [
+      0.8051600302419353,
+      0.8051600302419353
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 8,
+    "repeat": 1,
+    "variance": [
+      0.799741683467742,
+      0.799741683467742
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 8,
+    "repeat": 2,
+    "variance": [
+      0.7849042338709677,
+      0.7849042338709677
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 8,
+    "repeat": 3,
+    "variance": [
+      0.8143901209677423,
+      0.8143901209677423
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 8,
+    "repeat": 4,
+    "variance": [
+      0.8176663306451615,
+      0.8176663306451615
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 9,
+    "repeat": 0,
+    "variance": [
+      0.801474294354839,
+      0.801474294354839
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 9,
+    "repeat": 1,
+    "variance": [
+      0.8121534778225808,
+      0.8121534778225808
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 9,
+    "repeat": 2,
+    "variance": [
+      0.8329448084677422,
+      0.8329448084677422
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 9,
+    "repeat": 3,
+    "variance": [
+      0.8063256048387095,
+      0.8063256048387095
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 9,
+    "repeat": 4,
+    "variance": [
+      0.8232736895161291,
+      0.8232736895161291
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 10,
+    "repeat": 0,
+    "variance": [
+      0.8500819052419357,
+      0.8500819052419357
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 10,
+    "repeat": 1,
+    "variance": [
+      0.8229271673387101,
+      0.8229271673387101
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 10,
+    "repeat": 2,
+    "variance": [
+      0.8383631552419356,
+      0.8383631552419356
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 10,
+    "repeat": 3,
+    "variance": [
+      0.8277154737903226,
+      0.8277154737903226
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 10,
+    "repeat": 4,
+    "variance": [
+      0.820217993951613,
+      0.820217993951613
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 11,
+    "repeat": 0,
+    "variance": [
+      0.829952116935484,
+      0.829952116935484
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 11,
+    "repeat": 1,
+    "variance": [
+      0.8383631552419355,
+      0.8383631552419355
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 11,
+    "repeat": 2,
+    "variance": [
+      0.8282195060483872,
+      0.8282195060483872
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 11,
+    "repeat": 3,
+    "variance": [
+      0.8318107358870968,
+      0.8318107358870968
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 11,
+    "repeat": 4,
+    "variance": [
+      0.8401587701612905,
+      0.8401587701612905
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 12,
+    "repeat": 0,
+    "variance": [
+      0.8401272681451615,
+      0.8401272681451615
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 12,
+    "repeat": 1,
+    "variance": [
+      0.8394027217741935,
+      0.8394027217741935
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 12,
+    "repeat": 2,
+    "variance": [
+      0.8459866431451614,
+      0.8459866431451614
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 12,
+    "repeat": 3,
+    "variance": [
+      0.8537046370967738,
+      0.8537046370967738
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 12,
+    "repeat": 4,
+    "variance": [
+      0.8417023689516128,
+      0.8417023689516128
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 13,
+    "repeat": 0,
+    "variance": [
+      0.8254788306451615,
+      0.8254788306451615
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 13,
+    "repeat": 1,
+    "variance": [
+      0.8342993951612905,
+      0.8342993951612905
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 13,
+    "repeat": 2,
+    "variance": [
+      0.838615171370968,
+      0.838615171370968
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 13,
+    "repeat": 3,
+    "variance": [
+      0.8347404233870969,
+      0.8347404233870969
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 13,
+    "repeat": 4,
+    "variance": [
+      0.8422064012096773,
+      0.8422064012096773
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 14,
+    "repeat": 0,
+    "variance": [
+      0.850459929435484,
+      0.850459929435484
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 14,
+    "repeat": 1,
+    "variance": [
+      0.8472152217741937,
+      0.8472152217741937
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 14,
+    "repeat": 2,
+    "variance": [
+      0.8552482358870969,
+      0.8552482358870969
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 14,
+    "repeat": 3,
+    "variance": [
+      0.8434979838709679,
+      0.8434979838709679
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 14,
+    "repeat": 4,
+    "variance": [
+      0.8565083165322582,
+      0.8565083165322582
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 15,
+    "repeat": 0,
+    "variance": [
+      0.8061995967741937,
+      0.8061995967741937
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 15,
+    "repeat": 1,
+    "variance": [
+      0.8129095262096777,
+      0.8129095262096777
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 15,
+    "repeat": 2,
+    "variance": [
+      0.8094758064516129,
+      0.8094758064516129
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 15,
+    "repeat": 3,
+    "variance": [
+      0.8291015625,
+      0.8291015625
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 15,
+    "repeat": 4,
+    "variance": [
+      0.7906376008064517,
+      0.7906376008064517
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 16,
+    "repeat": 0,
+    "variance": [
+      0.850491431451613,
+      0.850491431451613
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 16,
+    "repeat": 1,
+    "variance": [
+      0.84765625,
+      0.84765625
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 16,
+    "repeat": 2,
+    "variance": [
+      0.8386151713709677,
+      0.8386151713709677
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 16,
+    "repeat": 3,
+    "variance": [
+      0.8681640625000001,
+      0.8681640625000001
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 16,
+    "repeat": 4,
+    "variance": [
+      0.8674710181451615,
+      0.8674710181451615
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 17,
+    "repeat": 0,
+    "variance": [
+      0.8358114919354838,
+      0.8358114919354838
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 17,
+    "repeat": 1,
+    "variance": [
+      0.8543976814516132,
+      0.8543976814516132
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 17,
+    "repeat": 2,
+    "variance": [
+      0.8469632056451613,
+      0.8469632056451613
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 17,
+    "repeat": 3,
+    "variance": [
+      0.8447265625,
+      0.8447265625
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 17,
+    "repeat": 4,
+    "variance": [
+      0.8415133568548387,
+      0.8415133568548387
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 18,
+    "repeat": 0,
+    "variance": [
+      0.8266759072580646,
+      0.8266759072580646
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 18,
+    "repeat": 1,
+    "variance": [
+      0.8180128528225805,
+      0.8180128528225805
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 18,
+    "repeat": 2,
+    "variance": [
+      0.8228641633064515,
+      0.8228641633064515
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 18,
+    "repeat": 3,
+    "variance": [
+      0.8089717741935485,
+      0.8089717741935485
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 18,
+    "repeat": 4,
+    "variance": [
+      0.8128780241935484,
+      0.8128780241935484
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 19,
+    "repeat": 0,
+    "variance": [
+      0.8121219758064517,
+      0.8121219758064517
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 19,
+    "repeat": 1,
+    "variance": [
+      0.8111454133064515,
+      0.8111454133064515
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 19,
+    "repeat": 2,
+    "variance": [
+      0.8188634072580648,
+      0.8188634072580648
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 19,
+    "repeat": 3,
+    "variance": [
+      0.8377646169354839,
+      0.8377646169354839
+    ]
+  },
+  {
+    "readout_error": 0.0,
+    "cal_draw": 19,
+    "repeat": 4,
+    "variance": [
+      0.8108303931451614,
+      0.8108303931451614
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 0,
+    "repeat": 0,
+    "variance": [
+      0.8246597782258065,
+      0.8246597782258065
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 0,
+    "repeat": 1,
+    "variance": [
+      0.8132245463709677,
+      0.8132245463709677
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 0,
+    "repeat": 2,
+    "variance": [
+      0.818327872983871,
+      0.818327872983871
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 0,
+    "repeat": 3,
+    "variance": [
+      0.8216670866935485,
+      0.8216670866935485
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 0,
+    "repeat": 4,
+    "variance": [
+      0.8185483870967741,
+      0.8185483870967741
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 1,
+    "repeat": 0,
+    "variance": [
+      0.844852570564516,
+      0.844852570564516
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 1,
+    "repeat": 1,
+    "variance": [
+      0.8556892641129032,
+      0.8556892641129032
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 1,
+    "repeat": 2,
+    "variance": [
+      0.8344884072580643,
+      0.8344884072580643
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 1,
+    "repeat": 3,
+    "variance": [
+      0.8591859879032259,
+      0.8591859879032259
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 1,
+    "repeat": 4,
+    "variance": [
+      0.8556892641129032,
+      0.8556892641129032
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 2,
+    "repeat": 0,
+    "variance": [
+      0.8177293346774193,
+      0.8177293346774193
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 2,
+    "repeat": 1,
+    "variance": [
+      0.8532636088709679,
+      0.8532636088709679
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 2,
+    "repeat": 2,
+    "variance": [
+      0.8313382056451616,
+      0.8313382056451616
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 2,
+    "repeat": 3,
+    "variance": [
+      0.8206905241935485,
+      0.8206905241935485
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 2,
+    "repeat": 4,
+    "variance": [
+      0.8364100302419356,
+      0.8364100302419356
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 3,
+    "repeat": 0,
+    "variance": [
+      0.8284400201612903,
+      0.8284400201612903
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 3,
+    "repeat": 1,
+    "variance": [
+      0.8208795362903226,
+      0.8208795362903226
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 3,
+    "repeat": 2,
+    "variance": [
+      0.8028288810483872,
+      0.8028288810483872
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 3,
+    "repeat": 3,
+    "variance": [
+      0.807459677419355,
+      0.807459677419355
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 3,
+    "repeat": 4,
+    "variance": [
+      0.8226436491935483,
+      0.8226436491935483
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 4,
+    "repeat": 0,
+    "variance": [
+      0.8281565020161293,
+      0.8281565020161293
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 4,
+    "repeat": 1,
+    "variance": [
+      0.8292905745967742,
+      0.8292905745967742
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 4,
+    "repeat": 2,
+    "variance": [
+      0.8559727822580645,
+      0.8559727822580645
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 4,
+    "repeat": 3,
+    "variance": [
+      0.8227381552419356,
+      0.8227381552419356
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 4,
+    "repeat": 4,
+    "variance": [
+      0.8192099294354838,
+      0.8192099294354838
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 5,
+    "repeat": 0,
+    "variance": [
+      0.8324092741935484,
+      0.8324092741935484
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 5,
+    "repeat": 1,
+    "variance": [
+      0.8372920866935485,
+      0.8372920866935485
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 5,
+    "repeat": 2,
+    "variance": [
+      0.826171875,
+      0.826171875
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 5,
+    "repeat": 3,
+    "variance": [
+      0.8095388104838711,
+      0.8095388104838711
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 5,
+    "repeat": 4,
+    "variance": [
+      0.821131552419355,
+      0.821131552419355
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 6,
+    "repeat": 0,
+    "variance": [
+      0.8734879032258063,
+      0.8734879032258063
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 6,
+    "repeat": 1,
+    "variance": [
+      0.8717867943548387,
+      0.8717867943548387
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 6,
+    "repeat": 2,
+    "variance": [
+      0.8815524193548384,
+      0.8815524193548384
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 6,
+    "repeat": 3,
+    "variance": [
+      0.877961189516129,
+      0.877961189516129
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 6,
+    "repeat": 4,
+    "variance": [
+      0.8582409274193552,
+      0.8582409274193552
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 7,
+    "repeat": 0,
+    "variance": [
+      0.8586504536290325,
+      0.8586504536290325
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 7,
+    "repeat": 1,
+    "variance": [
+      0.8569493447580647,
+      0.8569493447580647
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 7,
+    "repeat": 2,
+    "variance": [
+      0.8523815524193548,
+      0.8523815524193548
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 7,
+    "repeat": 3,
+    "variance": [
+      0.850428427419355,
+      0.850428427419355
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 7,
+    "repeat": 4,
+    "variance": [
+      0.8424584173387097,
+      0.8424584173387097
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 8,
+    "repeat": 0,
+    "variance": [
+      0.8165322580645162,
+      0.8165322580645162
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 8,
+    "repeat": 1,
+    "variance": [
+      0.8194304435483872,
+      0.8194304435483872
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 8,
+    "repeat": 2,
+    "variance": [
+      0.8171622983870969,
+      0.8171622983870969
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 8,
+    "repeat": 3,
+    "variance": [
+      0.831023185483871,
+      0.831023185483871
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 8,
+    "repeat": 4,
+    "variance": [
+      0.845734627016129,
+      0.845734627016129
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 9,
+    "repeat": 0,
+    "variance": [
+      0.8337323588709676,
+      0.8337323588709676
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 9,
+    "repeat": 1,
+    "variance": [
+      0.8445690524193549,
+      0.8445690524193549
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 9,
+    "repeat": 2,
+    "variance": [
+      0.8334488407258067,
+      0.8334488407258067
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 9,
+    "repeat": 3,
+    "variance": [
+      0.8373865927419357,
+      0.8373865927419357
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 9,
+    "repeat": 4,
+    "variance": [
+      0.823053175403226,
+      0.823053175403226
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 10,
+    "repeat": 0,
+    "variance": [
+      0.8585244455645159,
+      0.8585244455645159
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 10,
+    "repeat": 1,
+    "variance": [
+      0.8337638608870968,
+      0.8337638608870968
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 10,
+    "repeat": 2,
+    "variance": [
+      0.8563823084677422,
+      0.8563823084677422
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 10,
+    "repeat": 3,
+    "variance": [
+      0.8244707661290323,
+      0.8244707661290323
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 10,
+    "repeat": 4,
+    "variance": [
+      0.8248802923387095,
+      0.8248802923387095
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 11,
+    "repeat": 0,
+    "variance": [
+      0.8469947076612904,
+      0.8469947076612904
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 11,
+    "repeat": 1,
+    "variance": [
+      0.8627142137096777,
+      0.8627142137096777
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 11,
+    "repeat": 2,
+    "variance": [
+      0.8432144657258064,
+      0.8432144657258064
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 11,
+    "repeat": 3,
+    "variance": [
+      0.8259513608870968,
+      0.8259513608870968
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 11,
+    "repeat": 4,
+    "variance": [
+      0.8329133064516129,
+      0.8329133064516129
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 12,
+    "repeat": 0,
+    "variance": [
+      0.842867943548387,
+      0.842867943548387
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 12,
+    "repeat": 1,
+    "variance": [
+      0.8423639112903227,
+      0.8423639112903227
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 12,
+    "repeat": 2,
+    "variance": [
+      0.8418283770161292,
+      0.8418283770161292
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 12,
+    "repeat": 3,
+    "variance": [
+      0.8532321068548386,
+      0.8532321068548386
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 12,
+    "repeat": 4,
+    "variance": [
+      0.8294165826612905,
+      0.8294165826612905
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 13,
+    "repeat": 0,
+    "variance": [
+      0.8331338205645162,
+      0.8331338205645162
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 13,
+    "repeat": 1,
+    "variance": [
+      0.8205015120967744,
+      0.8205015120967744
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 13,
+    "repeat": 2,
+    "variance": [
+      0.8389931955645162,
+      0.8389931955645162
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 13,
+    "repeat": 3,
+    "variance": [
+      0.863155241935484,
+      0.863155241935484
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 13,
+    "repeat": 4,
+    "variance": [
+      0.8459236391129032,
+      0.8459236391129032
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 14,
+    "repeat": 0,
+    "variance": [
+      0.8686680947580645,
+      0.8686680947580645
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 14,
+    "repeat": 1,
+    "variance": [
+      0.8592804939516128,
+      0.8592804939516128
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 14,
+    "repeat": 2,
+    "variance": [
+      0.8527910786290325,
+      0.8527910786290325
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 14,
+    "repeat": 3,
+    "variance": [
+      0.8515625000000002,
+      0.8515625000000002
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 14,
+    "repeat": 4,
+    "variance": [
+      0.8697076612903225,
+      0.8697076612903225
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 15,
+    "repeat": 0,
+    "variance": [
+      0.82421875,
+      0.82421875
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 15,
+    "repeat": 1,
+    "variance": [
+      0.8143901209677421,
+      0.8143901209677421
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 15,
+    "repeat": 2,
+    "variance": [
+      0.8365360383064515,
+      0.8365360383064515
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 15,
+    "repeat": 3,
+    "variance": [
+      0.840851814516129,
+      0.840851814516129
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 15,
+    "repeat": 4,
+    "variance": [
+      0.8285660282258065,
+      0.8285660282258065
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 16,
+    "repeat": 0,
+    "variance": [
+      0.8680065524193548,
+      0.8680065524193548
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 16,
+    "repeat": 1,
+    "variance": [
+      0.8472467237903227,
+      0.8472467237903227
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 16,
+    "repeat": 2,
+    "variance": [
+      0.8464276713709677,
+      0.8464276713709677
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 16,
+    "repeat": 3,
+    "variance": [
+      0.839812247983871,
+      0.839812247983871
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 16,
+    "repeat": 4,
+    "variance": [
+      0.8575793850806455,
+      0.8575793850806455
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 17,
+    "repeat": 0,
+    "variance": [
+      0.8607295866935485,
+      0.8607295866935485
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 17,
+    "repeat": 1,
+    "variance": [
+      0.8437184979838712,
+      0.8437184979838712
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 17,
+    "repeat": 2,
+    "variance": [
+      0.844569052419355,
+      0.844569052419355
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 17,
+    "repeat": 3,
+    "variance": [
+      0.8578314012096777,
+      0.8578314012096777
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 17,
+    "repeat": 4,
+    "variance": [
+      0.8405682963709677,
+      0.8405682963709677
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 18,
+    "repeat": 0,
+    "variance": [
+      0.817193800403226,
+      0.817193800403226
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 18,
+    "repeat": 1,
+    "variance": [
+      0.8258568548387096,
+      0.8258568548387096
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 18,
+    "repeat": 2,
+    "variance": [
+      0.8142326108870968,
+      0.8142326108870968
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 18,
+    "repeat": 3,
+    "variance": [
+      0.8321572580645159,
+      0.8321572580645159
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 18,
+    "repeat": 4,
+    "variance": [
+      0.8285345262096776,
+      0.8285345262096776
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 19,
+    "repeat": 0,
+    "variance": [
+      0.8077746975806452,
+      0.8077746975806452
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 19,
+    "repeat": 1,
+    "variance": [
+      0.8422379032258065,
+      0.8422379032258065
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 19,
+    "repeat": 2,
+    "variance": [
+      0.825163810483871,
+      0.825163810483871
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 19,
+    "repeat": 3,
+    "variance": [
+      0.8073651713709677,
+      0.8073651713709677
+    ]
+  },
+  {
+    "readout_error": 0.01,
+    "cal_draw": 19,
+    "repeat": 4,
+    "variance": [
+      0.8153981854838712,
+      0.8153981854838712
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 0,
+    "repeat": 0,
+    "variance": [
+      0.8454511088709677,
+      0.8454511088709677
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 0,
+    "repeat": 1,
+    "variance": [
+      0.8336693548387099,
+      0.8336693548387099
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 0,
+    "repeat": 2,
+    "variance": [
+      0.8377961189516129,
+      0.8377961189516129
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 0,
+    "repeat": 3,
+    "variance": [
+      0.8394657258064515,
+      0.8394657258064515
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 0,
+    "repeat": 4,
+    "variance": [
+      0.828377016129032,
+      0.828377016129032
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 1,
+    "repeat": 0,
+    "variance": [
+      0.8385521673387095,
+      0.8385521673387095
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 1,
+    "repeat": 1,
+    "variance": [
+      0.8706527217741936,
+      0.8706527217741936
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 1,
+    "repeat": 2,
+    "variance": [
+      0.866021925403226,
+      0.866021925403226
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 1,
+    "repeat": 3,
+    "variance": [
+      0.868132560483871,
+      0.868132560483871
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 1,
+    "repeat": 4,
+    "variance": [
+      0.8509009576612903,
+      0.8509009576612903
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 2,
+    "repeat": 0,
+    "variance": [
+      0.83269279233871,
+      0.83269279233871
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 2,
+    "repeat": 1,
+    "variance": [
+      0.8626827116935483,
+      0.8626827116935483
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 2,
+    "repeat": 2,
+    "variance": [
+      0.844537550403226,
+      0.844537550403226
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 2,
+    "repeat": 3,
+    "variance": [
+      0.8491998487903227,
+      0.8491998487903227
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 2,
+    "repeat": 4,
+    "variance": [
+      0.8492943548387099,
+      0.8492943548387099
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 3,
+    "repeat": 0,
+    "variance": [
+      0.807333669354839,
+      0.807333669354839
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 3,
+    "repeat": 1,
+    "variance": [
+      0.8555632560483875,
+      0.8555632560483875
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 3,
+    "repeat": 2,
+    "variance": [
+      0.812342489919355,
+      0.812342489919355
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 3,
+    "repeat": 3,
+    "variance": [
+      0.834614415322581,
+      0.834614415322581
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 3,
+    "repeat": 4,
+    "variance": [
+      0.827904485887097,
+      0.827904485887097
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 4,
+    "repeat": 0,
+    "variance": [
+      0.857516381048387,
+      0.857516381048387
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 4,
+    "repeat": 1,
+    "variance": [
+      0.8727003528225806,
+      0.8727003528225806
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 4,
+    "repeat": 2,
+    "variance": [
+      0.823147681451613,
+      0.823147681451613
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 4,
+    "repeat": 3,
+    "variance": [
+      0.834771925403226,
+      0.834771925403226
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 4,
+    "repeat": 4,
+    "variance": [
+      0.8615801411290323,
+      0.8615801411290323
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 5,
+    "repeat": 0,
+    "variance": [
+      0.836819556451613,
+      0.836819556451613
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 5,
+    "repeat": 1,
+    "variance": [
+      0.8277469758064517,
+      0.8277469758064517
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 5,
+    "repeat": 2,
+    "variance": [
+      0.8421748991935485,
+      0.8421748991935485
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 5,
+    "repeat": 3,
+    "variance": [
+      0.8222656250000002,
+      0.8222656250000002
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 5,
+    "repeat": 4,
+    "variance": [
+      0.8256048387096775,
+      0.8256048387096775
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 6,
+    "repeat": 0,
+    "variance": [
+      0.8895854334677422,
+      0.8895854334677422
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 6,
+    "repeat": 1,
+    "variance": [
+      0.8791267641129032,
+      0.8791267641129032
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 6,
+    "repeat": 2,
+    "variance": [
+      0.8857421875,
+      0.8857421875
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 6,
+    "repeat": 3,
+    "variance": [
+      0.8898059475806452,
+      0.8898059475806452
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 6,
+    "repeat": 4,
+    "variance": [
+      0.8758190524193549,
+      0.8758190524193549
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 7,
+    "repeat": 0,
+    "variance": [
+      0.8490108366935485,
+      0.8490108366935485
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 7,
+    "repeat": 1,
+    "variance": [
+      0.8646358366935483,
+      0.8646358366935483
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 7,
+    "repeat": 2,
+    "variance": [
+      0.874873991935484,
+      0.874873991935484
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 7,
+    "repeat": 3,
+    "variance": [
+      0.8620211693548386,
+      0.8620211693548386
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 7,
+    "repeat": 4,
+    "variance": [
+      0.8692036290322582,
+      0.8692036290322582
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 8,
+    "repeat": 0,
+    "variance": [
+      0.8151146673387096,
+      0.8151146673387096
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 8,
+    "repeat": 1,
+    "variance": [
+      0.8350554435483872,
+      0.8350554435483872
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 8,
+    "repeat": 2,
+    "variance": [
+      0.8230216733870968,
+      0.8230216733870968
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 8,
+    "repeat": 3,
+    "variance": [
+      0.8385206653225807,
+      0.8385206653225807
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 8,
+    "repeat": 4,
+    "variance": [
+      0.8412613407258067,
+      0.8412613407258067
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 9,
+    "repeat": 0,
+    "variance": [
+      0.8508379536290323,
+      0.8508379536290323
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 9,
+    "repeat": 1,
+    "variance": [
+      0.8219191028225807,
+      0.8219191028225807
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 9,
+    "repeat": 2,
+    "variance": [
+      0.8256993447580648,
+      0.8256993447580648
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 9,
+    "repeat": 3,
+    "variance": [
+      0.8208165322580645,
+      0.8208165322580645
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 9,
+    "repeat": 4,
+    "variance": [
+      0.8719758064516128,
+      0.8719758064516128
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 10,
+    "repeat": 0,
+    "variance": [
+      0.8440650201612904,
+      0.8440650201612904
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 10,
+    "repeat": 1,
+    "variance": [
+      0.850365423387097,
+      0.850365423387097
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 10,
+    "repeat": 2,
+    "variance": [
+      0.8504284274193548,
+      0.8504284274193548
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 10,
+    "repeat": 3,
+    "variance": [
+      0.8414503528225806,
+      0.8414503528225806
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 10,
+    "repeat": 4,
+    "variance": [
+      0.8517830141129034,
+      0.8517830141129034
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 11,
+    "repeat": 0,
+    "variance": [
+      0.858524445564516,
+      0.858524445564516
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 11,
+    "repeat": 1,
+    "variance": [
+      0.8693611391129034,
+      0.8693611391129034
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 11,
+    "repeat": 2,
+    "variance": [
+      0.8417023689516128,
+      0.8417023689516128
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 11,
+    "repeat": 3,
+    "variance": [
+      0.855374243951613,
+      0.855374243951613
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 11,
+    "repeat": 4,
+    "variance": [
+      0.8540196572580645,
+      0.8540196572580645
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 12,
+    "repeat": 0,
+    "variance": [
+      0.847435735887097,
+      0.847435735887097
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 12,
+    "repeat": 1,
+    "variance": [
+      0.8663369455645159,
+      0.8663369455645159
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 12,
+    "repeat": 2,
+    "variance": [
+      0.8606980846774194,
+      0.8606980846774194
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 12,
+    "repeat": 3,
+    "variance": [
+      0.8556262600806454,
+      0.8556262600806454
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 12,
+    "repeat": 4,
+    "variance": [
+      0.8580834173387097,
+      0.8580834173387097
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 13,
+    "repeat": 0,
+    "variance": [
+      0.8426789314516131,
+      0.8426789314516131
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 13,
+    "repeat": 1,
+    "variance": [
+      0.8824974798387097,
+      0.8824974798387097
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 13,
+    "repeat": 2,
+    "variance": [
+      0.8704637096774193,
+      0.8704637096774193
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 13,
+    "repeat": 3,
+    "variance": [
+      0.8396547379032256,
+      0.8396547379032256
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 13,
+    "repeat": 4,
+    "variance": [
+      0.8750945060483875,
+      0.8750945060483875
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 14,
+    "repeat": 0,
+    "variance": [
+      0.8736769153225808,
+      0.8736769153225808
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 14,
+    "repeat": 1,
+    "variance": [
+      0.866903981854839,
+      0.866903981854839
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 14,
+    "repeat": 2,
+    "variance": [
+      0.8877898185483873,
+      0.8877898185483873
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 14,
+    "repeat": 3,
+    "variance": [
+      0.8614226310483871,
+      0.8614226310483871
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 14,
+    "repeat": 4,
+    "variance": [
+      0.8764175907258063,
+      0.8764175907258063
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 15,
+    "repeat": 0,
+    "variance": [
+      0.8343308971774195,
+      0.8343308971774195
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 15,
+    "repeat": 1,
+    "variance": [
+      0.8383631552419357,
+      0.8383631552419357
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 15,
+    "repeat": 2,
+    "variance": [
+      0.8525075604838712,
+      0.8525075604838712
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 15,
+    "repeat": 3,
+    "variance": [
+      0.8404737903225807,
+      0.8404737903225807
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 15,
+    "repeat": 4,
+    "variance": [
+      0.8218245967741935,
+      0.8218245967741935
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 16,
+    "repeat": 0,
+    "variance": [
+      0.866147933467742,
+      0.866147933467742
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 16,
+    "repeat": 1,
+    "variance": [
+      0.8747479838709679,
+      0.8747479838709679
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 16,
+    "repeat": 2,
+    "variance": [
+      0.8812058971774195,
+      0.8812058971774195
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 16,
+    "repeat": 3,
+    "variance": [
+      0.8664944556451615,
+      0.8664944556451615
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 16,
+    "repeat": 4,
+    "variance": [
+      0.8425214213709679,
+      0.8425214213709679
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 17,
+    "repeat": 0,
+    "variance": [
+      0.858240927419355,
+      0.858240927419355
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 17,
+    "repeat": 1,
+    "variance": [
+      0.8732988911290323,
+      0.8732988911290323
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 17,
+    "repeat": 2,
+    "variance": [
+      0.8838520665322581,
+      0.8838520665322581
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 17,
+    "repeat": 3,
+    "variance": [
+      0.8714087701612905,
+      0.8714087701612905
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 17,
+    "repeat": 4,
+    "variance": [
+      0.8677230342741935,
+      0.8677230342741935
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 18,
+    "repeat": 0,
+    "variance": [
+      0.8432144657258063,
+      0.8432144657258063
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 18,
+    "repeat": 1,
+    "variance": [
+      0.849703881048387,
+      0.849703881048387
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 18,
+    "repeat": 2,
+    "variance": [
+      0.854366179435484,
+      0.854366179435484
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 18,
+    "repeat": 3,
+    "variance": [
+      0.842615927419355,
+      0.842615927419355
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 18,
+    "repeat": 4,
+    "variance": [
+      0.8413558467741937,
+      0.8413558467741937
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 19,
+    "repeat": 0,
+    "variance": [
+      0.8262663810483871,
+      0.8262663810483871
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 19,
+    "repeat": 1,
+    "variance": [
+      0.8506804435483868,
+      0.8506804435483868
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 19,
+    "repeat": 2,
+    "variance": [
+      0.84148185483871,
+      0.84148185483871
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 19,
+    "repeat": 3,
+    "variance": [
+      0.8335433467741935,
+      0.8335433467741935
+    ]
+  },
+  {
+    "readout_error": 0.03,
+    "cal_draw": 19,
+    "repeat": 4,
+    "variance": [
+      0.8501134072580645,
+      0.8501134072580645
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 0,
+    "repeat": 0,
+    "variance": [
+      0.8549962197580647,
+      0.8549962197580647
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 0,
+    "repeat": 1,
+    "variance": [
+      0.832125756048387,
+      0.832125756048387
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 0,
+    "repeat": 2,
+    "variance": [
+      0.8488848286290324,
+      0.8488848286290324
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 0,
+    "repeat": 3,
+    "variance": [
+      0.8605090725806452,
+      0.8605090725806452
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 0,
+    "repeat": 4,
+    "variance": [
+      0.8477507560483872,
+      0.8477507560483872
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 1,
+    "repeat": 0,
+    "variance": [
+      0.8780871975806455,
+      0.8780871975806455
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 1,
+    "repeat": 1,
+    "variance": [
+      0.8822139616935483,
+      0.8822139616935483
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 1,
+    "repeat": 2,
+    "variance": [
+      0.8625882056451611,
+      0.8625882056451611
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 1,
+    "repeat": 3,
+    "variance": [
+      0.8684475806451613,
+      0.8684475806451613
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 1,
+    "repeat": 4,
+    "variance": [
+      0.8617061491935485,
+      0.8617061491935485
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 2,
+    "repeat": 0,
+    "variance": [
+      0.8556262600806455,
+      0.8556262600806455
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 2,
+    "repeat": 1,
+    "variance": [
+      0.8434034778225807,
+      0.8434034778225807
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 2,
+    "repeat": 2,
+    "variance": [
+      0.8724798387096775,
+      0.8724798387096775
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 2,
+    "repeat": 3,
+    "variance": [
+      0.8628402217741937,
+      0.8628402217741937
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 2,
+    "repeat": 4,
+    "variance": [
+      0.8781186995967745,
+      0.8781186995967745
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 3,
+    "repeat": 0,
+    "variance": [
+      0.849483366935484,
+      0.849483366935484
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 3,
+    "repeat": 1,
+    "variance": [
+      0.8428679435483872,
+      0.8428679435483872
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 3,
+    "repeat": 2,
+    "variance": [
+      0.8296055947580646,
+      0.8296055947580646
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 3,
+    "repeat": 3,
+    "variance": [
+      0.842899445564516,
+      0.842899445564516
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 3,
+    "repeat": 4,
+    "variance": [
+      0.8390561995967742,
+      0.8390561995967742
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 4,
+    "repeat": 0,
+    "variance": [
+      0.8673765120967742,
+      0.8673765120967742
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 4,
+    "repeat": 1,
+    "variance": [
+      0.8591229838709677,
+      0.8591229838709677
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 4,
+    "repeat": 2,
+    "variance": [
+      0.8559727822580645,
+      0.8559727822580645
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 4,
+    "repeat": 3,
+    "variance": [
+      0.8681640625,
+      0.8681640625
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 4,
+    "repeat": 4,
+    "variance": [
+      0.8740864415322582,
+      0.8740864415322582
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 5,
+    "repeat": 0,
+    "variance": [
+      0.8303301411290325,
+      0.8303301411290325
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 5,
+    "repeat": 1,
+    "variance": [
+      0.8526335685483872,
+      0.8526335685483872
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 5,
+    "repeat": 2,
+    "variance": [
+      0.8463646673387097,
+      0.8463646673387097
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 5,
+    "repeat": 3,
+    "variance": [
+      0.8429309475806451,
+      0.8429309475806451
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 5,
+    "repeat": 4,
+    "variance": [
+      0.8499243951612904,
+      0.8499243951612904
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 6,
+    "repeat": 0,
+    "variance": [
+      0.8781817036290323,
+      0.8781817036290323
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 6,
+    "repeat": 1,
+    "variance": [
+      0.9022492439516128,
+      0.9022492439516128
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 6,
+    "repeat": 2,
+    "variance": [
+      0.904328377016129,
+      0.904328377016129
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 6,
+    "repeat": 3,
+    "variance": [
+      0.877173639112903,
+      0.877173639112903
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 6,
+    "repeat": 4,
+    "variance": [
+      0.8781817036290325,
+      0.8781817036290325
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 7,
+    "repeat": 0,
+    "variance": [
+      0.8760080645161291,
+      0.8760080645161291
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 7,
+    "repeat": 1,
+    "variance": [
+      0.8734879032258066,
+      0.8734879032258066
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 7,
+    "repeat": 2,
+    "variance": [
+      0.8656754032258067,
+      0.8656754032258067
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 7,
+    "repeat": 3,
+    "variance": [
+      0.879725302419355,
+      0.879725302419355
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 7,
+    "repeat": 4,
+    "variance": [
+      0.8767011088709677,
+      0.8767011088709677
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 8,
+    "repeat": 0,
+    "variance": [
+      0.8640057963709676,
+      0.8640057963709676
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 8,
+    "repeat": 1,
+    "variance": [
+      0.841828377016129,
+      0.841828377016129
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 8,
+    "repeat": 2,
+    "variance": [
+      0.8523185483870968,
+      0.8523185483870968
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 8,
+    "repeat": 3,
+    "variance": [
+      0.8567918346774195,
+      0.8567918346774195
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 8,
+    "repeat": 4,
+    "variance": [
+      0.844033518145161,
+      0.844033518145161
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 9,
+    "repeat": 0,
+    "variance": [
+      0.8530745967741937,
+      0.8530745967741937
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 9,
+    "repeat": 1,
+    "variance": [
+      0.8665574596774195,
+      0.8665574596774195
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 9,
+    "repeat": 2,
+    "variance": [
+      0.8728578629032258,
+      0.8728578629032258
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 9,
+    "repeat": 3,
+    "variance": [
+      0.8601625504032259,
+      0.8601625504032259
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 9,
+    "repeat": 4,
+    "variance": [
+      0.871881300403226,
+      0.871881300403226
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 10,
+    "repeat": 0,
+    "variance": [
+      0.8731413810483872,
+      0.8731413810483872
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 10,
+    "repeat": 1,
+    "variance": [
+      0.8616116431451615,
+      0.8616116431451615
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 10,
+    "repeat": 2,
+    "variance": [
+      0.8583669354838712,
+      0.8583669354838712
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 10,
+    "repeat": 3,
+    "variance": [
+      0.8587764616935485,
+      0.8587764616935485
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 10,
+    "repeat": 4,
+    "variance": [
+      0.8716607862903227,
+      0.8716607862903227
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 11,
+    "repeat": 0,
+    "variance": [
+      0.8639427923387097,
+      0.8639427923387097
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 11,
+    "repeat": 1,
+    "variance": [
+      0.8710937500000002,
+      0.8710937500000002
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 11,
+    "repeat": 2,
+    "variance": [
+      0.8703061995967745,
+      0.8703061995967745
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 11,
+    "repeat": 3,
+    "variance": [
+      0.8618636592741934,
+      0.8618636592741934
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 11,
+    "repeat": 4,
+    "variance": [
+      0.8711567540322581,
+      0.8711567540322581
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 12,
+    "repeat": 0,
+    "variance": [
+      0.8727003528225805,
+      0.8727003528225805
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 12,
+    "repeat": 1,
+    "variance": [
+      0.8669354838709677,
+      0.8669354838709677
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 12,
+    "repeat": 2,
+    "variance": [
+      0.866242439516129,
+      0.866242439516129
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 12,
+    "repeat": 3,
+    "variance": [
+      0.8552167338709675,
+      0.8552167338709675
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 12,
+    "repeat": 4,
+    "variance": [
+      0.8851436491935485,
+      0.8851436491935485
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 13,
+    "repeat": 0,
+    "variance": [
+      0.8855846774193548,
+      0.8855846774193548
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 13,
+    "repeat": 1,
+    "variance": [
+      0.8584299395161291,
+      0.8584299395161291
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 13,
+    "repeat": 2,
+    "variance": [
+      0.8453251008064517,
+      0.8453251008064517
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 13,
+    "repeat": 3,
+    "variance": [
+      0.862273185483871,
+      0.862273185483871
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 13,
+    "repeat": 4,
+    "variance": [
+      0.8660219254032255,
+      0.8660219254032255
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 14,
+    "repeat": 0,
+    "variance": [
+      0.8837890624999998,
+      0.8837890624999998
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 14,
+    "repeat": 1,
+    "variance": [
+      0.8977444556451613,
+      0.8977444556451613
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 14,
+    "repeat": 2,
+    "variance": [
+      0.892578125,
+      0.892578125
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 14,
+    "repeat": 3,
+    "variance": [
+      0.877992691532258,
+      0.877992691532258
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 14,
+    "repeat": 4,
+    "variance": [
+      0.8797883064516128,
+      0.8797883064516128
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 15,
+    "repeat": 0,
+    "variance": [
+      0.8397492439516128,
+      0.8397492439516128
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 15,
+    "repeat": 1,
+    "variance": [
+      0.8499243951612903,
+      0.8499243951612903
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 15,
+    "repeat": 2,
+    "variance": [
+      0.8437500000000001,
+      0.8437500000000001
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 15,
+    "repeat": 3,
+    "variance": [
+      0.8652343749999998,
+      0.8652343749999998
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 15,
+    "repeat": 4,
+    "variance": [
+      0.8488218245967742,
+      0.8488218245967742
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 16,
+    "repeat": 0,
+    "variance": [
+      0.894436743951613,
+      0.894436743951613
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 16,
+    "repeat": 1,
+    "variance": [
+      0.8620526713709677,
+      0.8620526713709677
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 16,
+    "repeat": 2,
+    "variance": [
+      0.881804435483871,
+      0.881804435483871
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 16,
+    "repeat": 3,
+    "variance": [
+      0.8645728326612905,
+      0.8645728326612905
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 16,
+    "repeat": 4,
+    "variance": [
+      0.8812058971774194,
+      0.8812058971774194
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 17,
+    "repeat": 0,
+    "variance": [
+      0.8835370463709677,
+      0.8835370463709677
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 17,
+    "repeat": 1,
+    "variance": [
+      0.8598160282258066,
+      0.8598160282258066
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 17,
+    "repeat": 2,
+    "variance": [
+      0.8688256048387099,
+      0.8688256048387099
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 17,
+    "repeat": 3,
+    "variance": [
+      0.8735509072580646,
+      0.8735509072580646
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 17,
+    "repeat": 4,
+    "variance": [
+      0.875157510080645,
+      0.875157510080645
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 18,
+    "repeat": 0,
+    "variance": [
+      0.8558467741935485,
+      0.8558467741935485
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 18,
+    "repeat": 1,
+    "variance": [
+      0.8442225302419356,
+      0.8442225302419356
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 18,
+    "repeat": 2,
+    "variance": [
+      0.865108366935484,
+      0.865108366935484
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 18,
+    "repeat": 3,
+    "variance": [
+      0.8308656754032259,
+      0.8308656754032259
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 18,
+    "repeat": 4,
+    "variance": [
+      0.849577872983871,
+      0.849577872983871
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 19,
+    "repeat": 0,
+    "variance": [
+      0.8525390625,
+      0.8525390625
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 19,
+    "repeat": 1,
+    "variance": [
+      0.8428679435483873,
+      0.8428679435483873
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 19,
+    "repeat": 2,
+    "variance": [
+      0.8563823084677422,
+      0.8563823084677422
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 19,
+    "repeat": 3,
+    "variance": [
+      0.8372290826612903,
+      0.8372290826612903
+    ]
+  },
+  {
+    "readout_error": 0.05,
+    "cal_draw": 19,
+    "repeat": 4,
+    "variance": [
+      0.861422631048387,
+      0.861422631048387
+    ]
+  }
+]

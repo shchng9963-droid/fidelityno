@@ -1,5 +1,18 @@
 # FidelityNO: cost--accuracy audits for composed-channel fidelity
 
+## Final-rule readout sensitivity (2026-10-15)
+
+`revision/REPRODUCE_FINAL_READOUT.txt` describes the fixed-budget readout test
+of the final calibration-derived variance rule. Known independent symmetric
+sign-flip rates affect calibration labels and query measurements. Budgets and
+the final query sets are unchanged; this is secondary sensitivity, not a new
+independent test or a budget search. Zero-flip streams reproduce all matching
+primary MAEs within 1e-12. The design, seeds, per-fit errors, pooled calibration
+moments and provenance hashes are under `results_revision/final_readout_20261015`.
+At 5% flips, dephasing neural MAEs are 0.06415/0.05465 at 20/36 query shots.
+The small additive release `mlst-final-readout-20261015` requires the three
+earlier archives below. Previous data and results remain unchanged.
+
 ## Checkpoint sensitivity supplement (2026-10-03)
 
 `revision/REPRODUCE_CLOSEOUT.txt` documents exploratory exchange checkpoint
@@ -30,7 +43,7 @@ The additive asset `mlst_independent_weights_20261002.zip`, release
 `mlst-independent-weights-20261002`, contains the new code, data and per-query
 errors. It is used alongside the base asset `mlst_revision_data_code_20261002.zip`
 for the original calibration/validation data and frozen checkpoints. Prior releases
-remain unchanged. The independent-weight readout stress test has not been run;
+remain unchanged. The final-rule readout test is documented above;
 stage-three readout results describe the older estimators only.
 
 ### Earlier outcome-dependent evaluation (preserved)

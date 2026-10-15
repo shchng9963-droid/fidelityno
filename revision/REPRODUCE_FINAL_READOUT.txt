@@ -1,0 +1,45 @@
+Final independent-weight known-rate readout sensitivity, 15 October 2026
+
+Requires the data/code assets at:
+https://github.com/shchng9963-droid/fidelityno/releases
+Extract mlst-revision-20261002, mlst-independent-weights-20261002 and
+mlst-closeout-20261003, in that order, then overlay this small supplement.
+
+This is a secondary sensitivity run on the final stage-five query sets.
+It does not generate a new independent test, retrain source checkpoints,
+change validation guards, select new budgets or add significance tests.
+The 20 calibration groups and five label repeats are retained. At nonzero
+known flip rates, calibration labels and query measurements are redrawn.
+The supplied rate is exact; rate-estimation costs are outside this test.
+Every prior still pays 4096 calibration shots per fitted deployment.
+
+The variance of attenuated +/-1 signs is estimated only from calibration
+outcomes. Divide this pooled variance by attenuation squared and the actual
+query setting counts. Final query outcomes do not enter the weights.
+Zero-flip streams reproduce all corresponding final primary MAEs within 1e-12.
+The design, input/code hashes and clean regression check are recorded.
+
+Run from the repository root in the released Python environment, on the server:
+OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2 python scripts/audit_revision_final_readout.py --family zz
+OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2 python scripts/audit_revision_final_readout.py --family exchange
+python -m pytest tests/test_final_readout.py -q
+python scripts/plot_revision_final_readout.py
+
+The audit refuses to replace an existing result directory. To reproduce,
+use a fresh extraction and move the supplied results_revision/final_readout_20261015
+to a separate backup location before running. Compare summaries and manifests.
+The zero-flip streams match the primary evaluation. Positive-rate stream seed
+is 202610151 and is separated by family, rate, group, repeat, budget and purpose.
+
+Saved outputs per family: runs.csv (all individual-fit MAEs), summary.csv,
+calibration_moments.json and manifest.json. Raw outcomes are exactly regenerable
+from the supplied seeds and existing physical-query expectations. Results are
+descriptive mean risks and run-to-run variation, not new target confirmations.
+
+At 5% flips, dephasing neural MAEs at 20/36 shots are 0.06415/0.05465;
+ridge gives 0.06796/0.05686. DFE at 32/48 shots gives 0.07259/0.05922.
+Exchange zero-query ridge gives 0.05176. The earlier stage-three readout
+results remain historical and use different estimators and query sets.
+
+This archive contains scientific code, results and reproducibility records only.
+It includes no manuscript, response letter, reviewer reports or correspondence.
