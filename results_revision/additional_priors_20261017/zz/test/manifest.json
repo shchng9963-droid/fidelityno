@@ -1,0 +1,21 @@
+{
+  "status": "Post-hoc additional controls after inspection of the final stage-five tests; not new confirmation or preregistration",
+  "design_sha256": "cf657bc8fa2ac38b2a602b1bf68f0d7e3b40877802af5e9236f4eca267f2a07b",
+  "script_sha256": "e6367849ddd53ca529bd87377efe9a3f33ad7fd775a331e79381fc99f776d1db",
+  "calibration_cache_sha256": "a5393b94679e7b25fe6a64b5af1a10e02bf5641f88777a2fd2c638f066bf294c",
+  "query_cache_sha256": "07f387577d0994ca993d903b33fa8697c958db6b3e1b4e3ceefe7be1d1ceabcf",
+  "core_sha256": {
+    "physics/baselines/revision_measurement.py": "5e9b3c51509f452357e3bb5cfe16b3d702c1c302943dc8f00cfa109e87e0d230",
+    "scripts/eval_revision_confirmatory.py": "72fc97c9ecdf5359f851c14cb5a32ae8f8fe7ea8298d9f52fc0271c7066bfaa3"
+  },
+  "original_checkpoint_provenance": {
+    "checkpoint_sha256": {
+      "/home/wangshuchang/fidelityno_prxq/checkpoints/collision/bidir_seed0.pt": "a6acc4da694ee9595c2f4cac9c65a765fd8e550a4b585d77d298b8f3f18925e6",
+      "/home/wangshuchang/fidelityno_prxq/checkpoints/collision/bidir_seed1.pt": "98b32a983c5f92c5368d6b2a33ca2f912612f0957191e93a672f4c655f1d54cc",
+      "/home/wangshuchang/fidelityno_prxq/checkpoints/collision/bidir_seed2.pt": "55f1fdbcf7b873aea1738d354181d852ab213df5bfa7b8c4bf297f45bb19321c",
+      "/home/wangshuchang/fidelityno_prxq/checkpoints/collision/bidir_seed3.pt": "4f9dc64186f0c1efba4acd2280c76c653e4cd689045d81db24c8dfe0fd407138",
+      "/home/wangshuchang/fidelityno_prxq/checkpoints/collision/bidir_seed4.pt": "02814370955653c73f5f9ddc939ff080b6dd47a484264140f1a3c15e1b995a0f"
+    },
+    "data_sha256": "4699f2448941e847e8c07d071307517df46d4da228693aadab96bd34642a7c6d"
+  }
+}

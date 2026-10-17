@@ -1,0 +1,102 @@
+{
+  "status": "Result provenance; historical controls retained separately from final measurement tests",
+  "main_table_1": {
+    "exact": [
+      "results_mlst/exact_composition_device.csv",
+      "results_mlst/exact_composition_order_sensitive.csv"
+    ],
+    "product_mc": [
+      "results_revision/additional_priors_20261017/source_provenance/dmc_seed0.csv",
+      "results_revision/additional_priors_20261017/source_provenance/dmc_seed1.csv",
+      "results_revision/additional_priors_20261017/source_provenance/dmc_seed2.csv",
+      "results_revision/additional_priors_20261017/source_provenance/dmc_seed3.csv",
+      "results_revision/additional_priors_20261017/source_provenance/dmc_seed4.csv",
+      "results_revision/additional_priors_20261017/source_provenance/markov_one_qubit_analytic.csv",
+      "results_revision/additional_priors_20261017/source_provenance/markov_two_qubit_analytic.csv",
+      "results_revision/additional_priors_20261017/source_provenance/markov_two_qubit_mc.csv"
+    ],
+    "aggregation": "Unweighted mean of reported per-length MAEs, and then across the five original MC seeds for d=2; d=4 original MC file"
+  },
+  "main_figure_1_and_s1": [
+    "results_revision/stage2/{family}/grid/",
+    "results_revision/stage4/{family}/extrema/"
+  ],
+  "main_table_2": [
+    "results_revision/stage2/{family}/test/summary.csv"
+  ],
+  "main_table_3_figures_2_3_s8_s9": [
+    "results_revision/stage5/{family}/validation/summary.csv",
+    "results_revision/stage5/{family}/selection.json",
+    "results_revision/stage5/{family}/selected_results.csv",
+    "results_revision/stage5/{family}/paired_contrasts.csv",
+    "results_revision/stage5/{family}/deployment_variability.csv"
+  ],
+  "s2_original_protocol": [
+    "revision/stage2_design.json",
+    "results_revision/stage2/{family}/confirmed_operating_points.csv"
+  ],
+  "s3_historical_controls": [
+    "results_revision/stage2/{family}/test/summary.csv"
+  ],
+  "s4_raw_quantiles": [
+    "results_revision/stage3/{family}/raw_uncertainty.csv",
+    "results_revision/stage3/{family}/raw_coverage.csv"
+  ],
+  "s5_theory": [
+    "tests/test_revision_measurement.py",
+    "tests/test_choi_bounds_revision.py"
+  ],
+  "s6_readout": [
+    "results_revision/final_readout_20261015/{family}/"
+  ],
+  "s10_variance_diagnostic": [
+    "results_revision/stage5/{family}/weight_diagnostics.csv"
+  ],
+  "s11_checkpoint": [
+    "results_revision/closeout_20261003/"
+  ],
+  "additional_priors": [
+    "results_revision/additional_priors_20261017/{family}/selected_results.csv",
+    "results_revision/additional_priors_20261017/{family}/risk_intervals.csv"
+  ],
+  "implementation": [
+    "scripts/audit_revision_additional_priors.py",
+    "results_revision/additional_priors_20261017/implementation_audit.json"
+  ],
+  "source_generation_manifests": [
+    "results_revision/additional_priors_20261017/source_provenance/markov_one_qubit_manifest.json",
+    "results_revision/additional_priors_20261017/source_provenance/markov_two_qubit_manifest.json",
+    "results_revision/additional_priors_20261017/source_provenance/source_training_manifest.json"
+  ],
+  "historical_control_aggregates": {
+    "2": {
+      "mc_1000/family_ood": 0.004848977722273346,
+      "mc_1000/id_test": 0.003127249795363525,
+      "mc_1000/length_ood": 0.0066756375457077,
+      "product_bound/family_ood": 0.00028457681279781135,
+      "product_bound/id_test": 0.00010209582910645395,
+      "product_bound/length_ood": 0.0015736110120390667
+    },
+    "4": {
+      "mc_1000/family_ood": 0.007271745500975233,
+      "mc_1000/id_test": 0.0069361368269379,
+      "mc_1000/length_ood": 0.007182824998360533,
+      "product_bound/family_ood": 0.09069441010554626,
+      "product_bound/id_test": 0.1096630319952964,
+      "product_bound/length_ood": 0.07642905414104458
+    }
+  },
+  "source_file_sha256": {
+    "results_revision/additional_priors_20261017/source_provenance/dmc_seed0.csv": "245aea2dccb4ad76238e7c2fbbd4cf89af7a1589221ee90e0adf96e5327a8450",
+    "results_revision/additional_priors_20261017/source_provenance/dmc_seed1.csv": "eabfdf62871bbe8e7bdde8d7a92df299c05f07ba8a15e76e22aac93074f085d9",
+    "results_revision/additional_priors_20261017/source_provenance/dmc_seed2.csv": "a4f18e5f9ab22a2a798ff83db610242c668e33760a92c70897bb12a79145c7ad",
+    "results_revision/additional_priors_20261017/source_provenance/dmc_seed3.csv": "c284a39611e25a0910cc947811688401aed58b85468e09c4b58023531ddb0680",
+    "results_revision/additional_priors_20261017/source_provenance/dmc_seed4.csv": "63d46417a9699a8afe57b194c40ae8d1b73ad3dc0b03bd0a31f435438418c7b7",
+    "results_revision/additional_priors_20261017/source_provenance/markov_one_qubit_analytic.csv": "968d4cc897e77e12f141c3a9f56f278321fe78e03e93e3bef79eefa817ec4b89",
+    "results_revision/additional_priors_20261017/source_provenance/markov_one_qubit_manifest.json": "7b62d7d45543cb30b789dbaaa5ae44e1c03e009d531d21eb0924d3831f1e1e53",
+    "results_revision/additional_priors_20261017/source_provenance/markov_two_qubit_analytic.csv": "0cc16e0d533ef81d325536079624e86bd39fca65482954155db0d2e10aa2b440",
+    "results_revision/additional_priors_20261017/source_provenance/markov_two_qubit_manifest.json": "309c279e7166654edb8d778cb246048a4b1e83e2f9bcb324a490b2da9ac1fec3",
+    "results_revision/additional_priors_20261017/source_provenance/markov_two_qubit_mc.csv": "b74daa6bb12ba7191632f8a59fef85ce7984a23732b238efc0f6465e48068ea1",
+    "results_revision/additional_priors_20261017/source_provenance/source_training_manifest.json": "53ff1631bf19deeb04561ab930487e7886c94e9dcb20a3b634dc05d3c047915e"
+  }
+}

@@ -1,0 +1,1058 @@
+[
+  {
+    "method": "constant_mean_prior",
+    "allocation": "none",
+    "shots": 0,
+    "absolute_difference": 0.0
+  },
+  {
+    "method": "summary_ridge_prior",
+    "allocation": "none",
+    "shots": 0,
+    "absolute_difference": 6.938893903907228e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 3,
+    "absolute_difference": 5.551115123125783e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 3,
+    "absolute_difference": 6.938893903907228e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 4,
+    "absolute_difference": 0.0
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 4,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 6,
+    "absolute_difference": 2.7755575615628914e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 6,
+    "absolute_difference": 5.551115123125783e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 8,
+    "absolute_difference": 6.938893903907228e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 8,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 12,
+    "absolute_difference": 5.551115123125783e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 12,
+    "absolute_difference": 0.0
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 16,
+    "absolute_difference": 8.326672684688674e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 16,
+    "absolute_difference": 8.326672684688674e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 20,
+    "absolute_difference": 6.938893903907228e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 20,
+    "absolute_difference": 2.7755575615628914e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 24,
+    "absolute_difference": 6.938893903907228e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 24,
+    "absolute_difference": 8.326672684688674e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 28,
+    "absolute_difference": 0.0
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 28,
+    "absolute_difference": 0.0
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 32,
+    "absolute_difference": 6.938893903907228e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 32,
+    "absolute_difference": 6.245004513516506e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 36,
+    "absolute_difference": 8.326672684688674e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 36,
+    "absolute_difference": 4.85722573273506e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 40,
+    "absolute_difference": 5.551115123125783e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 40,
+    "absolute_difference": 4.85722573273506e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 44,
+    "absolute_difference": 2.7755575615628914e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 44,
+    "absolute_difference": 6.245004513516506e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 48,
+    "absolute_difference": 4.163336342344337e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 48,
+    "absolute_difference": 4.163336342344337e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 52,
+    "absolute_difference": 9.020562075079397e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 52,
+    "absolute_difference": 2.7755575615628914e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 56,
+    "absolute_difference": 9.020562075079397e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 56,
+    "absolute_difference": 8.326672684688674e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 60,
+    "absolute_difference": 2.7755575615628914e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 60,
+    "absolute_difference": 4.85722573273506e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 64,
+    "absolute_difference": 4.85722573273506e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 64,
+    "absolute_difference": 2.0816681711721685e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 68,
+    "absolute_difference": 9.020562075079397e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 68,
+    "absolute_difference": 6.938893903907228e-18
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 72,
+    "absolute_difference": 9.020562075079397e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 72,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 76,
+    "absolute_difference": 6.245004513516506e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 76,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 80,
+    "absolute_difference": 4.163336342344337e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 80,
+    "absolute_difference": 3.469446951953614e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 84,
+    "absolute_difference": 0.0
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 84,
+    "absolute_difference": 6.245004513516506e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 88,
+    "absolute_difference": 2.0816681711721685e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 88,
+    "absolute_difference": 6.938893903907228e-18
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 92,
+    "absolute_difference": 6.938893903907228e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 92,
+    "absolute_difference": 2.7755575615628914e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 96,
+    "absolute_difference": 9.020562075079397e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 96,
+    "absolute_difference": 3.469446951953614e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 128,
+    "absolute_difference": 7.632783294297951e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 128,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 192,
+    "absolute_difference": 2.0816681711721685e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 192,
+    "absolute_difference": 8.673617379884035e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 256,
+    "absolute_difference": 3.469446951953614e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "fixed",
+    "shots": 256,
+    "absolute_difference": 3.122502256758253e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 3,
+    "absolute_difference": 5.551115123125783e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 3,
+    "absolute_difference": 8.326672684688674e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 4,
+    "absolute_difference": 0.0
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 4,
+    "absolute_difference": 8.326672684688674e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 6,
+    "absolute_difference": 5.551115123125783e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 6,
+    "absolute_difference": 8.326672684688674e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 8,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 8,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 12,
+    "absolute_difference": 4.163336342344337e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 12,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 16,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 16,
+    "absolute_difference": 8.326672684688674e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 20,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 20,
+    "absolute_difference": 6.938893903907228e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 24,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 24,
+    "absolute_difference": 8.326672684688674e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 28,
+    "absolute_difference": 9.71445146547012e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 28,
+    "absolute_difference": 4.163336342344337e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 32,
+    "absolute_difference": 5.551115123125783e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 32,
+    "absolute_difference": 8.326672684688674e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 36,
+    "absolute_difference": 6.938893903907228e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 36,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 40,
+    "absolute_difference": 2.7755575615628914e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 40,
+    "absolute_difference": 2.0816681711721685e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 44,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 44,
+    "absolute_difference": 9.020562075079397e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 48,
+    "absolute_difference": 9.71445146547012e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 48,
+    "absolute_difference": 0.0
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 52,
+    "absolute_difference": 5.551115123125783e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 52,
+    "absolute_difference": 2.7755575615628914e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 56,
+    "absolute_difference": 9.020562075079397e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 56,
+    "absolute_difference": 4.163336342344337e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 60,
+    "absolute_difference": 2.7755575615628914e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 60,
+    "absolute_difference": 7.632783294297951e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 64,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 64,
+    "absolute_difference": 3.469446951953614e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 68,
+    "absolute_difference": 6.938893903907228e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 68,
+    "absolute_difference": 9.020562075079397e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 72,
+    "absolute_difference": 5.551115123125783e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 72,
+    "absolute_difference": 9.020562075079397e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 76,
+    "absolute_difference": 9.020562075079397e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 76,
+    "absolute_difference": 7.632783294297951e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 80,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 80,
+    "absolute_difference": 8.326672684688674e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 84,
+    "absolute_difference": 6.938893903907228e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 84,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 88,
+    "absolute_difference": 6.938893903907228e-18
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 88,
+    "absolute_difference": 4.85722573273506e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 92,
+    "absolute_difference": 5.551115123125783e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 92,
+    "absolute_difference": 6.938893903907228e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 96,
+    "absolute_difference": 6.245004513516506e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 96,
+    "absolute_difference": 6.938893903907228e-18
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 128,
+    "absolute_difference": 7.632783294297951e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 128,
+    "absolute_difference": 4.85722573273506e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 192,
+    "absolute_difference": 1.734723475976807e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 192,
+    "absolute_difference": 2.42861286636753e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "pilot",
+    "shots": 256,
+    "absolute_difference": 3.122502256758253e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 256,
+    "absolute_difference": 8.326672684688674e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 3,
+    "absolute_difference": 5.551115123125783e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 3,
+    "absolute_difference": 5.551115123125783e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 4,
+    "absolute_difference": 2.7755575615628914e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 4,
+    "absolute_difference": 8.326672684688674e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 6,
+    "absolute_difference": 0.0
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 6,
+    "absolute_difference": 0.0
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 8,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 8,
+    "absolute_difference": 6.938893903907228e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 12,
+    "absolute_difference": 0.0
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 12,
+    "absolute_difference": 2.7755575615628914e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 16,
+    "absolute_difference": 4.163336342344337e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 16,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 20,
+    "absolute_difference": 0.0
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 20,
+    "absolute_difference": 0.0
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 24,
+    "absolute_difference": 4.163336342344337e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 24,
+    "absolute_difference": 8.326672684688674e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 28,
+    "absolute_difference": 6.938893903907228e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 28,
+    "absolute_difference": 6.245004513516506e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 32,
+    "absolute_difference": 2.0816681711721685e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 32,
+    "absolute_difference": 4.163336342344337e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 36,
+    "absolute_difference": 2.0816681711721685e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 36,
+    "absolute_difference": 5.551115123125783e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 40,
+    "absolute_difference": 4.85722573273506e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 40,
+    "absolute_difference": 0.0
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 44,
+    "absolute_difference": 6.938893903907228e-18
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 44,
+    "absolute_difference": 6.245004513516506e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 48,
+    "absolute_difference": 7.632783294297951e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 48,
+    "absolute_difference": 4.85722573273506e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 52,
+    "absolute_difference": 3.469446951953614e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 52,
+    "absolute_difference": 6.938893903907228e-18
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 56,
+    "absolute_difference": 6.245004513516506e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 56,
+    "absolute_difference": 3.469446951953614e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 60,
+    "absolute_difference": 5.551115123125783e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 60,
+    "absolute_difference": 3.469446951953614e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 64,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 64,
+    "absolute_difference": 8.326672684688674e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 68,
+    "absolute_difference": 2.7755575615628914e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 68,
+    "absolute_difference": 9.020562075079397e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 72,
+    "absolute_difference": 6.245004513516506e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 72,
+    "absolute_difference": 3.469446951953614e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 76,
+    "absolute_difference": 4.163336342344337e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 76,
+    "absolute_difference": 2.7755575615628914e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 80,
+    "absolute_difference": 3.469446951953614e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 80,
+    "absolute_difference": 7.632783294297951e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 84,
+    "absolute_difference": 6.938893903907228e-18
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 84,
+    "absolute_difference": 4.163336342344337e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 88,
+    "absolute_difference": 2.0816681711721685e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 88,
+    "absolute_difference": 6.245004513516506e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 92,
+    "absolute_difference": 0.0
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 92,
+    "absolute_difference": 4.163336342344337e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 96,
+    "absolute_difference": 2.7755575615628914e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 96,
+    "absolute_difference": 3.469446951953614e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 128,
+    "absolute_difference": 4.85722573273506e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 128,
+    "absolute_difference": 3.469446951953614e-18
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 192,
+    "absolute_difference": 6.938893903907228e-18
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 192,
+    "absolute_difference": 6.938893903907228e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 256,
+    "absolute_difference": 7.979727989493313e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 256,
+    "absolute_difference": 7.28583859910259e-17
+  }
+]

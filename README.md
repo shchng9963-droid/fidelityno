@@ -1,5 +1,22 @@
 # FidelityNO: cost--accuracy audits for composed-channel fidelity
 
+## Additional simple-prior controls (2026-10-17)
+
+`revision/REPRODUCE_ADDITIONAL_PRIORS.txt` documents post-hoc median,
+affine-calibrated product and exact-marginal controls under the final independent
+variance rule. They reuse the existing final query sets; pointwise intervals do
+not extend the original corrected comparison families. Minimum positive-shot and
+zero-inclusive choices are reported separately. Dephasing median selects 28/44
+shots and both physical priors select 24/40 at targets 0.065/0.053, versus the
+unchanged ridge/neural 20/36. In exchange, zero-query ridge still meets both targets.
+The implementation audit verifies unclipped labels, the original 16-shot guard,
+the five checkpoint state dictionaries and effective bidirectional constructors.
+The complete server suite passes 140 tests with one pre-existing QuTiP warning.
+Results, source-generation manifests and a result-stage index are under
+`results_revision/additional_priors_20261017`. Per-query error arrays are supplied
+in the additive release `mlst-additional-priors-20261017`, requiring the four older
+archives below. Earlier designs, data, code and releases are unchanged.
+
 ## Final-rule readout sensitivity (2026-10-15)
 
 `revision/REPRODUCE_FINAL_READOUT.txt` describes the fixed-budget readout test

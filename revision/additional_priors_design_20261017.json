@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-17",
+  "status": "Post-hoc additional controls after inspection of the final stage-five tests; not new confirmation or preregistration",
+  "families": ["zz", "exchange"],
+  "added_priors": ["constant_median", "product_affine", "exact_marginal_affine"],
+  "regression_controls": ["constant_mean", "summary_ridge"],
+  "targets": [0.065, 0.053],
+  "data": "Reuse stage2 calibration and validation caches and stage5 final test caches without modifying them",
+  "labels": "20 groups of 64, five repetitions, original 64-shot label streams; labels are not clipped",
+  "fusion": "Unchanged independent calibration variance and four-fold out-of-fold residual correction; 4096 offline shots per fit",
+  "selection": "Use complete stage5 grid and allocations, original variance-component guard and tie order. Report smallest positive-shot configuration and smallest configuration allowing zero shots separately. Freeze choices before running this additional analysis on the already viewed final test.",
+  "statistics": "4000 paired crossed/hierarchical bootstrap draws, original seed 202610221. Pointwise 95% mean-risk intervals and one-sided 95% target checks only; no new noninferiority or six-comparison confirmatory-family claims",
+  "preservation": "Do not alter original designs, code, results or releases. No retraining, new physics, new tests or test-based retuning. Save everything under results_revision/additional_priors_20261017.",
+  "training_scope": "Network parameters remain frozen. Target-domain labels still fit the affine neural point calibration in the original results. This run does not reevaluate or select neural checkpoints."
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "method": "constant_mean_prior",
+    "allocation": "none",
+    "shots": 0,
+    "absolute_difference": 5.551115123125783e-17
+  },
+  {
+    "method": "summary_ridge_prior",
+    "allocation": "none",
+    "shots": 0,
+    "absolute_difference": 4.163336342344337e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 20,
+    "absolute_difference": 5.551115123125783e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 28,
+    "absolute_difference": 4.163336342344337e-17
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "zz_known",
+    "shots": 36,
+    "absolute_difference": 1.3877787807814457e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "zz_known",
+    "shots": 44,
+    "absolute_difference": 5.551115123125783e-17
+  }
+]

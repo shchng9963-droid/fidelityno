@@ -1,0 +1,228 @@
+{
+  "holdout_family": "pauli",
+  "representation": "choi_hermitian",
+  "fidelity_kind": "entanglement_fidelity",
+  "fidelity_formula": "F_e(\\Lambda,\\Lambda^{\\mathrm{tgt}}) = \\mathrm{Tr}[C_\\Lambda^\\dagger C_{\\Lambda^{\\mathrm{tgt}}}]/d^2",
+  "regime": "device",
+  "splits": [
+    {
+      "file": "data/device_regime/train.npz",
+      "n": 180000,
+      "seed": 0,
+      "lengths": [
+        2,
+        4,
+        8,
+        16
+      ],
+      "family": "mixed",
+      "exclude_family": "pauli",
+      "required_family": null,
+      "dim": 2,
+      "max_len": 48,
+      "representation": "choi_hermitian",
+      "active_families": [
+        "amplitude_damping",
+        "phase_damping",
+        "depolarizing",
+        "lindblad"
+      ],
+      "y_mean": 0.9814156889915466,
+      "y_std": 0.014643109403550625,
+      "benchmark_tag": "mixed",
+      "perm_gap_random_mean": 0.0,
+      "perm_gap_reverse_mean": 0.0,
+      "fidelity_kind": "entanglement_fidelity",
+      "fidelity_formula": "F_e(\\Lambda,\\Lambda^{\\mathrm{tgt}}) = \\mathrm{Tr}[C_\\Lambda^\\dagger C_{\\Lambda^{\\mathrm{tgt}}}]/d^2",
+      "regime": "device",
+      "y_description": "Per-sequence entanglement fidelity F_e against the natural reference target (identity for noise channels; ideal unitary for imperfect gates). Use ef_to_avg(F_e, dim) from physics.fidelity for average gate fidelity."
+    },
+    {
+      "file": "data/device_regime/calib.npz",
+      "n": 10000,
+      "seed": 4,
+      "lengths": [
+        2,
+        4,
+        8,
+        16
+      ],
+      "family": "mixed",
+      "exclude_family": "pauli",
+      "required_family": null,
+      "dim": 2,
+      "max_len": 48,
+      "representation": "choi_hermitian",
+      "active_families": [
+        "amplitude_damping",
+        "phase_damping",
+        "depolarizing",
+        "lindblad"
+      ],
+      "y_mean": 0.9815412163734436,
+      "y_std": 0.01453789509832859,
+      "benchmark_tag": "mixed",
+      "perm_gap_random_mean": 0.0,
+      "perm_gap_reverse_mean": 0.0,
+      "fidelity_kind": "entanglement_fidelity",
+      "fidelity_formula": "F_e(\\Lambda,\\Lambda^{\\mathrm{tgt}}) = \\mathrm{Tr}[C_\\Lambda^\\dagger C_{\\Lambda^{\\mathrm{tgt}}}]/d^2",
+      "regime": "device",
+      "y_description": "Per-sequence entanglement fidelity F_e against the natural reference target (identity for noise channels; ideal unitary for imperfect gates). Use ef_to_avg(F_e, dim) from physics.fidelity for average gate fidelity."
+    },
+    {
+      "file": "data/device_regime/id_test.npz",
+      "n": 10000,
+      "seed": 1,
+      "lengths": [
+        2,
+        4,
+        8,
+        16
+      ],
+      "family": "mixed",
+      "exclude_family": "pauli",
+      "required_family": null,
+      "dim": 2,
+      "max_len": 48,
+      "representation": "choi_hermitian",
+      "active_families": [
+        "amplitude_damping",
+        "phase_damping",
+        "depolarizing",
+        "lindblad"
+      ],
+      "y_mean": 0.981573224067688,
+      "y_std": 0.014539582654833794,
+      "benchmark_tag": "mixed",
+      "perm_gap_random_mean": 0.0,
+      "perm_gap_reverse_mean": 0.0,
+      "fidelity_kind": "entanglement_fidelity",
+      "fidelity_formula": "F_e(\\Lambda,\\Lambda^{\\mathrm{tgt}}) = \\mathrm{Tr}[C_\\Lambda^\\dagger C_{\\Lambda^{\\mathrm{tgt}}}]/d^2",
+      "regime": "device",
+      "y_description": "Per-sequence entanglement fidelity F_e against the natural reference target (identity for noise channels; ideal unitary for imperfect gates). Use ef_to_avg(F_e, dim) from physics.fidelity for average gate fidelity."
+    },
+    {
+      "file": "data/device_regime/length_ood.npz",
+      "n": 10000,
+      "seed": 2,
+      "lengths": [
+        24,
+        32,
+        48
+      ],
+      "family": "mixed",
+      "exclude_family": "pauli",
+      "required_family": null,
+      "dim": 2,
+      "max_len": 48,
+      "representation": "choi_hermitian",
+      "active_families": [
+        "amplitude_damping",
+        "phase_damping",
+        "depolarizing",
+        "lindblad"
+      ],
+      "y_mean": 0.9184285402297974,
+      "y_std": 0.025380687788128853,
+      "benchmark_tag": "mixed",
+      "perm_gap_random_mean": 0.0,
+      "perm_gap_reverse_mean": 0.0,
+      "fidelity_kind": "entanglement_fidelity",
+      "fidelity_formula": "F_e(\\Lambda,\\Lambda^{\\mathrm{tgt}}) = \\mathrm{Tr}[C_\\Lambda^\\dagger C_{\\Lambda^{\\mathrm{tgt}}}]/d^2",
+      "regime": "device",
+      "y_description": "Per-sequence entanglement fidelity F_e against the natural reference target (identity for noise channels; ideal unitary for imperfect gates). Use ef_to_avg(F_e, dim) from physics.fidelity for average gate fidelity."
+    },
+    {
+      "file": "data/device_regime/family_ood.npz",
+      "n": 10000,
+      "seed": 3,
+      "lengths": [
+        8,
+        16,
+        24
+      ],
+      "family": "pauli",
+      "exclude_family": null,
+      "required_family": null,
+      "dim": 2,
+      "max_len": 48,
+      "representation": "choi_hermitian",
+      "active_families": [
+        "pauli"
+      ],
+      "y_mean": 0.9610652327537537,
+      "y_std": 0.016307851299643517,
+      "benchmark_tag": "pauli",
+      "perm_gap_random_mean": 0.0,
+      "perm_gap_reverse_mean": 0.0,
+      "fidelity_kind": "entanglement_fidelity",
+      "fidelity_formula": "F_e(\\Lambda,\\Lambda^{\\mathrm{tgt}}) = \\mathrm{Tr}[C_\\Lambda^\\dagger C_{\\Lambda^{\\mathrm{tgt}}}]/d^2",
+      "regime": "device",
+      "y_description": "Per-sequence entanglement fidelity F_e against the natural reference target (identity for noise channels; ideal unitary for imperfect gates). Use ef_to_avg(F_e, dim) from physics.fidelity for average gate fidelity."
+    }
+  ],
+  "regime_summary": {
+    "regime": "device",
+    "single_qubit_ranges": {
+      "amplitude_damping": [
+        0.0,
+        0.01
+      ],
+      "phase_damping": [
+        0.0,
+        0.02
+      ],
+      "depolarizing": [
+        0.0,
+        0.005
+      ],
+      "pauli_total": [
+        0.0,
+        0.005
+      ],
+      "lindblad_omega": [
+        -0.05,
+        0.05
+      ],
+      "lindblad_gd": [
+        0.0,
+        0.005
+      ],
+      "lindblad_gp": [
+        0.0,
+        0.004
+      ],
+      "lindblad_t": [
+        0.0,
+        0.05
+      ]
+    },
+    "two_qubit_ranges": {
+      "correlated_dephasing": [
+        0.0,
+        0.01
+      ],
+      "two_qubit_depolarizing": [
+        0.0,
+        0.015
+      ],
+      "imperfect_cnot_theta": [
+        -0.02,
+        0.02
+      ],
+      "imperfect_cnot_p": [
+        0.0,
+        0.012
+      ],
+      "imperfect_swap_theta": [
+        -0.02,
+        0.02
+      ],
+      "imperfect_swap_p": [
+        0.0,
+        0.012
+      ]
+    },
+    "rationale": "Narrow sampling around modern QPU calibration (IBM Falcon/Eagle, Google Sycamore, Quantinuum H1/H2, IonQ Aria). All ranges allow a small safety margin above the device's typical operating point to support transfer to noisier days. See physics/channels/units.py."
+  }
+}

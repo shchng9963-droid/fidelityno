@@ -1,0 +1,134 @@
+{
+  "holdout_family": "correlated_dephasing",
+  "representation": "choi_hermitian",
+  "splits": [
+    {
+      "file": "data/benchmarks/two_qubit_order_sensitive/train.npz",
+      "n": 10000,
+      "seed": 0,
+      "lengths": [
+        8,
+        16
+      ],
+      "family": "order_sensitive",
+      "exclude_family": "correlated_dephasing",
+      "required_family": null,
+      "dim": 4,
+      "max_len": 48,
+      "representation": "choi_hermitian",
+      "active_families": [
+        "two_qubit_depolarizing",
+        "imperfect_cnot",
+        "imperfect_swap"
+      ],
+      "y_mean": 0.3124943971633911,
+      "y_std": 0.17400319874286652,
+      "benchmark_tag": "order_sensitive",
+      "perm_gap_random_mean": 0.2118363082408905,
+      "perm_gap_reverse_mean": 0.10162778198719025
+    },
+    {
+      "file": "data/benchmarks/two_qubit_order_sensitive/calib.npz",
+      "n": 2000,
+      "seed": 4,
+      "lengths": [
+        8,
+        16
+      ],
+      "family": "order_sensitive",
+      "exclude_family": "correlated_dephasing",
+      "required_family": null,
+      "dim": 4,
+      "max_len": 48,
+      "representation": "choi_hermitian",
+      "active_families": [
+        "two_qubit_depolarizing",
+        "imperfect_cnot",
+        "imperfect_swap"
+      ],
+      "y_mean": 0.31655174493789673,
+      "y_std": 0.17785532772541046,
+      "benchmark_tag": "order_sensitive",
+      "perm_gap_random_mean": 0.21247883141040802,
+      "perm_gap_reverse_mean": 0.0998879224061966
+    },
+    {
+      "file": "data/benchmarks/two_qubit_order_sensitive/id_test.npz",
+      "n": 2000,
+      "seed": 1,
+      "lengths": [
+        8,
+        16
+      ],
+      "family": "order_sensitive",
+      "exclude_family": "correlated_dephasing",
+      "required_family": null,
+      "dim": 4,
+      "max_len": 48,
+      "representation": "choi_hermitian",
+      "active_families": [
+        "two_qubit_depolarizing",
+        "imperfect_cnot",
+        "imperfect_swap"
+      ],
+      "y_mean": 0.3102903962135315,
+      "y_std": 0.17785276472568512,
+      "benchmark_tag": "order_sensitive",
+      "perm_gap_random_mean": 0.2120569497346878,
+      "perm_gap_reverse_mean": 0.09911205619573593
+    },
+    {
+      "file": "data/benchmarks/two_qubit_order_sensitive/length_ood.npz",
+      "n": 2000,
+      "seed": 2,
+      "lengths": [
+        24,
+        32,
+        48
+      ],
+      "family": "order_sensitive",
+      "exclude_family": "correlated_dephasing",
+      "required_family": null,
+      "dim": 4,
+      "max_len": 48,
+      "representation": "choi_hermitian",
+      "active_families": [
+        "two_qubit_depolarizing",
+        "imperfect_cnot",
+        "imperfect_swap"
+      ],
+      "y_mean": 0.10106842964887619,
+      "y_std": 0.05205302685499191,
+      "benchmark_tag": "order_sensitive",
+      "perm_gap_random_mean": 0.07547731697559357,
+      "perm_gap_reverse_mean": 0.03403491526842117
+    },
+    {
+      "file": "data/benchmarks/two_qubit_order_sensitive/family_ood.npz",
+      "n": 2000,
+      "seed": 3,
+      "lengths": [
+        8,
+        16,
+        24
+      ],
+      "family": "order_sensitive",
+      "exclude_family": null,
+      "required_family": "correlated_dephasing",
+      "dim": 4,
+      "max_len": 48,
+      "representation": "choi_hermitian",
+      "active_families": [
+        "correlated_dephasing",
+        "two_qubit_depolarizing",
+        "imperfect_cnot",
+        "imperfect_swap"
+      ],
+      "y_mean": 0.2572817802429199,
+      "y_std": 0.13667032122612,
+      "benchmark_tag": "order_sensitive",
+      "perm_gap_random_mean": 0.10284436494112015,
+      "perm_gap_reverse_mean": 0.04898383468389511
+    }
+  ]
+}

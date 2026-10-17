@@ -1,0 +1,110 @@
+{
+  "regime": "non_markovian_collision",
+  "fidelity_kind": "entanglement_fidelity",
+  "fidelity_formula": "F_e(\\Lambda,\\Lambda^{\\mathrm{tgt}}) = \\mathrm{Tr}[C_\\Lambda^\\dagger C_{\\Lambda^{\\mathrm{tgt}}}]/d^2",
+  "splits": [
+    {
+      "file": "data/collision/train.npz",
+      "n": 80000,
+      "seed": 0,
+      "lengths": [
+        2,
+        4,
+        8,
+        16
+      ],
+      "eta_range": [
+        0.0,
+        0.7
+      ],
+      "y_mean": 0.9047013521194458,
+      "y_std": 0.08465401083230972,
+      "max_len": 48,
+      "representation": "choi_hermitian",
+      "dim": 2,
+      "fidelity_kind": "entanglement_fidelity"
+    },
+    {
+      "file": "data/collision/calib.npz",
+      "n": 8000,
+      "seed": 100,
+      "lengths": [
+        2,
+        4,
+        8,
+        16
+      ],
+      "eta_range": [
+        0.0,
+        0.7
+      ],
+      "y_mean": 0.9046484231948853,
+      "y_std": 0.08478321880102158,
+      "max_len": 48,
+      "representation": "choi_hermitian",
+      "dim": 2,
+      "fidelity_kind": "entanglement_fidelity"
+    },
+    {
+      "file": "data/collision/id_test.npz",
+      "n": 8000,
+      "seed": 1,
+      "lengths": [
+        2,
+        4,
+        8,
+        16
+      ],
+      "eta_range": [
+        0.0,
+        0.7
+      ],
+      "y_mean": 0.9046978950500488,
+      "y_std": 0.08470281958580017,
+      "max_len": 48,
+      "representation": "choi_hermitian",
+      "dim": 2,
+      "fidelity_kind": "entanglement_fidelity"
+    },
+    {
+      "file": "data/collision/length_ood.npz",
+      "n": 8000,
+      "seed": 2,
+      "lengths": [
+        24,
+        32,
+        48
+      ],
+      "eta_range": [
+        0.0,
+        0.7
+      ],
+      "y_mean": 0.6779986023902893,
+      "y_std": 0.09310354292392731,
+      "max_len": 48,
+      "representation": "choi_hermitian",
+      "dim": 2,
+      "fidelity_kind": "entanglement_fidelity"
+    },
+    {
+      "file": "data/collision/family_ood.npz",
+      "n": 8000,
+      "seed": 3,
+      "lengths": [
+        8,
+        16,
+        24
+      ],
+      "eta_range": [
+        0.85,
+        0.99
+      ],
+      "y_mean": 0.44415992498397827,
+      "y_std": 0.197909414768219,
+      "max_len": 48,
+      "representation": "choi_hermitian",
+      "dim": 2,
+      "fidelity_kind": "entanglement_fidelity"
+    }
+  ]
+}

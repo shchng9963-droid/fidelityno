@@ -1,0 +1,208 @@
+{
+  "status": "Post-hoc additional controls after inspection of the final stage-five tests; not new confirmation or preregistration",
+  "design_sha256": "cf657bc8fa2ac38b2a602b1bf68f0d7e3b40877802af5e9236f4eca267f2a07b",
+  "script_sha256": "e6367849ddd53ca529bd87377efe9a3f33ad7fd775a331e79381fc99f776d1db",
+  "validation_sha256": "cf65f1e0fef48bce167b7ac85ed66a27327d54471f0b1fd0f7bba24466e23051",
+  "selections": [
+    {
+      "target": 0.065,
+      "prior": "constant_median",
+      "positive": {
+        "method": "constant_median_iv",
+        "allocation": "zz_known",
+        "shots": 28,
+        "offline_shots": 4096,
+        "mae": 0.0635048092864042,
+        "selection_score": 0.06378386565853199
+      },
+      "including_zero": {
+        "method": "constant_median_iv",
+        "allocation": "zz_known",
+        "shots": 28,
+        "offline_shots": 4096,
+        "mae": 0.0635048092864042,
+        "selection_score": 0.06378386565853199
+      }
+    },
+    {
+      "target": 0.065,
+      "prior": "product_affine",
+      "positive": {
+        "method": "product_affine_iv",
+        "allocation": "zz_known",
+        "shots": 24,
+        "offline_shots": 4096,
+        "mae": 0.0620001763610373,
+        "selection_score": 0.06239870048656545
+      },
+      "including_zero": {
+        "method": "product_affine_iv",
+        "allocation": "zz_known",
+        "shots": 24,
+        "offline_shots": 4096,
+        "mae": 0.0620001763610373,
+        "selection_score": 0.06239870048656545
+      }
+    },
+    {
+      "target": 0.065,
+      "prior": "exact_marginal_affine",
+      "positive": {
+        "method": "exact_marginal_affine_iv",
+        "allocation": "zz_known",
+        "shots": 24,
+        "offline_shots": 4096,
+        "mae": 0.06150319071774005,
+        "selection_score": 0.06191745582192712
+      },
+      "including_zero": {
+        "method": "exact_marginal_affine_iv",
+        "allocation": "zz_known",
+        "shots": 24,
+        "offline_shots": 4096,
+        "mae": 0.06150319071774005,
+        "selection_score": 0.06191745582192712
+      }
+    },
+    {
+      "target": 0.065,
+      "prior": "constant_mean",
+      "positive": {
+        "method": "constant_mean_iv",
+        "allocation": "zz_known",
+        "shots": 28,
+        "offline_shots": 4096,
+        "mae": 0.06330349882305847,
+        "selection_score": 0.06354178279351685
+      },
+      "including_zero": {
+        "method": "constant_mean_iv",
+        "allocation": "zz_known",
+        "shots": 28,
+        "offline_shots": 4096,
+        "mae": 0.06330349882305847,
+        "selection_score": 0.06354178279351685
+      }
+    },
+    {
+      "target": 0.065,
+      "prior": "summary_ridge",
+      "positive": {
+        "method": "summary_ridge_iv",
+        "allocation": "zz_known",
+        "shots": 20,
+        "offline_shots": 4096,
+        "mae": 0.063200488867527,
+        "selection_score": 0.06375297760078431
+      },
+      "including_zero": {
+        "method": "summary_ridge_iv",
+        "allocation": "zz_known",
+        "shots": 20,
+        "offline_shots": 4096,
+        "mae": 0.063200488867527,
+        "selection_score": 0.06375297760078431
+      }
+    },
+    {
+      "target": 0.053,
+      "prior": "constant_median",
+      "positive": {
+        "method": "constant_median_iv",
+        "allocation": "zz_known",
+        "shots": 44,
+        "offline_shots": 4096,
+        "mae": 0.051917713878406754,
+        "selection_score": 0.05213607512917643
+      },
+      "including_zero": {
+        "method": "constant_median_iv",
+        "allocation": "zz_known",
+        "shots": 44,
+        "offline_shots": 4096,
+        "mae": 0.051917713878406754,
+        "selection_score": 0.05213607512917643
+      }
+    },
+    {
+      "target": 0.053,
+      "prior": "product_affine",
+      "positive": {
+        "method": "product_affine_iv",
+        "allocation": "zz_known",
+        "shots": 40,
+        "offline_shots": 4096,
+        "mae": 0.05118808741763639,
+        "selection_score": 0.05143915574990329
+      },
+      "including_zero": {
+        "method": "product_affine_iv",
+        "allocation": "zz_known",
+        "shots": 40,
+        "offline_shots": 4096,
+        "mae": 0.05118808741763639,
+        "selection_score": 0.05143915574990329
+      }
+    },
+    {
+      "target": 0.053,
+      "prior": "exact_marginal_affine",
+      "positive": {
+        "method": "exact_marginal_affine_iv",
+        "allocation": "zz_known",
+        "shots": 40,
+        "offline_shots": 4096,
+        "mae": 0.050918783469628394,
+        "selection_score": 0.05118113479899526
+      },
+      "including_zero": {
+        "method": "exact_marginal_affine_iv",
+        "allocation": "zz_known",
+        "shots": 40,
+        "offline_shots": 4096,
+        "mae": 0.050918783469628394,
+        "selection_score": 0.05118113479899526
+      }
+    },
+    {
+      "target": 0.053,
+      "prior": "constant_mean",
+      "positive": {
+        "method": "constant_mean_iv",
+        "allocation": "zz_known",
+        "shots": 44,
+        "offline_shots": 4096,
+        "mae": 0.05179915822674111,
+        "selection_score": 0.05200860961706463
+      },
+      "including_zero": {
+        "method": "constant_mean_iv",
+        "allocation": "zz_known",
+        "shots": 44,
+        "offline_shots": 4096,
+        "mae": 0.05179915822674111,
+        "selection_score": 0.05200860961706463
+      }
+    },
+    {
+      "target": 0.053,
+      "prior": "summary_ridge",
+      "positive": {
+        "method": "summary_ridge_iv",
+        "allocation": "zz_known",
+        "shots": 36,
+        "offline_shots": 4096,
+        "mae": 0.05205773865144336,
+        "selection_score": 0.05236862264798382
+      },
+      "including_zero": {
+        "method": "summary_ridge_iv",
+        "allocation": "zz_known",
+        "shots": 36,
+        "offline_shots": 4096,
+        "mae": 0.05205773865144336,
+        "selection_score": 0.05236862264798382
+      }
+    }
+  ]
+}

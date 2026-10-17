@@ -1,0 +1,60 @@
+Additional simple-prior controls, 17 October 2026
+
+STATUS
+Post-hoc reuse of the final stage-five query sets, after their earlier analysis.
+No retraining, new physics, new independent test, retuning, or new noninferiority
+claim. Original designs/results and the six-comparison families are unchanged.
+Read additional_priors_design_20261017.json before reproduction.
+
+REQUIREMENTS
+Overlay this archive after the four earlier scientific releases, in a clean copy.
+Keep all supplied evidence unchanged. The new archive contains scientific code,
+results, generation manifests and reproduction documentation only.
+
+RESULTS
+results_revision/additional_priors_20261017/{zz,exchange}/selected_results.csv
+contains both the minimum positive-shot selection and the minimum allowing zero.
+Each row reports calibration shots, allocation, fusion, guard, risk and upper bound.
+risk_intervals.csv contains every zero-query prior and evaluated positive choice.
+validation/ and test/ contain per-fit records, manifests and calibration moments.
+test/paired_errors.npz preserves per-query absolute errors for paired resampling.
+implementation_audit.json verifies all five checkpoint contents/constructors and
+independently recomputes the original neural/ridge guard at 16 shots. Regression
+checks reproduce the original mean/ridge MAEs and guards within 1e-12.
+source_provenance/ contains the original source-training and Markovian generation
+manifests. Source data filenames in a manifest are historical provenance, not new
+target-test definitions. result_source_index.json maps manuscript evidence to files.
+
+REANALYSIS
+Run on the experimental server with the released environment:
+python scripts/eval_revision_additional_priors.py --family zz --mode analyze
+python scripts/eval_revision_additional_priors.py --family exchange --mode analyze
+python scripts/audit_revision_additional_priors.py
+python -m pytest -q
+
+REGENERATION
+Use a separate clean working copy without the supplied additional_priors_20261017
+results, retaining the existing stage2 and stage5 caches. For EACH family zz and
+exchange, run validation first, then test, then analyze, using the same script:
+python scripts/eval_revision_additional_priors.py --family FAMILY --mode validation
+python scripts/eval_revision_additional_priors.py --family FAMILY --mode test
+python scripts/eval_revision_additional_priors.py --family FAMILY --mode analyze
+Completed validation/test directories are deliberately not overwritten. Selection
+locks include design, script and validation hashes. No checkpoint is selected.
+
+GUARD AND CLIPPING
+The mean/median use raw finite-shot labels. Labels and query DFE estimates are
+not clipped in the measurement routine. Ridge and affine prior predictions are
+clipped before fusion and out-of-fold residual estimation. The residual moment
+subtracts the outcome-estimated label variance before truncation at zero. The
+fusion is finally clipped before scoring. Pilot-labelled budgets below 15 use
+balanced counts, drawing no pilot. Other pilots cost nine shots per query.
+The guard sums sample-variance components of query means /4096, calibration-group
+means /20, and (neural only) checkpoint means /5, then adds 1.645 sqrt(sum) to MAE.
+It is a selection heuristic, distinct from independent-test bootstrap inference.
+
+FINDINGS
+Dephasing median selects 28/44 shots, product and exact marginal each 24/40 at
+targets 0.065/0.053. These do not beat the original ridge/neural 20/36 budgets.
+Exchange zero-query product/marginal meet 0.065; zero-query ridge meets both.
+The primary 342-query crossing is unchanged. Additional intervals are pointwise.

@@ -1,0 +1,32 @@
+[
+  {
+    "method": "constant_mean_prior",
+    "allocation": "none",
+    "shots": 0,
+    "absolute_difference": 8.326672684688674e-17
+  },
+  {
+    "method": "summary_ridge_prior",
+    "allocation": "none",
+    "shots": 0,
+    "absolute_difference": 5.551115123125783e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 40,
+    "absolute_difference": 4.163336342344337e-17
+  },
+  {
+    "method": "constant_mean_iv",
+    "allocation": "fixed",
+    "shots": 72,
+    "absolute_difference": 0.0
+  },
+  {
+    "method": "summary_ridge_iv",
+    "allocation": "pilot",
+    "shots": 3,
+    "absolute_difference": 3.469446951953614e-17
+  }
+]
